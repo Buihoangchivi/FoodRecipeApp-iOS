@@ -40,6 +40,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var FoodName4: UILabel!
     @IBOutlet weak var FoodName5: UILabel!
     
+    @IBOutlet weak var FirstPageButton: UIButton!
+    @IBOutlet weak var PrevPageButton: UIButton!
+    @IBOutlet weak var CurrentPageLabel: UILabel!
+    @IBOutlet weak var NextPageButton: UIButton!
+    @IBOutlet weak var LastPageButton: UIButton!
+    
     
     var SelectedCategory = Array(repeating: false, count: 16)
     var SelectedMeal = Array(repeating: false, count: 4)
@@ -48,12 +54,12 @@ class ViewController: UIViewController {
     let MealList = ["Bữa sáng", "Bữa trưa", "Bữa tối", "Bữa phụ"]
     var FoodImageOutletList = [UIImageView]()
     var FoodNameOutletList = [UILabel]()
+    var CurrentPage = 1
+    var TotalPage = 5
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         Init()
-        // Do any additional setup after loading the view.
     }
 
     func Init() {
@@ -78,9 +84,45 @@ class ViewController: UIViewController {
         //Luu danh sach Outlet vao List
         FoodImageOutletList = [FoodImage0, FoodImage1, FoodImage2, FoodImage3, FoodImage4, FoodImage5]
         FoodNameOutletList = [FoodName0, FoodName1, FoodName2, FoodName3, FoodName4, FoodName5]
+        
+        //Bo tron goc cho cac nut phan trang
+        FirstPageButton.layer.cornerRadius = 12
+        PrevPageButton.layer.cornerRadius = 12
+        NextPageButton.layer.cornerRadius = 12
+        LastPageButton.layer.cornerRadius = 12
+        
+        //Khoi tao cac nut bi vo hieu hoa
+        FirstPageButton.layer.borderWidth = 1
+        FirstPageButton.layer.borderColor = UIColor.lightGray.cgColor
+        PrevPageButton.layer.borderWidth = 1
+        PrevPageButton.layer.borderColor = UIColor.lightGray.cgColor
+        
+        if (TotalPage == 0) {
+            CurrentPage = 0
+            NextPageButton.layer.borderWidth = 1
+            NextPageButton.layer.borderColor = UIColor.lightGray.cgColor
+            NextPageButton.isEnabled = false
+            NextPageButton.setTitleColor(UIColor.black, for: .normal)
+            NextPageButton.backgroundColor = FirstPageButton.backgroundColor
+            
+            LastPageButton.layer.borderWidth = 1
+            LastPageButton.layer.borderColor = UIColor.lightGray.cgColor
+            LastPageButton.isEnabled = false
+            LastPageButton.setTitleColor(UIColor.black, for: .normal)
+            LastPageButton.backgroundColor = FirstPageButton.backgroundColor
+        }
+        
+        //Hien thi trang hien tai tren tong so trang
+        CurrentPageLabel.text = "\(CurrentPage) of \(TotalPage)"
     }
     
     @IBAction func act_ClickFoodButton(_ sender: Any) {
+        let button = sender as! UIButton
+        let index = button.restorationIdentifier!.last!.hexDigitValue!
+        print(index)
+    }
+    
+    @IBAction func act_ClickPageButton(_ sender: Any) {
         let button = sender as! UIButton
         print(String(describing: button.restorationIdentifier))
     }
