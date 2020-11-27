@@ -16,11 +16,38 @@ class ViewController: UIViewController {
     @IBOutlet weak var CategoryCollectionView: UICollectionView!
     @IBOutlet weak var MealCollectionView: UICollectionView!
     
-    var SelectedCategory = Array(repeating: false, count: 17)
-    var SelectedMeal = Array(repeating: false, count: 5)
+    @IBOutlet weak var ShadowView: UIView!
+    @IBOutlet weak var FoodView: UIView!
     
-    let CategoryList = ["Tất cả", "Thịt heo", "Thịt bò", "Thịt gà", "Hải sản", "Cá", "Bánh", "Trái cây", "Ăn chay", "Giảm cân", "Chiên xào", "Món canh", "Món nướng", "Món kho", "Món nhậu", "Tiết kiệm", "Ngày lễ, tết"]
-    let MealList = ["Tất cả", "Bữa sáng", "Bữa trưa", "Bữa tối", "Bữa phụ"]
+    @IBOutlet weak var FoodButton0: UIButton!
+    @IBOutlet weak var FoodButton1: UIButton!
+    @IBOutlet weak var FoodButton2: UIButton!
+    @IBOutlet weak var FoodButton3: UIButton!
+    @IBOutlet weak var FoodButton4: UIButton!
+    @IBOutlet weak var FoodButton5: UIButton!
+    
+    @IBOutlet weak var FoodImage0: UIImageView!
+    @IBOutlet weak var FoodImage1: UIImageView!
+    @IBOutlet weak var FoodImage2: UIImageView!
+    @IBOutlet weak var FoodImage3: UIImageView!
+    @IBOutlet weak var FoodImage4: UIImageView!
+    @IBOutlet weak var FoodImage5: UIImageView!
+    
+    @IBOutlet weak var FoodName0: UILabel!
+    @IBOutlet weak var FoodName1: UILabel!
+    @IBOutlet weak var FoodName2: UILabel!
+    @IBOutlet weak var FoodName3: UILabel!
+    @IBOutlet weak var FoodName4: UILabel!
+    @IBOutlet weak var FoodName5: UILabel!
+    
+    
+    var SelectedCategory = Array(repeating: false, count: 16)
+    var SelectedMeal = Array(repeating: false, count: 4)
+    
+    let CategoryList = ["Thịt heo", "Thịt bò", "Thịt gà", "Hải sản", "Cá", "Bánh", "Trái cây", "Ăn chay", "Giảm cân", "Chiên xào", "Món canh", "Món nướng", "Món kho", "Món nhậu", "Tiết kiệm", "Ngày lễ, tết"]
+    let MealList = ["Bữa sáng", "Bữa trưa", "Bữa tối", "Bữa phụ"]
+    var FoodImageOutletList = [UIImageView]()
+    var FoodNameOutletList = [UILabel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,16 +57,33 @@ class ViewController: UIViewController {
     }
 
     func Init() {
+        //Layout thanh loai thuc an
         var layout = CategoryCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.sectionInset = UIEdgeInsets(top: 5,left: 5,bottom: 0,right: 15)
         
+        //Layout thanh loai bua an
         layout = MealCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.sectionInset = UIEdgeInsets(top: 0,left: 5,bottom: 0,right: 5)
         
-        SelectedCategory[0] = true
-        SelectedMeal[0] = true
+        //Layout bo goc va do bong cho nen 6 mon an
+        FoodView.layer.cornerRadius = 10
+        FoodView.layer.borderWidth = 0.1
+        FoodView.layer.masksToBounds = true
+        
+        ShadowView.layer.shadowColor = UIColor.black.cgColor
+        ShadowView.layer.shadowRadius = 7
+        ShadowView.layer.shadowOpacity = 0.5
+        ShadowView.layer.shadowOffset = CGSize(width: -2, height: 5)
+        
+        //Luu danh sach Outlet vao List
+        FoodImageOutletList = [FoodImage0, FoodImage1, FoodImage2, FoodImage3, FoodImage4, FoodImage5]
+        FoodNameOutletList = [FoodName0, FoodName1, FoodName2, FoodName3, FoodName4, FoodName5]
     }
-
+    
+    @IBAction func act_ClickFoodButton(_ sender: Any) {
+        let button = sender as! UIButton
+        print(String(describing: button.restorationIdentifier))
+    }
 }
 
 extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
