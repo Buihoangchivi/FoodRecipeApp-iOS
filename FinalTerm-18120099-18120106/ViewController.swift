@@ -46,6 +46,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var NextPageButton: UIButton!
     @IBOutlet weak var LastPageButton: UIButton!
     
+    @IBOutlet weak var ShadowViewLeftConstraint: NSLayoutConstraint!
+    @IBOutlet weak var ShadowViewRightConstraint: NSLayoutConstraint!
     
     var SelectedCategory = Array(repeating: false, count: 16)
     var SelectedMeal = Array(repeating: false, count: 4)
@@ -56,6 +58,19 @@ class ViewController: UIViewController {
     var FoodNameOutletList = [UILabel]()
     var CurrentPage = 1
     var TotalPage = 5
+    
+    override func viewWillAppear(_ animated: Bool) {
+        ShadowViewLeftConstraint.constant += view.bounds.width
+        ShadowViewRightConstraint.constant -= view.bounds.width
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        ShadowViewLeftConstraint.constant -= view.bounds.width
+        ShadowViewRightConstraint.constant += view.bounds.width
+        UIView.animate(withDuration: 0.8) { [weak self] in
+          self?.view.layoutIfNeeded()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,6 +100,15 @@ class ViewController: UIViewController {
         FoodImageOutletList = [FoodImage0, FoodImage1, FoodImage2, FoodImage3, FoodImage4, FoodImage5]
         FoodNameOutletList = [FoodName0, FoodName1, FoodName2, FoodName3, FoodName4, FoodName5]
         
+        for i in 0...5 {
+            FoodImageOutletList[i].image = UIImage(named: String(i))
+            FoodImageOutletList[i].layer.cornerRadius = 76
+            FoodImageOutletList[i].layer.borderWidth = 1
+            FoodImageOutletList[i].layer.borderColor = UIColor.lightGray.cgColor
+            FoodNameOutletList[i].text = String(i)
+        }
+        
+        
         //Bo tron goc cho cac nut phan trang
         FirstPageButton.layer.cornerRadius = 12
         PrevPageButton.layer.cornerRadius = 12
@@ -97,19 +121,12 @@ class ViewController: UIViewController {
         PrevPageButton.layer.borderWidth = 1
         PrevPageButton.layer.borderColor = UIColor.lightGray.cgColor
         
-        if (TotalPage == 0) {
-            CurrentPage = 0
-            NextPageButton.layer.borderWidth = 1
-            NextPageButton.layer.borderColor = UIColor.lightGray.cgColor
-            NextPageButton.isEnabled = false
-            NextPageButton.setTitleColor(UIColor.black, for: .normal)
-            NextPageButton.backgroundColor = FirstPageButton.backgroundColor
-            
-            LastPageButton.layer.borderWidth = 1
-            LastPageButton.layer.borderColor = UIColor.lightGray.cgColor
-            LastPageButton.isEnabled = false
-            LastPageButton.setTitleColor(UIColor.black, for: .normal)
-            LastPageButton.backgroundColor = FirstPageButton.backgroundColor
+        if (TotalPage < 2) {
+            if (TotalPage == 0) {
+                CurrentPage = 0
+            }
+            ChangButtonState(NextPageButton, false)
+            ChangButtonState(LastPageButton, false)
         }
         
         //Hien thi trang hien tai tren tong so trang
@@ -123,8 +140,107 @@ class ViewController: UIViewController {
     }
     
     @IBAction func act_ClickPageButton(_ sender: Any) {
-        let button = sender as! UIButton
-        print(String(describing: button.restorationIdentifier))
+        let button = (sender as! UIButton).restorationIdentifier!
+        var temp = view.bounds.width
+        if (button == "PrevPage" || button == "FirstPage") {
+            temp *= -1
+        }
+        
+        //Neu nhan nut Next hoac Last Page
+        if (temp > 0) {
+            if (button == "NextPage") {
+                CurrentPage += 1 //Tang so trang len 1
+            }
+            else {
+                CurrentPage = TotalPage //Trang cuoi cung
+            }
+            
+            //Neu dang o trang cuoi cung thi vo hieu hoa 2 nut Next va Last Page
+            if (CurrentPage == TotalPage) {
+                ChangButtonState(NextPageButton, false)
+                ChangButtonState(LastPageButton, false)
+            }
+            //Active 2 nut Prev va First Page
+            if (PrevPageButton.isEnabled == false) {
+                ChangButtonState(PrevPageButton, true)
+                ChangButtonState(FirstPageButton, true)
+            }
+        }
+        else { //Neu nhan nut Prev hoac First Page
+            if (button == "PrevPage") {
+                self.CurrentPage -= 1 //Giam so trang xuong 1
+            }
+            else {
+                self.CurrentPage = 1 //Trang dau tien
+            }
+            
+            //Neu dang o trang dau tien thi vo hieu hoa 2 nut Prev va First Page
+            if (CurrentPage == 1) {
+                ChangButtonState(PrevPageButton, false)
+                ChangButtonState(FirstPageButton, false)
+            }
+            //Active 2 nut Next va Last Page
+            if (NextPageButton.isEnabled == false) {
+                ChangButtonState(NextPageButton, true)
+                ChangButtonState(LastPageButton, true)
+            }
+        }
+        //Cap nhat so trang tren giao dien
+        self.CurrentPageLabel.text = "\(self.CurrentPage) of \(self.TotalPage)"
+        
+        //Backup trang thai cac nut
+        let tempButtonList: [(btn: UIButton, enable: Bool)] = [(FirstPageButton, FirstPageButton.isEnabled), (PrevPageButton, PrevPageButton.isEnabled), (NextPageButton, NextPageButton.isEnabled), (LastPageButton, LastPageButton.isEnabled)]
+        
+        //Vo hieu hoa cac nut khi dang thuc hien Animation
+        FirstPageButton.isEnabled = false
+        PrevPageButton.isEnabled = false
+        NextPageButton.isEnabled = false
+        LastPageButton.isEnabled = false
+        
+        //Animation di chuyen danh sach mon an hien tai ra ngoai khung hinh
+        ShadowViewLeftConstraint.constant -= temp
+        ShadowViewRightConstraint.constant += temp
+        UIView.animate(withDuration: 0.8) { [weak self] in
+          self?.view.layoutIfNeeded()
+        }
+        
+        //Di chuyen danh sach mon an sang phai khung hinh
+        ShadowViewLeftConstraint.constant += temp * 2
+        ShadowViewRightConstraint.constant -= temp * 2
+        UIView.animate(withDuration: 0,
+                       delay: 0.8,
+                     animations: { [weak self] in
+                      self?.view.layoutIfNeeded()
+        }, completion: nil)
+        
+        //Animation di chuyen danh sach mon an moi vao khung hinh
+        ShadowViewLeftConstraint.constant -= temp
+        ShadowViewRightConstraint.constant += temp
+        UIView.animate(withDuration: 0.8,
+                       delay: 0.8,
+                     animations: { [weak self] in
+                      self?.view.layoutIfNeeded()
+            }, completion: { //Active cac nut sau khi thuc hien xong Animation
+                (value: Bool) in
+                for i in 0...3 {
+                    tempButtonList[i].btn.isEnabled = tempButtonList[i].enable
+                }
+            })
+    }
+    
+    func ChangButtonState(_ button: UIButton, _ isActive: Bool) {
+        button.isEnabled = isActive
+        if (isActive == true) {
+            button.layer.borderWidth = 0
+            button.setTitleColor(UIColor.white, for: .normal)
+            button.backgroundColor = UIColor.systemGreen
+        }
+        else {
+            button.layer.borderWidth = 1
+            button.layer.borderColor = UIColor.lightGray.cgColor
+            button.setTitleColor(UIColor.black, for: .normal)
+            button.backgroundColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1)
+        }
     }
 }
 
@@ -212,4 +328,9 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
             MealCollectionView.reloadData()
         }
     }
+}
+
+class FoodInfomation {
+    var Name = ""
+    var Image = ""
 }
