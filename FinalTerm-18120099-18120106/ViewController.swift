@@ -63,13 +63,16 @@ class ViewController: UIViewController {
     var SelectedCategory = Array(repeating: false, count: 16)
     var SelectedMeal = Array(repeating: false, count: 4)
     
+    //Danh sach cac mon an dang duoc filter
+    var FoodIDList = [Int]()
+    
     let CategoryList = ["Thịt heo", "Thịt bò", "Thịt gà", "Hải sản", "Cá", "Bánh", "Trái cây", "Ăn chay", "Giảm cân", "Chiên xào", "Món canh", "Món nướng", "Món kho", "Món nhậu", "Tiết kiệm", "Ngày lễ, tết"]
     let MealList = ["Bữa sáng", "Bữa trưa", "Bữa tối", "Bữa phụ"]
     var FoodImageOutletList = [UIImageView]()
     var FoodNameOutletList = [UILabel]()
     var FoodButtonOutletList = [UIButton]()
     var CurrentPage = 1
-    var TotalPage = 5
+    var TotalPage = 0
     
     override func viewWillAppear(_ animated: Bool) {
         ShadowViewLeftConstraint.constant += view.bounds.width
@@ -192,20 +195,35 @@ class ViewController: UIViewController {
         FoodNameOutletList = [FoodName0, FoodName1, FoodName2, FoodName3, FoodName4, FoodName5]
         FoodButtonOutletList = [FoodButton0, FoodButton1, FoodButton2, FoodButton3, FoodButton4, FoodButton5]
         
-        //Khoi tao 6 mon an dau tien
-        for i in 0...5 {
-            //Doc du lieu cac mon an
-            foodInfoRef.child("FoodInfo\(i)").observeSingleEvent(of: .value, with: { (snapshot) in
-            if let food = snapshot.value as? [String:Any] {
-                self.FoodImageOutletList[i].sd_setImage(with: imageRef.child("/FoodImages/\(food["Image"]!)"))
-                self.FoodNameOutletList[i].text = "\(food["Name"]!)"
+        //Xac dinh co tat ca bao nhieu mon an luu tru tren Firebase
+        //Tu do suy ra duoc tong so trang
+        foodInfoRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            for i in 0..<Int(snapshot.childrenCount) {
+                self.FoodIDList += [i]
+            }
+            
+            if (self.FoodIDList.count == 0) {
+                self.TotalPage = 0
+                self.CurrentPage = 0
             }
             else {
-                self.FoodButtonOutletList[i].isEnabled = false
-                self.FoodImageOutletList[i].isHidden = true
-                self.FoodNameOutletList[i].isHidden = true
+                self.CurrentPage = 1
+                self.TotalPage = (self.FoodIDList.count - 1) / 6 + 1
             }
-            })
+            if (self.TotalPage < 2) {
+                self.ChangButtonState(self.NextPageButton, false)
+                self.ChangButtonState(self.LastPageButton, false)
+            }
+            
+            //Cap nhat 6 mon an
+            self.LoadFoodInfo()
+            
+            //Hien thi trang hien tai tren tong so trang
+            self.CurrentPageLabel.text = "\(self.CurrentPage) of \(self.TotalPage)"
+        })
+        
+        //Bo tron goc cho hinh anh 6 mon an
+        for i in 0...5 {
             FoodImageOutletList[i].layer.cornerRadius = 76
             FoodImageOutletList[i].layer.borderWidth = 1
             FoodImageOutletList[i].layer.borderColor = UIColor.lightGray.cgColor
@@ -222,17 +240,6 @@ class ViewController: UIViewController {
         FirstPageButton.layer.borderColor = UIColor.lightGray.cgColor
         PrevPageButton.layer.borderWidth = 1
         PrevPageButton.layer.borderColor = UIColor.lightGray.cgColor
-        
-        if (TotalPage < 2) {
-            if (TotalPage == 0) {
-                CurrentPage = 0
-            }
-            ChangButtonState(NextPageButton, false)
-            ChangButtonState(LastPageButton, false)
-        }
-        
-        //Hien thi trang hien tai tren tong so trang
-        CurrentPageLabel.text = "\(CurrentPage) of \(TotalPage)"
     }
     
     @IBAction func act_ClickFoodButton(_ sender: Any) {
@@ -317,29 +324,8 @@ class ViewController: UIViewController {
                       self?.view.layoutIfNeeded()
         }, completion: { //Thay doi mon an
             (value: Bool) in
-            for i in 0...5 {
-                //Doc du lieu 6 mon an tuong ung voi so trang hien tai
-                foodInfoRef.child("FoodInfo\((self.CurrentPage - 1) * 6 + i)").observeSingleEvent(of: .value, with: { (snapshot) in
-                if let food = snapshot.value as? [String:Any] {
-                    self.FoodImageOutletList[i].sd_setImage(with: imageRef.child("/FoodImages/\(food["Image"]!)"))
-                    self.FoodNameOutletList[i].text = "\(food["Name"]!)"
-                    //Neu dang bi vo hieu hoa thi bat nut len
-                    if (self.FoodButtonOutletList[i].isEnabled == false) {
-                        self.FoodButtonOutletList[i].isEnabled = true
-                        self.FoodImageOutletList[i].isHidden = false
-                        self.FoodNameOutletList[i].isHidden = false
-                    }
-                }
-                else {
-                    //Neu nut dang bat thi vo hieu hoa
-                    if (self.FoodButtonOutletList[i].isEnabled == true) {
-                        self.FoodButtonOutletList[i].isEnabled = false
-                        self.FoodImageOutletList[i].isHidden = true
-                        self.FoodNameOutletList[i].isHidden = true
-                    }
-                }
-                })
-            }
+            //Cap nhat 6 mon an
+            self.LoadFoodInfo()
         })
         //Animation di chuyen danh sach mon an moi vao khung hinh
         ShadowViewLeftConstraint.constant -= temp
@@ -369,6 +355,98 @@ class ViewController: UIViewController {
             button.layer.borderColor = UIColor.lightGray.cgColor
             button.setTitleColor(UIColor.black, for: .normal)
             button.backgroundColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1)
+        }
+    }
+    
+    //Cap nhat danh sach mon an theo phan loai
+    func UpdateFoodList() {
+        FoodIDList = [Int]()
+        
+        var isAllCategory = true
+        for i in 0..<CategoryList.count {
+            if (SelectedCategory[i] == true) {
+                isAllCategory = false
+                break
+            }
+        }
+        
+        foodInfoRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            for snapshotChild in snapshot.children {
+                let temp = snapshotChild as! DataSnapshot
+                if let food = temp.value as? [String:AnyObject] {
+                    if (food["Category"] != nil) {
+                        let categoryArray = food["Category"] as! NSArray
+                        for i in 0..<categoryArray.count {
+                            if (self.SelectedCategory[categoryArray[i] as! Int] == true || isAllCategory == true) {
+                                let foodID = (food["Image"] as! String).split(separator: ".").first!
+                                let tempInt = Int(String(foodID)) ?? 0
+                                self.FoodIDList += [tempInt]
+                                break
+                            }
+                        }
+                    }
+                }
+            }
+            
+            if (self.FoodIDList.count == 0) {
+                self.TotalPage = 0
+                self.CurrentPage = 0
+            }
+            else {
+                self.CurrentPage = 1
+                self.TotalPage = (self.FoodIDList.count - 1) / 6 + 1
+            }
+            if (self.TotalPage < 2) {
+                self.ChangButtonState(self.NextPageButton, false)
+                self.ChangButtonState(self.LastPageButton, false)
+            }
+            
+            //Cap nhat 6 mon an
+            self.LoadFoodInfo()
+            
+            //Hien thi trang hien tai tren tong so trang
+            self.CurrentPageLabel.text = "\(self.CurrentPage) of \(self.TotalPage)"
+        })
+    }
+    
+    func LoadFoodInfo() {
+        //An ca 6 mon an de app load lai se tao cam giac app chay muot hon
+        for i in 0...5 {
+            if (self.FoodButtonOutletList[i].isEnabled == true) {
+                self.FoodButtonOutletList[i].isEnabled = false
+                self.FoodImageOutletList[i].isHidden = true
+                self.FoodNameOutletList[i].isHidden = true
+            }
+        }
+        
+        //Cap nhat 6 mon an
+        for i in 0...5 {
+            //Kiem tra xem co du 6 mon an de hien thi hay khong
+            //Neu khong thi vo hieu hoa nut
+            if (self.FoodIDList.count <= (self.CurrentPage - 1) * 6 + i || self.CurrentPage == 0) {
+                continue
+            }
+            //Doc du lieu 6 mon an tuong ung voi so trang hien tai
+            foodInfoRef.child("FoodInfo\(FoodIDList[(self.CurrentPage - 1) * 6 + i])").observeSingleEvent(of: .value, with: { (snapshot) in
+            if let food = snapshot.value as? [String:Any] {
+                self.FoodImageOutletList[i].sd_setImage(with: imageRef.child("/FoodImages/\(food["Image"]!)"))
+                self.FoodNameOutletList[i].text = "\(food["Name"]!)"
+                //Neu dang bi vo hieu hoa thi bat nut len
+                if (self.FoodButtonOutletList[i].isEnabled == false) {
+                    self.FoodButtonOutletList[i].isEnabled = true
+                    self.FoodImageOutletList[i].isHidden = false
+                    self.FoodNameOutletList[i].isHidden = false
+                }
+            }
+            else {
+                //Neu nut dang bat thi vo hieu hoa
+                if (self.FoodButtonOutletList[i].isEnabled == true) {
+                    self.FoodButtonOutletList[i].isEnabled = false
+                    self.FoodImageOutletList[i].isHidden = true
+                    self.FoodNameOutletList[i].isHidden = true
+                }
+            }
+            })
         }
     }
 }
@@ -456,5 +534,6 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
             }
             MealCollectionView.reloadData()
         }
+        UpdateFoodList()
     }
 }
