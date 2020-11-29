@@ -1,0 +1,6 @@
+framework module Pods_FinalTerm_18120099_18120106Tests {
+  umbrella header "Pods-FinalTerm-18120099-18120106Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
