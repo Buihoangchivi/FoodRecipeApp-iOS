@@ -226,7 +226,11 @@ class ViewController: UIViewController {
     @IBAction func act_ClickFoodButton(_ sender: Any) {
         let button = sender as! UIButton
         let index = button.restorationIdentifier!.last!.hexDigitValue!
-        print(index)
+        let myPopUp = self.storyboard?.instantiateViewController(identifier: "FoodPopUpViewController") as! FoodPopUpViewController
+        myPopUp.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        myPopUp.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        myPopUp.FoodID = FoodIDList[(CurrentPage - 1) * 6 + index]
+        self.present(myPopUp, animated: true, completion: nil)
     }
     
     @IBAction func act_ClickPageButton(_ sender: Any) {
