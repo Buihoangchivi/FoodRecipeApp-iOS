@@ -60,14 +60,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var ShadowViewLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var ShadowViewRightConstraint: NSLayoutConstraint!
     
-    var SelectedCategory = Array(repeating: false, count: 16)
-    var SelectedMeal = Array(repeating: false, count: 4)
+    var SelectedCategory = [Bool]()
+    var SelectedMeal = [Bool]()
     
     //Danh sach cac mon an dang duoc filter
     var FoodIDList = [Int]()
     
-    let CategoryList = ["Thịt heo", "Thịt bò", "Thịt gà", "Hải sản", "Cá", "Bánh", "Trái cây", "Ăn chay", "Giảm cân", "Chiên xào", "Món canh", "Món nướng", "Món kho", "Món nhậu", "Tiết kiệm", "Ngày lễ, tết"]
-    let MealList = ["Bữa sáng", "Bữa trưa", "Bữa tối", "Bữa phụ"]
+    let CategoryList = ["Thịt heo", "Thịt bò", "Thịt gà", "Hải sản", "Cá", "Bánh", "Trái cây", "Ăn chay", "Giảm cân", "Chiên xào", "Món canh", "Món nướng", "Món kho", "Món nhậu", "Tiết kiệm", "Ngày lễ, tết", "Khác"]
+    let MealList = ["Bữa sáng", "Bữa trưa", "Bữa tối", "Bữa phụ", "Khác"]
     var FoodImageOutletList = [UIImageView]()
     var FoodNameOutletList = [UILabel]()
     var FoodButtonOutletList = [UIButton]()
@@ -172,6 +172,10 @@ class ViewController: UIViewController {
     }
 
     func Init() {
+        //Khoi tao cho cac List
+        SelectedCategory = Array(repeating: false, count: CategoryList.count)
+        SelectedMeal = Array(repeating: false, count: MealList.count)
+        
         //Layout thanh loai thuc an
         var layout = CategoryCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.sectionInset = UIEdgeInsets(top: 5,left: 5,bottom: 0,right: 15)
@@ -197,30 +201,7 @@ class ViewController: UIViewController {
         
         //Xac dinh co tat ca bao nhieu mon an luu tru tren Firebase
         //Tu do suy ra duoc tong so trang
-        foodInfoRef.observeSingleEvent(of: .value, with: { (snapshot) in
-            for i in 0..<Int(snapshot.childrenCount) {
-                self.FoodIDList += [i]
-            }
-            
-            if (self.FoodIDList.count == 0) {
-                self.TotalPage = 0
-                self.CurrentPage = 0
-            }
-            else {
-                self.CurrentPage = 1
-                self.TotalPage = (self.FoodIDList.count - 1) / 6 + 1
-            }
-            if (self.TotalPage < 2) {
-                self.ChangButtonState(self.NextPageButton, false)
-                self.ChangButtonState(self.LastPageButton, false)
-            }
-            
-            //Cap nhat 6 mon an
-            self.LoadFoodInfo()
-            
-            //Hien thi trang hien tai tren tong so trang
-            self.CurrentPageLabel.text = "\(self.CurrentPage) of \(self.TotalPage)"
-        })
+        UpdateFoodList()
         
         //Bo tron goc cho hinh anh 6 mon an
         for i in 0...5 {
@@ -362,6 +343,7 @@ class ViewController: UIViewController {
     func UpdateFoodList() {
         FoodIDList = [Int]()
         
+        //Kiem tra co phai dang chon tat cac cac loai mon an hay khong
         var isAllCategory = true
         for i in 0..<CategoryList.count {
             if (SelectedCategory[i] == true) {
@@ -370,20 +352,46 @@ class ViewController: UIViewController {
             }
         }
         
+        //Kiem tra co phai dang chon tat cac cac loai bua an hay khong
+        var isAllMeal = true
+        for i in 0..<MealList.count {
+            if (SelectedMeal[i] == true) {
+                isAllMeal = false
+                break
+            }
+        }
+        
         foodInfoRef.observeSingleEvent(of: .value, with: { (snapshot) in
             for snapshotChild in snapshot.children {
+                var check = 0
                 let temp = snapshotChild as! DataSnapshot
                 if let food = temp.value as? [String:AnyObject] {
+                    //Kiem tra co thoa loai mon an dang loc hay khong
                     if (food["Category"] != nil) {
                         let categoryArray = food["Category"] as! NSArray
                         for i in 0..<categoryArray.count {
                             if (self.SelectedCategory[categoryArray[i] as! Int] == true || isAllCategory == true) {
-                                let foodID = (food["Image"] as! String).split(separator: ".").first!
-                                let tempInt = Int(String(foodID)) ?? 0
-                                self.FoodIDList += [tempInt]
+                                check += 1
                                 break
                             }
                         }
+                    }
+                    
+                    //Kiem tra co thoa loai bua an dang loc hay khong
+                    if (food["Meal"] != nil) {
+                        let mealArray = food["Meal"] as! NSArray
+                        for i in 0..<mealArray.count {
+                            if (self.SelectedMeal[mealArray[i] as! Int] == true || isAllMeal == true) {
+                                check += 1
+                                break
+                            }
+                        }
+                    }
+                    
+                    //Neu thoa ca loai mon an va loai bua an thi dua mon an do vao List
+                    if (check == 2) {
+                        let id = Int(temp.key)!
+                        self.FoodIDList += [id]
                     }
                 }
             }
@@ -396,10 +404,22 @@ class ViewController: UIViewController {
                 self.CurrentPage = 1
                 self.TotalPage = (self.FoodIDList.count - 1) / 6 + 1
             }
+            
+            //Cap nhat trang thai cua cac nut phan trang
             if (self.TotalPage < 2) {
-                self.ChangButtonState(self.NextPageButton, false)
-                self.ChangButtonState(self.LastPageButton, false)
+                if (self.NextPageButton.isEnabled == true) {
+                    self.ChangButtonState(self.NextPageButton, false)
+                    self.ChangButtonState(self.LastPageButton, false)
+                }
             }
+            else {
+                if (self.NextPageButton.isEnabled == false) {
+                    self.ChangButtonState(self.NextPageButton, true)
+                    self.ChangButtonState(self.LastPageButton, true)
+                }
+            }
+            self.ChangButtonState(self.PrevPageButton, false)
+            self.ChangButtonState(self.FirstPageButton, false)
             
             //Cap nhat 6 mon an
             self.LoadFoodInfo()
@@ -427,7 +447,7 @@ class ViewController: UIViewController {
                 continue
             }
             //Doc du lieu 6 mon an tuong ung voi so trang hien tai
-            foodInfoRef.child("FoodInfo\(FoodIDList[(self.CurrentPage - 1) * 6 + i])").observeSingleEvent(of: .value, with: { (snapshot) in
+            foodInfoRef.child("\(FoodIDList[(self.CurrentPage - 1) * 6 + i])").observeSingleEvent(of: .value, with: { (snapshot) in
             if let food = snapshot.value as? [String:Any] {
                 self.FoodImageOutletList[i].sd_setImage(with: imageRef.child("/FoodImages/\(food["Image"]!)"))
                 self.FoodNameOutletList[i].text = "\(food["Name"]!)"
