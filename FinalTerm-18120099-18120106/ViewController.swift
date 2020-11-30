@@ -19,6 +19,9 @@ var FoodList = [FoodInfomation]()
 let imageRef = Storage.storage().reference()
 let foodInfoRef = Database.database().reference()
 
+let CategoryList = ["Thịt heo", "Thịt bò", "Thịt gà", "Hải sản", "Cá", "Bánh", "Trái cây", "Ăn chay", "Giảm cân", "Chiên xào", "Món canh", "Món nướng", "Món kho", "Món nhậu", "Tiết kiệm", "Ngày lễ, tết", "Khác"]
+let MealList = ["Bữa sáng", "Bữa trưa", "Bữa tối", "Bữa phụ", "Khác"]
+
 class ViewController: UIViewController {
 
     @IBOutlet weak var HomeButton: UIButton!
@@ -66,8 +69,6 @@ class ViewController: UIViewController {
     //Danh sach cac mon an dang duoc filter
     var FoodIDList = [Int]()
     
-    let CategoryList = ["Thịt heo", "Thịt bò", "Thịt gà", "Hải sản", "Cá", "Bánh", "Trái cây", "Ăn chay", "Giảm cân", "Chiên xào", "Món canh", "Món nướng", "Món kho", "Món nhậu", "Tiết kiệm", "Ngày lễ, tết", "Khác"]
-    let MealList = ["Bữa sáng", "Bữa trưa", "Bữa tối", "Bữa phụ", "Khác"]
     var FoodImageOutletList = [UIImageView]()
     var FoodNameOutletList = [UILabel]()
     var FoodButtonOutletList = [UIButton]()
@@ -327,6 +328,13 @@ class ViewController: UIViewController {
             })
     }
     
+    @IBAction func act_ShowAddFoodScreen(_ sender: Any) {
+        let myAddFoodScreen = self.storyboard?.instantiateViewController(identifier: "AddNewFoodViewController") as! AddNewFoodViewController
+        myAddFoodScreen.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        myAddFoodScreen.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        self.present(myAddFoodScreen, animated: true, completion: nil)
+    }
+    
     //Thay doi trang thai cua cac nut phan trang
     func ChangButtonState(_ button: UIButton, _ isActive: Bool) {
         button.isEnabled = isActive
@@ -433,6 +441,7 @@ class ViewController: UIViewController {
         })
     }
     
+    //Lay thong tin mon an tu Firebase xuong App
     func LoadFoodInfo() {
         //An ca 6 mon an de app load lai se tao cam giac app chay muot hon
         for i in 0...5 {
