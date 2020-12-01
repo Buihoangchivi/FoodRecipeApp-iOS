@@ -462,7 +462,7 @@ class ViewController: UIViewController {
             //Doc du lieu 6 mon an tuong ung voi so trang hien tai
             foodInfoRef.child("\(FoodIDList[(self.CurrentPage - 1) * 6 + i])").observeSingleEvent(of: .value, with: { (snapshot) in
             if let food = snapshot.value as? [String:Any] {
-                self.FoodImageOutletList[i].sd_setImage(with: imageRef.child("/FoodImages/\(food["Image"]!)"))
+                self.FoodImageOutletList[i].sd_setImage(with: imageRef.child("/FoodImages/\(food["Image"]!)"), placeholderImage: UIImage(named: "food-background"))
                 self.FoodNameOutletList[i].text = "\(food["Name"]!)"
                 //Neu dang bi vo hieu hoa thi bat nut len
                 if (self.FoodButtonOutletList[i].isEnabled == false) {

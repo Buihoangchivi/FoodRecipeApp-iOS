@@ -10,12 +10,16 @@ import UIKit
 
 class AddNewFoodViewController: UIViewController {
 
-    @IBOutlet weak var AddImageButton: UIButton!
     @IBOutlet weak var FoodImageView: UIImageView!
+    
     @IBOutlet weak var CategoryCollectionView: UICollectionView!
     @IBOutlet weak var MealCollectionView: UICollectionView!
+    
+    @IBOutlet weak var AddImageButton: UIButton!
     @IBOutlet weak var AddIngredientButton: UIButton!
     @IBOutlet weak var AddStepButton: UIButton!
+    @IBOutlet weak var CancelButton: UIButton!
+    @IBOutlet weak var SaveButton: UIButton!
     
     var SelectedCategory = [Bool]()
     var SelectedMeal = [Bool]()
@@ -31,9 +35,13 @@ class AddNewFoodViewController: UIViewController {
         AddImageButton.layer.cornerRadius = 17.5
         AddIngredientButton.layer.cornerRadius = 17.5
         AddStepButton.layer.cornerRadius = 17.5
+        CancelButton.layer.cornerRadius = 22
+        CancelButton.layer.borderColor = UIColor.systemGreen.cgColor
+        CancelButton.layer.borderWidth = 1
+        SaveButton.layer.cornerRadius = 22
         
         //Bo tron goc cho anh mon an
-        FoodImageView.layer.cornerRadius = 100
+        //FoodImageView.layer.cornerRadius = 100
         
         //Khoi tao cho cac List
         SelectedCategory = Array(repeating: false, count: CategoryList.count)
@@ -45,11 +53,26 @@ class AddNewFoodViewController: UIViewController {
         
         //Layout thanh loai bua an
         layout = MealCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.sectionInset = UIEdgeInsets(top: 0,left: 5,bottom: 0,right: 5)
+        layout.sectionInset = UIEdgeInsets(top: 5,left: 10,bottom: 0,right: 15)
     }
     
     @IBAction func act_ShowHomeScreen(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func act_AddFoodImage(_ sender: Any) {
+    }
+    
+    @IBAction func act_ShowIngredientList(_ sender: Any) {
+    }
+    
+    @IBAction func act_ShowStepsList(_ sender: Any) {
+    }
+    
+    @IBAction func act_CancelNewFood(_ sender: Any) {
+    }
+    
+    @IBAction func act_SaveNewFood(_ sender: Any) {
     }
     
     /*
@@ -101,19 +124,21 @@ extension AddNewFoodViewController: UICollectionViewDataSource, UICollectionView
             return cell
         }
         else { //Xu ly bua an
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MealCell", for: indexPath as IndexPath) as! MealCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MealForAddFoodCell", for: indexPath as IndexPath) as! MealForAddFoodCollectionViewCell
             
             cell.MealLabel.text = MealList[indexPath.row]
+            cell.layer.cornerRadius = 20
             
             if (SelectedMeal[indexPath.row] == true) {
                 cell.MealLabel.font = UIFont(name: cell.MealLabel.font.familyName, size: 20)
                 cell.MealLabel.textColor = UIColor.black
-                cell.DashLabel.isHidden = false
+                cell.layer.borderWidth = 1
+                cell.layer.borderColor = UIColor.systemGreen.cgColor
             }
             else {
                 cell.MealLabel.font = UIFont(name: cell.MealLabel.font.familyName, size: 17)
                 cell.MealLabel.textColor = UIColor.gray
-                cell.DashLabel.isHidden = true
+                cell.layer.borderWidth = 0
             }
             
             return cell

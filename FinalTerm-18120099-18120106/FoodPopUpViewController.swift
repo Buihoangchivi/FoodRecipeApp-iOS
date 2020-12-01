@@ -38,14 +38,9 @@ class FoodPopUpViewController: UIViewController {
         //Bo tron goc cua Pop-up
         PopUpView.layer.cornerRadius = 10
         
-        //Bo tron goc cho hinh anh mon an
-        FoodImageView.layer.cornerRadius = 100
-        FoodImageView.layer.borderWidth = 1
-        FoodImageView.layer.borderColor = UIColor.lightGray.cgColor
-        
         //Bo tron goc cho 2 nut Chi tiet va Chon mon
-        DetailFoodButton.layer.cornerRadius = 21
-        ChooseFoodButton.layer.cornerRadius = 21
+        DetailFoodButton.layer.cornerRadius = 22
+        ChooseFoodButton.layer.cornerRadius = 22
         
         //Bo tron cho nut Close
         CloseButton.layer.cornerRadius = 15
@@ -53,7 +48,13 @@ class FoodPopUpViewController: UIViewController {
         //Load anh va ten mon an
         foodInfoRef.child("\(FoodID)").observeSingleEvent(of: .value, with: { (snapshot) in
         if let food = snapshot.value as? [String:Any] {
-            self.FoodImageView.sd_setImage(with: imageRef.child("/FoodImages/\(food["Image"]!)"))
+            self.FoodImageView.sd_setImage(with: imageRef.child("/FoodImages/\(food["Image"]!)"), placeholderImage: UIImage(named: "food-background"))
+            if (self.FoodImageView.image != UIImage(named: "food-background")){
+                //Bo tron goc cho hinh anh mon an
+                self.FoodImageView.layer.cornerRadius = 100
+                self.FoodImageView.layer.borderWidth = 1
+                self.FoodImageView.layer.borderColor = UIColor.lightGray.cgColor
+            }
             self.FoodNameLabel.text = "\(food["Name"]!)"
             }})
     }
