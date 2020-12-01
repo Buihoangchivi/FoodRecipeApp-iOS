@@ -756,7 +756,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="food-background" translatesAutoresizingMaskIntoConstraints="NO" id="LeP-dA-tuZ">
-                                <rect key="frame" x="107" y="243.66666666666663" width="200.00000000000045" height="200"/>
+                                <rect key="frame" x="107" y="243.66666666666663" width="200" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="Rwp-Ih-eVj"/>
                                     <constraint firstAttribute="height" constant="200" id="fun-MW-gni"/>

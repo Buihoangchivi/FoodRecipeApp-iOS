@@ -93,6 +93,35 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Init()
+        
+        /*let index = 1
+        //Lay thong tin tat ca nguyen lieu cua mon an id 'index' tu Firebase
+        foodInfoRef.child("\(index)/Ingredient").observeSingleEvent(of: .value, with: { (snapshot) in
+        for snapshotChild in snapshot.children {
+            let temp = snapshotChild as! DataSnapshot
+            if let arr = temp.value as? NSArray {
+                var infoArr = [String]()
+                foodInfoRef.child("IngredientList/\(arr[0])").observeSingleEvent(of: .value, with: { (snapshot) in
+                for snapshotChild in snapshot.children {
+                    let temp = snapshotChild as! DataSnapshot
+                    infoArr += [temp.value as! String]
+                }
+                    //Chi so cua nguyen lieu
+                    //print(arr[0])
+                    //Gia tri cua nguyen lieu
+                    //print(arr[1])
+                    //Ket qua
+                    print("\(infoArr[0]): \(arr[1]) \(infoArr[1])")
+            })
+            }}})
+        
+        //Cap nhat thong tin len Firebase
+        let ingredientIndex = 0
+        //Thay doi loai nguyen lieu id 'ingredientIndex' cho mon an id 'index'
+        foodInfoRef.child("\(index)/Ingredient/\(ingredientIndex)/").updateChildValues(["0": 2])
+        //Thay doi gia tri cua nguyen lieu id 1 cho mon an id 0
+        foodInfoRef.child("\(index)/Ingredient/\(ingredientIndex)/").updateChildValues(["1": 93])*/
+        
         /*for i in 3...15 {
             foodInfoRef.child("FoodInfo\(i)").setValue(["Image": "\(i).jpg", "Name": "\(i)"])
         }*/
