@@ -18,7 +18,7 @@ class ProcessingViewController: UIViewController,UITableViewDelegate,UITableView
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProcessingCell") as! ProcessingTableViewCell
-        let temp = arrIngre[indexPath.row] + ": " + " " + arrIngreInfo[indexPath.row]
+        let temp = arrIngre[indexPath.row] + ":  " + " " + arrIngreInfo[indexPath.row]
         cell.lbDetail.text = temp
         cell.lbStep.text = "* Buoc \(indexPath.row + 1)"
         return cell
