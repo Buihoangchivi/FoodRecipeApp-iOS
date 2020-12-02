@@ -23,6 +23,7 @@ class AddNewFoodViewController: UIViewController {
     
     var SelectedCategory = [Bool]()
     var SelectedMeal = [Bool]()
+    var SelectedIngredient = [(ID: Int, Value: Double)]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +65,12 @@ class AddNewFoodViewController: UIViewController {
     }
     
     @IBAction func act_ShowIngredientList(_ sender: Any) {
+        let dest = self.storyboard?.instantiateViewController(identifier: "IngredientListViewController") as! IngredientListViewController
+        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        dest.delegate = self
+        dest.SelectedIngredient = self.SelectedIngredient
+        self.present(dest, animated: true, completion: nil)
     }
     
     @IBAction func act_ShowStepsList(_ sender: Any) {
@@ -74,17 +81,23 @@ class AddNewFoodViewController: UIViewController {
     
     @IBAction func act_SaveNewFood(_ sender: Any) {
     }
-    
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+}
+
+//Delegate
+extension AddNewFoodViewController : IngredientDelegate {
+    func UpdateIngredient(ingredient: (ID: Int, Value: Double)) {
+        var check = false
+        for i in 0..<SelectedIngredient.count {
+            if (SelectedIngredient[i].ID == ingredient.ID) {
+                SelectedIngredient[i] = ingredient
+                check = true
+            }
+        }
+        if (check == false) {
+            SelectedIngredient += [ingredient]
+        }
     }
-    */
-
 }
 
 extension AddNewFoodViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
