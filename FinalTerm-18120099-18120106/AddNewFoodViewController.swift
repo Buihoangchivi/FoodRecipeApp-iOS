@@ -24,6 +24,7 @@ class AddNewFoodViewController: UIViewController {
     var SelectedCategory = [Bool]()
     var SelectedMeal = [Bool]()
     var SelectedIngredient = [(ID: Int, Value: Double)]()
+    var TempSelectedIngredient = [(ID: Int, Value: Double)]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +71,7 @@ class AddNewFoodViewController: UIViewController {
         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         dest.delegate = self
         dest.SelectedIngredient = self.SelectedIngredient
+        TempSelectedIngredient = SelectedIngredient
         self.present(dest, animated: true, completion: nil)
     }
     
@@ -90,12 +92,26 @@ extension AddNewFoodViewController : IngredientDelegate {
         var check = false
         for i in 0..<SelectedIngredient.count {
             if (SelectedIngredient[i].ID == ingredient.ID) {
-                SelectedIngredient[i] = ingredient
+                TempSelectedIngredient[i] = ingredient
                 check = true
             }
         }
         if (check == false) {
-            SelectedIngredient += [ingredient]
+            TempSelectedIngredient += [ingredient]
+        }
+    }
+    
+    func SaveStatus(save: Bool) {
+        if (save == true) {
+            var i = 0
+            while i < TempSelectedIngredient.count {
+                if (TempSelectedIngredient[i].Value == 0) {
+                    TempSelectedIngredient.remove(at: i)
+                    i -= 1
+                }
+                i += 1
+            }
+            SelectedIngredient = TempSelectedIngredient
         }
     }
 }

@@ -11,6 +11,7 @@ import Firebase
 
 protocol IngredientDelegate : class {
     func UpdateIngredient(ingredient: (ID: Int, Value: Double))
+    func SaveStatus(save: Bool)
 }
 
 class IngredientListViewController: UIViewController {
@@ -22,6 +23,12 @@ class IngredientListViewController: UIViewController {
     
     var IngredientList = [(ID: Int, Name: String, Value: Double, Unit: String)]()
     var SelectedIngredient = [(ID: Int, Value: Double)]()
+    //0 la khong chinh sua nguyen lieu nao ca
+    //1 la nhan nut chinh sua nguyen lieu
+    //2 la nhan nut huy chinh sua
+    //3 la nhan nut luu chinh sua
+    var ButtonState = 0
+    var CurrentEditRow = -1
     var checkClickSave = false
     weak var delegate : IngredientDelegate?
     
@@ -61,7 +68,7 @@ class IngredientListViewController: UIViewController {
                     }
                     //Nhung nguyen lieu nao chua co roi thi de phia duoi cua danh sach
                     if (check == false) {
-                        self.IngredientList += [(ID: Int(temp.key)!, Name: arr[0] as! String, Value: 0.0, Unit: arr[1] as! String)]
+                        self.IngredientList += [(ID: Int(temp.key)!, Name: arr[0] as! String, Value: 0, Unit: arr[1] as! String)]
                     }
                 }
             }
@@ -70,16 +77,33 @@ class IngredientListViewController: UIViewController {
     }
 
     @IBAction func act_Cancel(_ sender: Any) {
+        delegate?.SaveStatus(save: false)
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func act_Save(_ sender: Any) {
-        //Danh dau da nhan nut luu va cap nhat du lieu vao mang
-        checkClickSave = true
-        SelectedIngredient = [(ID: Int, Value: Double)]()
-        IngredientTableView.reloadData()
+        delegate?.SaveStatus(save: true)
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func act_EditIngredient(_ sender: Any) {
+        if (ButtonState != 1) {
+            ButtonState = 1
+            CurrentEditRow = (sender as! UIButton).tag
+            IngredientTableView.reloadData()
+        }
+    }
+    
+    @IBAction func act_CancelIngredient(_ sender: Any) {
+        ButtonState = 2
+        IngredientTableView.reloadData()
+    }
+    
+    @IBAction func act_SaveIngredient(_ sender: Any) {
+        ButtonState = 3
+        IngredientTableView.reloadData()
+    }
+    
 }
 
 extension IngredientListViewController : UITableViewDataSource, UITableViewDelegate {
@@ -92,18 +116,79 @@ extension IngredientListViewController : UITableViewDataSource, UITableViewDeleg
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = IngredientTableView.dequeueReusableCell(withIdentifier: "IngredientCell", for: indexPath) as! IngredientTableViewCell
         
-        if (checkClickSave == false) {
-            cell.IngredientNameLabel.text = IngredientList[indexPath.row].Name
-            if (IngredientList[indexPath.row].Value != 0) {
-                cell.IngredientNumberTextField.text = String(IngredientList[indexPath.row].Value)
+        //Dinh nghia tag va target cho cac nut chinh sua nguyen lieu
+        cell.EditIngredientButton.tag = indexPath.row
+        cell.EditIngredientButton.addTarget(self, action: #selector(act_EditIngredient), for: .touchUpInside)
+        //Dinh nghia tag va target cho cac nut chinh sua nguyen lieu
+        cell.SaveIngredientButton.addTarget(self, action: #selector(act_SaveIngredient), for: .touchUpInside)
+        //Dinh nghia tag va target cho cac nut chinh sua nguyen lieu
+        cell.CancelIngredientButton.addTarget(self, action: #selector(act_CancelIngredient), for: .touchUpInside)
+        
+        if (indexPath.row == CurrentEditRow) {
+            //Kiem tra cac trang thai va xu ly tuong ung
+            if (ButtonState == 1) { //Nhan nut Edit
+                //Vo hieu hoa nut Edit
+                cell.EditIngredientButton.isHidden = true
+                cell.EditIngredientButton.isEnabled = false
+                //Hien thi nut Cancel
+                cell.CancelIngredientButton.isHidden = false
+                cell.CancelIngredientButton.isEnabled = true
+                //Hien thi nut Save
+                cell.SaveIngredientButton.isHidden = false
+                cell.SaveIngredientButton.isEnabled = true
+                //thut le phai
+                cell.UnitTrailingConstraint.constant = 65
+                cell.NumberWidthConstraint.constant = 50
+                //Hien thi o nhap gia tri
+                cell.IngredientNumberTextField.isEnabled = true
+                cell.DashLabel.isHidden = false
             }
-            cell.IngredientUnitLabel.text = IngredientList[indexPath.row].Unit
-        }
-        else { //Khi da nhan nut luu thi luu tat cac cac gia tri cua nguyen lieu vao mang
-            if let temp = Double(cell.IngredientNumberTextField.text!) {
-                delegate?.UpdateIngredient(ingredient: (ID: IngredientList[indexPath.row].ID, Value: temp))
+            else if (ButtonState != 0) {
+                //Hien thi nut Edit
+                cell.EditIngredientButton.isHidden = false
+                cell.EditIngredientButton.isEnabled = true
+                //Vo hieu hoa nut Cancel
+                cell.CancelIngredientButton.isHidden = true
+                cell.CancelIngredientButton.isEnabled = false
+                //Vo hieu hoa nut Save
+                cell.SaveIngredientButton.isHidden = true
+                cell.SaveIngredientButton.isEnabled = false
+                //Khong thut le phai
+                cell.UnitTrailingConstraint.constant = 35
+                cell.NumberWidthConstraint.constant = 85
+                
+                //Nhan nut Cancel
+                if (ButtonState == 2) {
+                    
+                }
+                else { //Nhan nut Save
+                    if let temp = Double(cell.IngredientNumberTextField.text!) {
+                        IngredientList[indexPath.row].Value = temp
+                        //Truyen du lieu gia tri vua thay doi cua nguyen lieu
+                        delegate?.UpdateIngredient(ingredient: (ID: IngredientList[indexPath.row].ID, Value: temp))
+                    }
+                }
+                
+                //An o nhap gia tri
+                cell.IngredientNumberTextField.isEnabled = false
+                cell.DashLabel.isHidden = true
+                
+                //Ve trang thai ban dau
+                ButtonState = 0
+                CurrentEditRow = -1
             }
         }
+        
+        cell.IngredientNameLabel.text = IngredientList[indexPath.row].Name
+        //So thuc
+        if (Double(Int(IngredientList[indexPath.row].Value)) != IngredientList[indexPath.row].Value) {
+            cell.IngredientNumberTextField.text = String(IngredientList[indexPath.row].Value)
+        }
+        else { //So nguyen
+            cell.IngredientNumberTextField.text = String(Int(IngredientList[indexPath.row].Value))
+        }
+        cell.IngredientUnitLabel.text = IngredientList[indexPath.row].Unit
+        
         return cell
     }
 }

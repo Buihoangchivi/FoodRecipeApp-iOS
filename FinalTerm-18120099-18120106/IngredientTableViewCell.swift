@@ -14,6 +14,11 @@ class IngredientTableViewCell: UITableViewCell {
     @IBOutlet weak var IngredientNumberTextField: UITextField!
     @IBOutlet weak var IngredientUnitLabel: UILabel!
     @IBOutlet weak var DashLabel: UILabel!
+    @IBOutlet weak var UnitTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var EditIngredientButton: UIButton!
+    @IBOutlet weak var CancelIngredientButton: UIButton!
+    @IBOutlet weak var SaveIngredientButton: UIButton!
+    @IBOutlet weak var NumberWidthConstraint: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
