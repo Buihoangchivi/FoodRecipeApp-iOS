@@ -364,6 +364,16 @@ class ViewController: UIViewController {
         self.present(myAddFoodScreen, animated: true, completion: nil)
     }
     
+    @IBAction func act_ShowMenu(_ sender: Any) {
+        let myPopUp = self.storyboard?.instantiateViewController(identifier: "MenuViewController") as! MenuViewController
+        myPopUp.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        myPopUp.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        self.present(myPopUp, animated: true, completion: nil)
+    }
+    
+    @IBAction func act_ShowSearch(_ sender: Any) {
+    }
+    
     //Thay doi trang thai cua cac nut phan trang
     func ChangButtonState(_ button: UIButton, _ isActive: Bool) {
         button.isEnabled = isActive
