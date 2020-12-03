@@ -87,11 +87,9 @@ class IngredientListViewController: UIViewController {
     }
     
     @IBAction func act_EditIngredient(_ sender: Any) {
-        if (ButtonState != 1) {
-            ButtonState = 1
-            CurrentEditRow = (sender as! UIButton).tag
-            IngredientTableView.reloadData()
-        }
+        ButtonState = 1
+        CurrentEditRow = (sender as! UIButton).tag
+        IngredientTableView.reloadData()
     }
     
     @IBAction func act_CancelIngredient(_ sender: Any) {
@@ -124,6 +122,7 @@ extension IngredientListViewController : UITableViewDataSource, UITableViewDeleg
         //Dinh nghia tag va target cho cac nut chinh sua nguyen lieu
         cell.CancelIngredientButton.addTarget(self, action: #selector(act_CancelIngredient), for: .touchUpInside)
         
+        //Xu ly nguyen lieu dang duoc Edit
         if (indexPath.row == CurrentEditRow) {
             //Kiem tra cac trang thai va xu ly tuong ung
             if (ButtonState == 1) { //Nhan nut Edit
@@ -178,8 +177,22 @@ extension IngredientListViewController : UITableViewDataSource, UITableViewDeleg
                 CurrentEditRow = -1
             }
         }
+        else { //Xu ly cac nguyen lieu khong duoc Edit
+            //Tat cac nut Edit con lai neu dang Edit 1 nguyen lieu nao do
+            if (ButtonState == 1) {
+                cell.EditIngredientButton.isHidden = true
+                cell.EditIngredientButton.isEnabled = false
+            }
+            else {
+                cell.EditIngredientButton.isHidden = false
+                cell.EditIngredientButton.isEnabled = true
+            }
+            
+        }
         
+        //Hien thi ten nguyen lieu
         cell.IngredientNameLabel.text = IngredientList[indexPath.row].Name
+        //Hien thi gia tri cua nguyen lieu
         //So thuc
         if (Double(Int(IngredientList[indexPath.row].Value)) != IngredientList[indexPath.row].Value) {
             cell.IngredientNumberTextField.text = String(IngredientList[indexPath.row].Value)
@@ -187,6 +200,7 @@ extension IngredientListViewController : UITableViewDataSource, UITableViewDeleg
         else { //So nguyen
             cell.IngredientNumberTextField.text = String(Int(IngredientList[indexPath.row].Value))
         }
+        //Hien thi don vi cua nguyen lieu
         cell.IngredientUnitLabel.text = IngredientList[indexPath.row].Unit
         
         return cell

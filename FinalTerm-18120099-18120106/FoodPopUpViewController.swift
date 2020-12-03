@@ -17,7 +17,6 @@ class FoodPopUpViewController: UIViewController {
     @IBOutlet weak var ChooseFoodButton: UIButton!
     @IBOutlet weak var CloseButton: UIButton!
     
-    
     var FoodID = 0
     
     override func viewDidLoad() {
@@ -68,7 +67,11 @@ class FoodPopUpViewController: UIViewController {
     }
     
     @IBAction func act_ShowDetailFood(_ sender: Any) {
-        
+        let dest = self.storyboard?.instantiateViewController(identifier: "DetailFoodViewController") as! DetailFoodViewController
+        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        dest.FoodID = FoodID
+        self.present(dest, animated: true, completion: nil)
     }
     
     @IBAction func act_ChooseFood(_ sender: Any) {
