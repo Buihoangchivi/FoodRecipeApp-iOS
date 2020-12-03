@@ -104,7 +104,7 @@ class DetailFoodViewController: UIViewController{
     }
     
     @IBAction func btnProcessing(_ sender: Any) {
-        let dest = self.storyboard?.instantiateViewController(identifier: "ProcessingView") as! ProcessingViewController
+        let dest = self.storyboard?.instantiateViewController(identifier: "ProcessingViewController") as! ProcessingViewController
         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         self.present(dest, animated: true, completion: nil)
@@ -181,9 +181,7 @@ extension DetailFoodViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return SelectedIngredientList.count
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 40
-    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DetailIngredientCell") as! DetailIngredientFoodTableViewCell
         //Ten nguyen lieu
