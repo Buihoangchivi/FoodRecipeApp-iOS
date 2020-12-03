@@ -39,6 +39,8 @@ class FoodPopUpViewController: UIViewController {
         
         //Bo tron goc cho 2 nut Chi tiet va Chon mon
         DetailFoodButton.layer.cornerRadius = 22
+        DetailFoodButton.layer.borderColor = UIColor.systemGreen.cgColor
+        DetailFoodButton.layer.borderWidth = 1
         ChooseFoodButton.layer.cornerRadius = 22
         
         //Bo tron cho nut Close

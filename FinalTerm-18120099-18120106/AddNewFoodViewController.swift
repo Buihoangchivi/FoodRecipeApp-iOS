@@ -23,8 +23,8 @@ class AddNewFoodViewController: UIViewController {
     
     var SelectedCategory = [Bool]()
     var SelectedMeal = [Bool]()
-    var SelectedIngredient = [(ID: Int, Value: Double)]()
-    var TempSelectedIngredient = [(ID: Int, Value: Double)]()
+    var SelectedIngredient = [(ID: Int, Name: String, Value: Double, Unit: String)]()
+    var TempSelectedIngredient = [(ID: Int, Name: String, Value: Double, Unit: String)]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,7 +88,7 @@ class AddNewFoodViewController: UIViewController {
 
 //Delegate
 extension AddNewFoodViewController : IngredientDelegate {
-    func UpdateIngredient(ingredient: (ID: Int, Value: Double)) {
+    func UpdateIngredient(ingredient: (ID: Int, Name: String, Value: Double, Unit: String)) {
         var check = false
         for i in 0..<SelectedIngredient.count {
             if (SelectedIngredient[i].ID == ingredient.ID) {

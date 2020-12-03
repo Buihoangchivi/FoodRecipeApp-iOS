@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 protocol IngredientDelegate : class {
-    func UpdateIngredient(ingredient: (ID: Int, Value: Double))
+    func UpdateIngredient(ingredient: (ID: Int, Name: String, Value: Double, Unit: String))
     func SaveStatus(save: Bool)
 }
 
@@ -22,7 +22,7 @@ class IngredientListViewController: UIViewController {
     @IBOutlet weak var SaveButton: UIButton!
     
     var IngredientList = [(ID: Int, Name: String, Value: Double, Unit: String)]()
-    var SelectedIngredient = [(ID: Int, Value: Double)]()
+    var SelectedIngredient = [(ID: Int, Name: String, Value: Double, Unit: String)]()
     //0 la khong chinh sua nguyen lieu nao ca
     //1 la nhan nut chinh sua nguyen lieu
     //2 la nhan nut huy chinh sua
@@ -161,10 +161,10 @@ extension IngredientListViewController : UITableViewDataSource, UITableViewDeleg
                     
                 }
                 else { //Nhan nut Save
-                    if let temp = Double(cell.IngredientNumberTextField.text!) {
-                        IngredientList[indexPath.row].Value = temp
+                    if let temp = Double(cell.IngredientNumberTextField.text!) { IngredientList[indexPath.row].Value = temp
                         //Truyen du lieu gia tri vua thay doi cua nguyen lieu
-                        delegate?.UpdateIngredient(ingredient: (ID: IngredientList[indexPath.row].ID, Value: temp))
+                        let ingre = IngredientList[indexPath.row]
+                        delegate?.UpdateIngredient(ingredient: (ID: ingre.ID, Name: ingre.Name, Value: temp, Unit: ingre.Unit))
                     }
                 }
                 
