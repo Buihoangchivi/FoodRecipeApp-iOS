@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		30FF564B662439D40922327C /* Pods_FinalTerm_18120099_18120106Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EBB0E0BBC418B047C2C44FE /* Pods_FinalTerm_18120099_18120106Tests.framework */; };
+		360B6422257A8D200040BF80 /* DirectionPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360B6421257A8D200040BF80 /* DirectionPopUpViewController.swift */; };
 		3634DFA52579745100A14EE2 /* DirectionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3634DFA42579745100A14EE2 /* DirectionListViewController.swift */; };
 		3634DFA7257975D400A14EE2 /* EditDirectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3634DFA6257975D400A14EE2 /* EditDirectionTableViewCell.swift */; };
 		363BA1CC257251A300A43B4A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 363BA1CB257251A300A43B4A /* GoogleService-Info.plist */; };
@@ -45,6 +46,7 @@
 
 /* Begin PBXFileReference section */
 		0EBB0E0BBC418B047C2C44FE /* Pods_FinalTerm_18120099_18120106Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FinalTerm_18120099_18120106Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		360B6421257A8D200040BF80 /* DirectionPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionPopUpViewController.swift; sourceTree = "<group>"; };
 		3634DFA42579745100A14EE2 /* DirectionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionListViewController.swift; sourceTree = "<group>"; };
 		3634DFA6257975D400A14EE2 /* EditDirectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDirectionTableViewCell.swift; sourceTree = "<group>"; };
 		363BA1CB257251A300A43B4A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				8746F5902578EB4D00D388AE /* MenuTableViewCell.swift */,
 				3634DFA42579745100A14EE2 /* DirectionListViewController.swift */,
 				3634DFA6257975D400A14EE2 /* EditDirectionTableViewCell.swift */,
+				360B6421257A8D200040BF80 /* DirectionPopUpViewController.swift */,
 			);
 			path = "FinalTerm-18120099-18120106";
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				366D6A7E256F831B00693FD7 /* ViewController.swift in Sources */,
 				366D6A7A256F831B00693FD7 /* AppDelegate.swift in Sources */,
 				366D6A7C256F831B00693FD7 /* SceneDelegate.swift in Sources */,
+				360B6422257A8D200040BF80 /* DirectionPopUpViewController.swift in Sources */,
 				3640BE942574BC68003C7903 /* FoodPopUpViewController.swift in Sources */,
 				3677DA7925760F1F00706FD5 /* MealForAddFoodCollectionViewCell.swift in Sources */,
 			);

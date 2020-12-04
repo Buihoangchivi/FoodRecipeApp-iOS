@@ -51,6 +51,14 @@ class DirectionListViewController: UIViewController {
     }
     
     @IBAction func act_EditDirection(_ sender: Any) {
+        let index = (sender as! UIButton).tag
+        let dest = self.storyboard?.instantiateViewController(identifier: "DirectionPopUpViewController") as! DirectionPopUpViewController
+        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        dest.delegate = self
+        dest.DỉrectionID = index
+        dest.DirectionContent = DirectionList[index]
+        self.present(dest, animated: true, completion: nil)
     }
     
     @IBAction func act_ChangeEditMode(_ sender: Any) {
@@ -67,6 +75,30 @@ class DirectionListViewController: UIViewController {
     }
     
     @IBAction func act_AddNewStep(_ sender: Any) {
+        let dest = self.storyboard?.instantiateViewController(identifier: "DirectionPopUpViewController") as! DirectionPopUpViewController
+        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        dest.delegate = self
+        dest.DỉrectionID = DirectionList.count
+        dest.isAddNewDirection = true
+        self.present(dest, animated: true, completion: nil)
+    }
+}
+
+//Delegate
+extension DirectionListViewController: DirectionPopUpDelegate {
+    func DirectionProcess(index: Int, content: String) {
+        //index = -1 thi khong co gi thay doi
+        if (index > -1) {
+            //Chinh sua buoc hien co
+            if (index < DirectionList.count) {
+                DirectionList[index] = content
+            }
+            else { //Them buoc moi
+                DirectionList += [content]
+            }
+        }
+        DirectionTableView.reloadData()
     }
 }
 
