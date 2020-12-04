@@ -111,13 +111,24 @@ class DetailFoodViewController: UIViewController{
     }
     
     @IBAction func act_EditIngredient(_ sender: Any) {
-        let dest = self.storyboard?.instantiateViewController(identifier: "IngredientListViewController") as! IngredientListViewController
-        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        dest.delegate = self
-        dest.SelectedIngredient = self.SelectedIngredientList
-        TempSelectedIngredient = SelectedIngredientList
-        self.present(dest, animated: true, completion: nil)
+        if (DirectionTBV.isHidden == true) {
+            let dest = self.storyboard?.instantiateViewController(identifier: "IngredientListViewController") as! IngredientListViewController
+            dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            dest.delegate = self
+            dest.SelectedIngredient = self.SelectedIngredientList
+            TempSelectedIngredient = SelectedIngredientList
+            self.present(dest, animated: true, completion: nil)
+        }
+        else {
+            let dest = self.storyboard?.instantiateViewController(identifier: "DirectionListViewController") as! DirectionListViewController
+            dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            dest.delegate = self
+            dest.DirectionList = self.DirectionList
+            self.present(dest, animated: true, completion: nil)
+        }
+        
     }
         
     @IBAction func act_ShowDirection(_ sender: Any) {
@@ -222,30 +233,27 @@ extension DetailFoodViewController : IngredientDelegate {
         }
     }
     
-    func SaveStatus(save: Bool) {
-        if (save == true) {
-            var i = 0
-            while i < TempSelectedIngredient.count {
-                if (TempSelectedIngredient[i].Value == 0) {
-                    TempSelectedIngredient.remove(at: i)
-                    i -= 1
-                }
-                i += 1
+    func SaveChange() {
+        var i = 0
+        while i < TempSelectedIngredient.count {
+            if (TempSelectedIngredient[i].Value == 0) {
+                TempSelectedIngredient.remove(at: i)
+                i -= 1
             }
-            SelectedIngredientList = TempSelectedIngredient
-            IngredientTBV.reloadData()
+            i += 1
         }
+        SelectedIngredientList = TempSelectedIngredient
+        IngredientTBV.reloadData()
     }
 }
 
-//Delegate
-/*extension DetailFoodViewController: DirectionDelegate {
-    func GetState(state: Bool) {
-        if (state == false) {
-            self.dismiss(animated: true, completion: nil)
-        }
+//Delegate cua cac buoc
+extension DetailFoodViewController: DirectionDelegate {
+    func SaveChange(List: [String]) {
+        DirectionList = List
+        DirectionTBV.reloadData()
     }
-}*/
+}
 
 extension DetailFoodViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

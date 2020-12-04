@@ -11,7 +11,7 @@ import Firebase
 
 protocol IngredientDelegate : class {
     func UpdateIngredient(ingredient: (ID: Int, Name: String, Value: Double, Unit: String))
-    func SaveStatus(save: Bool)
+    func SaveChange()
 }
 
 class IngredientListViewController: UIViewController {
@@ -77,12 +77,11 @@ class IngredientListViewController: UIViewController {
     }
 
     @IBAction func act_Cancel(_ sender: Any) {
-        delegate?.SaveStatus(save: false)
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func act_Save(_ sender: Any) {
-        delegate?.SaveStatus(save: true)
+        delegate?.SaveChange()
         self.dismiss(animated: true, completion: nil)
     }
     

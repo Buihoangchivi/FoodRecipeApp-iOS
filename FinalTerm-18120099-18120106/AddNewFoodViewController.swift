@@ -25,6 +25,7 @@ class AddNewFoodViewController: UIViewController {
     var SelectedMeal = [Bool]()
     var SelectedIngredient = [(ID: Int, Name: String, Value: Double, Unit: String)]()
     var TempSelectedIngredient = [(ID: Int, Name: String, Value: Double, Unit: String)]()
+    var SelectedDirection = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +66,7 @@ class AddNewFoodViewController: UIViewController {
     @IBAction func act_AddFoodImage(_ sender: Any) {
     }
     
+    //Hien thi man hinh chua danh sach nguyen lieu
     @IBAction func act_ShowIngredientList(_ sender: Any) {
         let dest = self.storyboard?.instantiateViewController(identifier: "IngredientListViewController") as! IngredientListViewController
         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
@@ -75,7 +77,14 @@ class AddNewFoodViewController: UIViewController {
         self.present(dest, animated: true, completion: nil)
     }
     
+    //Hien thi man hinh chua danh sach cac buoc
     @IBAction func act_ShowStepsList(_ sender: Any) {
+        let dest = self.storyboard?.instantiateViewController(identifier: "DirectionListViewController") as! DirectionListViewController
+        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        dest.delegate = self
+        dest.DirectionList = self.SelectedDirection
+        self.present(dest, animated: true, completion: nil)
     }
     
     @IBAction func act_CancelNewFood(_ sender: Any) {
@@ -86,7 +95,7 @@ class AddNewFoodViewController: UIViewController {
 
 }
 
-//Delegate
+//Delegate cua nguyen lieu
 extension AddNewFoodViewController : IngredientDelegate {
     func UpdateIngredient(ingredient: (ID: Int, Name: String, Value: Double, Unit: String)) {
         var check = false
@@ -101,18 +110,23 @@ extension AddNewFoodViewController : IngredientDelegate {
         }
     }
     
-    func SaveStatus(save: Bool) {
-        if (save == true) {
-            var i = 0
-            while i < TempSelectedIngredient.count {
-                if (TempSelectedIngredient[i].Value == 0) {
-                    TempSelectedIngredient.remove(at: i)
-                    i -= 1
-                }
-                i += 1
+    func SaveChange() {
+        var i = 0
+        while i < TempSelectedIngredient.count {
+            if (TempSelectedIngredient[i].Value == 0) {
+                TempSelectedIngredient.remove(at: i)
+                i -= 1
             }
-            SelectedIngredient = TempSelectedIngredient
+            i += 1
         }
+        SelectedIngredient = TempSelectedIngredient
+    }
+}
+
+//Delegate cua cac buoc
+extension AddNewFoodViewController: DirectionDelegate {
+    func SaveChange(List: [String]) {
+        SelectedDirection = List
     }
 }
 
