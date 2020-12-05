@@ -22,8 +22,7 @@ class DetailFoodViewController: UIViewController{
     @IBOutlet weak var TextLabel: UILabel!
     @IBOutlet weak var NumberLabel: UILabel!
     
-    @IBOutlet weak var IngredientTBV: UITableView!
-    @IBOutlet weak var DirectionTBV: UITableView!
+    @IBOutlet weak var ContentTableView: UITableView!
     
     @IBOutlet weak var btnAddtoMenu: UIButton!
     @IBOutlet weak var btnAddIngre: UIButton!
@@ -32,13 +31,12 @@ class DetailFoodViewController: UIViewController{
     @IBOutlet weak var DownNumberButton: UIButton!
     @IBOutlet weak var UpNumberButton: UIButton!
     
-    var pickerView = UIPickerView()
-    
     var TempSelectedIngredient = [(ID: Int, Name: String, Value: Double, Unit: String)]()
     var SelectedIngredientList = [(ID: Int, Name: String, Value: Double, Unit: String)]()
     var DirectionList = [String]()
     var FoodID = 0
     var NumberOfPeople = 1
+    var isIngredientView = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,11 +54,9 @@ class DetailFoodViewController: UIViewController{
         DirectionButton.layer.cornerRadius = 10
         
         //An dau ngan cach giua cac TableViewCell
-        IngredientTBV.separatorStyle = .none
-        DirectionTBV.separatorStyle = .none
+        ContentTableView.separatorStyle = .none
         //Khong cho chon cell
-        IngredientTBV.allowsSelection = false
-        DirectionTBV.allowsSelection = false
+        ContentTableView.allowsSelection = false
         
         //Xu ly 2 nut tang giam khau phan an
         if (NumberOfPeople == 1) {
@@ -86,7 +82,7 @@ class DetailFoodViewController: UIViewController{
                                 }
                                 self.SelectedIngredientList += [(ID: arr[0] as! Int, Name: infoArr[0], Value: arr[1] as! Double, Unit: infoArr[1])]
                             DispatchQueue.main.async {
-                                self.IngredientTBV.reloadData()
+                                self.ContentTableView.reloadData()
                             }
                             })
                       }
@@ -95,23 +91,20 @@ class DetailFoodViewController: UIViewController{
         foodInfoRef.child("\(FoodID)/Direction").observeSingleEvent(of: .value, with: { (snapshot) in
                 for snapshotChild in snapshot.children {
                     let temp = snapshotChild as! DataSnapshot
-                    self.DirectionList += [temp.value as! String]
+                        self.DirectionList += [temp.value as! String]
                     }
                 DispatchQueue.main.async {
-                    self.DirectionTBV.reloadData()
+                    self.ContentTableView.reloadData()
                 }
         })
       }
     
     
-    @IBAction func btnAddtoMenu(_ sender: Any) {
-    }
-    
-    @IBAction func btnAddIngredient(_ sender: Any) {
+    @IBAction func act_AddFoodToShoppingList(_ sender: Any) {
     }
     
     @IBAction func act_EditIngredient(_ sender: Any) {
-        if (DirectionTBV.isHidden == true) {
+        if (isIngredientView == true) {
             let dest = self.storyboard?.instantiateViewController(identifier: "IngredientListViewController") as! IngredientListViewController
             dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
@@ -132,53 +125,52 @@ class DetailFoodViewController: UIViewController{
     }
         
     @IBAction func act_ShowDirection(_ sender: Any) {
-        if (DirectionTBV.isHidden == true) {
+        if (isIngredientView == true) {
+            isIngredientView = false
             //Thay doi trang thai cua nut duoc chon
             IngredientButton.setTitleColor(UIColor.black, for: .normal)
             DirectionButton.setTitleColor(UIColor.systemGreen, for: .normal)
             //Thay doi dau gach
             IngredientDash.isHidden = true
             DirectionDash.isHidden = false
-            //An cac thong tin cua nguyen lieu
-            TextLabel.isHidden = true
-            NumberLabel.isHidden = true
+            //Thay doi thong tin khau phan an thanh thong tin tong so buoc
+            TextLabel.text = "Tổng số bước:"
+            NumberLabel.text = "\(DirectionList.count)"
+            //An 2 nut dieu chinh khau phan an
             DownNumberButton.isHidden = true
             DownNumberButton.isEnabled = false
             UpNumberButton.isHidden = true
             UpNumberButton.isEnabled = false
-            btnAddIngre.isHidden = true
-            btnAddIngre.isEnabled = false
-            btnAddtoMenu.isHidden = true
-            //An TableView cua nguyen lieu
-            IngredientTBV.isHidden = true
-            //Hien TableView cua che bien
-            DirectionTBV.isHidden = false
+            //Hieu ung cuon len dau TableView
+            if (DirectionList.count > 0) {
+                ContentTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            }
+            ContentTableView.reloadData()
         }
     }
     
     @IBAction func act_ShowIngredient(_ sender: Any) {
-        if (DirectionTBV.isHidden == false) {
+        if (isIngredientView == false) {
+            isIngredientView = true
             //Thay doi trang thai cua nut duoc chon
             DirectionButton.setTitleColor(UIColor.black, for: .normal)
             IngredientButton.setTitleColor(UIColor.systemGreen, for: .normal)
             //Thay doi dau gach
             IngredientDash.isHidden = false
             DirectionDash.isHidden = true
-            //Hien thi cac thong tin cua nguyen lieu
-            TextLabel.isHidden = false
-            NumberLabel.isHidden = false
+            //Thay doi thong tin tong so buoc thanh thong tin khau phan an
+            TextLabel.text = "Khẩu phần ăn:"
+            NumberLabel.text = "\(NumberOfPeople)"
+            //An 2 nut dieu chinh khau phan an
             DownNumberButton.isHidden = false
             DownNumberButton.isEnabled = true
             UpNumberButton.isHidden = false
             UpNumberButton.isEnabled = true
-            btnAddIngre.isHidden = false
-            btnAddIngre.isEnabled = true
-            btnAddtoMenu.isHidden = false
-            btnAddtoMenu.isEnabled = true
-            //Hien TableView cua nguyen lieu
-            IngredientTBV.isHidden = false
-            //An TableView cua che bien
-            DirectionTBV.isHidden = true
+            //Hieu ung cuon len dau TableView
+            if (SelectedIngredientList.count > 0) {
+                ContentTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            }
+            ContentTableView.reloadData()
         }
     }
     
@@ -198,7 +190,7 @@ class DetailFoodViewController: UIViewController{
         for i in 0..<SelectedIngredientList.count {
             SelectedIngredientList[i].Value *= Double(NumberOfPeople) / Double(NumberOfPeople + 1)
         }
-        IngredientTBV.reloadData()
+        ContentTableView.reloadData()
     }
     
     @IBAction func act_IncreaseNumber(_ sender: Any) {
@@ -213,12 +205,12 @@ class DetailFoodViewController: UIViewController{
         for i in 0..<SelectedIngredientList.count {
             SelectedIngredientList[i].Value *= Double(NumberOfPeople) / Double(NumberOfPeople - 1)
         }
-        IngredientTBV.reloadData()
+        ContentTableView.reloadData()
     }
     
 }
 
-//Delegate
+//Delegate cua nguyen lieu
 extension DetailFoodViewController : IngredientDelegate {
     func UpdateIngredient(ingredient: (ID: Int, Name: String, Value: Double, Unit: String)) {
         var check = false
@@ -243,7 +235,7 @@ extension DetailFoodViewController : IngredientDelegate {
             i += 1
         }
         SelectedIngredientList = TempSelectedIngredient
-        IngredientTBV.reloadData()
+        ContentTableView.reloadData()
     }
 }
 
@@ -251,13 +243,14 @@ extension DetailFoodViewController : IngredientDelegate {
 extension DetailFoodViewController: DirectionDelegate {
     func SaveChange(List: [String]) {
         DirectionList = List
-        DirectionTBV.reloadData()
+        NumberLabel.text = "\(DirectionList.count)"
+        ContentTableView.reloadData()
     }
 }
 
 extension DetailFoodViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (tableView == IngredientTBV) {
+        if (isIngredientView == true) {
             return SelectedIngredientList.count
         }
         else {
@@ -266,7 +259,7 @@ extension DetailFoodViewController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if (tableView == IngredientTBV) {
+        if (isIngredientView == true) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "DetailIngredientCell") as! DetailIngredientFoodTableViewCell
             //Ten nguyen lieu
             cell.lbIngre.text = SelectedIngredientList[indexPath.row].Name
