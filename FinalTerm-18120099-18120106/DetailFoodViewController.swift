@@ -142,7 +142,7 @@ class DetailFoodViewController: UIViewController{
             UpNumberButton.isHidden = true
             UpNumberButton.isEnabled = false
             //Hieu ung cuon len dau TableView
-            if (DirectionList.count > 0) {
+            if (SelectedIngredientList.count > 0 && DirectionList.count > 0) {
                 ContentTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
             }
             ContentTableView.reloadData()
@@ -163,11 +163,15 @@ class DetailFoodViewController: UIViewController{
             NumberLabel.text = "\(NumberOfPeople)"
             //An 2 nut dieu chinh khau phan an
             DownNumberButton.isHidden = false
-            DownNumberButton.isEnabled = true
+            if (NumberOfPeople > 1) {
+                DownNumberButton.isEnabled = true
+            }
             UpNumberButton.isHidden = false
-            UpNumberButton.isEnabled = true
+            if (NumberOfPeople < 10) {
+                UpNumberButton.isEnabled = true
+            }
             //Hieu ung cuon len dau TableView
-            if (SelectedIngredientList.count > 0) {
+            if (SelectedIngredientList.count > 0 && DirectionList.count > 0) {
                 ContentTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
             }
             ContentTableView.reloadData()

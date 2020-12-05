@@ -208,11 +208,11 @@ class ViewController: UIViewController {
         
         //Layout thanh loai thuc an
         var layout = CategoryCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.sectionInset = UIEdgeInsets(top: 5,left: 5,bottom: 0,right: 15)
+        layout.sectionInset = UIEdgeInsets(top: 5,left: 10,bottom: 0,right: 15)
         
         //Layout thanh loai bua an
         layout = MealCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.sectionInset = UIEdgeInsets(top: 0,left: 5,bottom: 0,right: 5)
+        layout.sectionInset = UIEdgeInsets(top: 0,left: 10,bottom: 0,right: 5)
         
         //Layout bo goc va do bong cho nen 6 mon an
         FoodView.layer.cornerRadius = 10
