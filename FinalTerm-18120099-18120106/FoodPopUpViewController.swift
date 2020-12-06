@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol ReloadDataDelegate: class {
+    func Reload()
+}
+
 class FoodPopUpViewController: UIViewController {
 
     @IBOutlet weak var PopUpView: UIView!
@@ -18,6 +22,8 @@ class FoodPopUpViewController: UIViewController {
     @IBOutlet weak var CloseButton: UIButton!
     
     var FoodID = 0
+    var delegate: ReloadDataDelegate?
+    var isClickDetailFood = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,14 +67,23 @@ class FoodPopUpViewController: UIViewController {
     }
     
     @IBAction func act_PopUpBackgroundButton(_ sender: Any) {
+        //Neu co chon chi tiet mon an thi reload lai giao dien
+        if (isClickDetailFood == true) {
+            delegate?.Reload()
+        }
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func act_ClosePopUp(_ sender: Any) {
+        //Neu co chon chi tiet mon an thi reload lai giao dien
+        if (isClickDetailFood == true) {
+            delegate?.Reload()
+        }
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func act_ShowDetailFood(_ sender: Any) {
+        isClickDetailFood = true
         let dest = self.storyboard?.instantiateViewController(identifier: "DetailFoodViewController") as! DetailFoodViewController
         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve

@@ -40,6 +40,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var FoodButton4: UIButton!
     @IBOutlet weak var FoodButton5: UIButton!
     
+    @IBOutlet weak var FoodFavoriteButton0: UIButton!
+    @IBOutlet weak var FoodFavoriteButton1: UIButton!
+    @IBOutlet weak var FoodFavoriteButton2: UIButton!
+    @IBOutlet weak var FoodFavoriteButton3: UIButton!
+    @IBOutlet weak var FoodFavoriteButton4: UIButton!
+    @IBOutlet weak var FoodFavoriteButton5: UIButton!
+    
     @IBOutlet weak var FoodImage0: UIImageView!
     @IBOutlet weak var FoodImage1: UIImageView!
     @IBOutlet weak var FoodImage2: UIImageView!
@@ -72,6 +79,7 @@ class ViewController: UIViewController {
     var FoodImageOutletList = [UIImageView]()
     var FoodNameOutletList = [UILabel]()
     var FoodButtonOutletList = [UIButton]()
+    var FoodFavoriteButtonOutletList = [UIButton]()
     var CurrentPage = 1
     var TotalPage = 0
     
@@ -93,7 +101,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Init()
-        
         /*let index = 1
         //Lay thong tin tat ca nguyen lieu cua mon an id 'index' tu Firebase
         foodInfoRef.child("\(index)/Ingredient").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -228,6 +235,7 @@ class ViewController: UIViewController {
         FoodImageOutletList = [FoodImage0, FoodImage1, FoodImage2, FoodImage3, FoodImage4, FoodImage5]
         FoodNameOutletList = [FoodName0, FoodName1, FoodName2, FoodName3, FoodName4, FoodName5]
         FoodButtonOutletList = [FoodButton0, FoodButton1, FoodButton2, FoodButton3, FoodButton4, FoodButton5]
+        FoodFavoriteButtonOutletList = [FoodFavoriteButton0, FoodFavoriteButton1, FoodFavoriteButton2, FoodFavoriteButton3, FoodFavoriteButton4, FoodFavoriteButton5]
         
         //Xac dinh co tat ca bao nhieu mon an luu tru tren Firebase
         //Tu do suy ra duoc tong so trang
@@ -260,6 +268,7 @@ class ViewController: UIViewController {
         myPopUp.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         myPopUp.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         myPopUp.FoodID = FoodIDList[(CurrentPage - 1) * 6 + index]
+        myPopUp.delegate = self
         self.present(myPopUp, animated: true, completion: nil)
     }
     
@@ -372,6 +381,25 @@ class ViewController: UIViewController {
     }
     
     @IBAction func act_ShowSearch(_ sender: Any) {
+    }
+    
+    @IBAction func act_ChangeFavoriteStatus(_ sender: Any) {
+        let button = sender as! UIButton
+        let index = button.restorationIdentifier!.last!.hexDigitValue!
+        let foodID = FoodIDList[(CurrentPage - 1) * 6 + index]
+        //Them vao danh sach yeu thich
+        if (button.tintColor == UIColor.black) {
+            button.tintColor = UIColor.red
+            button.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            //Cap nhat data tren Firebase
+            foodInfoRef.child("\(foodID)").updateChildValues(["Favorite": 1])
+        }
+        else { //Xoa khoi danh sach yeu thich
+            button.tintColor = UIColor.black
+            button.setImage(UIImage(systemName: "heart"), for: .normal)
+            //Cap nhat data tren Firebase
+            foodInfoRef.child("\(foodID)").updateChildValues(["Favorite": 0])
+        }
     }
     
     //Thay doi trang thai cua cac nut phan trang
@@ -488,6 +516,8 @@ class ViewController: UIViewController {
                 self.FoodButtonOutletList[i].isEnabled = false
                 self.FoodImageOutletList[i].isHidden = true
                 self.FoodNameOutletList[i].isHidden = true
+                self.FoodFavoriteButtonOutletList[i].isEnabled = false
+                self.FoodFavoriteButtonOutletList[i].isHidden = true
             }
         }
         
@@ -501,13 +531,30 @@ class ViewController: UIViewController {
             //Doc du lieu 6 mon an tuong ung voi so trang hien tai
             foodInfoRef.child("\(FoodIDList[(self.CurrentPage - 1) * 6 + i])").observeSingleEvent(of: .value, with: { (snapshot) in
             if let food = snapshot.value as? [String:Any] {
+                //Hien thi hinh anh mon an
                 self.FoodImageOutletList[i].sd_setImage(with: imageRef.child("/FoodImages/\(food["Image"]!)"), placeholderImage: UIImage(named: "food-background"))
+                
+                //Hien thi ten mon an
                 self.FoodNameOutletList[i].text = "\(food["Name"]!)"
+                
+                //Hien thi trang thai yeu thich cua mon an
+                //Yeu thich
+                if (food["Favorite"] as! Int == 1) {
+                    self.FoodFavoriteButtonOutletList[i].tintColor = UIColor.red
+                self.FoodFavoriteButtonOutletList[i].setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                }
+                else { //Khong yeu thich
+                    self.FoodFavoriteButtonOutletList[i].tintColor = UIColor.black
+                self.FoodFavoriteButtonOutletList[i].setImage(UIImage(systemName: "heart"), for: .normal)
+                }
+                
                 //Neu dang bi vo hieu hoa thi bat nut len
                 if (self.FoodButtonOutletList[i].isEnabled == false) {
                     self.FoodButtonOutletList[i].isEnabled = true
                     self.FoodImageOutletList[i].isHidden = false
                     self.FoodNameOutletList[i].isHidden = false
+                    self.FoodFavoriteButtonOutletList[i].isEnabled = true
+                    self.FoodFavoriteButtonOutletList[i].isHidden = false
                 }
             }
             else {
@@ -516,10 +563,19 @@ class ViewController: UIViewController {
                     self.FoodButtonOutletList[i].isEnabled = false
                     self.FoodImageOutletList[i].isHidden = true
                     self.FoodNameOutletList[i].isHidden = true
+                    self.FoodFavoriteButtonOutletList[i].isEnabled = false
+                    self.FoodFavoriteButtonOutletList[i].isHidden = true
                 }
             }
             })
         }
+    }
+}
+
+//Delegate
+extension ViewController: ReloadDataDelegate {
+    func Reload() {
+        LoadFoodInfo()
     }
 }
 

@@ -11,8 +11,6 @@ import Firebase
 import FirebaseUI
 class DetailFoodViewController: UIViewController{
     
-   
-   
     @IBOutlet weak var FoodImageView: UIImageView!
     
     @IBOutlet weak var FoodNameLabel: UILabel!
@@ -30,6 +28,9 @@ class DetailFoodViewController: UIViewController{
     @IBOutlet weak var DirectionButton: UIButton!
     @IBOutlet weak var DownNumberButton: UIButton!
     @IBOutlet weak var UpNumberButton: UIButton!
+    @IBOutlet weak var FavoriteButton: UIButton!
+    
+    @IBOutlet weak var FavoriteButtonBackground: UIView!
     
     var TempSelectedIngredient = [(ID: Int, Name: String, Value: Double, Unit: String)]()
     var SelectedIngredientList = [(ID: Int, Name: String, Value: Double, Unit: String)]()
@@ -58,6 +59,10 @@ class DetailFoodViewController: UIViewController{
         //Khong cho chon cell
         ContentTableView.allowsSelection = false
         
+        //Bo tron nut yeu thich
+        FavoriteButtonBackground.layer.cornerRadius = 20
+        FavoriteButton.layer.cornerRadius = 20
+        
         //Xu ly 2 nut tang giam khau phan an
         if (NumberOfPeople == 1) {
             DownNumberButton.isEnabled = false
@@ -67,8 +72,25 @@ class DetailFoodViewController: UIViewController{
         }
         foodInfoRef.child("\(FoodID)").observeSingleEvent(of: .value, with: { (snapshot) in
         if let food = snapshot.value as? [String:Any] {
+            //Hien thi hinh anh mon an
             self.FoodImageView.sd_setImage(with: imageRef.child("/FoodImages/\(food["Image"]!)"), placeholderImage: UIImage(named: "food-background"))
+            
+            //Hien thi ten mon an
             self.FoodNameLabel.text = "\(food["Name"]!)"
+            
+            //Hien thi trang thai yeu thich cua mon an
+            //Yeu thich
+            if (food["Favorite"] as! Int == 1) {
+                self.FavoriteButton.tintColor = UIColor.red
+            self.FavoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            }
+            else { //Khong yeu thich
+                self.FavoriteButton.tintColor = UIColor.white
+            self.FavoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            }
+            //Hien thi nut yeu thich
+            self.FavoriteButton.isHidden = false
+            self.FavoriteButtonBackground.isHidden = false
             }})
         foodInfoRef.child("\(FoodID)/Ingredient").observeSingleEvent(of: .value, with: { (snapshot) in
                 for snapshotChild in snapshot.children {
@@ -212,6 +234,21 @@ class DetailFoodViewController: UIViewController{
         ContentTableView.reloadData()
     }
     
+    @IBAction func act_ChangeFavoriteStatus(_ sender: Any) {
+        //Them vao danh sach yeu thich
+        if (FavoriteButton.tintColor == UIColor.white) {
+            FavoriteButton.tintColor = UIColor.red
+            FavoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            //Cap nhat data tren Firebase
+            foodInfoRef.child("\(FoodID)").updateChildValues(["Favorite": 1])
+        }
+        else { //Xoa khoi danh sach yeu thich
+            FavoriteButton.tintColor = UIColor.white
+            FavoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            //Cap nhat data tren Firebase
+            foodInfoRef.child("\(FoodID)").updateChildValues(["Favorite": 0])
+        }
+    }
 }
 
 //Delegate cua nguyen lieu
