@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseUI
 
 protocol ReloadDataDelegate: class {
     func Reload()
@@ -55,13 +56,19 @@ class FoodPopUpViewController: UIViewController {
         //Load anh va ten mon an
         foodInfoRef.child("\(FoodID)").observeSingleEvent(of: .value, with: { (snapshot) in
         if let food = snapshot.value as? [String:Any] {
-            self.FoodImageView.sd_setImage(with: imageRef.child("/FoodImages/\(food["Image"]!)"), placeholderImage: UIImage(named: "food-background"))
-            if (self.FoodImageView.image != UIImage(named: "food-background")){
-                //Bo tron goc cho hinh anh mon an
-                self.FoodImageView.layer.cornerRadius = 100
-                self.FoodImageView.layer.borderWidth = 1
-                self.FoodImageView.layer.borderColor = UIColor.lightGray.cgColor
-            }
+            //Xoa cache
+            SDImageCache.shared.clearMemory()
+            SDImageCache.shared.clearDisk()
+            
+            self.FoodImageView.sd_setImage(with: imageRef.child("/FoodImages/\(food["Image"]!)"), maxImageSize: 1 << 30, placeholderImage: UIImage(named: "food-background"), options: .retryFailed) { (image, error, cacheType, url) in
+                    if error == nil {
+                    //Bo tron goc cho hinh anh mon an
+                    self.FoodImageView.layer.cornerRadius = 100
+                    self.FoodImageView.layer.borderWidth = 1
+                    self.FoodImageView.layer.borderColor = UIColor.lightGray.cgColor
+                    return
+                }}
+                
             self.FoodNameLabel.text = "\(food["Name"]!)"
             }})
     }

@@ -407,13 +407,13 @@ class ViewController: UIViewController {
         button.isEnabled = isActive
         if (isActive == true) {
             button.layer.borderWidth = 0
-            button.setTitleColor(UIColor.white, for: .normal)
+            button.tintColor  = UIColor.white
             button.backgroundColor = UIColor.systemGreen
         }
         else {
             button.layer.borderWidth = 1
             button.layer.borderColor = UIColor.lightGray.cgColor
-            button.setTitleColor(UIColor.black, for: .normal)
+            button.tintColor = UIColor.black
             button.backgroundColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1)
         }
     }
@@ -521,6 +521,10 @@ class ViewController: UIViewController {
             }
         }
         
+        //Xoa cache
+        SDImageCache.shared.clearMemory()
+        SDImageCache.shared.clearDisk()
+        
         //Cap nhat 6 mon an
         for i in 0...5 {
             //Kiem tra xem co du 6 mon an de hien thi hay khong
@@ -530,10 +534,10 @@ class ViewController: UIViewController {
             }
             //Doc du lieu 6 mon an tuong ung voi so trang hien tai
             foodInfoRef.child("\(FoodIDList[(self.CurrentPage - 1) * 6 + i])").observeSingleEvent(of: .value, with: { (snapshot) in
+                
             if let food = snapshot.value as? [String:Any] {
                 //Hien thi hinh anh mon an
-                self.FoodImageOutletList[i].sd_setImage(with: imageRef.child("/FoodImages/\(food["Image"]!)"), placeholderImage: UIImage(named: "food-background"))
-                
+                self.FoodImageOutletList[i].sd_setImage(with: imageRef.child("/FoodImages/\(food["Image"]!)"), maxImageSize: 1 << 30, placeholderImage: UIImage(named: "food-background"), options: .retryFailed, completion: nil)
                 //Hien thi ten mon an
                 self.FoodNameOutletList[i].text = "\(food["Name"]!)"
                 
