@@ -551,7 +551,6 @@ class ViewController: UIViewController {
                     self.FoodFavoriteButtonOutletList[i].tintColor = UIColor.black
                 self.FoodFavoriteButtonOutletList[i].setImage(UIImage(systemName: "heart"), for: .normal)
                 }
-                
                 //Neu dang bi vo hieu hoa thi bat nut len
                 if (self.FoodButtonOutletList[i].isEnabled == false) {
                     self.FoodButtonOutletList[i].isEnabled = true
@@ -559,16 +558,6 @@ class ViewController: UIViewController {
                     self.FoodNameOutletList[i].isHidden = false
                     self.FoodFavoriteButtonOutletList[i].isEnabled = true
                     self.FoodFavoriteButtonOutletList[i].isHidden = false
-                }
-            }
-            else {
-                //Neu nut dang bat thi vo hieu hoa
-                if (self.FoodButtonOutletList[i].isEnabled == true) {
-                    self.FoodButtonOutletList[i].isEnabled = false
-                    self.FoodImageOutletList[i].isHidden = true
-                    self.FoodNameOutletList[i].isHidden = true
-                    self.FoodFavoriteButtonOutletList[i].isEnabled = false
-                    self.FoodFavoriteButtonOutletList[i].isHidden = true
                 }
             }
             })

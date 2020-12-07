@@ -31,6 +31,9 @@
 		8746F5912578EB4D00D388AE /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8746F5902578EB4D00D388AE /* MenuTableViewCell.swift */; };
 		874C217C257761F20033F8F8 /* DetailFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874C217B257761F20033F8F8 /* DetailFoodViewController.swift */; };
 		874C217E257762380033F8F8 /* DetailIngredientFoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874C217D257762370033F8F8 /* DetailIngredientFoodTableViewCell.swift */; };
+		87997F60257DFFAD00C9AF5F /* TipListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87997F5F257DFFAD00C9AF5F /* TipListTableViewCell.swift */; };
+		87997F62257DFFBD00C9AF5F /* TipListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87997F61257DFFBD00C9AF5F /* TipListViewController.swift */; };
+		87997F64257DFFCB00C9AF5F /* TipDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87997F63257DFFCB00C9AF5F /* TipDetailViewController.swift */; };
 		87BD52B12577986C0099C569 /* ProcessingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BD52B02577986C0099C569 /* ProcessingTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +77,9 @@
 		8746F5902578EB4D00D388AE /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		874C217B257761F20033F8F8 /* DetailFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFoodViewController.swift; sourceTree = "<group>"; };
 		874C217D257762370033F8F8 /* DetailIngredientFoodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailIngredientFoodTableViewCell.swift; sourceTree = "<group>"; };
+		87997F5F257DFFAD00C9AF5F /* TipListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipListTableViewCell.swift; sourceTree = "<group>"; };
+		87997F61257DFFBD00C9AF5F /* TipListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipListViewController.swift; sourceTree = "<group>"; };
+		87997F63257DFFCB00C9AF5F /* TipDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipDetailViewController.swift; sourceTree = "<group>"; };
 		87BD52B02577986C0099C569 /* ProcessingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingTableViewCell.swift; sourceTree = "<group>"; };
 		8AE80B337E77A6200CD88425 /* Pods-FinalTerm-18120099-18120106.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalTerm-18120099-18120106.release.xcconfig"; path = "Target Support Files/Pods-FinalTerm-18120099-18120106/Pods-FinalTerm-18120099-18120106.release.xcconfig"; sourceTree = "<group>"; };
 		9951FC1BE239973A2F94AB87 /* Pods-FinalTerm-18120099-18120106Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalTerm-18120099-18120106Tests.release.xcconfig"; path = "Target Support Files/Pods-FinalTerm-18120099-18120106Tests/Pods-FinalTerm-18120099-18120106Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -146,6 +152,9 @@
 				3634DFA42579745100A14EE2 /* DirectionListViewController.swift */,
 				3634DFA6257975D400A14EE2 /* EditDirectionTableViewCell.swift */,
 				360B6421257A8D200040BF80 /* DirectionPopUpViewController.swift */,
+				87997F5F257DFFAD00C9AF5F /* TipListTableViewCell.swift */,
+				87997F61257DFFBD00C9AF5F /* TipListViewController.swift */,
+				87997F63257DFFCB00C9AF5F /* TipDetailViewController.swift */,
 			);
 			path = "FinalTerm-18120099-18120106";
 			sourceTree = "<group>";
@@ -350,8 +359,10 @@
 			files = (
 				3634DFA7257975D400A14EE2 /* EditDirectionTableViewCell.swift in Sources */,
 				874C217C257761F20033F8F8 /* DetailFoodViewController.swift in Sources */,
+				87997F62257DFFBD00C9AF5F /* TipListViewController.swift in Sources */,
 				8746F58F2578EB3A00D388AE /* MenuViewController.swift in Sources */,
 				36517980257659DA00574610 /* IngredientTableViewCell.swift in Sources */,
+				87997F64257DFFCB00C9AF5F /* TipDetailViewController.swift in Sources */,
 				36A2DE2E256FF1EB00C64FB8 /* MealCollectionViewCell.swift in Sources */,
 				3651797E2576508F00574610 /* IngredientListViewController.swift in Sources */,
 				36A2DE2C256F9C7F00C64FB8 /* CategoryCollectionViewCell.swift in Sources */,
@@ -365,6 +376,7 @@
 				366D6A7C256F831B00693FD7 /* SceneDelegate.swift in Sources */,
 				360B6422257A8D200040BF80 /* DirectionPopUpViewController.swift in Sources */,
 				3640BE942574BC68003C7903 /* FoodPopUpViewController.swift in Sources */,
+				87997F60257DFFAD00C9AF5F /* TipListTableViewCell.swift in Sources */,
 				3677DA7925760F1F00706FD5 /* MealForAddFoodCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
