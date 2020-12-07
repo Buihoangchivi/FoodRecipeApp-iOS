@@ -8,7 +8,7 @@
 
 import UIKit
 class MenuViewController: UIViewController {
-    var MenuList = ["Favorite Food","My Food Recipe","Holiday Food","Vegetarian Food","Diet Food","Cake Food","Party Food", "Security","Email"]
+    var MenuList = ["Món ăn yêu thích","Công thức nhà mình","Mẹo hay","Món ăn ngày lễ","Món ăn chay","Món ăn giảm cân","Món bánh ngon","Món nhậu cơ bản", "Chính sách quyền riêng tư","Liên hệ"]
     @IBOutlet weak var MenuTBV: UITableView!
     @IBOutlet weak var MenuRightConstraint: NSLayoutConstraint!
     
@@ -69,14 +69,20 @@ extension MenuViewController : UITableViewDelegate, UITableViewDataSource{
         return MenuList.count
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
-    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MenuCell") as! MenuTableViewCell
         cell.lbMenu.text = MenuList[indexPath.row]
         cell.btnMenu.setImage(UIImage(named: "menu\(indexPath.row + 1)"), for: .normal)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (indexPath.row == 2) {
+            let dest = self.storyboard?.instantiateViewController(identifier: "TipListViewController") as! TipListViewController
+            dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            self.present(dest, animated: true, completion: nil)
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

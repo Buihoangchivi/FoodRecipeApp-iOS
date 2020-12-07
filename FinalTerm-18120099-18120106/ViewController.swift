@@ -522,8 +522,8 @@ class ViewController: UIViewController {
         }
         
         //Xoa cache
-        SDImageCache.shared.clearMemory()
-        SDImageCache.shared.clearDisk()
+        //SDImageCache.shared.clearMemory()
+        //SDImageCache.shared.clearDisk()
         
         //Cap nhat 6 mon an
         for i in 0...5 {

@@ -72,8 +72,8 @@ class DetailFoodViewController: UIViewController{
         foodInfoRef.child("\(FoodID)").observeSingleEvent(of: .value, with: { (snapshot) in
         if let food = snapshot.value as? [String:Any] {
             //Xoa cache
-            SDImageCache.shared.clearMemory()
-            SDImageCache.shared.clearDisk()
+            //SDImageCache.shared.clearMemory()
+            //SDImageCache.shared.clearDisk()
             
             //Hien thi hinh anh mon an
             self.FoodImageView.sd_setImage(with: imageRef.child("/FoodImages/\(food["Image"]!)"), maxImageSize: 1 << 30, placeholderImage: UIImage(named: "food-background"), options: .retryFailed, completion: nil)
