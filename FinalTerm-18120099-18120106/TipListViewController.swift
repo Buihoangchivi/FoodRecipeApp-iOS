@@ -12,6 +12,7 @@ import FirebaseUI
 class TipListViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var TipListTBV: UITableView!
     var count = 0
+    
     var TipList = [(Name: String, Detail: String)]()
     override func viewDidLoad() {
         super.viewDidLoad()
