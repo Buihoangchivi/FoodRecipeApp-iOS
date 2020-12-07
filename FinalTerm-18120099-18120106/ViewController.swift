@@ -370,6 +370,7 @@ class ViewController: UIViewController {
         let myAddFoodScreen = self.storyboard?.instantiateViewController(identifier: "AddNewFoodViewController") as! AddNewFoodViewController
         myAddFoodScreen.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         myAddFoodScreen.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        myAddFoodScreen.delegate = self
         self.present(myAddFoodScreen, animated: true, completion: nil)
     }
     
@@ -569,6 +570,13 @@ class ViewController: UIViewController {
 extension ViewController: ReloadDataDelegate {
     func Reload() {
         LoadFoodInfo()
+    }
+}
+
+//Delegate them mon an moi
+extension ViewController: AddNewFoodDelegate {
+    func UpdateUI() {
+        UpdateFoodList()
     }
 }
 

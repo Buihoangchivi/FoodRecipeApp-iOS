@@ -7,6 +7,11 @@
 //
 
 import UIKit
+import Firebase
+
+protocol AddNewFoodDelegate: class {
+    func UpdateUI()
+}
 
 class AddNewFoodViewController: UIViewController {
 
@@ -14,6 +19,8 @@ class AddNewFoodViewController: UIViewController {
     
     @IBOutlet weak var CategoryCollectionView: UICollectionView!
     @IBOutlet weak var MealCollectionView: UICollectionView!
+    
+    @IBOutlet weak var FoodNameTextField: UITextField!
     
     @IBOutlet weak var AddImageButton: UIButton!
     @IBOutlet weak var AddIngredientButton: UIButton!
@@ -27,6 +34,7 @@ class AddNewFoodViewController: UIViewController {
     var TempSelectedIngredient = [(ID: Int, Name: String, Value: Double, Unit: String)]()
     var SelectedDirection = [String]()
     var imagePicker = UIImagePickerController()
+    var delegate: AddNewFoodDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,9 +105,67 @@ class AddNewFoodViewController: UIViewController {
     }
     
     @IBAction func act_CancelNewFood(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func act_SaveNewFood(_ sender: Any) {
+        var count = 0
+        foodInfoRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            //Xac dinh ID cho mon an moi
+            for snapshotChild in snapshot.children {
+                let temp = snapshotChild as! DataSnapshot
+                if let id = Int(temp.key) {
+                    if id != count {
+                        break
+                    }
+                    else {
+                        count += 1
+                    }
+                }
+            }
+            
+            //Ghi du lieu loai mon an len Firebase
+            var tempCategoryArr = [Int]()
+            for i in 0..<self.SelectedCategory.count {
+                if (self.SelectedCategory[i] == true) {
+                    tempCategoryArr += [i]
+                }
+            }
+            if (tempCategoryArr.count == 0) {
+                //Loai khac
+                tempCategoryArr += [self.SelectedCategory.count - 1]
+            }
+            
+            //Upload anh mon an va ten anh len Firebase
+            
+            /*let uploadTask = imageRef.child("/FoodImages/\(count).jpg").putData((self.FoodImageView.image?.pngData())!, metadata: nil) { (metadata, error) in
+                }
+            uploadTask.resume()*/
+            
+            //Ghi du lieu danh sach nguyen lieu len Firebase
+            var tempIngredientArr = [[Double]]()
+            for i in 0..<self.SelectedIngredient.count {
+                tempIngredientArr += [[Double(self.SelectedIngredient[i].ID), self.SelectedIngredient[i].Value]]
+            }
+            
+            //Ghi du lieu loai bua an len Firebase
+            var tempMealArr = [Int]()
+            for i in 0..<self.SelectedMeal.count {
+                if (self.SelectedMeal[i] == true) {
+                    tempMealArr += [i]
+                }
+            }
+            if (tempMealArr.count == 0) {
+                //Loai khac
+                tempMealArr += [self.SelectedMeal.count - 1]
+            }
+            
+            //Day tat ca thong tin cua mon an len Firebase
+            foodInfoRef.child("\(count)").setValue(["Category": tempCategoryArr, "Direction": self.SelectedDirection, "Favorite": 0, "Image": "\(count).jpg","Ingredient": tempIngredientArr, "Meal": tempMealArr, "Name": self.FoodNameTextField.text!]) { (err, ref) in
+                self.delegate?.UpdateUI()
+                self.dismiss(animated: true, completion: nil)
+            }
+        })
     }
 
 }

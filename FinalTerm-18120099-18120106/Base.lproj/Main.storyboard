@@ -11,7 +11,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FinalTerm_18120099_18120106" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="FinalTerm_18120099_18120106" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1150,6 +1150,7 @@
                         <outlet property="CancelButton" destination="9L3-qj-IAR" id="LQf-Vj-Phx"/>
                         <outlet property="CategoryCollectionView" destination="5GY-4F-O33" id="J7q-lZ-1C1"/>
                         <outlet property="FoodImageView" destination="LeP-dA-tuZ" id="dtZ-FO-TX2"/>
+                        <outlet property="FoodNameTextField" destination="Ggc-el-3Or" id="and-oL-KcB"/>
                         <outlet property="MealCollectionView" destination="UFg-0n-LRT" id="lj9-xC-kMw"/>
                         <outlet property="SaveButton" destination="0VY-vg-0LV" id="dr5-oy-RoO"/>
                     </connections>
