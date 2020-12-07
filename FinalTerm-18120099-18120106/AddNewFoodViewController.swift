@@ -26,6 +26,7 @@ class AddNewFoodViewController: UIViewController {
     var SelectedIngredient = [(ID: Int, Name: String, Value: Double, Unit: String)]()
     var TempSelectedIngredient = [(ID: Int, Name: String, Value: Double, Unit: String)]()
     var SelectedDirection = [String]()
+    var imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +65,14 @@ class AddNewFoodViewController: UIViewController {
     }
     
     @IBAction func act_AddFoodImage(_ sender: Any) {
+        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
+            imagePicker.sourceType = .savedPhotosAlbum
+            imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .savedPhotosAlbum)!
+            imagePicker.delegate = self
+            imagePicker.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            imagePicker.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            self.present(imagePicker, animated: true, completion: nil)
+        }
     }
     
     //Hien thi man hinh chua danh sach nguyen lieu
@@ -127,6 +136,21 @@ extension AddNewFoodViewController : IngredientDelegate {
 extension AddNewFoodViewController: DirectionDelegate {
     func SaveChange(List: [String]) {
         SelectedDirection = List
+    }
+}
+
+//Delegate chon hinh anh tu thu vien
+extension AddNewFoodViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        imagePicker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true) {
+            if let image = info[UIImagePickerController.InfoKey.originalImage] {
+                self.FoodImageView.image = image as? UIImage
+            }
+        }
     }
 }
 
