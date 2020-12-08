@@ -10,14 +10,14 @@ import UIKit
 class MenuViewController: UIViewController {
     var MenuList = ["Món ăn yêu thích","Công thức nhà mình","Mẹo hay","Món ăn ngày lễ","Món ăn chay","Món ăn giảm cân","Món bánh ngon","Món nhậu cơ bản", "Chính sách quyền riêng tư","Liên hệ"]
     @IBOutlet weak var MenuTBV: UITableView!
-    @IBOutlet weak var MenuRightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var MenuRightConstraint: NSLayoutConstraint!
     override func viewWillAppear(_ animated: Bool) {
-        MenuRightConstraint.constant -= view.bounds.width
+        MenuRightConstraint.constant += view.bounds.width
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        MenuRightConstraint.constant += view.bounds.width
+        MenuRightConstraint.constant -= view.bounds.width
         UIView.animate(withDuration: 0.8,
                        delay: 0,
                      animations: { [weak self] in
@@ -42,7 +42,7 @@ class MenuViewController: UIViewController {
     }
 
     @IBAction func act_HideMenu(_ sender: Any) {
-        MenuRightConstraint.constant -= view.bounds.width
+        MenuRightConstraint.constant += view.bounds.width
         UIView.animate(withDuration: 0.8,
                        delay: 0,
                      animations: { [weak self] in
