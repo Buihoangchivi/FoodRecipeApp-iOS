@@ -35,6 +35,7 @@ class AddNewFoodViewController: UIViewController {
     var SelectedDirection = [String]()
     var imagePicker = UIImagePickerController()
     var delegate: AddNewFoodDelegate?
+    var uploadTask: StorageUploadTask?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -137,10 +138,15 @@ class AddNewFoodViewController: UIViewController {
             }
             
             //Upload anh mon an va ten anh len Firebase
-            
-            /*let uploadTask = imageRef.child("/FoodImages/\(count).jpg").putData((self.FoodImageView.image?.pngData())!, metadata: nil) { (metadata, error) in
+            let metadata = StorageMetadata()
+            metadata.contentType = "image/jpeg"
+            self.uploadTask = imageRef.child("/FoodImages/\(count).jpg").putData((self.FoodImageView.image?.sd_imageData(as: .JPEG, compressionQuality: 1.0, firstFrameOnly: true))!, metadata: metadata) { (metadata, error) in
                 }
-            uploadTask.resume()*/
+            // Create a task listener handle
+            self.uploadTask!.observe(.progress) { snapshot in
+                let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
+                self.DisplayValueInProgressBar(PercentCompleted: percentComplete)
+            }
             
             //Ghi du lieu danh sach nguyen lieu len Firebase
             var tempIngredientArr = [[Double]]()
@@ -168,6 +174,13 @@ class AddNewFoodViewController: UIViewController {
         })
     }
 
+    func DisplayValueInProgressBar(PercentCompleted value: Double) {
+        print(value)
+        if (value == 100.0) {
+            print("Done!")
+            uploadTask!.removeAllObservers()
+        }
+    }
 }
 
 //Delegate cua nguyen lieu
