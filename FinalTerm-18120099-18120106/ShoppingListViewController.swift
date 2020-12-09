@@ -161,13 +161,61 @@ class ShoppingListViewController: UIViewController {
     
     @IBAction func ChangeCheckState(_ sender: Any) {
         let button = sender as! UIButton
+        //Mang luu trang thai cua cac nguyen lieu
+        var stateArr = [Int]()
+        //Vi tri bat dau va ket thuc cua mang chua cac nguyen lieu cua mon an dang xet
+        let start = GetLeadingIndex(button.tag)
+        let end = GetTrailingIndex(button.tag)
+        
         if (button.tintColor == UIColor.systemGreen) {
             ShoppingList[button.tag].Check = false
         }
         else {
             ShoppingList[button.tag].Check = true
         }
+        
+        for i in start...end {
+            if (ShoppingList[i].Check == true) {
+                stateArr += [i - start]
+            }
+        }
+        
+        //Xac dinh chi so cua mon an luu trong mang
+        var index = 0
+        for i in 0..<start - 1 {
+            if (ShoppingList[i].FoodName != "") {
+                index += 1
+            }
+        }
+        
+        //Cap nhat lai du lieu tren Firebase
+        let path = DateToString(dateData, "yyyy/MM/dd")
+        foodInfoRef.child("ShoppingList/\(path)/\(index)/CheckList").setValue(stateArr)
+        
+        //Cap nhat lai giao dien
         ShoppingListTableView.reloadData()
+    }
+    
+    func GetLeadingIndex(_ currentIndex: Int) -> Int {
+        var index = currentIndex
+        while (true) {
+            if (ShoppingList[index].FoodName != "") {
+                break
+            }
+            index -= 1
+        }
+        return index + 1
+    }
+    
+    func GetTrailingIndex(_ currentIndex: Int) -> Int {
+        var index = currentIndex
+        while (true) {
+            if (ShoppingList[index].IngredientName == "") {
+                break
+            }
+            index += 1
+        }
+        return index - 1
     }
 }
 
