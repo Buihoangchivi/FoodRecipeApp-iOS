@@ -11,6 +11,7 @@
 		360B6422257A8D200040BF80 /* DirectionPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360B6421257A8D200040BF80 /* DirectionPopUpViewController.swift */; };
 		36150381257FDC1100201EEA /* ShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36150380257FDC1000201EEA /* ShoppingListViewController.swift */; };
 		36150383257FDC5800201EEA /* DatePickerPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36150382257FDC5800201EEA /* DatePickerPopUpViewController.swift */; };
+		36150385257FEBF000201EEA /* ShoppingListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36150384257FEBF000201EEA /* ShoppingListTableViewCell.swift */; };
 		3634DFA52579745100A14EE2 /* DirectionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3634DFA42579745100A14EE2 /* DirectionListViewController.swift */; };
 		3634DFA7257975D400A14EE2 /* EditDirectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3634DFA6257975D400A14EE2 /* EditDirectionTableViewCell.swift */; };
 		363BA1CC257251A300A43B4A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 363BA1CB257251A300A43B4A /* GoogleService-Info.plist */; };
@@ -54,6 +55,7 @@
 		360B6421257A8D200040BF80 /* DirectionPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionPopUpViewController.swift; sourceTree = "<group>"; };
 		36150380257FDC1000201EEA /* ShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListViewController.swift; sourceTree = "<group>"; };
 		36150382257FDC5800201EEA /* DatePickerPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerPopUpViewController.swift; sourceTree = "<group>"; };
+		36150384257FEBF000201EEA /* ShoppingListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListTableViewCell.swift; sourceTree = "<group>"; };
 		3634DFA42579745100A14EE2 /* DirectionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionListViewController.swift; sourceTree = "<group>"; };
 		3634DFA6257975D400A14EE2 /* EditDirectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDirectionTableViewCell.swift; sourceTree = "<group>"; };
 		363BA1CB257251A300A43B4A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				87997F63257DFFCB00C9AF5F /* TipDetailViewController.swift */,
 				36150380257FDC1000201EEA /* ShoppingListViewController.swift */,
 				36150382257FDC5800201EEA /* DatePickerPopUpViewController.swift */,
+				36150384257FEBF000201EEA /* ShoppingListTableViewCell.swift */,
 			);
 			path = "FinalTerm-18120099-18120106";
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				36517980257659DA00574610 /* IngredientTableViewCell.swift in Sources */,
 				87997F64257DFFCB00C9AF5F /* TipDetailViewController.swift in Sources */,
 				36A2DE2E256FF1EB00C64FB8 /* MealCollectionViewCell.swift in Sources */,
+				36150385257FEBF000201EEA /* ShoppingListTableViewCell.swift in Sources */,
 				3651797E2576508F00574610 /* IngredientListViewController.swift in Sources */,
 				36A2DE2C256F9C7F00C64FB8 /* CategoryCollectionViewCell.swift in Sources */,
 				874C217E257762380033F8F8 /* DetailIngredientFoodTableViewCell.swift in Sources */,
