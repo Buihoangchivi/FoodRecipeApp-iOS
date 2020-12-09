@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 import FirebaseUI
 
 protocol ReloadDataDelegate: class {
@@ -99,7 +100,11 @@ class FoodPopUpViewController: UIViewController {
     }
     
     @IBAction func act_ChooseFood(_ sender: Any) {
-        
+        let dest = self.storyboard?.instantiateViewController(identifier: "DatePickerPopUpViewController") as! DatePickerPopUpViewController
+        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        dest.delegate = self
+        self.present(dest, animated: true, completion: nil)
     }
     
     
@@ -113,4 +118,30 @@ class FoodPopUpViewController: UIViewController {
     }
     */
 
+}
+
+extension FoodPopUpViewController: DatePickerDalegate{
+    func TransmitDate(Date date: Date) {
+        let path = DateToString(date, "yyyy/MM/dd")
+        foodInfoRef.child("ShoppingList/\(path)").observeSingleEvent(of: .value) { (snapshot) in
+            var index = 0
+            var isExist = false
+            if (snapshot.exists() == true) {
+                for snapshotChild in snapshot.children {
+                    let temp = snapshotChild as! DataSnapshot
+                    if let info = temp.value as? [String:AnyObject] {
+                        if self.FoodID == info["FoodID"] as! Int {
+                            isExist = true
+                            break
+                        }
+                    }
+                }
+                index = Int(snapshot.childrenCount)
+            }
+            
+            if (isExist == false) {
+            foodInfoRef.child("ShoppingList/\(path)/\(index)").setValue(["FoodID": self.FoodID])
+            }
+            }
+    }
 }

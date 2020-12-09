@@ -9,6 +9,12 @@
 import UIKit
 import Firebase
 
+func DateToString(_ date: Date, _ format: String) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = format
+    return dateFormatter.string(from: date)
+}
+
 class ShoppingListViewController: UIViewController {
 
     @IBOutlet weak var DateLabel: UILabel!
@@ -62,12 +68,6 @@ class ShoppingListViewController: UIViewController {
     @IBAction func act_ShowAddNewFoodScreen(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
         delegate?.DismissWithCondition(1)
-    }
-    
-    func DateToString(_ date: Date, _ format: String) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
-        return dateFormatter.string(from: date)
     }
     
     func LoadDataFromFirebase(_ date: Date) {
@@ -196,20 +196,6 @@ extension ShoppingListViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ShoppingList.count
     }
-    
-    /*func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 10
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footerView = UIView()
-        footerView.backgroundColor = UIColor.white
-        return footerView
-    }*/
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ShoppingListCell") as! ShoppingListTableViewCell
