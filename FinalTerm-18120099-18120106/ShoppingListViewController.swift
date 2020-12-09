@@ -18,6 +18,8 @@ class ShoppingListViewController: UIViewController {
     
     @IBOutlet weak var ShoppingListTableView: UITableView!
     
+    @IBOutlet weak var ShoppingListView: UIView!
+    
     var dateData = Date()
     var ShoppingList = [(FoodName: String, IngredientName: String, Value: String, Check: Bool)]()
     var IngredientList = [(Name: String, Unit: String)]()
@@ -43,39 +45,65 @@ class ShoppingListViewController: UIViewController {
                     }
                 }
         })
-        var tempOrderArr = [(x: Int, y: Int)]()
-        var count = 0, index = 0
-        let path = DateToString(dateData, "yyyy/MM/dd")
+        
+        //Bo tron goc cho nut Len thuc don
+        EstablishMenuButton.layer.cornerRadius = 22
+        
+        //Doc du lieu tren Firebase va hien len man hinh
+        LoadDataFromFirebase(dateData)
+    }
+    
+    func DateToString(_ date: Date, _ format: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: date)
+    }
+    
+    func LoadDataFromFirebase(_ date: Date) {
+        //Khoi tao danh sach cac mon an trong menu
+        ShoppingList = [(FoodName: String, IngredientName: String, Value: String, Check: Bool)]()
+        let path = DateToString(date, "yyyy/MM/dd")
         foodInfoRef.child("ShoppingList/\(path)").observeSingleEvent(of: .value) { (snapshot) in
-            for snapshotChild in snapshot.children {
-                let child = snapshotChild as! DataSnapshot
-                var temp = (FoodName: "", IngredientName: "", Value: "", Check: false)
-                //Them khoang cach giua cac mon an
-                if (self.ShoppingList.count > 0) {
-                    self.ShoppingList += [temp]
+            //Kiem tra co ton tai menu trong ngay duoc chon hay khong
+            if (snapshot.exists() == false) {
+                //An View chua TableView di va hien thi thong bao khong co menu
+                self.ShoppingListView.isHidden = true
+                self.EstablishMenuButton.isEnabled = true
+                if (self.DateLabel.text == "Hôm nay") {
+                    self.NotificationLabel.text = "Bạn chưa chọn món cho thực đơn hôm nay!"
                 }
-                if let menu = child.value as? [String:AnyObject] {
-                    foodInfoRef.child("\(menu["FoodID"] as! Int)").observeSingleEvent(of: .value) { (snapshot) in
-                        if let food = snapshot.value as? [String:Any] {
-                            //Lay danh sach nguyen lieu cua mon an ung voi ID
-                            if let arr = food["Ingredient"] as? NSArray {
-                                count += arr.count + 2
-                                for i in 0..<arr.count {
-                                    if let info = arr[i] as? NSArray {
-                                        var infoArr = [String]()
-                                        foodInfoRef.child("IngredientList/\(info[0])").observeSingleEvent(of: .value, with: { (snapshot) in
+                else if (self.DateLabel.text == "Hôm qua") {
+                    self.NotificationLabel.text = "Bạn chưa chọn món cho thực đơn hôm qua!"
+                }
+                else if (self.DateLabel.text == "Ngày mai") {
+                    self.NotificationLabel.text = "Bạn chưa chọn món cho thực đơn ngày mai!"
+                }
+                else {
+                    self.NotificationLabel.text = "Bạn chưa chọn món cho thực đơn ngày \(self.DateLabel.text!)!"
+                }
+            }
+            else {
+                for snapshotChild in snapshot.children {
+                    let child = snapshotChild as! DataSnapshot
+                    var temp = (FoodName: "", IngredientName: "", Value: "", Check: false)
+                    //Them khoang cach giua cac mon an
+                    if (self.ShoppingList.count > 0) {
+                        self.ShoppingList += [temp]
+                    }
+                    if let menu = child.value as? [String:AnyObject] {
+                        foodInfoRef.child("\(menu["FoodID"] as! Int)").observeSingleEvent(of: .value) { (snapshot) in
+                            if let food = snapshot.value as? [String:Any] {
+                                //Lay danh sach nguyen lieu cua mon an ung voi ID
+                                if let arr = food["Ingredient"] as? NSArray {
+                                    for i in 0..<arr.count {
+                                        if let info = arr[i] as? NSArray {
+                                            //Lay ten mon an ung voi ID
                                             if (i == 0) {
-                                                //Lay ten mon an ung voi ID
                                                 temp = (FoodName: food["Name"] as! String, IngredientName: "", Value: "", Check: false)
                                                 self.ShoppingList += [temp]
-                                                tempOrderArr += [(x: Int(child.key)!, y: 0)]
-                                                index += 1
                                             }
-                                            //Lay thong tin nguyen lieu
-                                            for snapshotChild in snapshot.children {
-                                                let temp = snapshotChild as! DataSnapshot
-                                                infoArr += [temp.value as! String]
-                                            }
+                                            
+                                            //Kiem tra xe nguyen lieu dang xet co duoc danh dau hay chua
                                             var check = false
                                             if let checkArr = menu["CheckList"] as? NSArray {
                                                 for element in checkArr {
@@ -85,45 +113,30 @@ class ShoppingListViewController: UIViewController {
                                                     }
                                                 }
                                             }
-                                            temp = (FoodName: "", IngredientName: infoArr[0], Value: "\(info[1]) \(infoArr[1])", Check: check)
+                                            
+                                            //Them nguyen lieu vao danh sach
+                                            temp = (FoodName: "", IngredientName: self.IngredientList[info[0] as! Int].Name, Value: "\(info[1]) \(self.IngredientList[info[0] as! Int].Unit)", Check: check)
                                             self.ShoppingList += [temp]
-                                            tempOrderArr += [(x: Int(child.key)!, y: i + 1)]
-                                            index += 1
+                                            
                                             //Them khoang cach giua cac mon an
                                             if (i == arr.count - 1) {
                                                 temp = (FoodName: "", IngredientName: "", Value: "", Check: false)
                                                 self.ShoppingList += [temp]
-                                                tempOrderArr += [(x: Int(child.key)!, y: i + 2)]
-                                                index += 1
                                             }
-                                            if (index == count) {
-                                                //Sap xep danh sach nguyen lieu theo dung thu tu
-                                                for i in 0..<self.ShoppingList.count - 1 {
-                                                    for j in i + 1..<self.ShoppingList.count {
-                                                        if (tempOrderArr[i].x > tempOrderArr[j].x ||
-                                                            (tempOrderArr[i].x == tempOrderArr[j].x && tempOrderArr[i].y > tempOrderArr[j].y)) {
-                                                            tempOrderArr.swapAt(i, j)
-                                                            self.ShoppingList.swapAt(i, j)
-                                                        }
-                                                    }
-                                                }
-                                                self.ShoppingListTableView.reloadData()
-                                            }
-                                        })
+                                        }
                                     }
                                 }
                             }
+                            self.ShoppingListTableView.reloadData()
+                            //Hien View chua TableView di va an thong bao khong co menu
+                            self.ShoppingListView.isHidden = false
+                            self.EstablishMenuButton.isEnabled = false
                         }
                     }
                 }
             }
         }
-    }
-    
-    func DateToString(_ date: Date, _ format: String) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
-        return dateFormatter.string(from: date)
+        
     }
     
     @IBAction func act_ShowDatePicker(_ sender: Any) {
@@ -163,6 +176,8 @@ extension ShoppingListViewController: DatePickerDalegate {
         else {
             DateLabel.text = DateToString(date, "dd/MM/yyyy")
         }
+        //Doc du lieu tren Firebase va hien len man hinh
+        LoadDataFromFirebase(dateData)
     }
 }
 
