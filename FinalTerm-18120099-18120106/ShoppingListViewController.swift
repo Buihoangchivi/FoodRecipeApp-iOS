@@ -23,6 +23,7 @@ class ShoppingListViewController: UIViewController {
     var dateData = Date()
     var ShoppingList = [(FoodName: String, IngredientName: String, Value: String, Check: Bool)]()
     var IngredientList = [(Name: String, Unit: String)]()
+    var delegate: AddNewFoodDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +52,16 @@ class ShoppingListViewController: UIViewController {
         
         //Doc du lieu tren Firebase va hien len man hinh
         LoadDataFromFirebase(dateData)
+    }
+    
+    @IBAction func act_ShowHomeScreen(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+        delegate?.DismissWithCondition(0)
+    }
+    
+    @IBAction func act_ShowAddNewFoodScreen(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+        delegate?.DismissWithCondition(1)
     }
     
     func DateToString(_ date: Date, _ format: String) -> String {

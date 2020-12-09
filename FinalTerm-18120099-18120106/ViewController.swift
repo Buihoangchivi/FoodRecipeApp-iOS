@@ -32,6 +32,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var ShadowView: UIView!
     @IBOutlet weak var FoodView: UIView!
+    @IBOutlet weak var HomeView: UIView!
     
     @IBOutlet weak var FoodButton0: UIButton!
     @IBOutlet weak var FoodButton1: UIButton!
@@ -367,11 +368,23 @@ class ViewController: UIViewController {
     }
     
     @IBAction func act_ShowAddFoodScreen(_ sender: Any) {
-        let myAddFoodScreen = self.storyboard?.instantiateViewController(identifier: "AddNewFoodViewController") as! AddNewFoodViewController
-        myAddFoodScreen.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        myAddFoodScreen.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        myAddFoodScreen.delegate = self
-        self.present(myAddFoodScreen, animated: true, completion: nil)
+        let dest = self.storyboard?.instantiateViewController(identifier: "AddNewFoodViewController") as! AddNewFoodViewController
+        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        dest.delegate = self
+        HomeView.isHidden = true
+        HomeButton.tintColor = UIColor.systemGray
+        self.present(dest, animated: true, completion: nil)
+    }
+    
+    @IBAction func act_ShowShoppingListScreen(_ sender: Any) {
+        let dest = self.storyboard?.instantiateViewController(identifier: "ShoppingListViewController") as! ShoppingListViewController
+        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        dest.delegate = self
+        HomeView.isHidden = true
+        HomeButton.tintColor = UIColor.systemGray
+        self.present(dest, animated: true, completion: nil)
     }
     
     @IBAction func act_ShowMenu(_ sender: Any) {
@@ -577,6 +590,28 @@ extension ViewController: ReloadDataDelegate {
 extension ViewController: AddNewFoodDelegate {
     func UpdateUI() {
         UpdateFoodList()
+    }
+    
+    func DismissWithCondition(_ index: Int) {
+        if (index == 0) { //Quay ve man hinh Home
+            HomeView.isHidden = false
+            HomeButton.tintColor = UIColor.systemGreen
+        }
+        else if (index == 1) { //Hien thi man hinh them mon an moi
+            let dest = self.storyboard?.instantiateViewController(identifier: "AddNewFoodViewController") as! AddNewFoodViewController
+            dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            dest.delegate = self
+            self.present(dest, animated: true, completion: nil)
+        }
+        else { //Hien thi man hinh thuc don mua sam
+            let dest = self.storyboard?.instantiateViewController(identifier: "ShoppingListViewController") as! ShoppingListViewController
+            dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            dest.delegate = self
+            HomeView.isHidden = true
+            self.present(dest, animated: true, completion: nil)
+        }
     }
 }
 

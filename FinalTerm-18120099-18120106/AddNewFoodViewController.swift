@@ -11,6 +11,7 @@ import Firebase
 
 protocol AddNewFoodDelegate: class {
     func UpdateUI()
+    func DismissWithCondition(_ index: Int)
 }
 
 class AddNewFoodViewController: UIViewController {
@@ -71,6 +72,12 @@ class AddNewFoodViewController: UIViewController {
     
     @IBAction func act_ShowHomeScreen(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+        delegate?.DismissWithCondition(0)
+    }
+    
+    @IBAction func act_ShowShoppingListScreen(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+        delegate?.DismissWithCondition(2)
     }
     
     @IBAction func act_AddFoodImage(_ sender: Any) {
