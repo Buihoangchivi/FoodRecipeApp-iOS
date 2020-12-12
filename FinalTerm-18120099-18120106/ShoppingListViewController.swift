@@ -208,11 +208,27 @@ class ShoppingListViewController: UIViewController {
             }
         }
         
-        //Xoa lai du lieu tren Firebase
+        //Lay duong dan ngay thang nam den menu chua mon an can xoa
         let path = DateToString(dateData, "yyyy/MM/dd")
-        foodInfoRef.child("ShoppingList/\(path)/\(index)").removeValue()
         
         //Xoa du lieu mon an trong mang
+        foodInfoRef.child("ShoppingList/\(path)").observeSingleEvent(of: .value) { (snapshot) in
+        if (snapshot.exists() == true) {
+            var menuArr = [[String:AnyObject]]()
+            for snapshotChild in snapshot.children {
+                let child = snapshotChild as! DataSnapshot
+                if let menu = child.value as? [String:AnyObject] {
+                    menuArr += [menu]
+                }
+            }
+            //Xoa danh sach nguyen lieu cua mon an co chi so 'index' trong thuc don
+            menuArr.remove(at: index)
+            
+            //Cap nhat lai du lieu tren Firebase
+            foodInfoRef.child("ShoppingList/\(path)").setValue(menuArr)
+            }
+        }
+        
         let end = GetTrailingIndex(button.tag + 1)
         for _ in button.tag...end + 1 {
             ShoppingList.remove(at: button.tag)
