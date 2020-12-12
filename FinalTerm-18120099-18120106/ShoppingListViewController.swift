@@ -196,6 +196,31 @@ class ShoppingListViewController: UIViewController {
         ShoppingListTableView.reloadData()
     }
     
+    @IBAction func DeleteFoodInMenu(_ sender: Any) {
+        let button = sender as! UIButton
+        //Vi tri bat dau va ket thuc cua mang chua cac nguyen lieu cua mon an dang xet
+        
+        //Xac dinh chi so cua mon an luu trong mang
+        var index = 0
+        for i in 0..<button.tag {
+            if (ShoppingList[i].FoodName != "") {
+                index += 1
+            }
+        }
+        
+        //Xoa lai du lieu tren Firebase
+        let path = DateToString(dateData, "yyyy/MM/dd")
+        foodInfoRef.child("ShoppingList/\(path)/\(index)").removeValue()
+        
+        //Xoa du lieu mon an trong mang
+        let end = GetTrailingIndex(button.tag + 1)
+        for _ in button.tag...end + 1 {
+            ShoppingList.remove(at: button.tag)
+        }
+        //Cap nhat lai giao dien
+        ShoppingListTableView.reloadData()
+    }
+    
     func GetLeadingIndex(_ currentIndex: Int) -> Int {
         var index = currentIndex
         while (true) {
@@ -250,6 +275,18 @@ extension ShoppingListViewController: UITableViewDelegate,UITableViewDataSource{
         cell.FoodNameLabel.text = ShoppingList[indexPath.row].FoodName
         cell.IngredientNameLabel.text = ShoppingList[indexPath.row].IngredientName
         cell.ValueAndUnitLabel.text = ShoppingList[indexPath.row].Value
+        //Cell chua ten mon an
+        if (ShoppingList[indexPath.row].FoodName == "") {
+            cell.DeleteButton.isHidden = true
+            cell.DeleteButton.isEnabled = false
+        }
+        else {
+            cell.DeleteButton.tag = indexPath.row
+            cell.DeleteButton.addTarget(self, action: #selector(DeleteFoodInMenu(_:)), for: .touchUpInside)
+            cell.DeleteButton.isHidden = false
+            cell.DeleteButton.isEnabled = true
+        }
+        //Cell chua thong tin nguyen lieu
         if (ShoppingList[indexPath.row].IngredientName != "") {
             if (ShoppingList[indexPath.row].Check == true) {
                 //Dinh nghia tag va target cho cac nut chinh sua nguyen lieu

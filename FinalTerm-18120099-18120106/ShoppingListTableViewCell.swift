@@ -15,9 +15,11 @@ class ShoppingListTableViewCell: UITableViewCell {
     @IBOutlet weak var ValueAndUnitLabel: UILabel!
     @IBOutlet weak var CheckButton: UIButton!
     @IBOutlet weak var UncheckButton: UIButton!
+    @IBOutlet weak var DeleteButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        DeleteButton.layer.cornerRadius = 12
         // Initialization code
     }
 
