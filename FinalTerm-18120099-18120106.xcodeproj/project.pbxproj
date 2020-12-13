@@ -29,6 +29,7 @@
 		36A2DE2C256F9C7F00C64FB8 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A2DE2B256F9C7F00C64FB8 /* CategoryCollectionViewCell.swift */; };
 		36A2DE2E256FF1EB00C64FB8 /* MealCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A2DE2D256FF1EB00C64FB8 /* MealCollectionViewCell.swift */; };
 		36DAB9A3257521C1005CA319 /* AddNewFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DAB9A2257521C1005CA319 /* AddNewFoodViewController.swift */; };
+		36E6E6992585D0F0007EEA32 /* ChangeCurrentPagePopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E6E6982585D0F0007EEA32 /* ChangeCurrentPagePopUpVC.swift */; };
 		81B71440F3D7338D7D04EF46 /* Pods_FinalTerm_18120099_18120106.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABDB6492BAB0F53D5553D11 /* Pods_FinalTerm_18120099_18120106.framework */; };
 		8746F58F2578EB3A00D388AE /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8746F58E2578EB3A00D388AE /* MenuViewController.swift */; };
 		8746F5912578EB4D00D388AE /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8746F5902578EB4D00D388AE /* MenuTableViewCell.swift */; };
@@ -77,6 +78,7 @@
 		36A2DE2B256F9C7F00C64FB8 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		36A2DE2D256FF1EB00C64FB8 /* MealCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCollectionViewCell.swift; sourceTree = "<group>"; };
 		36DAB9A2257521C1005CA319 /* AddNewFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewFoodViewController.swift; sourceTree = "<group>"; };
+		36E6E6982585D0F0007EEA32 /* ChangeCurrentPagePopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCurrentPagePopUpVC.swift; sourceTree = "<group>"; };
 		4ABDB6492BAB0F53D5553D11 /* Pods_FinalTerm_18120099_18120106.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FinalTerm_18120099_18120106.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		533BC05158045272D7206855 /* Pods-FinalTerm-18120099-18120106.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalTerm-18120099-18120106.debug.xcconfig"; path = "Target Support Files/Pods-FinalTerm-18120099-18120106/Pods-FinalTerm-18120099-18120106.debug.xcconfig"; sourceTree = "<group>"; };
 		8746F58E2578EB3A00D388AE /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				36150380257FDC1000201EEA /* ShoppingListViewController.swift */,
 				36150382257FDC5800201EEA /* DatePickerPopUpViewController.swift */,
 				36150384257FEBF000201EEA /* ShoppingListTableViewCell.swift */,
+				36E6E6982585D0F0007EEA32 /* ChangeCurrentPagePopUpVC.swift */,
 			);
 			path = "FinalTerm-18120099-18120106";
 			sourceTree = "<group>";
@@ -382,6 +385,7 @@
 				36DAB9A3257521C1005CA319 /* AddNewFoodViewController.swift in Sources */,
 				3634DFA52579745100A14EE2 /* DirectionListViewController.swift in Sources */,
 				87BD52B12577986C0099C569 /* ProcessingTableViewCell.swift in Sources */,
+				36E6E6992585D0F0007EEA32 /* ChangeCurrentPagePopUpVC.swift in Sources */,
 				8746F5912578EB4D00D388AE /* MenuTableViewCell.swift in Sources */,
 				366D6A7E256F831B00693FD7 /* ViewController.swift in Sources */,
 				366D6A7A256F831B00693FD7 /* AppDelegate.swift in Sources */,

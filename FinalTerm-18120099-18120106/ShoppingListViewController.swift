@@ -196,6 +196,47 @@ class ShoppingListViewController: UIViewController {
         ShoppingListTableView.reloadData()
     }
     
+    @IBAction func DeleteFoodInMenu(_ sender: Any) {
+        let button = sender as! UIButton
+        //Vi tri bat dau va ket thuc cua mang chua cac nguyen lieu cua mon an dang xet
+        
+        //Xac dinh chi so cua mon an luu trong mang
+        var index = 0
+        for i in 0..<button.tag {
+            if (ShoppingList[i].FoodName != "") {
+                index += 1
+            }
+        }
+        
+        //Lay duong dan ngay thang nam den menu chua mon an can xoa
+        let path = DateToString(dateData, "yyyy/MM/dd")
+        
+        //Xoa du lieu mon an trong mang
+        foodInfoRef.child("ShoppingList/\(path)").observeSingleEvent(of: .value) { (snapshot) in
+        if (snapshot.exists() == true) {
+            var menuArr = [[String:AnyObject]]()
+            for snapshotChild in snapshot.children {
+                let child = snapshotChild as! DataSnapshot
+                if let menu = child.value as? [String:AnyObject] {
+                    menuArr += [menu]
+                }
+            }
+            //Xoa danh sach nguyen lieu cua mon an co chi so 'index' trong thuc don
+            menuArr.remove(at: index)
+            
+            //Cap nhat lai du lieu tren Firebase
+            foodInfoRef.child("ShoppingList/\(path)").setValue(menuArr)
+            }
+        }
+        
+        let end = GetTrailingIndex(button.tag + 1)
+        for _ in button.tag...end + 1 {
+            ShoppingList.remove(at: button.tag)
+        }
+        //Cap nhat lai giao dien
+        ShoppingListTableView.reloadData()
+    }
+    
     func GetLeadingIndex(_ currentIndex: Int) -> Int {
         var index = currentIndex
         while (true) {
@@ -250,6 +291,18 @@ extension ShoppingListViewController: UITableViewDelegate,UITableViewDataSource{
         cell.FoodNameLabel.text = ShoppingList[indexPath.row].FoodName
         cell.IngredientNameLabel.text = ShoppingList[indexPath.row].IngredientName
         cell.ValueAndUnitLabel.text = ShoppingList[indexPath.row].Value
+        //Cell chua ten mon an
+        if (ShoppingList[indexPath.row].FoodName == "") {
+            cell.DeleteButton.isHidden = true
+            cell.DeleteButton.isEnabled = false
+        }
+        else {
+            cell.DeleteButton.tag = indexPath.row
+            cell.DeleteButton.addTarget(self, action: #selector(DeleteFoodInMenu(_:)), for: .touchUpInside)
+            cell.DeleteButton.isHidden = false
+            cell.DeleteButton.isEnabled = true
+        }
+        //Cell chua thong tin nguyen lieu
         if (ShoppingList[indexPath.row].IngredientName != "") {
             if (ShoppingList[indexPath.row].Check == true) {
                 //Dinh nghia tag va target cho cac nut chinh sua nguyen lieu
