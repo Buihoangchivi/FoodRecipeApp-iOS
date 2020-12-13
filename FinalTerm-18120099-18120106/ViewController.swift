@@ -65,6 +65,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var FirstPageButton: UIButton!
     @IBOutlet weak var PrevPageButton: UIButton!
     @IBOutlet weak var CurrentPageLabel: UILabel!
+    @IBOutlet weak var ChangeCurrentPageButton: UIButton!
     @IBOutlet weak var NextPageButton: UIButton!
     @IBOutlet weak var LastPageButton: UIButton!
     
@@ -222,6 +223,10 @@ class ViewController: UIViewController {
         layout = MealCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.sectionInset = UIEdgeInsets(top: 0,left: 10,bottom: 0,right: 5)
         
+        //Bo goc cho nut thay doi so trang hien tai
+        ChangeCurrentPageButton.layer.borderWidth = 0.2
+        ChangeCurrentPageButton.layer.cornerRadius = 10
+        
         //Layout bo goc va do bong cho nen 6 mon an
         FoodView.layer.cornerRadius = 10
         FoodView.layer.borderWidth = 0.1
@@ -321,50 +326,7 @@ class ViewController: UIViewController {
                 ChangButtonState(LastPageButton, true)
             }
         }
-        //Cap nhat so trang tren giao dien
-        self.CurrentPageLabel.text = "\(self.CurrentPage) of \(self.TotalPage)"
-        
-        //Backup trang thai cac nut
-        let tempButtonList: [(btn: UIButton, enable: Bool)] = [(FirstPageButton, FirstPageButton.isEnabled), (PrevPageButton, PrevPageButton.isEnabled), (NextPageButton, NextPageButton.isEnabled), (LastPageButton, LastPageButton.isEnabled)]
-        
-        //Vo hieu hoa cac nut khi dang thuc hien Animation
-        FirstPageButton.isEnabled = false
-        PrevPageButton.isEnabled = false
-        NextPageButton.isEnabled = false
-        LastPageButton.isEnabled = false
-        
-        //Animation di chuyen danh sach mon an hien tai ra ngoai khung hinh
-        ShadowViewLeftConstraint.constant -= temp
-        ShadowViewRightConstraint.constant += temp
-        UIView.animate(withDuration: 0.8) { [weak self] in
-          self?.view.layoutIfNeeded()
-        }
-        
-        //Di chuyen danh sach mon an sang phai khung hinh
-        ShadowViewLeftConstraint.constant += temp * 2
-        ShadowViewRightConstraint.constant -= temp * 2
-        UIView.animate(withDuration: 0,
-                       delay: 0.8,
-                     animations: { [weak self] in
-                      self?.view.layoutIfNeeded()
-        }, completion: { //Thay doi mon an
-            (value: Bool) in
-            //Cap nhat 6 mon an
-            self.LoadFoodInfo()
-        })
-        //Animation di chuyen danh sach mon an moi vao khung hinh
-        ShadowViewLeftConstraint.constant -= temp
-        ShadowViewRightConstraint.constant += temp
-        UIView.animate(withDuration: 0.8,
-                       delay: 0.8,
-                     animations: { [weak self] in
-                      self?.view.layoutIfNeeded()
-            }, completion: { //Active cac nut sau khi thuc hien xong Animation
-                (value: Bool) in
-                for i in 0...3 {
-                    tempButtonList[i].btn.isEnabled = tempButtonList[i].enable
-                }
-            })
+        AnimationChangePage(Width: temp)
     }
     
     @IBAction func act_ShowAddFoodScreen(_ sender: Any) {
@@ -414,6 +376,16 @@ class ViewController: UIViewController {
             //Cap nhat data tren Firebase
             foodInfoRef.child("\(foodID)").updateChildValues(["Favorite": 0])
         }
+    }
+    
+    @IBAction func act_ChangeCurrentPageButton(_ sender: Any) {
+        let myPopUp = self.storyboard?.instantiateViewController(identifier: "ChangeCurrentPagePopUpVC") as! ChangeCurrentPagePopUpVC
+        myPopUp.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        myPopUp.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        myPopUp.delegate = self
+        myPopUp.CurrentPage = CurrentPage
+        myPopUp.TotalPage = TotalPage
+        self.present(myPopUp, animated: true, completion: nil)
     }
     
     //Thay doi trang thai cua cac nut phan trang
@@ -518,7 +490,7 @@ class ViewController: UIViewController {
             self.LoadFoodInfo()
             
             //Hien thi trang hien tai tren tong so trang
-            self.CurrentPageLabel.text = "\(self.CurrentPage) of \(self.TotalPage)"
+            self.CurrentPageLabel.text = "\(self.CurrentPage) / \(self.TotalPage)"
         })
     }
     
@@ -577,6 +549,53 @@ class ViewController: UIViewController {
             })
         }
     }
+    
+    func AnimationChangePage(Width temp: CGFloat) {
+        //Cap nhat so trang tren giao dien
+        self.CurrentPageLabel.text = "\(self.CurrentPage) / \(self.TotalPage)"
+        
+        //Backup trang thai cac nut
+        let tempButtonList: [(btn: UIButton, enable: Bool)] = [(FirstPageButton, FirstPageButton.isEnabled), (PrevPageButton, PrevPageButton.isEnabled), (NextPageButton, NextPageButton.isEnabled), (LastPageButton, LastPageButton.isEnabled)]
+        
+        //Vo hieu hoa cac nut khi dang thuc hien Animation
+        FirstPageButton.isEnabled = false
+        PrevPageButton.isEnabled = false
+        NextPageButton.isEnabled = false
+        LastPageButton.isEnabled = false
+        
+        //Animation di chuyen danh sach mon an hien tai ra ngoai khung hinh
+        ShadowViewLeftConstraint.constant -= temp
+        ShadowViewRightConstraint.constant += temp
+        UIView.animate(withDuration: 0.8) { [weak self] in
+          self?.view.layoutIfNeeded()
+        }
+        
+        //Di chuyen danh sach mon an sang phai khung hinh
+        ShadowViewLeftConstraint.constant += temp * 2
+        ShadowViewRightConstraint.constant -= temp * 2
+        UIView.animate(withDuration: 0,
+                       delay: 0.8,
+                     animations: { [weak self] in
+                      self?.view.layoutIfNeeded()
+        }, completion: { //Thay doi mon an
+            (value: Bool) in
+            //Cap nhat 6 mon an
+            self.LoadFoodInfo()
+        })
+        //Animation di chuyen danh sach mon an moi vao khung hinh
+        ShadowViewLeftConstraint.constant -= temp
+        ShadowViewRightConstraint.constant += temp
+        UIView.animate(withDuration: 0.8,
+                       delay: 0.8,
+                     animations: { [weak self] in
+                      self?.view.layoutIfNeeded()
+            }, completion: { //Active cac nut sau khi thuc hien xong Animation
+                (value: Bool) in
+                for i in 0...3 {
+                    tempButtonList[i].btn.isEnabled = tempButtonList[i].enable
+                }
+            })
+    }
 }
 
 //Delegate
@@ -612,6 +631,48 @@ extension ViewController: AddNewFoodDelegate {
             HomeView.isHidden = true
             self.present(dest, animated: true, completion: nil)
         }
+    }
+}
+
+//Delegate chon so trang nguoi dung tuy chinh
+extension ViewController: ChangeCurrentPagePopUpDelegate {
+    func UpdateCurrentPage(index: Int) {
+        var temp = view.bounds.width
+        //temp < 0 thi animation tu phai sang trai
+        //temp > 0 thi animation tu trai sang phai
+        if (index < CurrentPage) {
+            temp *= -1
+        }
+        
+        //Cap nhat gia tri cho trang hien tai
+        CurrentPage = index
+        
+        //Chon trang lon hon trang hien tai
+        if (temp > 0) {
+            //Neu dang o trang cuoi cung thi vo hieu hoa 2 nut Next va Last Page
+            if (CurrentPage == TotalPage) {
+                ChangButtonState(NextPageButton, false)
+                ChangButtonState(LastPageButton, false)
+            }
+            //Active 2 nut Prev va First Page
+            if (PrevPageButton.isEnabled == false) {
+                ChangButtonState(PrevPageButton, true)
+                ChangButtonState(FirstPageButton, true)
+            }
+        }
+        else { //Chon trang nho hon trang hien tai
+            //Neu dang o trang dau tien thi vo hieu hoa 2 nut Prev va First Page
+            if (CurrentPage == 1) {
+                ChangButtonState(PrevPageButton, false)
+                ChangButtonState(FirstPageButton, false)
+            }
+            //Active 2 nut Next va Last Page
+            if (NextPageButton.isEnabled == false) {
+                ChangButtonState(NextPageButton, true)
+                ChangButtonState(LastPageButton, true)
+            }
+        }
+        AnimationChangePage(Width: temp)
     }
 }
 
