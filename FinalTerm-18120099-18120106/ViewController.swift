@@ -69,8 +69,18 @@ class ViewController: UIViewController {
     @IBOutlet weak var NextPageButton: UIButton!
     @IBOutlet weak var LastPageButton: UIButton!
     
+    @IBOutlet weak var MenuButton: UIButton!
+    @IBOutlet weak var HomeLabel: UILabel!
+    @IBOutlet weak var SearchButton: UIButton!
+    
+    @IBOutlet weak var SearchFoodButton: UIButton!
+    @IBOutlet weak var CancelFoodButton: UIButton!
+    @IBOutlet weak var SearchTextField: UITextField!
+    @IBOutlet weak var SearchLabel: UILabel!
+    
     @IBOutlet weak var ShadowViewLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var ShadowViewRightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var SearchWidthConstraint: NSLayoutConstraint!
     
     var SelectedCategory = [Bool]()
     var SelectedMeal = [Bool]()
@@ -84,6 +94,7 @@ class ViewController: UIViewController {
     var FoodFavoriteButtonOutletList = [UIButton]()
     var CurrentPage = 1
     var TotalPage = 0
+    var searchFoodName = ""
     
     override func viewWillAppear(_ animated: Bool) {
         ShadowViewLeftConstraint.constant += view.bounds.width
@@ -265,6 +276,11 @@ class ViewController: UIViewController {
         FirstPageButton.layer.borderColor = UIColor.lightGray.cgColor
         PrevPageButton.layer.borderWidth = 1
         PrevPageButton.layer.borderColor = UIColor.lightGray.cgColor
+        
+        //Bo tron goc cho khung tim kiem
+        SearchLabel.layer.cornerRadius = 22
+        SearchLabel.layer.borderWidth = 0.2
+        SearchLabel.layer.masksToBounds = true
     }
     
     @IBAction func act_ClickFoodButton(_ sender: Any) {
@@ -388,6 +404,64 @@ class ViewController: UIViewController {
         self.present(myPopUp, animated: true, completion: nil)
     }
     
+    @IBAction func act_OpenSearchFoodBox(_ sender: Any) {
+        //Vo hieu tieu de va hai nut menu, tim kiem
+        MenuButton.isHidden = true
+        MenuButton.isEnabled = false
+        HomeLabel.isHidden = true
+        HomeLabel.isEnabled = false
+        SearchButton.isHidden = true
+        SearchButton.isEnabled = false
+        
+        //Hien thi khung tim kiem
+        SearchLabel.isHidden = false
+        SearchTextField.text = ""
+        SearchTextField.isHidden = false
+        SearchTextField.isEnabled = true
+        SearchFoodButton.isHidden = false
+        SearchFoodButton.isEnabled = true
+        CancelFoodButton.isHidden = false
+        CancelFoodButton.isEnabled = true
+        //Animation xuat hien khung tim kiem
+        SearchWidthConstraint.constant += 300
+        UIView.animate(withDuration: 1,
+                       delay: 0,
+                     animations: {
+                        [weak self] in
+                        self?.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    @IBAction func act_SearchFood(_ sender: Any) {
+        //Lay chuoi trong khung tim kiem
+        let name = SearchTextField.text!
+        //Bo dau trong chuoi
+        searchFoodName = name.folding(options: .diacriticInsensitive, locale: .current)
+        UpdateFoodList()
+    }
+    
+    @IBAction func act_CloseSearchBox(_ sender: Any) {
+        self.searchFoodName = ""
+        //An khung tim kiem
+        self.SearchLabel.isHidden = true
+        self.SearchTextField.isHidden = true
+        self.SearchTextField.isEnabled = false
+        self.SearchFoodButton.isHidden = true
+        self.SearchFoodButton.isEnabled = false
+        self.CancelFoodButton.isHidden = true
+        self.CancelFoodButton.isEnabled = false
+        //Active tieu de va hai nut menu, tim kiem
+        self.MenuButton.isHidden = false
+        self.MenuButton.isEnabled = true
+        self.HomeLabel.isHidden = false
+        self.HomeLabel.isEnabled = true
+        self.SearchButton.isHidden = false
+        self.SearchButton.isEnabled = true
+        //Thu nho thanh tim kiem
+        self.SearchWidthConstraint.constant -= 300
+        UpdateFoodList()
+    }
+    
     //Thay doi trang thai cua cac nut phan trang
     func ChangButtonState(_ button: UIButton, _ isActive: Bool) {
         button.isEnabled = isActive
@@ -450,6 +524,13 @@ class ViewController: UIViewController {
                                 check += 1
                                 break
                             }
+                        }
+                    }
+                    
+                    if let name = food["Name"] as? NSString {
+                        let unicodeName = name.folding(options: .diacriticInsensitive, locale: .current)
+                        if (self.searchFoodName != "" && unicodeName.contains(self.searchFoodName) == false) {
+                            continue
                         }
                     }
                     
