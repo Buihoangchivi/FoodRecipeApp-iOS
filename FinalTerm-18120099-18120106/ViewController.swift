@@ -437,6 +437,8 @@ class ViewController: UIViewController {
         let name = SearchTextField.text!
         //Bo dau trong chuoi
         searchFoodName = name.folding(options: .diacriticInsensitive, locale: .current)
+        //Viet thuong ten tim kiem
+        searchFoodName = searchFoodName.lowercased()
         UpdateFoodList()
     }
     
@@ -529,7 +531,7 @@ class ViewController: UIViewController {
                     
                     if let name = food["Name"] as? NSString {
                         let unicodeName = name.folding(options: .diacriticInsensitive, locale: .current)
-                        if (self.searchFoodName != "" && unicodeName.contains(self.searchFoodName) == false) {
+                        if (self.searchFoodName != "" && unicodeName.lowercased().contains(self.searchFoodName) == false) {
                             continue
                         }
                     }
