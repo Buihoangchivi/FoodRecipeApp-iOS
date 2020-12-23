@@ -82,6 +82,7 @@
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22"/>
                                         </state>
                                         <connections>
+                                            <action selector="act_OpenSearchFoodBox:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oeN-ua-4ha"/>
                                             <action selector="act_ShowSearch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="p7e-YQ-HyL"/>
                                         </connections>
                                     </button>
@@ -140,11 +141,44 @@
                                         </connections>
                                     </collectionView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TRANG CHỦ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DwN-6y-pf5">
-                                        <rect key="frame" x="141.33333333333337" y="48" width="131.66666666666663" height="28"/>
+                                        <rect key="frame" x="141" y="48" width="132" height="28"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="23"/>
                                         <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mQ6-U2-cVi">
+                                        <rect key="frame" x="315" y="40" width="84" height="45"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="PPg-2x-sMS"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Hôm nay ăn gì" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WGa-VV-VH9">
+                                        <rect key="frame" x="330" y="43.666666666666664" width="0.0" height="37.999999999999993"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="38" id="7AT-nU-6aq"/>
+                                            <constraint firstAttribute="width" id="dHb-Y5-JIR"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sih-xk-dOi">
+                                        <rect key="frame" x="364" y="47.666666666666664" width="25" height="29.999999999999993"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="Yw4-nf-Utt"/>
+                                            <constraint firstAttribute="width" constant="25" id="gfh-wP-lKQ"/>
+                                        </constraints>
+                                        <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" image="xmark" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="act_CloseSearchBox:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XLX-7L-Och"/>
+                                        </connections>
+                                    </button>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gh9-49-OQN">
                                         <rect key="frame" x="0.0" y="150" width="414" height="50"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -591,12 +625,27 @@
                                             <action selector="act_ChangeCurrentPageButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iSD-zG-G3O"/>
                                         </connections>
                                     </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGi-aW-x44">
+                                        <rect key="frame" x="334" y="47.666666666666664" width="25" height="29.999999999999993"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="25" id="8gV-nP-Jwt"/>
+                                            <constraint firstAttribute="height" constant="30" id="siF-uM-2nz"/>
+                                        </constraints>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="magnifyingglass" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="act_SearchFood:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GCN-Sx-Wh0"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstItem="r9R-bA-eYU" firstAttribute="top" secondItem="q9g-Vc-wGH" secondAttribute="bottom" constant="25" id="0f5-Ad-RRt"/>
                                     <constraint firstItem="q9g-Vc-wGH" firstAttribute="top" secondItem="gh9-49-OQN" secondAttribute="bottom" constant="15" id="33G-km-hVe"/>
                                     <constraint firstItem="k6B-gd-yw3" firstAttribute="leading" secondItem="0pL-xj-j3i" secondAttribute="trailing" constant="10" id="4bR-gY-gTh"/>
+                                    <constraint firstItem="sih-xk-dOi" firstAttribute="centerY" secondItem="mQ6-U2-cVi" secondAttribute="centerY" id="5YG-XF-Qi1"/>
                                     <constraint firstItem="0pL-xj-j3i" firstAttribute="top" secondItem="q9g-Vc-wGH" secondAttribute="bottom" constant="25" id="6Vj-IS-yXp"/>
                                     <constraint firstItem="k6B-gd-yw3" firstAttribute="top" secondItem="q9g-Vc-wGH" secondAttribute="bottom" constant="25" id="783-dd-wA5"/>
                                     <constraint firstItem="gh9-49-OQN" firstAttribute="leading" secondItem="fyw-fn-LyH" secondAttribute="leading" id="9Oe-jo-taZ"/>
@@ -605,27 +654,35 @@
                                     <constraint firstItem="qil-us-ws3" firstAttribute="leading" secondItem="fyw-fn-LyH" secondAttribute="leading" id="DuE-9U-d4e"/>
                                     <constraint firstItem="FaJ-Wu-Xib" firstAttribute="leading" secondItem="fyw-fn-LyH" secondAttribute="leading" constant="20" id="FES-D1-h4b"/>
                                     <constraint firstItem="k6B-gd-yw3" firstAttribute="centerX" secondItem="fyw-fn-LyH" secondAttribute="centerX" id="FjB-N0-bMn"/>
+                                    <constraint firstItem="WGa-VV-VH9" firstAttribute="centerY" secondItem="mQ6-U2-cVi" secondAttribute="centerY" id="J6r-yr-aoY"/>
+                                    <constraint firstItem="bGi-aW-x44" firstAttribute="centerY" secondItem="mQ6-U2-cVi" secondAttribute="centerY" id="Lfq-OM-VHX"/>
                                     <constraint firstItem="r9R-bA-eYU" firstAttribute="leading" secondItem="5ll-Te-DIv" secondAttribute="trailing" constant="10" id="MFw-dD-zpk"/>
                                     <constraint firstItem="5ll-Te-DIv" firstAttribute="leading" secondItem="0pL-xj-j3i" secondAttribute="trailing" constant="10" id="N8K-aD-Yq0"/>
                                     <constraint firstItem="XCg-98-eTg" firstAttribute="top" secondItem="q9g-Vc-wGH" secondAttribute="bottom" constant="25" id="OHi-CW-OrD"/>
                                     <constraint firstAttribute="trailing" secondItem="q9g-Vc-wGH" secondAttribute="trailing" constant="15" id="PNr-HE-O4t"/>
                                     <constraint firstItem="fcU-aO-FQM" firstAttribute="top" secondItem="fyw-fn-LyH" secondAttribute="top" id="QIK-UN-SVp"/>
+                                    <constraint firstItem="mQ6-U2-cVi" firstAttribute="trailing" secondItem="sih-xk-dOi" secondAttribute="trailing" constant="10" id="RUy-hW-DrK"/>
                                     <constraint firstAttribute="trailing" secondItem="fcU-aO-FQM" secondAttribute="trailing" id="Sws-yE-aou"/>
                                     <constraint firstItem="FaJ-Wu-Xib" firstAttribute="top" secondItem="fyw-fn-LyH" secondAttribute="top" constant="45" id="U0d-gF-YuU"/>
                                     <constraint firstAttribute="trailing" secondItem="gh9-49-OQN" secondAttribute="trailing" id="UiN-55-50s"/>
                                     <constraint firstItem="28l-x5-fvl" firstAttribute="top" secondItem="q9g-Vc-wGH" secondAttribute="bottom" constant="25" id="VLc-3h-e5A"/>
                                     <constraint firstItem="5ll-Te-DIv" firstAttribute="top" secondItem="q9g-Vc-wGH" secondAttribute="bottom" constant="25" id="WjC-x8-PQz"/>
                                     <constraint firstAttribute="bottom" secondItem="28l-x5-fvl" secondAttribute="bottom" constant="2" id="X9Z-jx-fKi"/>
+                                    <constraint firstItem="WGa-VV-VH9" firstAttribute="leading" secondItem="mQ6-U2-cVi" secondAttribute="leading" constant="15" id="ZWG-QM-IAW"/>
+                                    <constraint firstItem="mQ6-U2-cVi" firstAttribute="top" secondItem="fyw-fn-LyH" secondAttribute="top" constant="40" id="b1a-i8-y8l"/>
                                     <constraint firstItem="28l-x5-fvl" firstAttribute="leading" secondItem="r9R-bA-eYU" secondAttribute="trailing" constant="10" id="btE-FJ-Cot"/>
                                     <constraint firstItem="gh9-49-OQN" firstAttribute="top" secondItem="qil-us-ws3" secondAttribute="bottom" id="czv-8w-Byr"/>
                                     <constraint firstItem="fzt-Dd-AqQ" firstAttribute="top" secondItem="fyw-fn-LyH" secondAttribute="top" constant="45" id="fXi-hx-eUR"/>
+                                    <constraint firstItem="bGi-aW-x44" firstAttribute="leading" secondItem="WGa-VV-VH9" secondAttribute="trailing" constant="4" id="fqh-7W-H1Q"/>
                                     <constraint firstItem="DwN-6y-pf5" firstAttribute="top" secondItem="fyw-fn-LyH" secondAttribute="top" constant="48" id="gqe-Yb-mYf"/>
+                                    <constraint firstItem="sih-xk-dOi" firstAttribute="leading" secondItem="bGi-aW-x44" secondAttribute="trailing" constant="5" id="iPk-4r-dSY"/>
                                     <constraint firstItem="q9g-Vc-wGH" firstAttribute="leading" secondItem="fyw-fn-LyH" secondAttribute="leading" constant="15" id="mHC-cn-94M"/>
                                     <constraint firstAttribute="trailing" secondItem="qil-us-ws3" secondAttribute="trailing" id="nFR-8Q-rJb"/>
                                     <constraint firstItem="DwN-6y-pf5" firstAttribute="centerX" secondItem="fyw-fn-LyH" secondAttribute="centerX" id="qDd-NP-ZWG"/>
                                     <constraint firstItem="qil-us-ws3" firstAttribute="top" secondItem="fcU-aO-FQM" secondAttribute="bottom" constant="10" id="vnT-wv-IdE"/>
                                     <constraint firstItem="0pL-xj-j3i" firstAttribute="leading" secondItem="XCg-98-eTg" secondAttribute="trailing" constant="10" id="wrU-t6-ezr"/>
                                     <constraint firstAttribute="trailing" secondItem="fzt-Dd-AqQ" secondAttribute="trailing" constant="20" id="ybr-wC-dEA"/>
+                                    <constraint firstAttribute="trailing" secondItem="mQ6-U2-cVi" secondAttribute="trailing" constant="15" id="zLK-nZ-b5D"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -647,6 +704,7 @@
                     </view>
                     <connections>
                         <outlet property="AddButton" destination="aFq-pi-ivQ" id="Wb0-Je-VdA"/>
+                        <outlet property="CancelFoodButton" destination="sih-xk-dOi" id="Ca6-Nf-yft"/>
                         <outlet property="CategoryCollectionView" destination="qil-us-ws3" id="K8a-QE-Udg"/>
                         <outlet property="ChangeCurrentPageButton" destination="5ll-Te-DIv" id="f4Y-I7-peh"/>
                         <outlet property="CurrentPageLabel" destination="k6B-gd-yw3" id="ern-xs-igl"/>
@@ -677,11 +735,18 @@
                         <outlet property="FoodName5" destination="rnG-ox-1Qh" id="PmZ-U6-SAb"/>
                         <outlet property="FoodView" destination="uwN-03-9OB" id="VA7-aA-nxs"/>
                         <outlet property="HomeButton" destination="32h-kz-dVV" id="m2B-nn-S9h"/>
+                        <outlet property="HomeLabel" destination="DwN-6y-pf5" id="5wG-vP-b3t"/>
                         <outlet property="HomeView" destination="fyw-fn-LyH" id="iSu-lo-YQj"/>
                         <outlet property="LastPageButton" destination="28l-x5-fvl" id="yWQ-y2-Ra3"/>
                         <outlet property="MealCollectionView" destination="gh9-49-OQN" id="bjw-3z-ePW"/>
+                        <outlet property="MenuButton" destination="FaJ-Wu-Xib" id="IFO-cX-odp"/>
                         <outlet property="NextPageButton" destination="r9R-bA-eYU" id="dfo-4M-mbT"/>
                         <outlet property="PrevPageButton" destination="0pL-xj-j3i" id="Mhw-b6-drv"/>
+                        <outlet property="SearchButton" destination="fzt-Dd-AqQ" id="MQ0-W0-N7U"/>
+                        <outlet property="SearchFoodButton" destination="bGi-aW-x44" id="riC-Mh-l9Q"/>
+                        <outlet property="SearchLabel" destination="mQ6-U2-cVi" id="boZ-Mg-Hmq"/>
+                        <outlet property="SearchTextField" destination="WGa-VV-VH9" id="vqq-ay-bYu"/>
+                        <outlet property="SearchWidthConstraint" destination="dHb-Y5-JIR" id="mBx-fW-Hxn"/>
                         <outlet property="ShadowView" destination="q9g-Vc-wGH" id="Ufg-Fv-D1p"/>
                         <outlet property="ShadowViewLeftConstraint" destination="mHC-cn-94M" id="cHk-ks-ZBI"/>
                         <outlet property="ShadowViewRightConstraint" destination="PNr-HE-O4t" id="2YS-gl-3cN"/>
@@ -3062,6 +3127,7 @@
         <image name="plus.app" catalog="system" width="64" height="56"/>
         <image name="plus.circle.fill" catalog="system" width="64" height="60"/>
         <image name="square.and.pencil" catalog="system" width="64" height="58"/>
+        <image name="xmark" catalog="system" width="64" height="56"/>
         <image name="xmark.rectangle" catalog="system" width="64" height="46"/>
     </resources>
 </document>
