@@ -446,24 +446,24 @@ class ViewController: UIViewController {
     }
     
     @IBAction func act_CloseSearchBox(_ sender: Any) {
-        self.searchFoodName = ""
+        searchFoodName = ""
         //An khung tim kiem
-        self.SearchLabel.isHidden = true
-        self.SearchTextField.isHidden = true
-        self.SearchTextField.isEnabled = false
-        self.SearchFoodButton.isHidden = true
-        self.SearchFoodButton.isEnabled = false
-        self.CancelFoodButton.isHidden = true
-        self.CancelFoodButton.isEnabled = false
+        SearchLabel.isHidden = true
+        SearchTextField.isHidden = true
+        SearchTextField.isEnabled = false
+        SearchFoodButton.isHidden = true
+        SearchFoodButton.isEnabled = false
+        CancelFoodButton.isHidden = true
+        CancelFoodButton.isEnabled = false
         //Active tieu de va hai nut menu, tim kiem
-        self.MenuButton.isHidden = false
-        self.MenuButton.isEnabled = true
-        self.HomeLabel.isHidden = false
-        self.HomeLabel.isEnabled = true
-        self.SearchButton.isHidden = false
-        self.SearchButton.isEnabled = true
+        MenuButton.isHidden = false
+        MenuButton.isEnabled = true
+        HomeLabel.isHidden = false
+        HomeLabel.isEnabled = true
+        SearchButton.isHidden = false
+        SearchButton.isEnabled = true
         //Thu nho thanh tim kiem
-        self.SearchWidthConstraint.constant -= 300
+        SearchWidthConstraint.constant -= 300
         UpdateFoodList()
     }
     
