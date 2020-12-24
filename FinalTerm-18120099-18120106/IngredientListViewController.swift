@@ -20,8 +20,10 @@ class IngredientListViewController: UIViewController {
     @IBOutlet weak var IngredientTableView: UITableView!
     @IBOutlet weak var CancelButton: UIButton!
     @IBOutlet weak var SaveButton: UIButton!
+    @IBOutlet weak var SearchTextField: UITextField!
     
     var IngredientList = [(ID: Int, Name: String, Value: Double, Unit: String)]()
+    var IngredientIndexList = [Int]()
     var SelectedIngredient = [(ID: Int, Name: String, Value: Double, Unit: String)]()
     //0 la khong chinh sua nguyen lieu nao ca
     //1 la nhan nut chinh sua nguyen lieu
@@ -31,6 +33,7 @@ class IngredientListViewController: UIViewController {
     var CurrentEditRow = -1
     var checkClickSave = false
     weak var delegate : IngredientDelegate?
+    var searchFoodName = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +75,7 @@ class IngredientListViewController: UIViewController {
                     }
                 }
             }
-            self.IngredientTableView.reloadData()
+            self.ReloadData()
         })
     }
 
@@ -88,16 +91,45 @@ class IngredientListViewController: UIViewController {
     @IBAction func act_EditIngredient(_ sender: Any) {
         ButtonState = 1
         CurrentEditRow = (sender as! UIButton).tag
-        IngredientTableView.reloadData()
+        ReloadData()
     }
     
     @IBAction func act_CancelIngredient(_ sender: Any) {
         ButtonState = 2
-        IngredientTableView.reloadData()
+        ReloadData()
     }
     
     @IBAction func act_SaveIngredient(_ sender: Any) {
         ButtonState = 3
+        ReloadData()
+    }
+    
+    @IBAction func act_SearchIngredient(_ sender: Any) {
+        //Lay chuoi trong khung tim kiem
+        let name = SearchTextField.text!
+        //Bo dau trong chuoi
+        searchFoodName = name.folding(options: .diacriticInsensitive, locale: .current)
+        //Viet thuong ten tim kiem
+        searchFoodName = searchFoodName.lowercased()
+        ReloadData()
+    }
+    
+    @IBAction func act_DeleteSearch(_ sender: Any) {
+        //Xoa chu trong khung tim kiem
+        searchFoodName = ""
+        SearchTextField.text = ""
+        ReloadData()
+    }
+    
+    func ReloadData() {
+        //Reset mang chi so
+        IngredientIndexList = [Int]()
+        for index in 0..<IngredientList.count {
+            //Neu ten nguyen lieu co chi so index chua chuoi can tim thi them vao list
+            if (CheckIfStringContainSubstring(IngredientList[index].Name, searchFoodName) == true) {
+                IngredientIndexList += [index]
+            }
+        }
         IngredientTableView.reloadData()
     }
     
@@ -106,13 +138,20 @@ class IngredientListViewController: UIViewController {
 extension IngredientListViewController : UITableViewDataSource, UITableViewDelegate {
     //So dong
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return IngredientList.count
+        return IngredientIndexList.count
     }
     
     //Cai dat, hien thi du lieu 1 dong
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = IngredientTableView.dequeueReusableCell(withIdentifier: "IngredientCell", for: indexPath) as! IngredientTableViewCell
+        let index = IngredientIndexList[indexPath.row]
         
+        //Kiem tra xem ten nguyen lieu co chua text trong khung tim kiem hay khong
+        //print(searchFoodName)
+        //print(unicodeName.lowercased())
+        //print(unicodeName.lowercased().contains(searchFoodName))
+        //print(unicodeName.lowercased())
+        //print("\n\n")
         //Dinh nghia tag va target cho cac nut chinh sua nguyen lieu
         cell.EditIngredientButton.tag = indexPath.row
         cell.EditIngredientButton.addTarget(self, action: #selector(act_EditIngredient), for: .touchUpInside)
@@ -157,12 +196,12 @@ extension IngredientListViewController : UITableViewDataSource, UITableViewDeleg
                 
                 //Nhan nut Cancel
                 if (ButtonState == 2) {
-                    
+                    //Do nothing
                 }
                 else { //Nhan nut Save
-                    if let temp = Double(cell.IngredientNumberTextField.text!) { IngredientList[indexPath.row].Value = temp
+                    if let temp = Double(cell.IngredientNumberTextField.text!) { IngredientList[index].Value = temp
                         //Truyen du lieu gia tri vua thay doi cua nguyen lieu
-                        let ingre = IngredientList[indexPath.row]
+                        let ingre = IngredientList[index]
                         delegate?.UpdateIngredient(ingredient: (ID: ingre.ID, Name: ingre.Name, Value: temp, Unit: ingre.Unit))
                     }
                 }
@@ -190,17 +229,17 @@ extension IngredientListViewController : UITableViewDataSource, UITableViewDeleg
         }
         
         //Hien thi ten nguyen lieu
-        cell.IngredientNameLabel.text = IngredientList[indexPath.row].Name
+        cell.IngredientNameLabel.text = IngredientList[index].Name
         //Hien thi gia tri cua nguyen lieu
         //So thuc
-        if (Double(Int(IngredientList[indexPath.row].Value)) != IngredientList[indexPath.row].Value) {
-            cell.IngredientNumberTextField.text = String(IngredientList[indexPath.row].Value)
+        if (Double(Int(IngredientList[index].Value)) != IngredientList[index].Value) {
+            cell.IngredientNumberTextField.text = String(IngredientList[index].Value)
         }
         else { //So nguyen
-            cell.IngredientNumberTextField.text = String(Int(IngredientList[indexPath.row].Value))
+            cell.IngredientNumberTextField.text = String(Int(IngredientList[index].Value))
         }
         //Hien thi don vi cua nguyen lieu
-        cell.IngredientUnitLabel.text = IngredientList[indexPath.row].Unit
+        cell.IngredientUnitLabel.text = IngredientList[index].Unit
         
         return cell
     }
