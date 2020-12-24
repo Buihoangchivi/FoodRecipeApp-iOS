@@ -22,6 +22,16 @@ let foodInfoRef = Database.database().reference()
 let CategoryList = ["Thịt heo", "Thịt bò", "Thịt gà", "Hải sản", "Cá", "Bánh", "Trái cây", "Ăn chay", "Giảm cân", "Chiên xào", "Món canh", "Món nướng", "Món kho", "Món nhậu", "Tiết kiệm", "Ngày lễ, tết", "Khác"]
 let MealList = ["Bữa sáng", "Bữa trưa", "Bữa tối", "Bữa phụ", "Khác"]
 
+func CheckIfStringContainSubstring(_ str: String, _ sub: String) -> Bool {
+    var result = true
+    let unicodeName = str.folding(options: .diacriticInsensitive, locale: .current)
+    let unicodeSubName = sub.folding(options: .diacriticInsensitive, locale: .current)
+    if (sub != "") {
+        result = unicodeName.lowercased().contains(unicodeSubName.lowercased())
+    }
+    return result
+}
+
 class ViewController: UIViewController {
 
     @IBOutlet weak var HomeButton: UIButton!
@@ -372,9 +382,6 @@ class ViewController: UIViewController {
         self.present(myPopUp, animated: true, completion: nil)
     }
     
-    @IBAction func act_ShowSearch(_ sender: Any) {
-    }
-    
     @IBAction func act_ChangeFavoriteStatus(_ sender: Any) {
         let button = sender as! UIButton
         let index = button.restorationIdentifier!.last!.hexDigitValue!
@@ -434,11 +441,7 @@ class ViewController: UIViewController {
     
     @IBAction func act_SearchFood(_ sender: Any) {
         //Lay chuoi trong khung tim kiem
-        let name = SearchTextField.text!
-        //Bo dau trong chuoi
-        searchFoodName = name.folding(options: .diacriticInsensitive, locale: .current)
-        //Viet thuong ten tim kiem
-        searchFoodName = searchFoodName.lowercased()
+        searchFoodName = SearchTextField.text!
         UpdateFoodList()
     }
     
@@ -530,8 +533,7 @@ class ViewController: UIViewController {
                     }
                     
                     if let name = food["Name"] as? NSString {
-                        let unicodeName = name.folding(options: .diacriticInsensitive, locale: .current)
-                        if (self.searchFoodName != "" && unicodeName.lowercased().contains(self.searchFoodName) == false) {
+                        if (CheckIfStringContainSubstring(name as String, self.searchFoodName) == false) {
                             continue
                         }
                     }
