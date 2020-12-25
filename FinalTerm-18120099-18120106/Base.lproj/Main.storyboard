@@ -162,7 +162,7 @@
                                             <constraint firstAttribute="width" id="dHb-Y5-JIR"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                     </textField>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sih-xk-dOi">
                                         <rect key="frame" x="364" y="47.666666666666664" width="25" height="29.999999999999993"/>
@@ -1299,7 +1299,7 @@
                                     <constraint firstAttribute="height" constant="38" id="zhp-3Y-ZOG"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l2O-6Q-pbX">
                                 <rect key="frame" x="328" y="127.66666666666669" width="30" height="30"/>
@@ -3132,7 +3132,7 @@
                                     <constraint firstAttribute="height" constant="38" id="yoo-83-xXq"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uN1-IN-Eq3">
                                 <rect key="frame" x="364" y="45.666666666666664" width="25" height="29.999999999999993"/>

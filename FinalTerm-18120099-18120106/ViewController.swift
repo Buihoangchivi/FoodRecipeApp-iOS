@@ -24,9 +24,13 @@ let MealList = ["Bữa sáng", "Bữa trưa", "Bữa tối", "Bữa phụ", "Kh�
 
 func CheckIfStringContainSubstring(_ str: String, _ sub: String) -> Bool {
     var result = true
-    let unicodeName = str.folding(options: .diacriticInsensitive, locale: .current)
-    let unicodeSubName = sub.folding(options: .diacriticInsensitive, locale: .current)
-    if (sub != "") {
+    //Chuyen thanh chuoi ASCII va xoa ki tu khoang trang trong chuoi
+    let unicodeName = str.folding(options: .diacriticInsensitive, locale: .current).replacingOccurrences(of: " ", with: "")
+    let unicodeSubName = sub.folding(options: .diacriticInsensitive, locale: .current).replacingOccurrences(of: " ", with: "")
+    
+    //Neu chuoi can tim kiem khac rong thi kiem tra
+    if (unicodeSubName != "") {
+        //Chuyen ki tu thanh chu thuong va kiem tra
         result = unicodeName.lowercased().contains(unicodeSubName.lowercased())
     }
     return result
