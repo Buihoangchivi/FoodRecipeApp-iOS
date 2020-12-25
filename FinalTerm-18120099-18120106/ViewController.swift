@@ -36,6 +36,16 @@ func CheckIfStringContainSubstring(_ str: String, _ sub: String) -> Bool {
     return result
 }
 
+func AttributedStringWithColor(_ mainString: String, _ strings: [String], color: UIColor) -> NSAttributedString {
+    let attributedString = NSMutableAttributedString(string: mainString)
+    for string in strings {
+        let range = (mainString as NSString).range(of: string)
+        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
+    }
+
+    return attributedString
+}
+
 class ViewController: UIViewController {
 
     @IBOutlet weak var HomeButton: UIButton!
@@ -416,9 +426,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func act_OpenSearchFoodBox(_ sender: Any) {
-        //Vo hieu tieu de va hai nut menu, tim kiem
-        MenuButton.isHidden = true
-        MenuButton.isEnabled = false
+        //Vo hieu tieu de va nut tim kiem
         HomeLabel.isHidden = true
         HomeLabel.isEnabled = false
         SearchButton.isHidden = true
@@ -434,7 +442,7 @@ class ViewController: UIViewController {
         CancelFoodButton.isHidden = false
         CancelFoodButton.isEnabled = true
         //Animation xuat hien khung tim kiem
-        SearchWidthConstraint.constant += 300
+        SearchWidthConstraint.constant += 260
         UIView.animate(withDuration: 1,
                        delay: 0,
                      animations: {
@@ -459,15 +467,13 @@ class ViewController: UIViewController {
         SearchFoodButton.isEnabled = false
         CancelFoodButton.isHidden = true
         CancelFoodButton.isEnabled = false
-        //Active tieu de va hai nut menu, tim kiem
-        MenuButton.isHidden = false
-        MenuButton.isEnabled = true
+        //Active tieu de va nut tim kiem
         HomeLabel.isHidden = false
         HomeLabel.isEnabled = true
         SearchButton.isHidden = false
         SearchButton.isEnabled = true
         //Thu nho thanh tim kiem
-        SearchWidthConstraint.constant -= 300
+        SearchWidthConstraint.constant -= 260
         UpdateFoodList()
     }
     
@@ -614,7 +620,8 @@ class ViewController: UIViewController {
                 //Hien thi hinh anh mon an
                 self.FoodImageOutletList[i].sd_setImage(with: imageRef.child("/FoodImages/\(food["Image"]!)"), maxImageSize: 1 << 30, placeholderImage: UIImage(named: "food-background"), options: .retryFailed, completion: nil)
                 //Hien thi ten mon an
-                self.FoodNameOutletList[i].text = "\(food["Name"]!)"
+                //self.FoodNameOutletList[i].text = "\(food["Name"]!)"
+                self.FoodNameOutletList[i].attributedText = AttributedStringWithColor("\(food["Name"]!)", [self.searchFoodName], color: UIColor.link)
                 
                 //Hien thi trang thai yeu thich cua mon an
                 //Yeu thich
