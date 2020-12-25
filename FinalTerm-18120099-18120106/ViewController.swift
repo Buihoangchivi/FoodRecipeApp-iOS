@@ -24,9 +24,13 @@ let MealList = ["Bữa sáng", "Bữa trưa", "Bữa tối", "Bữa phụ", "Kh�
 
 func CheckIfStringContainSubstring(_ str: String, _ sub: String) -> Bool {
     var result = true
-    let unicodeName = str.folding(options: .diacriticInsensitive, locale: .current)
-    let unicodeSubName = sub.folding(options: .diacriticInsensitive, locale: .current)
-    if (sub != "") {
+    //Chuyen thanh chuoi ASCII va xoa ki tu khoang trang trong chuoi
+    let unicodeName = str.folding(options: .diacriticInsensitive, locale: .current).replacingOccurrences(of: " ", with: "")
+    let unicodeSubName = sub.folding(options: .diacriticInsensitive, locale: .current).replacingOccurrences(of: " ", with: "")
+    
+    //Neu chuoi can tim kiem khac rong thi kiem tra
+    if (unicodeSubName != "") {
+        //Chuyen ki tu thanh chu thuong va kiem tra
         result = unicodeName.lowercased().contains(unicodeSubName.lowercased())
     }
     return result
@@ -446,24 +450,24 @@ class ViewController: UIViewController {
     }
     
     @IBAction func act_CloseSearchBox(_ sender: Any) {
-        self.searchFoodName = ""
+        searchFoodName = ""
         //An khung tim kiem
-        self.SearchLabel.isHidden = true
-        self.SearchTextField.isHidden = true
-        self.SearchTextField.isEnabled = false
-        self.SearchFoodButton.isHidden = true
-        self.SearchFoodButton.isEnabled = false
-        self.CancelFoodButton.isHidden = true
-        self.CancelFoodButton.isEnabled = false
+        SearchLabel.isHidden = true
+        SearchTextField.isHidden = true
+        SearchTextField.isEnabled = false
+        SearchFoodButton.isHidden = true
+        SearchFoodButton.isEnabled = false
+        CancelFoodButton.isHidden = true
+        CancelFoodButton.isEnabled = false
         //Active tieu de va hai nut menu, tim kiem
-        self.MenuButton.isHidden = false
-        self.MenuButton.isEnabled = true
-        self.HomeLabel.isHidden = false
-        self.HomeLabel.isEnabled = true
-        self.SearchButton.isHidden = false
-        self.SearchButton.isEnabled = true
+        MenuButton.isHidden = false
+        MenuButton.isEnabled = true
+        HomeLabel.isHidden = false
+        HomeLabel.isEnabled = true
+        SearchButton.isHidden = false
+        SearchButton.isEnabled = true
         //Thu nho thanh tim kiem
-        self.SearchWidthConstraint.constant -= 300
+        SearchWidthConstraint.constant -= 300
         UpdateFoodList()
     }
     
