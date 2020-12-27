@@ -770,7 +770,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b23-na-LYR">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                         <connections>
-                                            <action selector="act_PopUpBackgroundButton:" destination="muN-6l-Ya4" eventType="touchUpInside" id="pqX-va-tIL"/>
+                                            <action selector="act_ClosePopUp:" destination="muN-6l-Ya4" eventType="touchUpInside" id="N4w-Hu-DrO"/>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rTn-YT-LHf">
@@ -2233,7 +2233,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dDp-pH-l6H">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                         <connections>
-                                            <action selector="act_PopUpBackgroundButton:" destination="ecj-lJ-DuY" eventType="touchUpInside" id="p5X-Th-Ru5"/>
+                                            <action selector="act_CancelChange:" destination="ecj-lJ-DuY" eventType="touchUpInside" id="Q5d-v2-oWO"/>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X4i-Eh-NmI">
