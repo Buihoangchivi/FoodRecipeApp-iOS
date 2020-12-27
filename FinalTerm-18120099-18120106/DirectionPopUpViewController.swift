@@ -67,8 +67,7 @@ class DirectionPopUpViewController: UIViewController {
     }
     
     @IBAction func act_PopUpBackgroundButton(_ sender: Any) {
-        delegate?.DirectionProcess(index: -1, content: "")
-        self.dismiss(animated: true, completion: nil)
+        act_CancelChange(sender)
     }
     
     @IBAction func act_CancelChange(_ sender: Any) {

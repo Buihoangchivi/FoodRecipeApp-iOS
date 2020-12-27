@@ -229,7 +229,8 @@ extension IngredientListViewController : UITableViewDataSource, UITableViewDeleg
         }
         
         //Hien thi ten nguyen lieu
-        cell.IngredientNameLabel.text = IngredientList[index].Name
+        cell.IngredientNameLabel.attributedText = AttributedStringWithColor(IngredientList[index].Name, searchFoodName, color: UIColor.link)
+        
         //Hien thi gia tri cua nguyen lieu
         //So thuc
         if (Double(Int(IngredientList[index].Value)) != IngredientList[index].Value) {

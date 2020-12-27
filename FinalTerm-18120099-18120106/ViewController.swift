@@ -677,7 +677,6 @@ class ViewController: UIViewController {
                 //Hien thi hinh anh mon an
                 self.FoodImageOutletList[i].sd_setImage(with: imageRef.child("/FoodImages/\(food["Image"]!)"), maxImageSize: 1 << 30, placeholderImage: UIImage(named: "food-background"), options: .retryFailed, completion: nil)
                 //Hien thi ten mon an
-                //self.FoodNameOutletList[i].text = "\(food["Name"]!)"
                 self.FoodNameOutletList[i].attributedText = AttributedStringWithColor("\(food["Name"]!)", self.searchFoodName, color: UIColor.link)
                 
                 //Hien thi trang thai yeu thich cua mon an
