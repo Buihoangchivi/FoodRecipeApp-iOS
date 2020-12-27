@@ -24,7 +24,11 @@ let MealList = ["Bữa sáng", "Bữa trưa", "Bữa tối", "Bữa phụ", "Kh�
 
 //Chuyen thanh chuoi ASCII va xoa ki tu khoang trang trong chuoi
 func GetCustomizedString(_ string: String) -> String {
-    return string.folding(options: .diacriticInsensitive, locale: .current).replacingOccurrences(of: " ", with: "").lowercased()
+    var result = string.folding(options: .diacriticInsensitive, locale: .current)
+    result = result.replacingOccurrences(of: " ", with: "").lowercased()
+    //Chuyen thu cong chu đ thanh chu d
+    result = result.replacingOccurrences(of: "đ", with: "d")
+    return result
 }
 
 func CheckIfStringContainSubstring(_ str: String, _ sub: String) -> Bool {
