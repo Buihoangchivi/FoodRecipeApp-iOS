@@ -583,6 +583,7 @@ class ViewController: UIViewController {
                 if let food = temp.value as? [String:AnyObject] {
                     //Kiem tra co thoa loai mon an dang loc hay khong
                     if (food["Category"] != nil) {
+                        print(temp.key)
                         let categoryArray = food["Category"] as! NSArray
                         for i in 0..<categoryArray.count {
                             if (self.SelectedCategory[categoryArray[i] as! Int] == true || isAllCategory == true) {

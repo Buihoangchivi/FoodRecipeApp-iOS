@@ -2398,7 +2398,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqG-yI-gCK">
-                                <rect key="frame" x="20" y="385.66666666666669" width="374" height="0.0"/>
+                                <rect key="frame" x="40" y="385.66666666666669" width="354" height="0.0"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="450" id="BT0-d3-Pgr"/>
                                 </constraints>
@@ -2417,6 +2417,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Lqt-KT-G2h">
+                                <rect key="frame" x="15" y="391.66666666666669" width="10" height="8.6666666666666856"/>
+                                <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="10" id="Dp6-DQ-Ity"/>
+                                    <constraint firstAttribute="height" constant="10" id="y2b-PU-xBJ"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -2433,11 +2441,13 @@
                             <constraint firstItem="VmL-8K-NRc" firstAttribute="top" secondItem="mNY-V3-LDG" secondAttribute="top" id="T80-AL-d2B"/>
                             <constraint firstItem="VmL-8K-NRc" firstAttribute="trailing" secondItem="gv2-fi-04q" secondAttribute="trailing" id="WPy-4V-Fh3"/>
                             <constraint firstItem="VmL-8K-NRc" firstAttribute="leading" secondItem="gv2-fi-04q" secondAttribute="leading" id="dZQ-AG-yOW"/>
-                            <constraint firstItem="aqG-yI-gCK" firstAttribute="leading" secondItem="gv2-fi-04q" secondAttribute="leading" constant="20" id="gN3-fj-JGN"/>
+                            <constraint firstItem="aqG-yI-gCK" firstAttribute="leading" secondItem="gv2-fi-04q" secondAttribute="leading" constant="40" id="gN3-fj-JGN"/>
                             <constraint firstItem="Pq7-tl-Vai" firstAttribute="leading" secondItem="mNY-V3-LDG" secondAttribute="leading" id="ngO-NF-bKH"/>
+                            <constraint firstItem="Lqt-KT-G2h" firstAttribute="leading" secondItem="gv2-fi-04q" secondAttribute="leading" constant="15" id="noF-uQ-koT"/>
                             <constraint firstItem="Gq1-g4-wdm" firstAttribute="leading" secondItem="mNY-V3-LDG" secondAttribute="leading" constant="15" id="t15-aN-tjH"/>
                             <constraint firstItem="gkT-dD-5no" firstAttribute="top" secondItem="gv2-fi-04q" secondAttribute="top" constant="3" id="uab-aP-6SX"/>
                             <constraint firstItem="xRM-yl-Apy" firstAttribute="leading" secondItem="gv2-fi-04q" secondAttribute="leading" constant="15" id="w9e-e4-Pl8"/>
+                            <constraint firstItem="Lqt-KT-G2h" firstAttribute="top" secondItem="Gq1-g4-wdm" secondAttribute="bottom" constant="20" id="zxB-zM-kk0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gv2-fi-04q"/>
                     </view>
