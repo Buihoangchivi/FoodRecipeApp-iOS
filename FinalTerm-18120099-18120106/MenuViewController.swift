@@ -83,6 +83,41 @@ extension MenuViewController : UITableViewDelegate, UITableViewDataSource{
             dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
             self.present(dest, animated: true, completion: nil)
         }
+        if (indexPath.row == 3) {
+            let dest = self.storyboard?.instantiateViewController(identifier: "DetailMenuViewController") as! DetailMenuViewController
+            dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            dest.CategoryID = 16
+            self.present(dest, animated: true, completion: nil)
+        }
+        if (indexPath.row == 4) {
+            let dest = self.storyboard?.instantiateViewController(identifier: "DetailMenuViewController") as! DetailMenuViewController
+            dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            dest.CategoryID = 8
+            self.present(dest, animated: true, completion: nil)
+        }
+        if (indexPath.row == 5) {
+            let dest = self.storyboard?.instantiateViewController(identifier: "DetailMenuViewController") as! DetailMenuViewController
+            dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            dest.CategoryID = 9
+            self.present(dest, animated: true, completion: nil)
+        }
+        if (indexPath.row == 6) {
+            let dest = self.storyboard?.instantiateViewController(identifier: "DetailMenuViewController") as! DetailMenuViewController
+            dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            dest.CategoryID = 6
+            self.present(dest, animated: true, completion: nil)
+        }
+        if (indexPath.row == 7) {
+            let dest = self.storyboard?.instantiateViewController(identifier: "DetailMenuViewController") as! DetailMenuViewController
+            dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            dest.CategoryID = 14
+            self.present(dest, animated: true, completion: nil)
+        }
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
