@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="g7P-tN-PN9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -2345,7 +2345,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bgl-ey-OOB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2536" y="836"/>
+            <point key="canvasLocation" x="2442" y="836"/>
         </scene>
         <!--Tip Detail View Controller-->
         <scene sceneID="3VC-qU-4rg">
@@ -3044,7 +3044,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="srS-XF-x0Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2534.7826086956525" y="138.61607142857142"/>
+            <point key="canvasLocation" x="2442" y="139"/>
         </scene>
         <!--Tip List View Controller-->
         <scene sceneID="9lT-09-Y0n">
@@ -3275,8 +3275,8 @@
                                     <action selector="btnBack:" destination="JTg-gF-WLd" eventType="touchUpInside" id="pK4-aT-Bdh"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mẹo hay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLl-YI-6b9">
-                                <rect key="frame" x="65" y="47" width="329" height="28"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLl-YI-6b9">
+                                <rect key="frame" x="65" y="47" width="329" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="23"/>
                                 <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <nil key="highlightedColor"/>
@@ -3295,7 +3295,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PPl-Bu-Jg5">
                                                     <rect key="frame" x="35" y="10" width="367" height="100"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bW8-Xb-IW3">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bW8-Xb-IW3">
                                                             <rect key="frame" x="90" y="10" width="257" height="80"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                             <nil key="textColor"/>
@@ -3309,12 +3309,12 @@
                                                             </constraints>
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T7Y-3r-keN">
-                                                            <rect key="frame" x="309" y="85" width="30" height="30"/>
+                                                            <rect key="frame" x="312" y="83" width="35" height="35"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="30" id="0Xj-18-0il"/>
-                                                                <constraint firstAttribute="width" constant="30" id="Oh5-af-UD8"/>
+                                                                <constraint firstAttribute="height" constant="35" id="0Xj-18-0il"/>
+                                                                <constraint firstAttribute="width" constant="35" id="Oh5-af-UD8"/>
                                                             </constraints>
-                                                            <state key="normal" title="Button" image="heart" catalog="system">
+                                                            <state key="normal" image="heart" catalog="system">
                                                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
                                                             </state>
@@ -3327,14 +3327,14 @@
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="bW8-Xb-IW3" secondAttribute="bottom" constant="10" id="8E3-kC-Pi0"/>
                                                         <constraint firstAttribute="height" constant="100" id="8cI-rx-P6t"/>
+                                                        <constraint firstAttribute="bottom" secondItem="T7Y-3r-keN" secondAttribute="bottom" constant="-18" id="Dlp-eh-SRC"/>
                                                         <constraint firstItem="bW8-Xb-IW3" firstAttribute="top" secondItem="PPl-Bu-Jg5" secondAttribute="top" constant="10" id="FL5-g8-I9N"/>
                                                         <constraint firstItem="bW8-Xb-IW3" firstAttribute="centerY" secondItem="PPl-Bu-Jg5" secondAttribute="centerY" id="KwZ-I0-5JA"/>
                                                         <constraint firstItem="Hz2-0m-vRt" firstAttribute="centerY" secondItem="PPl-Bu-Jg5" secondAttribute="centerY" id="Q9Y-rD-S6V"/>
                                                         <constraint firstAttribute="trailing" secondItem="bW8-Xb-IW3" secondAttribute="trailing" constant="20" id="Z5A-o8-PWC"/>
                                                         <constraint firstItem="Hz2-0m-vRt" firstAttribute="leading" secondItem="PPl-Bu-Jg5" secondAttribute="leading" constant="-30" id="cmo-Zg-ye7"/>
                                                         <constraint firstItem="bW8-Xb-IW3" firstAttribute="leading" secondItem="Hz2-0m-vRt" secondAttribute="trailing" constant="20" id="coJ-Mt-Hqu"/>
-                                                        <constraint firstAttribute="bottom" secondItem="T7Y-3r-keN" secondAttribute="bottom" constant="-15" id="sa0-i2-cRh"/>
-                                                        <constraint firstAttribute="trailing" secondItem="T7Y-3r-keN" secondAttribute="trailing" constant="28" id="xN7-W3-Ipw"/>
+                                                        <constraint firstAttribute="trailing" secondItem="T7Y-3r-keN" secondAttribute="trailing" constant="20" id="ohf-jB-eUP"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -3388,7 +3388,7 @@
                     <nil key="highlightedColor"/>
                 </label>
             </objects>
-            <point key="canvasLocation" x="-14" y="2172"/>
+            <point key="canvasLocation" x="2442" y="1537"/>
         </scene>
     </scenes>
     <resources>
