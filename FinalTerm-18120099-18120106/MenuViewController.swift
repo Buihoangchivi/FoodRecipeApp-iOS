@@ -12,6 +12,9 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var MenuTBV: UITableView!
     
     @IBOutlet weak var MenuRightConstraint: NSLayoutConstraint!
+    
+    var delegate: ReloadDataDelegate?
+    
     override func viewWillAppear(_ animated: Bool) {
         MenuRightConstraint.constant += view.bounds.width
     }
@@ -48,7 +51,8 @@ class MenuViewController: UIViewController {
                      animations: { [weak self] in
                       self?.view.layoutIfNeeded()
             }, completion: {(value: Bool) in
-            self.dismiss(animated: true, completion: nil)
+                self.delegate?.Reload()
+                self.dismiss(animated: true, completion: nil)
         }
         )
         

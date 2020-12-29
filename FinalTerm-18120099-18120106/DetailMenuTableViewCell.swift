@@ -18,6 +18,8 @@ class DetailMenuTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        cellView.layer.cornerRadius = 12
+        FoodImageView.layer.cornerRadius = FoodImageView.frame.height/2
         // Initialization code
     }
 
