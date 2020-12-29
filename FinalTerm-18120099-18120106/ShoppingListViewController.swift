@@ -19,11 +19,8 @@ class ShoppingListViewController: UIViewController {
 
     @IBOutlet weak var DateLabel: UILabel!
     @IBOutlet weak var NotificationLabel: UILabel!
-    
     @IBOutlet weak var EstablishMenuButton: UIButton!
-    
     @IBOutlet weak var ShoppingListTableView: UITableView!
-    
     @IBOutlet weak var ShoppingListView: UIView!
     
     var dateData = Date()
@@ -77,9 +74,12 @@ class ShoppingListViewController: UIViewController {
         foodInfoRef.child("ShoppingList/\(path)").observeSingleEvent(of: .value) { (snapshot) in
             //Kiem tra co ton tai menu trong ngay duoc chon hay khong
             if (snapshot.exists() == false) {
-                //An View chua TableView di va hien thi thong bao khong co menu
+                //An View chua TableView
                 self.ShoppingListView.isHidden = true
+                //Hien thi thong bao khong co menu
+                self.EstablishMenuButton.isHidden = false
                 self.EstablishMenuButton.isEnabled = true
+                self.NotificationLabel.isHidden = false
                 if (self.DateLabel.text == "Hôm nay") {
                     self.NotificationLabel.text = "Bạn chưa chọn món cho thực đơn hôm nay!"
                 }
@@ -139,8 +139,9 @@ class ShoppingListViewController: UIViewController {
                                 }
                             }
                             self.ShoppingListTableView.reloadData()
-                            //Hien View chua TableView di va an thong bao khong co menu
+                            //Hien View chua TableView di
                             self.ShoppingListView.isHidden = false
+                            //An thong bao khong co menu
                             self.EstablishMenuButton.isEnabled = false
                         }
                     }
@@ -198,7 +199,6 @@ class ShoppingListViewController: UIViewController {
     
     @IBAction func DeleteFoodInMenu(_ sender: Any) {
         let button = sender as! UIButton
-        //Vi tri bat dau va ket thuc cua mang chua cac nguyen lieu cua mon an dang xet
         
         //Xac dinh chi so cua mon an luu trong mang
         var index = 0
@@ -233,8 +233,31 @@ class ShoppingListViewController: UIViewController {
         for _ in button.tag...end + 1 {
             ShoppingList.remove(at: button.tag)
         }
-        //Cap nhat lai giao dien
-        ShoppingListTableView.reloadData()
+        //Neu khong con mon an nao trong menu thi hien thi thong bao khong co mon an trong thuc don
+        if (ShoppingList.count == 0) {
+            //An View chua TableView
+            ShoppingListView.isHidden = true
+            //Hien thi thong bao khong co menu
+            EstablishMenuButton.isHidden = false
+            EstablishMenuButton.isEnabled = true
+            NotificationLabel.isHidden = false
+            if (DateLabel.text == "Hôm nay") {
+                NotificationLabel.text = "Bạn chưa chọn món cho thực đơn hôm nay!"
+            }
+            else if (DateLabel.text == "Hôm qua") {
+                NotificationLabel.text = "Bạn chưa chọn món cho thực đơn hôm qua!"
+            }
+            else if (DateLabel.text == "Ngày mai") {
+                NotificationLabel.text = "Bạn chưa chọn món cho thực đơn ngày mai!"
+            }
+            else {
+                NotificationLabel.text = "Bạn chưa chọn món cho thực đơn ngày \(DateLabel.text!)!"
+            }
+        }
+        else { //Cap nhat lai giao dien
+            LoadDataFromFirebase(dateData)
+        }
+        
     }
     
     func GetLeadingIndex(_ currentIndex: Int) -> Int {
@@ -291,16 +314,23 @@ extension ShoppingListViewController: UITableViewDelegate,UITableViewDataSource{
         cell.FoodNameLabel.text = ShoppingList[indexPath.row].FoodName
         cell.IngredientNameLabel.text = ShoppingList[indexPath.row].IngredientName
         cell.ValueAndUnitLabel.text = ShoppingList[indexPath.row].Value
-        //Cell chua ten mon an
+        //Cell khong chua ten mon an
         if (ShoppingList[indexPath.row].FoodName == "") {
+            //An nut xoa
             cell.DeleteButton.isHidden = true
             cell.DeleteButton.isEnabled = false
+            //An dau cham dau ten mon an
+            cell.CircleImageView.isHidden = true
         }
-        else {
+        else { //Cell chua ten mon an
+            //Gan su kien cho nut xoa
             cell.DeleteButton.tag = indexPath.row
             cell.DeleteButton.addTarget(self, action: #selector(DeleteFoodInMenu(_:)), for: .touchUpInside)
+            //Hien thi nut xoa
             cell.DeleteButton.isHidden = false
             cell.DeleteButton.isEnabled = true
+            //Hien thi dau cham dau ten
+            cell.CircleImageView.isHidden = false
         }
         //Cell chua thong tin nguyen lieu
         if (ShoppingList[indexPath.row].IngredientName != "") {

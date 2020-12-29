@@ -22,18 +22,89 @@ let foodInfoRef = Database.database().reference()
 let CategoryList = ["Thịt heo", "Thịt bò", "Thịt gà","Thit vit", "Hải sản", "Cá", "Bánh", "Trái cây", "Ăn chay", "Giảm cân", "Chiên xào", "Món canh", "Món nướng", "Món kho", "Món nhậu", "Tiết kiệm", "Ngày lễ, tết", "Khác"]
 let MealList = ["Bữa sáng", "Bữa trưa", "Bữa tối", "Bữa phụ", "Khác"]
 
+//Chuyen thanh chuoi ASCII va xoa ki tu khoang trang trong chuoi
+func GetCustomizedString(_ string: String) -> String {
+    var result = string.folding(options: .diacriticInsensitive, locale: .current)
+    result = result.replacingOccurrences(of: " ", with: "").lowercased()
+    //Chuyen thu cong chu đ thanh chu d
+    result = result.replacingOccurrences(of: "đ", with: "d")
+    return result
+}
+
 func CheckIfStringContainSubstring(_ str: String, _ sub: String) -> Bool {
     var result = true
     //Chuyen thanh chuoi ASCII va xoa ki tu khoang trang trong chuoi
-    let unicodeName = str.folding(options: .diacriticInsensitive, locale: .current).replacingOccurrences(of: " ", with: "")
-    let unicodeSubName = sub.folding(options: .diacriticInsensitive, locale: .current).replacingOccurrences(of: " ", with: "")
+    let unicodeName = GetCustomizedString(str)
+    let unicodeSubName = GetCustomizedString(sub)
     
     //Neu chuoi can tim kiem khac rong thi kiem tra
     if (unicodeSubName != "") {
-        //Chuyen ki tu thanh chu thuong va kiem tra
-        result = unicodeName.lowercased().contains(unicodeSubName.lowercased())
+        result = unicodeName.contains(unicodeSubName)
     }
     return result
+}
+
+func GetOriginSubstring(_ mainString: String, _ subString: String) -> String {
+    //Neu chuoi can tim la rong thi tra ve chuoi rong
+    if (subString == "") {
+        return ""
+    }
+    //Chuyen chuoi con can tim thanh chuoi ASCII khong co ki tu khoang trang
+    var str = "", mainChar = "", subChar = "", subStringTemp = GetCustomizedString(subString)
+    var mainStringIndex, subStringIndex: String.Index
+    var subIndex = 0
+    var check = false
+    for mainIndex in 0..<mainString.count {
+        //Lay Index cua chuoi chinh va chuoi con tu lan luot o vi tri 'mainIndex' va 'subIndex'
+        //Viec chay index cua 2 chuoi nay giong nhu chay 2 con tro song song
+        mainStringIndex = mainString.index(mainString.startIndex, offsetBy: mainIndex)
+        subStringIndex = subString.index(subStringTemp.startIndex, offsetBy: subIndex)
+        //Lay 2 ki tu cua 2 chuoi tu 2 index o tren
+        mainChar = GetCustomizedString(String(mainString[mainStringIndex]))
+        subChar = String(subStringTemp[subStringIndex])
+        
+        //Neu 2 ki tu bang nhau hoac dang duyet chuoi kha thi ma gap dau cach thi xu ly
+        if (mainChar == subChar || (mainChar == "" && check == true)) {
+            //Chuyen sang trang thai chuoi dang xet la kha thi
+            if (check == false) {
+                check = true
+            }
+            //Cong dong ki tu dang xet vao ket qua
+            str += [mainString[mainStringIndex]]
+            //Neu ki tu dang xet khac dau cach thi moi tang chi so cua chuoi con len
+            if (mainChar != "") {
+                subIndex += 1
+            }
+        }
+        else { //Truong hop ki tu chuoi con khong giong ki tu tuong ung trong chuoi chinh
+            //Chuyen trang thai chuoi dang xet tu kha thi thanh khong kha thi
+            if (check == true) {
+                check = false
+                str = ""
+                subIndex = 0
+            }
+        }
+        
+        //Neu da du so ki tu thi tra va tra ve chuoi str
+        if (subIndex == subStringTemp.count) {
+            return str
+        }
+    }
+    //Truong hop chuoi chinh khong chua chuoi con thi tra ve chuoi rong
+    return ""
+}
+
+func AttributedStringWithColor(_ mainString: String, _ string: String, color: UIColor) -> NSAttributedString {
+    
+    //Lay chuoi 'string' voi dinh dang giong nhu trong 'mainString'
+    let subString = GetOriginSubstring(mainString, string)
+    
+    //Thay doi mau cho chuoi con trong ten mon an trung voi chuoi tim kiem
+    let attributedString = NSMutableAttributedString(string: mainString)
+    let range = (mainString as NSString).range(of: subString)
+    attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
+
+    return attributedString
 }
 
 class ViewController: UIViewController {
@@ -416,9 +487,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func act_OpenSearchFoodBox(_ sender: Any) {
-        //Vo hieu tieu de va hai nut menu, tim kiem
-        MenuButton.isHidden = true
-        MenuButton.isEnabled = false
+        //Vo hieu tieu de va nut tim kiem
         HomeLabel.isHidden = true
         HomeLabel.isEnabled = false
         SearchButton.isHidden = true
@@ -434,7 +503,7 @@ class ViewController: UIViewController {
         CancelFoodButton.isHidden = false
         CancelFoodButton.isEnabled = true
         //Animation xuat hien khung tim kiem
-        SearchWidthConstraint.constant += 300
+        SearchWidthConstraint.constant += 260
         UIView.animate(withDuration: 1,
                        delay: 0,
                      animations: {
@@ -459,15 +528,13 @@ class ViewController: UIViewController {
         SearchFoodButton.isEnabled = false
         CancelFoodButton.isHidden = true
         CancelFoodButton.isEnabled = false
-        //Active tieu de va hai nut menu, tim kiem
-        MenuButton.isHidden = false
-        MenuButton.isEnabled = true
+        //Active tieu de va nut tim kiem
         HomeLabel.isHidden = false
         HomeLabel.isEnabled = true
         SearchButton.isHidden = false
         SearchButton.isEnabled = true
         //Thu nho thanh tim kiem
-        SearchWidthConstraint.constant -= 300
+        SearchWidthConstraint.constant -= 260
         UpdateFoodList()
     }
     
@@ -516,6 +583,7 @@ class ViewController: UIViewController {
                 if let food = temp.value as? [String:AnyObject] {
                     //Kiem tra co thoa loai mon an dang loc hay khong
                     if (food["Category"] != nil) {
+                        print(temp.key)
                         let categoryArray = food["Category"] as! NSArray
                         for i in 0..<categoryArray.count {
                             if (self.SelectedCategory[categoryArray[i] as! Int] == true || isAllCategory == true) {
@@ -614,7 +682,7 @@ class ViewController: UIViewController {
                 //Hien thi hinh anh mon an
                 self.FoodImageOutletList[i].sd_setImage(with: imageRef.child("/FoodImages/\(food["Image"]!)"), maxImageSize: 1 << 30, placeholderImage: UIImage(named: "food-background"), options: .retryFailed, completion: nil)
                 //Hien thi ten mon an
-                self.FoodNameOutletList[i].text = "\(food["Name"]!)"
+                self.FoodNameOutletList[i].attributedText = AttributedStringWithColor("\(food["Name"]!)", self.searchFoodName, color: UIColor.link)
                 
                 //Hien thi trang thai yeu thich cua mon an
                 //Yeu thich

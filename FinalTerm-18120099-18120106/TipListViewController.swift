@@ -137,7 +137,7 @@ class TipListViewController: UIViewController,UITableViewDelegate, UITableViewDa
         //Hien thi hinh anh mo ta meo
         cell.TipImageView.sd_setImage(with: imageRef.child("/TipImages/\(TipList[index].ImageName)"), maxImageSize: 1 << 30, placeholderImage: nil, options: .retryFailed, completion: nil)
         //Hien thi ten meo
-        cell.lbTip.text = TipList[index].Name
+        cell.lbTip.attributedText = AttributedStringWithColor(TipList[index].Name, searchFoodName, color: UIColor.link)
         return cell
     }
     

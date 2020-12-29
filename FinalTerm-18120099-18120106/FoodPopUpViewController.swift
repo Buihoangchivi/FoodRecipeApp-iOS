@@ -74,14 +74,6 @@ class FoodPopUpViewController: UIViewController {
             }})
     }
     
-    @IBAction func act_PopUpBackgroundButton(_ sender: Any) {
-        //Neu co chon chi tiet mon an thi reload lai giao dien
-        if (isClickDetailFood == true) {
-            delegate?.Reload()
-        }
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     @IBAction func act_ClosePopUp(_ sender: Any) {
         //Neu co chon chi tiet mon an thi reload lai giao dien
         if (isClickDetailFood == true) {

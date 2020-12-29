@@ -16,6 +16,7 @@ class ShoppingListTableViewCell: UITableViewCell {
     @IBOutlet weak var CheckButton: UIButton!
     @IBOutlet weak var UncheckButton: UIButton!
     @IBOutlet weak var DeleteButton: UIButton!
+    @IBOutlet weak var CircleImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
