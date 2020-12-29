@@ -19,7 +19,7 @@ var FoodList = [FoodInfomation]()
 let imageRef = Storage.storage().reference()
 let foodInfoRef = Database.database().reference()
 
-let CategoryList = ["Thịt heo", "Thịt bò", "Thịt gà", "Hải sản", "Cá", "Bánh", "Trái cây", "Ăn chay", "Giảm cân", "Chiên xào", "Món canh", "Món nướng", "Món kho", "Món nhậu", "Tiết kiệm", "Ngày lễ, tết", "Khác"]
+let CategoryList = ["Thịt heo", "Thịt bò", "Thịt gà","Thit vit", "Hải sản", "Cá", "Bánh", "Trái cây", "Ăn chay", "Giảm cân", "Chiên xào", "Món canh", "Món nướng", "Món kho", "Món nhậu", "Tiết kiệm", "Ngày lễ, tết", "Khác"]
 let MealList = ["Bữa sáng", "Bữa trưa", "Bữa tối", "Bữa phụ", "Khác"]
 
 func CheckIfStringContainSubstring(_ str: String, _ sub: String) -> Bool {
