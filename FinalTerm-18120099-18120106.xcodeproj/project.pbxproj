@@ -118,6 +118,70 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		366D47AC259B6E3300926D8C /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				36DAB9A2257521C1005CA319 /* AddNewFoodViewController.swift */,
+				36E6E6982585D0F0007EEA32 /* ChangeCurrentPagePopUpVC.swift */,
+				36150382257FDC5800201EEA /* DatePickerPopUpViewController.swift */,
+				874C217B257761F20033F8F8 /* DetailFoodViewController.swift */,
+				8788DD21259AF3AB007B8D8C /* DetailMenuViewController.swift */,
+				3634DFA42579745100A14EE2 /* DirectionListViewController.swift */,
+				360B6421257A8D200040BF80 /* DirectionPopUpViewController.swift */,
+				3640BE932574BC68003C7903 /* FoodPopUpViewController.swift */,
+				3651797D2576508F00574610 /* IngredientListViewController.swift */,
+				8746F58E2578EB3A00D388AE /* MenuViewController.swift */,
+				36150380257FDC1000201EEA /* ShoppingListViewController.swift */,
+				87997F63257DFFCB00C9AF5F /* TipDetailViewController.swift */,
+				87997F61257DFFBD00C9AF5F /* TipListViewController.swift */,
+				366D6A7D256F831B00693FD7 /* ViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		366D47AD259B6E7600926D8C /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				874C217D257762370033F8F8 /* DetailIngredientFoodTableViewCell.swift */,
+				8788DD23259AF3C6007B8D8C /* DetailMenuTableViewCell.swift */,
+				3634DFA6257975D400A14EE2 /* EditDirectionTableViewCell.swift */,
+				3651797F257659DA00574610 /* IngredientTableViewCell.swift */,
+				8746F5902578EB4D00D388AE /* MenuTableViewCell.swift */,
+				87BD52B02577986C0099C569 /* ProcessingTableViewCell.swift */,
+				36150384257FEBF000201EEA /* ShoppingListTableViewCell.swift */,
+				87997F5F257DFFAD00C9AF5F /* TipListTableViewCell.swift */,
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		366D47AE259B6EB100926D8C /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				36A2DE2B256F9C7F00C64FB8 /* CategoryCollectionViewCell.swift */,
+				36A2DE2D256FF1EB00C64FB8 /* MealCollectionViewCell.swift */,
+				3677DA7825760F1F00706FD5 /* MealForAddFoodCollectionViewCell.swift */,
+			);
+			path = CollectionViewCell;
+			sourceTree = "<group>";
+		};
+		366D47AF259B6ECB00926D8C /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				366D6A84256F831C00693FD7 /* LaunchScreen.storyboard */,
+				366D6A7F256F831B00693FD7 /* Main.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		366D47B0259B6EF000926D8C /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				366D6A79256F831B00693FD7 /* AppDelegate.swift */,
+				366D6A7B256F831B00693FD7 /* SceneDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
 		366D6A6D256F831B00693FD7 = {
 			isa = PBXGroup;
 			children = (
@@ -141,38 +205,14 @@
 		366D6A78256F831B00693FD7 /* FinalTerm-18120099-18120106 */ = {
 			isa = PBXGroup;
 			children = (
-				366D6A79256F831B00693FD7 /* AppDelegate.swift */,
-				366D6A7B256F831B00693FD7 /* SceneDelegate.swift */,
-				366D6A7D256F831B00693FD7 /* ViewController.swift */,
-				366D6A7F256F831B00693FD7 /* Main.storyboard */,
-				366D6A82256F831C00693FD7 /* Assets.xcassets */,
-				366D6A84256F831C00693FD7 /* LaunchScreen.storyboard */,
-				366D6A87256F831C00693FD7 /* Info.plist */,
 				363BA1CB257251A300A43B4A /* GoogleService-Info.plist */,
-				36A2DE2B256F9C7F00C64FB8 /* CategoryCollectionViewCell.swift */,
-				36A2DE2D256FF1EB00C64FB8 /* MealCollectionViewCell.swift */,
-				3640BE932574BC68003C7903 /* FoodPopUpViewController.swift */,
-				36DAB9A2257521C1005CA319 /* AddNewFoodViewController.swift */,
-				3677DA7825760F1F00706FD5 /* MealForAddFoodCollectionViewCell.swift */,
-				3651797D2576508F00574610 /* IngredientListViewController.swift */,
-				3651797F257659DA00574610 /* IngredientTableViewCell.swift */,
-				874C217B257761F20033F8F8 /* DetailFoodViewController.swift */,
-				874C217D257762370033F8F8 /* DetailIngredientFoodTableViewCell.swift */,
-				87BD52B02577986C0099C569 /* ProcessingTableViewCell.swift */,
-				8746F58E2578EB3A00D388AE /* MenuViewController.swift */,
-				8746F5902578EB4D00D388AE /* MenuTableViewCell.swift */,
-				3634DFA42579745100A14EE2 /* DirectionListViewController.swift */,
-				3634DFA6257975D400A14EE2 /* EditDirectionTableViewCell.swift */,
-				360B6421257A8D200040BF80 /* DirectionPopUpViewController.swift */,
-				87997F5F257DFFAD00C9AF5F /* TipListTableViewCell.swift */,
-				87997F61257DFFBD00C9AF5F /* TipListViewController.swift */,
-				87997F63257DFFCB00C9AF5F /* TipDetailViewController.swift */,
-				36150380257FDC1000201EEA /* ShoppingListViewController.swift */,
-				36150382257FDC5800201EEA /* DatePickerPopUpViewController.swift */,
-				36150384257FEBF000201EEA /* ShoppingListTableViewCell.swift */,
-				36E6E6982585D0F0007EEA32 /* ChangeCurrentPagePopUpVC.swift */,
-				8788DD21259AF3AB007B8D8C /* DetailMenuViewController.swift */,
-				8788DD23259AF3C6007B8D8C /* DetailMenuTableViewCell.swift */,
+				366D6A87256F831C00693FD7 /* Info.plist */,
+				366D6A82256F831C00693FD7 /* Assets.xcassets */,
+				366D47AE259B6EB100926D8C /* CollectionViewCell */,
+				366D47B0259B6EF000926D8C /* Delegate */,
+				366D47AF259B6ECB00926D8C /* Storyboard */,
+				366D47AD259B6E7600926D8C /* TableViewCell */,
+				366D47AC259B6E3300926D8C /* ViewController */,
 			);
 			path = "FinalTerm-18120099-18120106";
 			sourceTree = "<group>";
