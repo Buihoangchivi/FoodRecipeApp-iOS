@@ -22,6 +22,7 @@ let foodInfoRef = FirebaseRef.child("FoodList")
 
 let CategoryList = ["Thịt heo", "Thịt bò", "Thịt gà", "Thịt vịt", "Hải sản", "Cá", "Bánh", "Trái cây", "Ăn chay", "Giảm cân", "Chiên xào", "Món canh", "Món nướng", "Món kho", "Món nhậu", "Tiết kiệm", "Ngày lễ, tết", "Khác"]
 let MealList = ["Bữa sáng", "Bữa trưa", "Bữa tối", "Bữa phụ", "Khác"]
+var CurrentUserID = ""
 
 //Chuyen thanh chuoi ASCII va xoa ki tu khoang trang trong chuoi
 func GetCustomizedString(_ string: String) -> String {
@@ -665,10 +666,6 @@ class ViewController: UIViewController {
             }
         }
         
-        //Xoa cache
-        //SDImageCache.shared.clearMemory()
-        //SDImageCache.shared.clearDisk()
-        
         //Cap nhat 6 mon an
         for i in 0...5 {
             //Kiem tra xem co du 6 mon an de hien thi hay khong
@@ -766,6 +763,9 @@ extension ViewController: ReloadDataDelegate {
 //Delegate them mon an moi
 extension ViewController: AddNewFoodDelegate {
     func UpdateUI() {
+        //Xoa cache
+        SDImageCache.shared.clearMemory()
+        SDImageCache.shared.clearDisk()
         UpdateFoodList()
     }
     

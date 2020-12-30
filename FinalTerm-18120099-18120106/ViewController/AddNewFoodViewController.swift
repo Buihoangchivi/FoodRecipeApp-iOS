@@ -112,13 +112,9 @@ class AddNewFoodViewController: UIViewController {
         self.present(dest, animated: true, completion: nil)
     }
     
-    @IBAction func act_CancelNewFood(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     @IBAction func act_SaveNewFood(_ sender: Any) {
         var count = 0
-        foodInfoRef.observeSingleEvent(of: .value, with: { (snapshot) in
+        FirebaseRef.child("UserList").observeSingleEvent(of: .value, with: { (snapshot) in
             //Xac dinh ID cho mon an moi
             for snapshotChild in snapshot.children {
                 let temp = snapshotChild as! DataSnapshot
@@ -147,7 +143,7 @@ class AddNewFoodViewController: UIViewController {
             //Upload anh mon an va ten anh len Firebase
             let metadata = StorageMetadata()
             metadata.contentType = "image/jpeg"
-            self.uploadTask = imageRef.child("/FoodImages/\(count).jpg").putData((self.FoodImageView.image?.sd_imageData(as: .JPEG, compressionQuality: 1.0, firstFrameOnly: true))!, metadata: metadata) { (metadata, error) in
+            self.uploadTask = imageRef.child("/UserImages/\(count).jpg").putData((self.FoodImageView.image?.sd_imageData(as: .JPEG, compressionQuality: 1.0, firstFrameOnly: true))!, metadata: metadata) { (metadata, error) in
                 }
             // Create a task listener handle
             self.uploadTask!.observe(.progress) { snapshot in
@@ -174,9 +170,9 @@ class AddNewFoodViewController: UIViewController {
             }
             
             //Day tat ca thong tin cua mon an len Firebase
-            foodInfoRef.child("\(count)").setValue(["Category": tempCategoryArr, "Direction": self.SelectedDirection, "Favorite": 0, "Image": "\(count).jpg","Ingredient": tempIngredientArr, "Meal": tempMealArr, "Name": self.FoodNameTextField.text!]) { (err, ref) in
+        FirebaseRef.child("UserList/\(count)").setValue(["Category": tempCategoryArr, "Direction": self.SelectedDirection, "Favorite": 0, "Image": "\(count).jpg","Ingredient": tempIngredientArr, "Meal": tempMealArr, "Name": self.FoodNameTextField.text!]) { (err, ref) in
                 self.delegate?.UpdateUI()
-                self.dismiss(animated: true, completion: nil)
+                self.act_ShowHomeScreen(sender)
             }
         })
     }
