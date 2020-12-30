@@ -10,10 +10,6 @@ import UIKit
 import Firebase
 import FirebaseUI
 
-protocol ReloadDataDelegate: class {
-    func Reload()
-}
-
 class FoodPopUpViewController: UIViewController {
 
     @IBOutlet weak var PopUpView: UIView!
@@ -103,7 +99,7 @@ class FoodPopUpViewController: UIViewController {
 extension FoodPopUpViewController: DatePickerDalegate{
     func TransmitDate(Date date: Date) {
         let path = DateToString(date, "yyyy/MM/dd")
-        foodInfoRef.child("ShoppingList/\(path)").observeSingleEvent(of: .value) { (snapshot) in
+        FirebaseRef.child("ShoppingList/\(path)").observeSingleEvent(of: .value) { (snapshot) in
             var index = 0
             var isExist = false
             if (snapshot.exists() == true) {
@@ -120,7 +116,7 @@ extension FoodPopUpViewController: DatePickerDalegate{
             }
             
             if (isExist == false) {
-            foodInfoRef.child("ShoppingList/\(path)/\(index)").setValue(["FoodID": self.FoodID])
+            FirebaseRef.child("ShoppingList/\(path)/\(index)").setValue(["FoodID": self.FoodID])
             }
             }
     }

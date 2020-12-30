@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol DirectionPopUpDelegate: class {
-    func DirectionProcess(index: Int, content: String)
-}
-
 class DirectionPopUpViewController: UIViewController {
 
     @IBOutlet weak var PopUpView: UIView!

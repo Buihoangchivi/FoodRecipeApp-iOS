@@ -10,103 +10,6 @@ import UIKit
 import Firebase
 import FirebaseUI
 
-class FoodInfomation {
-    var Name = ""
-    var Image = ""
-}
-
-var FoodList = [FoodInfomation]()
-let imageRef = Storage.storage().reference()
-let foodInfoRef = Database.database().reference()
-
-let CategoryList = ["Thịt heo", "Thịt bò", "Thịt gà", "Thịt vịt", "Hải sản", "Cá", "Bánh", "Trái cây", "Ăn chay", "Giảm cân", "Chiên xào", "Món canh", "Món nướng", "Món kho", "Món nhậu", "Tiết kiệm", "Ngày lễ, tết", "Khác"]
-let MealList = ["Bữa sáng", "Bữa trưa", "Bữa tối", "Bữa phụ", "Khác"]
-
-//Chuyen thanh chuoi ASCII va xoa ki tu khoang trang trong chuoi
-func GetCustomizedString(_ string: String) -> String {
-    var result = string.folding(options: .diacriticInsensitive, locale: .current)
-    result = result.replacingOccurrences(of: " ", with: "").lowercased()
-    //Chuyen thu cong chu đ thanh chu d
-    result = result.replacingOccurrences(of: "đ", with: "d")
-    return result
-}
-
-func CheckIfStringContainSubstring(_ str: String, _ sub: String) -> Bool {
-    var result = true
-    //Chuyen thanh chuoi ASCII va xoa ki tu khoang trang trong chuoi
-    let unicodeName = GetCustomizedString(str)
-    let unicodeSubName = GetCustomizedString(sub)
-    
-    //Neu chuoi can tim kiem khac rong thi kiem tra
-    if (unicodeSubName != "") {
-        result = unicodeName.contains(unicodeSubName)
-    }
-    return result
-}
-
-func GetOriginSubstring(_ mainString: String, _ subString: String) -> String {
-    //Neu chuoi can tim la rong thi tra ve chuoi rong
-    if (subString == "") {
-        return ""
-    }
-    //Chuyen chuoi con can tim thanh chuoi ASCII khong co ki tu khoang trang
-    var str = "", mainChar = "", subChar = "", subStringTemp = GetCustomizedString(subString)
-    var mainStringIndex, subStringIndex: String.Index
-    var subIndex = 0
-    var check = false
-    for mainIndex in 0..<mainString.count {
-        //Lay Index cua chuoi chinh va chuoi con tu lan luot o vi tri 'mainIndex' va 'subIndex'
-        //Viec chay index cua 2 chuoi nay giong nhu chay 2 con tro song song
-        mainStringIndex = mainString.index(mainString.startIndex, offsetBy: mainIndex)
-        subStringIndex = subString.index(subStringTemp.startIndex, offsetBy: subIndex)
-        //Lay 2 ki tu cua 2 chuoi tu 2 index o tren
-        mainChar = GetCustomizedString(String(mainString[mainStringIndex]))
-        subChar = String(subStringTemp[subStringIndex])
-        
-        //Neu 2 ki tu bang nhau hoac dang duyet chuoi kha thi ma gap dau cach thi xu ly
-        if (mainChar == subChar || (mainChar == "" && check == true)) {
-            //Chuyen sang trang thai chuoi dang xet la kha thi
-            if (check == false) {
-                check = true
-            }
-            //Cong dong ki tu dang xet vao ket qua
-            str += [mainString[mainStringIndex]]
-            //Neu ki tu dang xet khac dau cach thi moi tang chi so cua chuoi con len
-            if (mainChar != "") {
-                subIndex += 1
-            }
-        }
-        else { //Truong hop ki tu chuoi con khong giong ki tu tuong ung trong chuoi chinh
-            //Chuyen trang thai chuoi dang xet tu kha thi thanh khong kha thi
-            if (check == true) {
-                check = false
-                str = ""
-                subIndex = 0
-            }
-        }
-        
-        //Neu da du so ki tu thi tra va tra ve chuoi str
-        if (subIndex == subStringTemp.count) {
-            return str
-        }
-    }
-    //Truong hop chuoi chinh khong chua chuoi con thi tra ve chuoi rong
-    return ""
-}
-
-func AttributedStringWithColor(_ mainString: String, _ string: String, color: UIColor) -> NSAttributedString {
-    
-    //Lay chuoi 'string' voi dinh dang giong nhu trong 'mainString'
-    let subString = GetOriginSubstring(mainString, string)
-    
-    //Thay doi mau cho chuoi con trong ten mon an trung voi chuoi tim kiem
-    let attributedString = NSMutableAttributedString(string: mainString)
-    let range = (mainString as NSString).range(of: subString)
-    attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
-
-    return attributedString
-}
-
 class ViewController: UIViewController {
 
     @IBOutlet weak var HomeButton: UIButton!
@@ -664,10 +567,6 @@ class ViewController: UIViewController {
             }
         }
         
-        //Xoa cache
-        //SDImageCache.shared.clearMemory()
-        //SDImageCache.shared.clearDisk()
-        
         //Cap nhat 6 mon an
         for i in 0...5 {
             //Kiem tra xem co du 6 mon an de hien thi hay khong
@@ -765,6 +664,9 @@ extension ViewController: ReloadDataDelegate {
 //Delegate them mon an moi
 extension ViewController: AddNewFoodDelegate {
     func UpdateUI() {
+        //Xoa cache
+        SDImageCache.shared.clearMemory()
+        SDImageCache.shared.clearDisk()
         UpdateFoodList()
     }
     

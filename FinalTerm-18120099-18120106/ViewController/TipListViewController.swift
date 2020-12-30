@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseUI
+
 class TipListViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var TipListTBV: UITableView!
     @IBOutlet weak var SearchTipsButton: UIButton!
@@ -30,8 +31,9 @@ class TipListViewController: UIViewController,UITableViewDelegate, UITableViewDa
         Init()
         // Do any additional setup after loading the view.
     }
+    
     func Init(){
-        foodInfoRef.child("TipList").observeSingleEvent(of: .value, with: { (snapshot) in
+        FirebaseRef.child("TipList").observeSingleEvent(of: .value, with: { (snapshot) in
               for snapshotChild in snapshot.children {
                 let temp = snapshotChild as! DataSnapshot
                 if let dict = temp.value as? [String: Any] {
@@ -150,7 +152,7 @@ class TipListViewController: UIViewController,UITableViewDelegate, UITableViewDa
        
         //Xoa cache
         //Hien thi hinh anh mo ta meo
-        dest.TipImageView.sd_setImage(with: imageRef.child("/TipImages/\(TipList[index].ImageName)"), maxImageSize: 1 << 30, placeholderImage: nil, options: .retryFailed, completion: nil)
+        dest.TipImageView.sd_setImage(with: imageRef.child("/TipImages/\(TipList[index].ImageName)"), maxImageSize: 1 << 30, placeholderImage: UIImage(named: "food-background"), options: .retryFailed, completion: nil)
         //Hien thi ten meo
         dest.LbTipName.text = TipList[index].Name
         //Hien thi chi tiet noi dung meo

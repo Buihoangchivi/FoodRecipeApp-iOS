@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol ChangeCurrentPagePopUpDelegate: class {
-    func UpdateCurrentPage(index: Int)
-}
-
 class ChangeCurrentPagePopUpVC: UIViewController {
 
     @IBOutlet weak var PopUpView: UIView!

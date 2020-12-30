@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 class MenuViewController: UIViewController {
     var MenuList = ["Món ăn yêu thích","Công thức nhà mình","Mẹo hay","Món ăn ngày lễ","Món ăn chay","Món ăn giảm cân","Món bánh ngon","Món nhậu cơ bản", "Chính sách quyền riêng tư","Liên hệ"]
     @IBOutlet weak var MenuTBV: UITableView!
@@ -68,6 +69,7 @@ class MenuViewController: UIViewController {
     */
 
 }
+
 extension MenuViewController : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return MenuList.count
@@ -81,47 +83,38 @@ extension MenuViewController : UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //Meo hay
         if (indexPath.row == 2) {
             let dest = self.storyboard?.instantiateViewController(identifier: "TipListViewController") as! TipListViewController
             dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
             self.present(dest, animated: true, completion: nil)
         }
-        if (indexPath.row == 3) {
+        else {
             let dest = self.storyboard?.instantiateViewController(identifier: "DetailMenuViewController") as! DetailMenuViewController
             dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-            dest.CategoryID = 16
+            switch indexPath.row {
+            case 0: //Món ăn yêu thích
+                dest.isFavorite = true
+            case 1: //Công thức nhà mình
+                dest.isUserFood = true
+            case 3: //Món ăn ngày lễ
+                dest.CategoryID = 16
+            case 4: //Món ăn chay
+                dest.CategoryID = 8
+            case 5: //Món ăn giảm cân
+                dest.CategoryID = 9
+            case 6: //Món bánh ngon
+                dest.CategoryID = 6
+            case 7: //Món nhậu cơ bản
+                dest.CategoryID = 14
+            default: //Truong hop mac dinh
+                dest.CategoryID = 0
+            }
             self.present(dest, animated: true, completion: nil)
         }
-        if (indexPath.row == 4) {
-            let dest = self.storyboard?.instantiateViewController(identifier: "DetailMenuViewController") as! DetailMenuViewController
-            dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-            dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-            dest.CategoryID = 8
-            self.present(dest, animated: true, completion: nil)
-        }
-        if (indexPath.row == 5) {
-            let dest = self.storyboard?.instantiateViewController(identifier: "DetailMenuViewController") as! DetailMenuViewController
-            dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-            dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-            dest.CategoryID = 9
-            self.present(dest, animated: true, completion: nil)
-        }
-        if (indexPath.row == 6) {
-            let dest = self.storyboard?.instantiateViewController(identifier: "DetailMenuViewController") as! DetailMenuViewController
-            dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-            dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-            dest.CategoryID = 6
-            self.present(dest, animated: true, completion: nil)
-        }
-        if (indexPath.row == 7) {
-            let dest = self.storyboard?.instantiateViewController(identifier: "DetailMenuViewController") as! DetailMenuViewController
-            dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-            dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-            dest.CategoryID = 14
-            self.present(dest, animated: true, completion: nil)
-        }
+        //Bo chon cell
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

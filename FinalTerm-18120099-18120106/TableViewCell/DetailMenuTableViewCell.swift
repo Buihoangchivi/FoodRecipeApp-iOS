@@ -20,6 +20,7 @@ class DetailMenuTableViewCell: UITableViewCell {
         super.awakeFromNib()
         cellView.layer.cornerRadius = 12
         FoodImageView.layer.cornerRadius = FoodImageView.frame.height/2
+        btnLove.layer.cornerRadius = btnLove.frame.height/2
         // Initialization code
     }
 

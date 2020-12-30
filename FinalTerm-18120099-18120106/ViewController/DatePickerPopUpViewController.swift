@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol DatePickerDalegate: class {
-    func TransmitDate(Date date: Date)
-}
-
 class DatePickerPopUpViewController: UIViewController {
 
     @IBOutlet weak var PopUpView: UIView!

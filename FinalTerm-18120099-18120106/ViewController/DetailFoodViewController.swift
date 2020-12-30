@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseUI
+
 class DetailFoodViewController: UIViewController{
     
     @IBOutlet weak var FoodImageView: UIImageView!
@@ -38,6 +39,9 @@ class DetailFoodViewController: UIViewController{
     var FoodID = 0
     var NumberOfPeople = 1
     var isIngredientView = true
+    var delegate: DetailFoodDelegate?
+    var Ref = foodInfoRef
+    var folderName = "/FoodImages"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,14 +73,14 @@ class DetailFoodViewController: UIViewController{
         else if (NumberOfPeople == 10) {
             UpNumberButton.isEnabled = false
         }
-        foodInfoRef.child("\(FoodID)").observeSingleEvent(of: .value, with: { (snapshot) in
+        Ref.child("\(FoodID)").observeSingleEvent(of: .value, with: { (snapshot) in
         if let food = snapshot.value as? [String:Any] {
             //Xoa cache
             //SDImageCache.shared.clearMemory()
             //SDImageCache.shared.clearDisk()
             
             //Hien thi hinh anh mon an
-            self.FoodImageView.sd_setImage(with: imageRef.child("/FoodImages/\(food["Image"]!)"), maxImageSize: 1 << 30, placeholderImage: UIImage(named: "food-background"), options: .retryFailed, completion: nil)
+            self.FoodImageView.sd_setImage(with: imageRef.child("\(self.folderName)/\(food["Image"]!)"), maxImageSize: 1 << 30, placeholderImage: UIImage(named: "food-background"), options: .retryFailed, completion: nil)
             
             //Hien thi ten mon an
             self.FoodNameLabel.text = "\(food["Name"]!)"
@@ -95,12 +99,12 @@ class DetailFoodViewController: UIViewController{
             self.FavoriteButton.isHidden = false
             self.FavoriteButtonBackground.isHidden = false
             }})
-        foodInfoRef.child("\(FoodID)/Ingredient").observeSingleEvent(of: .value, with: { (snapshot) in
+        Ref.child("\(FoodID)/Ingredient").observeSingleEvent(of: .value, with: { (snapshot) in
                 for snapshotChild in snapshot.children {
                     let temp = snapshotChild as! DataSnapshot
                         if let arr = temp.value as? NSArray {
                             var infoArr = [String]()
-                            foodInfoRef.child("IngredientList/\(arr[0])").observeSingleEvent(of: .value, with: { (snapshot) in
+                            FirebaseRef.child("IngredientList/\(arr[0])").observeSingleEvent(of: .value, with: { (snapshot) in
                                 for snapshotChild in snapshot.children {
                                     let temp = snapshotChild as! DataSnapshot
                                     infoArr += [temp.value as! String]
@@ -113,7 +117,7 @@ class DetailFoodViewController: UIViewController{
                       }
                 }
           })
-        foodInfoRef.child("\(FoodID)/Direction").observeSingleEvent(of: .value, with: { (snapshot) in
+        Ref.child("\(FoodID)/Direction").observeSingleEvent(of: .value, with: { (snapshot) in
                 for snapshotChild in snapshot.children {
                     let temp = snapshotChild as! DataSnapshot
                         self.DirectionList += [temp.value as! String]
@@ -209,6 +213,7 @@ class DetailFoodViewController: UIViewController{
     }
     
     @IBAction func act_Back(_ sender: Any) {
+        delegate?.Reload()
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -248,13 +253,13 @@ class DetailFoodViewController: UIViewController{
             FavoriteButton.tintColor = UIColor.red
             FavoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
             //Cap nhat data tren Firebase
-            foodInfoRef.child("\(FoodID)").updateChildValues(["Favorite": 1])
+            Ref.child("\(FoodID)").updateChildValues(["Favorite": 1])
         }
         else { //Xoa khoi danh sach yeu thich
             FavoriteButton.tintColor = UIColor.white
             FavoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
             //Cap nhat data tren Firebase
-            foodInfoRef.child("\(FoodID)").updateChildValues(["Favorite": 0])
+            Ref.child("\(FoodID)").updateChildValues(["Favorite": 0])
         }
     }
 }
@@ -301,7 +306,7 @@ extension DetailFoodViewController: DirectionDelegate {
 extension DetailFoodViewController: DatePickerDalegate{
     func TransmitDate(Date date: Date) {
         let path = DateToString(date, "yyyy/MM/dd")
-        foodInfoRef.child("ShoppingList/\(path)").observeSingleEvent(of: .value) { (snapshot) in
+        FirebaseRef.child("ShoppingList/\(path)").observeSingleEvent(of: .value) { (snapshot) in
             var index = 0
             var isExist = false
             if (snapshot.exists() == true) {
@@ -318,7 +323,7 @@ extension DetailFoodViewController: DatePickerDalegate{
             }
             
             if (isExist == false) {
-            foodInfoRef.child("ShoppingList/\(path)/\(index)").setValue(["FoodID": self.FoodID])
+            FirebaseRef.child("ShoppingList/\(path)/\(index)").setValue(["FoodID": self.FoodID])
             }
             }
     }
