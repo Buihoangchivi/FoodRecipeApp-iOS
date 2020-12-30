@@ -31,7 +31,7 @@ class TipListViewController: UIViewController,UITableViewDelegate, UITableViewDa
         // Do any additional setup after loading the view.
     }
     func Init(){
-        foodInfoRef.child("TipList").observeSingleEvent(of: .value, with: { (snapshot) in
+        FirebaseRef.child("TipList").observeSingleEvent(of: .value, with: { (snapshot) in
               for snapshotChild in snapshot.children {
                 let temp = snapshotChild as! DataSnapshot
                 if let dict = temp.value as? [String: Any] {

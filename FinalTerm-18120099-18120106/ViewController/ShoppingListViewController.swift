@@ -41,7 +41,7 @@ class ShoppingListViewController: UIViewController {
         ShoppingListTableView.allowsSelection = false
         
         //Lay danh sach thong tin tat ca cac nguyen lieu
-        foodInfoRef.child("IngredientList").observeSingleEvent(of: .value, with: { (snapshot) in
+        FirebaseRef.child("IngredientList").observeSingleEvent(of: .value, with: { (snapshot) in
             for snapshotChild in snapshot.children {
                 let temp = snapshotChild as! DataSnapshot
                 if let arr = temp.value as? NSArray {
@@ -71,7 +71,7 @@ class ShoppingListViewController: UIViewController {
         //Khoi tao danh sach cac mon an trong menu
         ShoppingList = [(FoodName: String, IngredientName: String, Value: String, Check: Bool)]()
         let path = DateToString(date, "yyyy/MM/dd")
-        foodInfoRef.child("ShoppingList/\(path)").observeSingleEvent(of: .value) { (snapshot) in
+        FirebaseRef.child("ShoppingList/\(path)").observeSingleEvent(of: .value) { (snapshot) in
             //Kiem tra co ton tai menu trong ngay duoc chon hay khong
             if (snapshot.exists() == false) {
                 //An View chua TableView
@@ -191,7 +191,7 @@ class ShoppingListViewController: UIViewController {
         
         //Cap nhat lai du lieu tren Firebase
         let path = DateToString(dateData, "yyyy/MM/dd")
-        foodInfoRef.child("ShoppingList/\(path)/\(index)/CheckList").setValue(stateArr)
+        FirebaseRef.child("ShoppingList/\(path)/\(index)/CheckList").setValue(stateArr)
         
         //Cap nhat lai giao dien
         ShoppingListTableView.reloadData()
@@ -212,7 +212,7 @@ class ShoppingListViewController: UIViewController {
         let path = DateToString(dateData, "yyyy/MM/dd")
         
         //Xoa du lieu mon an trong mang
-        foodInfoRef.child("ShoppingList/\(path)").observeSingleEvent(of: .value) { (snapshot) in
+        FirebaseRef.child("ShoppingList/\(path)").observeSingleEvent(of: .value) { (snapshot) in
         if (snapshot.exists() == true) {
             var menuArr = [[String:AnyObject]]()
             for snapshotChild in snapshot.children {
@@ -225,7 +225,7 @@ class ShoppingListViewController: UIViewController {
             menuArr.remove(at: index)
             
             //Cap nhat lai du lieu tren Firebase
-            foodInfoRef.child("ShoppingList/\(path)").setValue(menuArr)
+            FirebaseRef.child("ShoppingList/\(path)").setValue(menuArr)
             }
         }
         

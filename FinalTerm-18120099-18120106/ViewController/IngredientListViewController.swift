@@ -56,7 +56,7 @@ class IngredientListViewController: UIViewController {
         //Khong hien thi vach chia cac cell
         IngredientTableView.separatorStyle = .none
         IngredientTableView.allowsSelection = false
-        foodInfoRef.child("IngredientList").observeSingleEvent(of: .value, with: { (snapshot) in
+        FirebaseRef.child("IngredientList").observeSingleEvent(of: .value, with: { (snapshot) in
             for snapshotChild in snapshot.children {
                 let temp = snapshotChild as! DataSnapshot
                 if let arr = temp.value as? NSArray {

@@ -100,7 +100,7 @@ class DetailFoodViewController: UIViewController{
                     let temp = snapshotChild as! DataSnapshot
                         if let arr = temp.value as? NSArray {
                             var infoArr = [String]()
-                            foodInfoRef.child("IngredientList/\(arr[0])").observeSingleEvent(of: .value, with: { (snapshot) in
+                            FirebaseRef.child("IngredientList/\(arr[0])").observeSingleEvent(of: .value, with: { (snapshot) in
                                 for snapshotChild in snapshot.children {
                                     let temp = snapshotChild as! DataSnapshot
                                     infoArr += [temp.value as! String]
@@ -301,7 +301,7 @@ extension DetailFoodViewController: DirectionDelegate {
 extension DetailFoodViewController: DatePickerDalegate{
     func TransmitDate(Date date: Date) {
         let path = DateToString(date, "yyyy/MM/dd")
-        foodInfoRef.child("ShoppingList/\(path)").observeSingleEvent(of: .value) { (snapshot) in
+        FirebaseRef.child("ShoppingList/\(path)").observeSingleEvent(of: .value) { (snapshot) in
             var index = 0
             var isExist = false
             if (snapshot.exists() == true) {
@@ -318,7 +318,7 @@ extension DetailFoodViewController: DatePickerDalegate{
             }
             
             if (isExist == false) {
-            foodInfoRef.child("ShoppingList/\(path)/\(index)").setValue(["FoodID": self.FoodID])
+            FirebaseRef.child("ShoppingList/\(path)/\(index)").setValue(["FoodID": self.FoodID])
             }
             }
     }
