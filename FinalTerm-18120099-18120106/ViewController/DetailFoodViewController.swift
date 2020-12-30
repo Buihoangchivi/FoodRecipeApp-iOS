@@ -9,6 +9,11 @@
 import UIKit
 import Firebase
 import FirebaseUI
+
+protocol DetailFoodDelegate: class {
+    func Reload()
+}
+
 class DetailFoodViewController: UIViewController{
     
     @IBOutlet weak var FoodImageView: UIImageView!
@@ -38,6 +43,7 @@ class DetailFoodViewController: UIViewController{
     var FoodID = 0
     var NumberOfPeople = 1
     var isIngredientView = true
+    var delegate: DetailFoodDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -209,6 +215,7 @@ class DetailFoodViewController: UIViewController{
     }
     
     @IBAction func act_Back(_ sender: Any) {
+        delegate?.Reload()
         self.dismiss(animated: true, completion: nil)
     }
     

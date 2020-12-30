@@ -94,7 +94,7 @@ extension MenuViewController : UITableViewDelegate, UITableViewDataSource{
             dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
             switch indexPath.row {
             case 0: //Món ăn yêu thích
-                dest.CategoryID = 16
+                dest.isFavorite = true
             case 1: //Công thức nhà mình
                 dest.CategoryID = 8
             case 3: //Món ăn ngày lễ
