@@ -9,12 +9,6 @@
 import UIKit
 import Firebase
 
-func DateToString(_ date: Date, _ format: String) -> String {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = format
-    return dateFormatter.string(from: date)
-}
-
 class ShoppingListViewController: UIViewController {
 
     @IBOutlet weak var DateLabel: UILabel!

@@ -9,11 +9,6 @@
 import UIKit
 import Firebase
 
-protocol IngredientDelegate : class {
-    func UpdateIngredient(ingredient: (ID: Int, Name: String, Value: Double, Unit: String))
-    func SaveChange()
-}
-
 class IngredientListViewController: UIViewController {
 
     @IBOutlet weak var SearchIngredientLabel: UILabel!
@@ -146,12 +141,6 @@ extension IngredientListViewController : UITableViewDataSource, UITableViewDeleg
         let cell = IngredientTableView.dequeueReusableCell(withIdentifier: "IngredientCell", for: indexPath) as! IngredientTableViewCell
         let index = IngredientIndexList[indexPath.row]
         
-        //Kiem tra xem ten nguyen lieu co chua text trong khung tim kiem hay khong
-        //print(searchFoodName)
-        //print(unicodeName.lowercased())
-        //print(unicodeName.lowercased().contains(searchFoodName))
-        //print(unicodeName.lowercased())
-        //print("\n\n")
         //Dinh nghia tag va target cho cac nut chinh sua nguyen lieu
         cell.EditIngredientButton.tag = indexPath.row
         cell.EditIngredientButton.addTarget(self, action: #selector(act_EditIngredient), for: .touchUpInside)

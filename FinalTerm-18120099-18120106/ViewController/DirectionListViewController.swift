@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol DirectionDelegate: class {
-    func SaveChange(List: [String])
-}
-
 class DirectionListViewController: UIViewController {
     
     @IBOutlet weak var CancelButton: UIButton!

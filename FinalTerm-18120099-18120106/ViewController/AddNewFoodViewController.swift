@@ -9,11 +9,6 @@
 import UIKit
 import Firebase
 
-protocol AddNewFoodDelegate: class {
-    func UpdateUI()
-    func DismissWithCondition(_ index: Int)
-}
-
 class AddNewFoodViewController: UIViewController {
 
     @IBOutlet weak var FoodImageView: UIImageView!

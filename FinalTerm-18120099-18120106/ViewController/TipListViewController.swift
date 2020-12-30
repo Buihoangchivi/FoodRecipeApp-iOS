@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseUI
+
 class TipListViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var TipListTBV: UITableView!
     @IBOutlet weak var SearchTipsButton: UIButton!
@@ -30,6 +31,7 @@ class TipListViewController: UIViewController,UITableViewDelegate, UITableViewDa
         Init()
         // Do any additional setup after loading the view.
     }
+    
     func Init(){
         FirebaseRef.child("TipList").observeSingleEvent(of: .value, with: { (snapshot) in
               for snapshotChild in snapshot.children {

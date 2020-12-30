@@ -10,10 +10,6 @@ import UIKit
 import Firebase
 import FirebaseUI
 
-protocol ReloadDataDelegate: class {
-    func Reload()
-}
-
 class FoodPopUpViewController: UIViewController {
 
     @IBOutlet weak var PopUpView: UIView!

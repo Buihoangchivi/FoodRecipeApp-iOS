@@ -10,10 +10,6 @@ import UIKit
 import Firebase
 import FirebaseUI
 
-protocol DetailFoodDelegate: class {
-    func Reload()
-}
-
 class DetailFoodViewController: UIViewController{
     
     @IBOutlet weak var FoodImageView: UIImageView!

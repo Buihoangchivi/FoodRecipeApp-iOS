@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 class MenuViewController: UIViewController {
     var MenuList = ["Món ăn yêu thích","Công thức nhà mình","Mẹo hay","Món ăn ngày lễ","Món ăn chay","Món ăn giảm cân","Món bánh ngon","Món nhậu cơ bản", "Chính sách quyền riêng tư","Liên hệ"]
     @IBOutlet weak var MenuTBV: UITableView!
@@ -68,6 +69,7 @@ class MenuViewController: UIViewController {
     */
 
 }
+
 extension MenuViewController : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return MenuList.count

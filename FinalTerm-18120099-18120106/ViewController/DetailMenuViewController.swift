@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseUI
+
 class DetailMenuViewController: UIViewController {
     var CategoryID = 0
     var isFavorite = false
@@ -195,6 +196,7 @@ class DetailMenuViewController: UIViewController {
     }
 
 }
+
 extension DetailMenuViewController:UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return FoodsIndexList.count
