@@ -14,10 +14,17 @@ class DetailMenuViewController: UIViewController {
     var isFavorite = false
     var isUserFood = false
     var FoodList = [(ID: Int, Name: String, ImageName: String, Favorite: Bool)]()
+    var FoodsIndexList = [Int]()
     var Ref = DatabaseReference()
     var folderName = ""
+    var searchFoodName = ""
     @IBOutlet weak var FoodListTBV: UITableView!
-    
+    @IBOutlet weak var SearchFoodsButton: UIButton!
+    @IBOutlet weak var CancelFoodsButton: UIButton!
+    @IBOutlet weak var SearchTextField: UITextField!
+    @IBOutlet weak var SearchLabel: UILabel!
+    @IBOutlet weak var SearchButton: UIButton!
+    @IBOutlet weak var SearchWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var CategoryNameLb: UILabel!
     
     override func viewDidLoad() {
@@ -46,6 +53,11 @@ class DetailMenuViewController: UIViewController {
                 CategoryNameLb.text = CategoryList[CategoryID]
             }
         }
+        
+        //Bo tron goc cho khung tim kiem
+        SearchLabel.layer.cornerRadius = 22
+        SearchLabel.layer.borderWidth = 0.2
+        SearchLabel.layer.masksToBounds = true
         
         Ref.observeSingleEvent(of: .value, with: { (snapshot) in
             for snapshotChild in snapshot.children {
@@ -82,7 +94,7 @@ class DetailMenuViewController: UIViewController {
             }
         }
         DispatchQueue.main.async {
-            self.FoodListTBV.reloadData()
+            self.ReloadData()
             self.FoodListTBV.isHidden = false
         }
     })
@@ -117,11 +129,75 @@ class DetailMenuViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func act_OpenSearchBox(_ sender: Any) {
+        //Vo hieu tieu de va nut tim kiem
+        CategoryNameLb.isHidden = true
+        CategoryNameLb.isEnabled = false
+        SearchButton.isHidden = true
+        SearchButton.isEnabled = false
+        
+        //Hien thi khung tim kiem
+        SearchLabel.isHidden = false
+        SearchTextField.text = ""
+        SearchTextField.isHidden = false
+        SearchTextField.isEnabled = true
+        SearchFoodsButton.isHidden = false
+        SearchFoodsButton.isEnabled = true
+        CancelFoodsButton.isHidden = false
+        CancelFoodsButton.isEnabled = true
+        //Animation xuat hien khung tim kiem
+        SearchWidthConstraint.constant += 265
+        UIView.animate(withDuration: 1,
+                       delay: 0,
+                     animations: {
+                        [weak self] in
+                        self?.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    @IBAction func act_SearchFoods(_ sender: Any) {
+        //Lay chuoi trong khung tim kiem
+        searchFoodName = SearchTextField.text!
+        ReloadData()
+    }
+    
+    @IBAction func act_CloseSearchBox(_ sender: Any) {
+        searchFoodName = ""
+        //An khung tim kiem
+        SearchLabel.isHidden = true
+        SearchTextField.isHidden = true
+        SearchTextField.isEnabled = false
+        SearchFoodsButton.isHidden = true
+        SearchFoodsButton.isEnabled = false
+        CancelFoodsButton.isHidden = true
+        CancelFoodsButton.isEnabled = false
+        //Active tieu de va nut tim kiem
+        CategoryNameLb.isHidden = false
+        CategoryNameLb.isEnabled = true
+        SearchButton.isHidden = false
+        SearchButton.isEnabled = true
+        //Thu nho thanh tim kiem
+        SearchWidthConstraint.constant -= 265
+        ReloadData()
+    }
+    
+    func ReloadData() {
+        //Reset mang chi so
+        FoodsIndexList = [Int]()
+        for index in 0..<FoodList.count {
+            //Neu ten meo hay co chi so index chua chuoi can tim thi them vao list
+            if (CheckIfStringContainSubstring(FoodList[index].Name, searchFoodName) == true) {
+                FoodsIndexList += [index]
+            }
+        }
+        FoodListTBV.reloadData()
+    }
 
 }
 extension DetailMenuViewController:UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return FoodList.count
+        return FoodsIndexList.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -130,11 +206,16 @@ extension DetailMenuViewController:UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DetailMenuCell") as! DetailMenuTableViewCell
+        let index = FoodsIndexList[indexPath.row]
+        //Gán chỉ số hàng tương ứng vào nút yêu thích của từng món ăn
         cell.btnLove.tag = indexPath.row
         cell.btnLove.addTarget(self, action: #selector(btnLove(_:)), for: .touchUpInside)
-        cell.FoodImageView.sd_setImage(with: imageRef.child("\(folderName)/\(FoodList[indexPath.row].ImageName)"), maxImageSize: 1 << 30, placeholderImage: UIImage(named: "food-background"), options: .retryFailed, completion: nil)
-        cell.FoodNameLb.text = FoodList[indexPath.row].Name
-        if (FoodList[indexPath.row].Favorite == true) {
+        //Hiển thị ảnh món ăn
+        cell.FoodImageView.sd_setImage(with: imageRef.child("\(folderName)/\(FoodList[index].ImageName)"), maxImageSize: 1 << 30, placeholderImage: UIImage(named: "food-background"), options: .retryFailed, completion: nil)
+        //Hiển thị tên món ăn
+        cell.FoodNameLb.attributedText = AttributedStringWithColor(FoodList[index].Name, searchFoodName, color: UIColor.link)
+        //Hiển thị trạng thái yêu thích của món ăn
+        if (FoodList[index].Favorite == true) { //Yêu thích
             cell.btnLove.tintColor = UIColor.red
             cell.btnLove.setImage(UIImage(systemName: "heart.fill"), for: .normal)
         }
@@ -147,7 +228,8 @@ extension DetailMenuViewController:UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let dest = storyboard?.instantiateViewController(withIdentifier: "DetailFoodViewController") as! DetailFoodViewController
-        dest.FoodID = FoodList[indexPath.row].ID
+        let index = FoodsIndexList[indexPath.row]
+        dest.FoodID = FoodList[index].ID
         dest.Ref = Ref
         dest.folderName = folderName
         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
