@@ -12,7 +12,10 @@ import FirebaseUI
 class DetailMenuViewController: UIViewController {
     var CategoryID = 0
     var isFavorite = false
+    var isUserFood = false
     var FoodList = [(ID: Int, Name: String, ImageName: String, Favorite: Bool)]()
+    var Ref = DatabaseReference()
+    var folderName = ""
     @IBOutlet weak var FoodListTBV: UITableView!
     
     @IBOutlet weak var CategoryNameLb: UILabel!
@@ -27,29 +30,46 @@ class DetailMenuViewController: UIViewController {
     
     func Init() {
         FoodList = [(ID: Int, Name: String, ImageName: String, Favorite: Bool)]()
-        if (isFavorite == true) { //Hiển thị món ăn yêu thích
-            CategoryNameLb.text = "Món ăn yêu thích"
+        //Hien thi danh sach cac mon an rieng do nguoi dung tu them
+        if (isUserFood == true) {
+            Ref = FirebaseRef.child("UserList")
+            folderName = "/UserImages"
+            CategoryNameLb.text = "Công thức nhà mình"
         }
-        else { //Hiển thị danh sách món ăn thuộc các loại khác
-            CategoryNameLb.text = CategoryList[CategoryID]
+        else { //Hien thi danh sach mon an chung
+            Ref = foodInfoRef
+            folderName = "/FoodImages"
+            if (isFavorite == true) { //Hiển thị món ăn yêu thích
+                CategoryNameLb.text = "Món ăn yêu thích"
+            }
+            else { //Hiển thị danh sách món ăn thuộc các loại khác
+                CategoryNameLb.text = CategoryList[CategoryID]
+            }
         }
-        foodInfoRef.observeSingleEvent(of: .value, with: { (snapshot) in
+        
+        Ref.observeSingleEvent(of: .value, with: { (snapshot) in
             for snapshotChild in snapshot.children {
                 var check = false
                 let temp = snapshotChild as! DataSnapshot
                 if let food = temp.value as? [String:AnyObject] {
-                    //Truong hop hien thi danh sach yeu thich
-                    if (self.isFavorite == true) {
-                        check = food["Favorite"] as! Bool
+                    //Truong hop hien thi danh sach mon an cua ca nhan nguoi dung tu them
+                    if (self.isUserFood == true) {
+                        check = true
                     }
                     else {
-                        //Kiem tra co thoa loai mon an dang loc hay khong
-                        if (food["Category"] != nil) {
-                            let categoryArray = food["Category"] as! NSArray
-                            for i in 0..<categoryArray.count {
-                                if (categoryArray[i] as! Int == self.CategoryID) {
-                                    check = true
-                                    break
+                        //Truong hop hien thi danh sach yeu thich
+                        if (self.isFavorite == true) {
+                            check = food["Favorite"] as! Bool
+                        }
+                        else {
+                            //Kiem tra co thoa loai mon an dang loc hay khong
+                            if (food["Category"] != nil) {
+                                let categoryArray = food["Category"] as! NSArray
+                                for i in 0..<categoryArray.count {
+                                    if (categoryArray[i] as! Int == self.CategoryID) {
+                                        check = true
+                                        break
+                                    }
                                 }
                             }
                         }
@@ -80,14 +100,14 @@ class DetailMenuViewController: UIViewController {
             button.tintColor = UIColor.red
             button.setImage(UIImage(systemName: "heart.fill"), for: .normal)
             //Cap nhat data tren Firebase
-            foodInfoRef.child("\(FoodList[foodID].ID)").updateChildValues(["Favorite": 1])
+            Ref.child("\(FoodList[foodID].ID)").updateChildValues(["Favorite": 1])
             
         }
         else { //Xoa khoi danh sach yeu thich
             button.tintColor = UIColor.black
             button.setImage(UIImage(systemName: "heart"), for: .normal)
             //Cap nhat data tren Firebase
-            foodInfoRef.child("\(FoodList[foodID].ID)").updateChildValues(["Favorite": 0])
+            Ref.child("\(FoodList[foodID].ID)").updateChildValues(["Favorite": 0])
             //Nếu đang hiển thị danh sách yêu thích thì cập nhật lại dữ liệu món ăn trên màn hình
             if (isFavorite == true) {
                 FoodList.remove(at: foodID)
@@ -110,7 +130,7 @@ extension DetailMenuViewController:UITableViewDelegate, UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "DetailMenuCell") as! DetailMenuTableViewCell
         cell.btnLove.tag = indexPath.row
         cell.btnLove.addTarget(self, action: #selector(btnLove(_:)), for: .touchUpInside)
-        cell.FoodImageView.sd_setImage(with: imageRef.child("/FoodImages/\(FoodList[indexPath.row].ImageName)"), maxImageSize: 1 << 30, placeholderImage: nil, options: .retryFailed, completion: nil)
+        cell.FoodImageView.sd_setImage(with: imageRef.child("\(folderName)/\(FoodList[indexPath.row].ImageName)"), maxImageSize: 1 << 30, placeholderImage: UIImage(named: "food-background"), options: .retryFailed, completion: nil)
         cell.FoodNameLb.text = FoodList[indexPath.row].Name
         if (FoodList[indexPath.row].Favorite == true) {
             cell.btnLove.tintColor = UIColor.red
@@ -120,13 +140,14 @@ extension DetailMenuViewController:UITableViewDelegate, UITableViewDataSource{
             cell.btnLove.tintColor = UIColor.black
             cell.btnLove.setImage(UIImage(systemName: "heart"), for: .normal)
         }
-        cell.btnLove.layer.cornerRadius = cell.btnLove.frame.height/2
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let dest = storyboard?.instantiateViewController(withIdentifier: "DetailFoodViewController") as! DetailFoodViewController
         dest.FoodID = FoodList[indexPath.row].ID
+        dest.Ref = Ref
+        dest.folderName = folderName
         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         dest.delegate = self

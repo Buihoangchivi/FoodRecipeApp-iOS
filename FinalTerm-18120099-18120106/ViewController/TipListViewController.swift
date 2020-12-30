@@ -150,7 +150,7 @@ class TipListViewController: UIViewController,UITableViewDelegate, UITableViewDa
        
         //Xoa cache
         //Hien thi hinh anh mo ta meo
-        dest.TipImageView.sd_setImage(with: imageRef.child("/TipImages/\(TipList[index].ImageName)"), maxImageSize: 1 << 30, placeholderImage: nil, options: .retryFailed, completion: nil)
+        dest.TipImageView.sd_setImage(with: imageRef.child("/TipImages/\(TipList[index].ImageName)"), maxImageSize: 1 << 30, placeholderImage: UIImage(named: "food-background"), options: .retryFailed, completion: nil)
         //Hien thi ten meo
         dest.LbTipName.text = TipList[index].Name
         //Hien thi chi tiet noi dung meo

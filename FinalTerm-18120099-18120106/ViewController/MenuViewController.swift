@@ -96,7 +96,7 @@ extension MenuViewController : UITableViewDelegate, UITableViewDataSource{
             case 0: //Món ăn yêu thích
                 dest.isFavorite = true
             case 1: //Công thức nhà mình
-                dest.CategoryID = 8
+                dest.isUserFood = true
             case 3: //Món ăn ngày lễ
                 dest.CategoryID = 16
             case 4: //Món ăn chay

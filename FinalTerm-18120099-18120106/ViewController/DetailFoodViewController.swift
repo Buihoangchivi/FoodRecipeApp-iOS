@@ -44,6 +44,8 @@ class DetailFoodViewController: UIViewController{
     var NumberOfPeople = 1
     var isIngredientView = true
     var delegate: DetailFoodDelegate?
+    var Ref = foodInfoRef
+    var folderName = "/FoodImages"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,14 +77,14 @@ class DetailFoodViewController: UIViewController{
         else if (NumberOfPeople == 10) {
             UpNumberButton.isEnabled = false
         }
-        foodInfoRef.child("\(FoodID)").observeSingleEvent(of: .value, with: { (snapshot) in
+        Ref.child("\(FoodID)").observeSingleEvent(of: .value, with: { (snapshot) in
         if let food = snapshot.value as? [String:Any] {
             //Xoa cache
             //SDImageCache.shared.clearMemory()
             //SDImageCache.shared.clearDisk()
             
             //Hien thi hinh anh mon an
-            self.FoodImageView.sd_setImage(with: imageRef.child("/FoodImages/\(food["Image"]!)"), maxImageSize: 1 << 30, placeholderImage: UIImage(named: "food-background"), options: .retryFailed, completion: nil)
+            self.FoodImageView.sd_setImage(with: imageRef.child("\(self.folderName)/\(food["Image"]!)"), maxImageSize: 1 << 30, placeholderImage: UIImage(named: "food-background"), options: .retryFailed, completion: nil)
             
             //Hien thi ten mon an
             self.FoodNameLabel.text = "\(food["Name"]!)"
@@ -101,7 +103,7 @@ class DetailFoodViewController: UIViewController{
             self.FavoriteButton.isHidden = false
             self.FavoriteButtonBackground.isHidden = false
             }})
-        foodInfoRef.child("\(FoodID)/Ingredient").observeSingleEvent(of: .value, with: { (snapshot) in
+        Ref.child("\(FoodID)/Ingredient").observeSingleEvent(of: .value, with: { (snapshot) in
                 for snapshotChild in snapshot.children {
                     let temp = snapshotChild as! DataSnapshot
                         if let arr = temp.value as? NSArray {
@@ -119,7 +121,7 @@ class DetailFoodViewController: UIViewController{
                       }
                 }
           })
-        foodInfoRef.child("\(FoodID)/Direction").observeSingleEvent(of: .value, with: { (snapshot) in
+        Ref.child("\(FoodID)/Direction").observeSingleEvent(of: .value, with: { (snapshot) in
                 for snapshotChild in snapshot.children {
                     let temp = snapshotChild as! DataSnapshot
                         self.DirectionList += [temp.value as! String]
@@ -255,13 +257,13 @@ class DetailFoodViewController: UIViewController{
             FavoriteButton.tintColor = UIColor.red
             FavoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
             //Cap nhat data tren Firebase
-            foodInfoRef.child("\(FoodID)").updateChildValues(["Favorite": 1])
+            Ref.child("\(FoodID)").updateChildValues(["Favorite": 1])
         }
         else { //Xoa khoi danh sach yeu thich
             FavoriteButton.tintColor = UIColor.white
             FavoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
             //Cap nhat data tren Firebase
-            foodInfoRef.child("\(FoodID)").updateChildValues(["Favorite": 0])
+            Ref.child("\(FoodID)").updateChildValues(["Favorite": 0])
         }
     }
 }
