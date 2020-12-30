@@ -54,9 +54,9 @@ func GetOriginSubstring(_ mainString: String, _ subString: String) -> String {
     //Chuyen chuoi con can tim thanh chuoi ASCII khong co ki tu khoang trang
     var str = "", mainChar = "", subChar = "", subStringTemp = GetCustomizedString(subString)
     var mainStringIndex, subStringIndex: String.Index
-    var subIndex = 0
+    var subIndex = 0, mainIndex = 0
     var check = false
-    for mainIndex in 0..<mainString.count {
+    while mainIndex < mainString.count {
         //Lay Index cua chuoi chinh va chuoi con tu lan luot o vi tri 'mainIndex' va 'subIndex'
         //Viec chay index cua 2 chuoi nay giong nhu chay 2 con tro song song
         mainStringIndex = mainString.index(mainString.startIndex, offsetBy: mainIndex)
@@ -84,6 +84,8 @@ func GetOriginSubstring(_ mainString: String, _ subString: String) -> String {
                 check = false
                 str = ""
                 subIndex = 0
+                //Xet tu ki tu hien tai
+                mainIndex -= 1
             }
         }
         
@@ -91,6 +93,9 @@ func GetOriginSubstring(_ mainString: String, _ subString: String) -> String {
         if (subIndex == subStringTemp.count) {
             return str
         }
+        
+        //Tang bien dem mainIndex len 1 don vi
+        mainIndex += 1
     }
     //Truong hop chuoi chinh khong chua chuoi con thi tra ve chuoi rong
     return ""

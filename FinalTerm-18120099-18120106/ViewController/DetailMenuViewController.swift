@@ -97,6 +97,7 @@ class DetailMenuViewController: UIViewController {
         //Them vao danh sach yeu thich
         let foodID = (sender as! UIButton).tag
         if (button.tintColor == UIColor.black) {
+            FoodList[foodID].Favorite = true
             button.tintColor = UIColor.red
             button.setImage(UIImage(systemName: "heart.fill"), for: .normal)
             //Cap nhat data tren Firebase
@@ -104,6 +105,7 @@ class DetailMenuViewController: UIViewController {
             
         }
         else { //Xoa khoi danh sach yeu thich
+            FoodList[foodID].Favorite = false
             button.tintColor = UIColor.black
             button.setImage(UIImage(systemName: "heart"), for: .normal)
             //Cap nhat data tren Firebase
