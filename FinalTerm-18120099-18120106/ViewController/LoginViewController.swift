@@ -14,6 +14,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var PasswordTextField: UITextField!
     @IBOutlet weak var HidePasswordButton: UIButton!
     @IBOutlet weak var LoginButton: UIButton!
+    @IBOutlet weak var RegisterButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +33,14 @@ class LoginViewController: UIViewController {
         
         //Bo tron goc cho nut Dang nhap
         LoginButton.layer.cornerRadius = 4.5
+        
+        //Thay doi mau dong chu 'Hay dang ky' de lam noi bat
+        let FirstTitle = NSAttributedString(string: "Bạn chưa có tài khoản? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray])
+        let LastTitle = NSAttributedString(string: "Hãy đăng ký.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
+        let Title = NSMutableAttributedString()
+        Title.append(FirstTitle)
+        Title.append(LastTitle)
+        RegisterButton.setAttributedTitle(Title, for: UIControl.State.normal)
     }
     
     @IBAction func act_ChangePasswordVisibility(_ sender: Any) {
@@ -62,5 +71,11 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func act_Login(_ sender: Any) {
+    }
+    
+    @IBAction func act_ResetPassword(_ sender: Any) {
+    }
+    
+    @IBAction func act_Register(_ sender: Any) {
     }
 }
