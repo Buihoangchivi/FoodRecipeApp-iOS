@@ -36,7 +36,7 @@ class LoginViewController: UIViewController {
         
         //Thay doi mau dong chu 'Hay dang ky' de lam noi bat
         let FirstTitle = NSAttributedString(string: "Bạn chưa có tài khoản? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray])
-        let LastTitle = NSAttributedString(string: "Hãy đăng ký.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
+        let LastTitle = NSAttributedString(string: "Đăng ký ngay.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
         let Title = NSMutableAttributedString()
         Title.append(FirstTitle)
         Title.append(LastTitle)
@@ -77,5 +77,11 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func act_Register(_ sender: Any) {
+    }
+    
+    @IBAction func act_LoginWithGoogle(_ sender: Any) {
+    }
+    
+    @IBAction func act_LoginWithFacebook(_ sender: Any) {
     }
 }
