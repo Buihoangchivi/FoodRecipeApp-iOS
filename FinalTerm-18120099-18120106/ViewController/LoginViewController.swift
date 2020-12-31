@@ -48,6 +48,19 @@ class LoginViewController: UIViewController {
         }
     }
     
+    @IBAction func act_ShowLoginButton(_ sender: Any) {
+        //Hien nut dang nhap
+        if (UsernameTextField.text != "" && PasswordTextField.text != "" && LoginButton.isEnabled == false) {
+            LoginButton.alpha = 1
+            LoginButton.isEnabled = true
+        }
+        //An nut dang nhap
+        else if ((UsernameTextField.text == "" || PasswordTextField.text == "") && LoginButton.isEnabled == true) {
+            LoginButton.alpha = 0.45
+            LoginButton.isEnabled = false
+        }
+    }
+    
     @IBAction func act_Login(_ sender: Any) {
     }
 }
