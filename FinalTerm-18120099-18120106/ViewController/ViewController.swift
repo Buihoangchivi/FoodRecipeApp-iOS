@@ -587,11 +587,11 @@ class ViewController: UIViewController {
                 //Yeu thich
                 if (food["Favorite"] as! Int == 1) {
                     self.FoodFavoriteButtonOutletList[i].tintColor = UIColor.red
-                self.FoodFavoriteButtonOutletList[i].setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                    self.FoodFavoriteButtonOutletList[i].setImage(UIImage(systemName: "heart.fill"), for: .normal)
                 }
                 else { //Khong yeu thich
                     self.FoodFavoriteButtonOutletList[i].tintColor = UIColor.black
-                self.FoodFavoriteButtonOutletList[i].setImage(UIImage(systemName: "heart"), for: .normal)
+                    self.FoodFavoriteButtonOutletList[i].setImage(UIImage(systemName: "heart"), for: .normal)
                 }
                 //Neu dang bi vo hieu hoa thi bat nut len
                 if (self.FoodButtonOutletList[i].isEnabled == false) {
