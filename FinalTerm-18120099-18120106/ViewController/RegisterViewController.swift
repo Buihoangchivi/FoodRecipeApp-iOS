@@ -70,6 +70,26 @@ class RegisterViewController: UIViewController {
         }
     }
     
+    @IBAction func act_CheckValidUsername(_ sender: Any) {
+        //Ten dang nhap phai it nhat chua 2 ky tu
+        if (UsernameTextField.text!.count < 2) {
+            UsernameNotificationLabel.text = "Tên người dùng quá ngắn (tối thiểu là 2 ký tự)."
+            UsernameNotificationLabel.textColor = UIColor.red
+        }
+        else if (UsernameTextField.text!.isAlphanumeric == false) { //Cac ki tu chi chua cac chu cai tieng Anh va so
+            UsernameNotificationLabel.text = "Vui lòng tạo tên người dùng chỉ với số và các ký tự ASCII."
+            UsernameNotificationLabel.textColor = UIColor.red
+        }
+        else if (CheckIfUsernameIsExist(UsernameTextField.text!) == true) { //Kiem tra xem username da ton tai hay chua
+            UsernameNotificationLabel.text = "Tên người dùng đã tồn tại."
+            UsernameNotificationLabel.textColor = UIColor.red
+        }
+        else { //Ten nguoi dung hop le
+            UsernameNotificationLabel.text = "Tên người dùng hợp lệ."
+            UsernameNotificationLabel.textColor = UIColor.systemGreen
+        }
+    }
+    
     @IBAction func act_ShowLoginButton(_ sender: Any) {
         //Hien nut dang nhap
         /*if (UsernameTextField.text != "" && PasswordTextField.text != "" && LoginButton.isEnabled == false) {

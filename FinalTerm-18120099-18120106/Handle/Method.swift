@@ -109,6 +109,19 @@ func AttributedStringWithColor(_ mainString: String, _ string: String, color: UI
     return attributedString
 }
 
+//Kiem tra ten nguoi dung co ton tai hay chua
+func CheckIfUsernameIsExist (_ username: String) -> Bool {
+    var result = false
+    return result
+}
+
+//Kiem tra chuoi co chua toan cac ky tu trong bang ma ASCII hay khong
+extension String {
+    var isAlphanumeric: Bool {
+        return !isEmpty && range(of: "[^a-zA-Z0-9]", options: .regularExpression) == nil
+    }
+}
+
 //Padding cho TextField
 extension UITextField {
     func setLeftPaddingPoints(_ amount:CGFloat){
