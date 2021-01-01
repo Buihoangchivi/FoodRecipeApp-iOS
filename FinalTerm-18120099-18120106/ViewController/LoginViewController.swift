@@ -34,7 +34,7 @@ class LoginViewController: UIViewController {
         //Bo tron goc cho nut Dang nhap
         LoginButton.layer.cornerRadius = 4.5
         
-        //Thay doi mau dong chu 'Hay dang ky' de lam noi bat
+        //Thay doi mau dong chu 'Đăng ký ngay' de lam noi bat
         let FirstTitle = NSAttributedString(string: "Bạn chưa có tài khoản? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray])
         let LastTitle = NSAttributedString(string: "Đăng ký ngay.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
         let Title = NSMutableAttributedString()
