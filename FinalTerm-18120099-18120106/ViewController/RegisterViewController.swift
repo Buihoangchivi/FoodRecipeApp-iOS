@@ -90,6 +90,22 @@ class RegisterViewController: UIViewController {
         }
     }
     
+    @IBAction func act_CheckValidEmail(_ sender: Any) {
+        //Email co dinh dang hop le hay khong
+        if (CheckIfEmailIsValid(EmailTextField.text!) == false) {
+            EmailNotificationLabel.text = "Email có định dạng không hợp lệ."
+            EmailNotificationLabel.textColor = UIColor.red
+        }
+        else if (CheckIfEmailIsExist(EmailTextField.text!) == true) { //Kiem tra xem email da ton tai hay chua
+            EmailNotificationLabel.text = "Email đã tồn tại."
+            EmailNotificationLabel.textColor = UIColor.red
+        }
+        else { //Email hop le
+            EmailNotificationLabel.text = "Email hợp lệ."
+            EmailNotificationLabel.textColor = UIColor.systemGreen
+        }
+    }
+    
     @IBAction func act_ShowLoginButton(_ sender: Any) {
         //Hien nut dang nhap
         /*if (UsernameTextField.text != "" && PasswordTextField.text != "" && LoginButton.isEnabled == false) {

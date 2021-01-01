@@ -115,6 +115,19 @@ func CheckIfUsernameIsExist (_ username: String) -> Bool {
     return result
 }
 
+//Kiem tra email co ton tai hay chua
+func CheckIfEmailIsExist (_ email: String) -> Bool {
+    var result = false
+    return result
+}
+
+//Kiem tra email co hop le hay khong
+func CheckIfEmailIsValid(_ email: String) -> Bool {
+    let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+    let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+    return emailPred.evaluate(with: email)
+}
+
 //Kiem tra chuoi co chua toan cac ky tu trong bang ma ASCII hay khong
 extension String {
     var isAlphanumeric: Bool {
