@@ -110,13 +110,13 @@ func AttributedStringWithColor(_ mainString: String, _ string: String, color: UI
 }
 
 //Kiem tra ten nguoi dung co ton tai hay chua
-func CheckIfUsernameIsExist (_ username: String) -> Bool {
+func CheckIfUsernameIsExist(_ username: String) -> Bool {
     var result = false
     return result
 }
 
 //Kiem tra email co ton tai hay chua
-func CheckIfEmailIsExist (_ email: String) -> Bool {
+func CheckIfEmailIsExist(_ email: String) -> Bool {
     var result = false
     return result
 }
@@ -146,6 +146,12 @@ func CheckIfPasswordIsValid(_ password: String) -> Bool {
     let numberResult = texttest.evaluate(with: password)
 
     return uppercaseResult && lowercaseResult && numberResult
+}
+
+//Kiem tra mat khau tuong ung cua tai khoan co hop le hay khong
+func CheckIfPasswordIsCorrect(_ username: String, _ password: String) -> Bool {
+    var result = false
+    return result
 }
 
 //Kiem tra chuoi co chua toan cac ky tu trong bang ma ASCII hay khong

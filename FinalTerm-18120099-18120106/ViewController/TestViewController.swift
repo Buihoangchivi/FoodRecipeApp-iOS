@@ -28,7 +28,7 @@ class TestViewController: UIViewController {
     
     func Init() {
         //Doi mau chu goi y trong cac o nhap ten nguoi dung, email, mat khau
-        UsernameTextField.attributedPlaceholder = NSAttributedString(string: "Tên người dùng", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        UsernameTextField.attributedPlaceholder = NSAttributedString(string: "Tên đăng nhập", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         EmailTextField.attributedPlaceholder = NSAttributedString(string: "Tài khoản email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Mật khẩu", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         
@@ -67,19 +67,19 @@ class TestViewController: UIViewController {
     @IBAction func act_CheckValidUsername(_ sender: Any) {
         //Ten dang nhap phai it nhat chua 2 ky tu
         if (UsernameTextField.text!.count < 2) {
-            UsernameNotificationLabel.text = "Tên người dùng quá ngắn (tối thiểu là 2 ký tự)."
+            UsernameNotificationLabel.text = "Tên đăng nhập quá ngắn (tối thiểu là 2 ký tự)."
             UsernameNotificationLabel.textColor = UIColor.red
         }
         else if (UsernameTextField.text!.isAlphanumeric == false) { //Cac ki tu chi chua cac chu cai tieng Anh va so
-            UsernameNotificationLabel.text = "Vui lòng tạo tên người dùng chỉ với số và các ký tự ASCII."
+            UsernameNotificationLabel.text = "Vui lòng tạo tên đăng nhập chỉ với số và các ký tự ASCII."
             UsernameNotificationLabel.textColor = UIColor.red
         }
         else if (CheckIfUsernameIsExist(UsernameTextField.text!) == true) { //Kiem tra xem username da ton tai hay chua
-            UsernameNotificationLabel.text = "Tên người dùng đã tồn tại."
+            UsernameNotificationLabel.text = "Tên đăng nhập đã tồn tại."
             UsernameNotificationLabel.textColor = UIColor.red
         }
         else { //Ten nguoi dung hop le
-            UsernameNotificationLabel.text = "Tên người dùng hợp lệ."
+            UsernameNotificationLabel.text = "Tên đăng nhập hợp lệ."
             UsernameNotificationLabel.textColor = UIColor.systemGreen
         }
     }

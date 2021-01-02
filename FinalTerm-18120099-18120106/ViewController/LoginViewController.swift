@@ -16,6 +16,9 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var LoginButton: UIButton!
     @IBOutlet weak var RegisterButton: UIButton!
     
+    @IBOutlet weak var UsernameNotificationLabel: UILabel!
+    @IBOutlet weak var PasswordNotificationLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         Init();
@@ -23,7 +26,7 @@ class LoginViewController: UIViewController {
     
     func Init() {
         //Doi mau chu goi y trong cac o nhap ten nguoi dung va mat khau
-        UsernameTextField.attributedPlaceholder = NSAttributedString(string: "Địa chỉ email hoặc tên người dùng", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        UsernameTextField.attributedPlaceholder = NSAttributedString(string: "Địa chỉ email hoặc tên đăng nhập", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Mật khẩu", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         
         //Canh le cho 2 o Username va Password
@@ -71,6 +74,20 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func act_Login(_ sender: Any) {
+        //Kiểm tra username hoặc email có tồn tại hay chưa
+        if (CheckIfUsernameIsExist(UsernameTextField.text!) == true && CheckIfEmailIsExist(UsernameTextField.text!) == false) {
+            ChangTextFieldState(UsernameTextField, UIColor.red, UsernameNotificationLabel, "Địa chỉ email hoặc tên đăng nhập không tồn tại.")
+        }
+        else {
+            ChangTextFieldState(UsernameTextField, UIColor.systemGreen, UsernameNotificationLabel, "Địa chỉ email hoặc tên đăng nhập hợp lệ.")
+            //Kiểm tra mật khẩu có đúng hay không
+            if (CheckIfPasswordIsCorrect(UsernameTextField.text!, PasswordTextField.text!) == false) {
+                ChangTextFieldState(PasswordTextField, UIColor.red, PasswordNotificationLabel, "Mật khẩu không chính xác.")
+            }
+            else { //Đăng nhập tài khoản
+                //Do something here
+            }
+        }
     }
     
     @IBAction func act_ResetPassword(_ sender: Any) {
@@ -87,5 +104,13 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func act_LoginWithFacebook(_ sender: Any) {
+    }
+    
+    func ChangTextFieldState(_ textfield: UITextField, _ color: UIColor, _ label: UILabel, _ text: String) {
+        label.text = text
+        label.textColor = color
+        textfield.layer.borderColor = color.cgColor
+        textfield.layer.borderWidth = 1
+        textfield.layer.cornerRadius = 7
     }
 }
