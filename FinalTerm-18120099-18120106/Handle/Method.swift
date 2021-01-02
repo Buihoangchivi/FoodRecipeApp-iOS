@@ -154,6 +154,15 @@ func CheckIfPasswordIsCorrect(_ username: String, _ password: String) -> Bool {
     return result
 }
 
+//Thay doi trang thai mau sac cua khung nhap du lieu tuy vao du lieu co hop le hay khong
+func ChangTextFieldState(_ textfield: UITextField, _ color: UIColor, _ label: UILabel, _ text: String) {
+    label.text = text
+    label.textColor = color
+    textfield.layer.borderColor = color.cgColor
+    textfield.layer.borderWidth = 1
+    textfield.layer.cornerRadius = 7
+}
+
 //Kiem tra chuoi co chua toan cac ky tu trong bang ma ASCII hay khong
 extension String {
     var isAlphanumeric: Bool {

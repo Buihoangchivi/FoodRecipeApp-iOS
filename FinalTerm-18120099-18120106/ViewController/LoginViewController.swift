@@ -105,12 +105,4 @@ class LoginViewController: UIViewController {
     
     @IBAction func act_LoginWithFacebook(_ sender: Any) {
     }
-    
-    func ChangTextFieldState(_ textfield: UITextField, _ color: UIColor, _ label: UILabel, _ text: String) {
-        label.text = text
-        label.textColor = color
-        textfield.layer.borderColor = color.cgColor
-        textfield.layer.borderWidth = 1
-        textfield.layer.cornerRadius = 7
-    }
 }

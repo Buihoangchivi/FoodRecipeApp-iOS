@@ -67,68 +67,63 @@ class TestViewController: UIViewController {
     @IBAction func act_CheckValidUsername(_ sender: Any) {
         //Ten dang nhap phai it nhat chua 2 ky tu
         if (UsernameTextField.text!.count < 2) {
-            UsernameNotificationLabel.text = "Tên đăng nhập quá ngắn (tối thiểu là 2 ký tự)."
-            UsernameNotificationLabel.textColor = UIColor.red
+            ChangTextFieldState(UsernameTextField, UIColor.red, UsernameNotificationLabel, "Tên đăng nhập quá ngắn (tối thiểu là 2 ký tự).")
         }
         else if (UsernameTextField.text!.isAlphanumeric == false) { //Cac ki tu chi chua cac chu cai tieng Anh va so
-            UsernameNotificationLabel.text = "Vui lòng tạo tên đăng nhập chỉ với số và các ký tự ASCII."
-            UsernameNotificationLabel.textColor = UIColor.red
+            ChangTextFieldState(UsernameTextField, UIColor.red, UsernameNotificationLabel, "Vui lòng tạo tên đăng nhập chỉ với số và các ký tự ASCII.")
         }
         else if (CheckIfUsernameIsExist(UsernameTextField.text!) == true) { //Kiem tra xem username da ton tai hay chua
-            UsernameNotificationLabel.text = "Tên đăng nhập đã tồn tại."
-            UsernameNotificationLabel.textColor = UIColor.red
+            ChangTextFieldState(UsernameTextField, UIColor.red, UsernameNotificationLabel, "Tên đăng nhập đã tồn tại.")
         }
         else { //Ten nguoi dung hop le
-            UsernameNotificationLabel.text = "Tên đăng nhập hợp lệ."
-            UsernameNotificationLabel.textColor = UIColor.systemGreen
+            ChangTextFieldState(UsernameTextField, UIColor.systemGreen, UsernameNotificationLabel, "Tên đăng nhập hợp lệ.")
         }
+        ShowLoginButton()
     }
     
     @IBAction func act_CheckValidEmail(_ sender: Any) {
         //Email co dinh dang hop le hay khong
         if (CheckIfEmailIsValid(EmailTextField.text!) == false) {
-            EmailNotificationLabel.text = "Email có định dạng không hợp lệ."
-            EmailNotificationLabel.textColor = UIColor.red
+            ChangTextFieldState(EmailTextField, UIColor.red, EmailNotificationLabel, "Email có định dạng không hợp lệ.")
         }
         else if (CheckIfEmailIsExist(EmailTextField.text!) == true) { //Kiem tra xem email da ton tai hay chua
-            EmailNotificationLabel.text = "Email đã tồn tại."
-            EmailNotificationLabel.textColor = UIColor.red
+            ChangTextFieldState(EmailTextField, UIColor.red, EmailNotificationLabel, "Email đã tồn tại.")
         }
         else { //Email hop le
-            EmailNotificationLabel.text = "Email hợp lệ."
-            EmailNotificationLabel.textColor = UIColor.systemGreen
+            ChangTextFieldState(EmailTextField, UIColor.systemGreen, EmailNotificationLabel, "Email hợp lệ.")
         }
+        ShowLoginButton()
     }
     
     @IBAction func act_CheckValidPassword(_ sender: Any) {
         //Mat khau phai chua it nhat chua 8 ky tu
         if (PasswordTextField.text!.count < 8) {
-            PasswordNotificationLabel.text = "Mật khẩu quá ngắn (tối thiểu là 8 ký tự)."
-            PasswordNotificationLabel.textColor = UIColor.red
+            ChangTextFieldState(PasswordTextField, UIColor.red, PasswordNotificationLabel, "Mật khẩu quá ngắn (tối thiểu là 8 ký tự).")
         }
         else if (CheckIfPasswordIsValid(PasswordTextField.text!) == false) {
             //Mat khau phai chua it nhat 1 ky tu thuong, 1 ky tu in hoa va 1 so
-            PasswordNotificationLabel.text = "Mật khẩu phải chứa ít nhất 1 chữ thường, 1 chữ in và 1 số."
-            PasswordNotificationLabel.textColor = UIColor.red
+            ChangTextFieldState(PasswordTextField, UIColor.red, PasswordNotificationLabel, "Mật khẩu phải chứa ít nhất 1 chữ thường, 1 chữ in và 1 số.")
         }
         else { //Mat khau hop le
-            PasswordNotificationLabel.text = "Mật khẩu hợp lệ."
-            PasswordNotificationLabel.textColor = UIColor.systemGreen
+            ChangTextFieldState(PasswordTextField, UIColor.systemGreen, PasswordNotificationLabel, "Mật khẩu hợp lệ.")
+        }
+        ShowLoginButton()
+    }
+    
+    func ShowLoginButton() {
+        //Hien nut dang ky
+        if (UsernameNotificationLabel.textColor == UIColor.systemGreen &&
+            EmailNotificationLabel.textColor == UIColor.systemGreen &&
+            PasswordNotificationLabel.textColor == UIColor.systemGreen) {
+            RegisterButton.alpha = 1
+            RegisterButton.isEnabled = true
+        }
+        else { //An nut dang ky
+            RegisterButton.alpha = 0.45
+            RegisterButton.isEnabled = false
         }
     }
     
-    @IBAction func act_ShowLoginButton(_ sender: Any) {
-        //Hien nut dang nhap
-        /*if (UsernameTextField.text != "" && PasswordTextField.text != "" && LoginButton.isEnabled == false) {
-            LoginButton.alpha = 1
-            LoginButton.isEnabled = true
-        }
-        //An nut dang nhap
-        else if ((UsernameTextField.text == "" || PasswordTextField.text == "") && LoginButton.isEnabled == true) {
-            LoginButton.alpha = 0.45
-            LoginButton.isEnabled = false
-        }*/
-    }
     @IBAction func act_Check(_ sender: Any) {
     }
     
