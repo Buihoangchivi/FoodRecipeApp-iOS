@@ -60,34 +60,29 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @IBAction func act_ShowLoginButton(_ sender: Any) {
-        //Hien nut dang nhap
-        if (UsernameTextField.text != "" && PasswordTextField.text != "" && LoginButton.isEnabled == false) {
-            LoginButton.alpha = 1
-            LoginButton.isEnabled = true
-        }
-        //An nut dang nhap
-        else if ((UsernameTextField.text == "" || PasswordTextField.text == "") && LoginButton.isEnabled == true) {
-            LoginButton.alpha = 0.45
-            LoginButton.isEnabled = false
-        }
-    }
-    
-    @IBAction func act_Login(_ sender: Any) {
+    @IBAction func act_CheckValidUsername(_ sender: Any) {
         //Kiểm tra username hoặc email có tồn tại hay chưa
-        if (CheckIfUsernameIsExist(UsernameTextField.text!) == true && CheckIfEmailIsExist(UsernameTextField.text!) == false) {
+        if (CheckIfUsernameIsExist(UsernameTextField.text!) == false && CheckIfEmailIsExist(UsernameTextField.text!) == false) {
             ChangTextFieldState(UsernameTextField, UIColor.red, UsernameNotificationLabel, "Địa chỉ email hoặc tên đăng nhập không tồn tại.")
         }
         else {
             ChangTextFieldState(UsernameTextField, UIColor.systemGreen, UsernameNotificationLabel, "Địa chỉ email hoặc tên đăng nhập hợp lệ.")
-            //Kiểm tra mật khẩu có đúng hay không
-            if (CheckIfPasswordIsCorrect(UsernameTextField.text!, PasswordTextField.text!) == false) {
-                ChangTextFieldState(PasswordTextField, UIColor.red, PasswordNotificationLabel, "Mật khẩu không chính xác.")
-            }
-            else { //Đăng nhập tài khoản
-                //Do something here
-            }
         }
+        ShowLoginButton()
+    }
+    
+    @IBAction func act_CheckValidPassword(_ sender: Any) {
+        //Kiểm tra mật khẩu có đúng hay không
+        if (CheckIfPasswordIsCorrect(UsernameTextField.text!, PasswordTextField.text!) == false) {
+            ChangTextFieldState(PasswordTextField, UIColor.red, PasswordNotificationLabel, "Mật khẩu không chính xác.")
+        }
+        else {
+            ChangTextFieldState(PasswordTextField, UIColor.systemGreen, PasswordNotificationLabel, "Mật khẩu chính xác.")
+        }
+        ShowLoginButton()
+    }
+    
+    @IBAction func act_Login(_ sender: Any) {
     }
     
     @IBAction func act_ResetPassword(_ sender: Any) {
@@ -104,5 +99,18 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func act_LoginWithFacebook(_ sender: Any) {
+    }
+    
+    func ShowLoginButton() {
+        //Hien nut dang ky
+        if (UsernameNotificationLabel.textColor == UIColor.systemGreen &&
+            PasswordNotificationLabel.textColor == UIColor.systemGreen) {
+            LoginButton.alpha = 1
+            LoginButton.isEnabled = true
+        }
+        else { //An nut dang ky
+            LoginButton.alpha = 0.45
+            LoginButton.isEnabled = false
+        }
     }
 }
