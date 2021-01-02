@@ -77,6 +77,10 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func act_Register(_ sender: Any) {
+        let dest = self.storyboard?.instantiateViewController(identifier: "RegisterViewController") as! TestViewController
+        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        self.present(dest, animated: true, completion: nil)
     }
     
     @IBAction func act_LoginWithGoogle(_ sender: Any) {

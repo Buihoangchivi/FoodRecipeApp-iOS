@@ -128,6 +128,26 @@ func CheckIfEmailIsValid(_ email: String) -> Bool {
     return emailPred.evaluate(with: email)
 }
 
+//Kiem tra mat khau co hop le hay khong
+func CheckIfPasswordIsValid(_ password: String) -> Bool {
+    //Kiem tra co ton tai it nhat 1 chu in hoa hay khong
+    var RegEx  = ".*[A-Z]+.*"
+    var texttest = NSPredicate(format:"SELF MATCHES %@", RegEx)
+    let uppercaseResult = texttest.evaluate(with: password)
+    
+    //Kiem tra co ton tai it nhat 1 chu thuong hay khong
+    RegEx  = ".*[a-z]+.*"
+    texttest = NSPredicate(format:"SELF MATCHES %@", RegEx)
+    let lowercaseResult = texttest.evaluate(with: password)
+
+    //Kiem tra co ton tai it nhat 1 so hay khong
+    RegEx  = ".*[0-9]+.*"
+    texttest = NSPredicate(format:"SELF MATCHES %@", RegEx)
+    let numberResult = texttest.evaluate(with: password)
+
+    return uppercaseResult && lowercaseResult && numberResult
+}
+
 //Kiem tra chuoi co chua toan cac ky tu trong bang ma ASCII hay khong
 extension String {
     var isAlphanumeric: Bool {

@@ -1,28 +1,25 @@
 //
-//  RegisterViewController.swift
+//  TestViewController.swift
 //  FinalTerm-18120099-18120106
 //
-//  Created by Bui Van Vi on 1/1/21.
+//  Created by Bui Van Vi on 1/2/21.
 //  Copyright © 2021 Bui Van Vi. All rights reserved.
 //
 
 import UIKit
 
-class RegisterViewController: UIViewController {
+class TestViewController: UIViewController {
 
     @IBOutlet weak var UsernameTextField: UITextField!
     @IBOutlet weak var EmailTextField: UITextField!
     @IBOutlet weak var PasswordTextField: UITextField!
     @IBOutlet weak var HidePasswordButton: UIButton!
-    @IBOutlet weak var RetypePasswordTextField: UITextField!
-    @IBOutlet weak var HideRetypePasswordButton: UIButton!
     @IBOutlet weak var RegisterButton: UIButton!
     @IBOutlet weak var SignInButton: UIButton!
     
     @IBOutlet weak var UsernameNotificationLabel: UILabel!
     @IBOutlet weak var EmailNotificationLabel: UILabel!
     @IBOutlet weak var PasswordNotificationLabel: UILabel!
-    @IBOutlet weak var RetypePasswordNotificationLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,19 +27,16 @@ class RegisterViewController: UIViewController {
     }
     
     func Init() {
-        //Doi mau chu goi y trong cac o nhap ten nguoi dung, email, mat khau, nhap lai mat khau
+        //Doi mau chu goi y trong cac o nhap ten nguoi dung, email, mat khau
         UsernameTextField.attributedPlaceholder = NSAttributedString(string: "Tên người dùng", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         EmailTextField.attributedPlaceholder = NSAttributedString(string: "Tài khoản email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Mật khẩu", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        RetypePasswordTextField.attributedPlaceholder = NSAttributedString(string: "Nhập lại mật khẩu", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         
         //Canh le cho cac o
         UsernameTextField.setLeftPaddingPoints(8)
         EmailTextField.setLeftPaddingPoints(8)
         PasswordTextField.setLeftPaddingPoints(8)
         PasswordTextField.setRightPaddingPoints(45)
-        RetypePasswordTextField.setLeftPaddingPoints(8)
-        RetypePasswordTextField.setRightPaddingPoints(45)
         
         //Bo tron goc cho nut Dang ky
         RegisterButton.layer.cornerRadius = 4.5
@@ -106,6 +100,23 @@ class RegisterViewController: UIViewController {
         }
     }
     
+    @IBAction func act_CheckValidPassword(_ sender: Any) {
+        //Mat khau phai chua it nhat chua 8 ky tu
+        if (PasswordTextField.text!.count < 8) {
+            PasswordNotificationLabel.text = "Mật khẩu quá ngắn (tối thiểu là 8 ký tự)."
+            PasswordNotificationLabel.textColor = UIColor.red
+        }
+        else if (CheckIfPasswordIsValid(PasswordTextField.text!) == false) {
+            //Mat khau phai chua it nhat 1 ky tu thuong, 1 ky tu in hoa va 1 so
+            PasswordNotificationLabel.text = "Mật khẩu phải chứa ít nhất 1 chữ thường, 1 chữ in và 1 số."
+            PasswordNotificationLabel.textColor = UIColor.red
+        }
+        else { //Mat khau hop le
+            PasswordNotificationLabel.text = "Mật khẩu hợp lệ."
+            PasswordNotificationLabel.textColor = UIColor.systemGreen
+        }
+    }
+    
     @IBAction func act_ShowLoginButton(_ sender: Any) {
         //Hien nut dang nhap
         /*if (UsernameTextField.text != "" && PasswordTextField.text != "" && LoginButton.isEnabled == false) {
@@ -118,16 +129,19 @@ class RegisterViewController: UIViewController {
             LoginButton.isEnabled = false
         }*/
     }
+    @IBAction func act_Check(_ sender: Any) {
+    }
     
-    @IBAction func act_Register(_ sender: Any) {
+    @IBAction func act_CheckWithGoogle(_ sender: Any) {
+    }
+    
+    @IBAction func act_CheckWithFacebook(_ sender: Any) {
     }
     
     @IBAction func act_Login(_ sender: Any) {
-    }
-    
-    @IBAction func act_RegisterWithGoogle(_ sender: Any) {
-    }
-    
-    @IBAction func act_RegisterWithFacebook(_ sender: Any) {
+        let dest = self.storyboard?.instantiateViewController(identifier: "LoginViewController") as! LoginViewController
+        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        self.present(dest, animated: true, completion: nil)
     }
 }

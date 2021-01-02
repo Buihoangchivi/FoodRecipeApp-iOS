@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		30FF564B662439D40922327C /* Pods_FinalTerm_18120099_18120106Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EBB0E0BBC418B047C2C44FE /* Pods_FinalTerm_18120099_18120106Tests.framework */; };
 		360B6422257A8D200040BF80 /* DirectionPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360B6421257A8D200040BF80 /* DirectionPopUpViewController.swift */; };
-		36133610259E5566001896A0 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3613360F259E5566001896A0 /* RegisterViewController.swift */; };
 		36150381257FDC1100201EEA /* ShoppingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36150380257FDC1000201EEA /* ShoppingListViewController.swift */; };
 		36150383257FDC5800201EEA /* DatePickerPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36150382257FDC5800201EEA /* DatePickerPopUpViewController.swift */; };
 		36150385257FEBF000201EEA /* ShoppingListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36150384257FEBF000201EEA /* ShoppingListTableViewCell.swift */; };
@@ -30,6 +29,7 @@
 		366D6A83256F831C00693FD7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 366D6A82256F831C00693FD7 /* Assets.xcassets */; };
 		366D6A86256F831C00693FD7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 366D6A84256F831C00693FD7 /* LaunchScreen.storyboard */; };
 		366D6A91256F831C00693FD7 /* FinalTerm_18120099_18120106Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366D6A90256F831C00693FD7 /* FinalTerm_18120099_18120106Tests.swift */; };
+		36723A1A25A0ACA700ABBCED /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36723A1925A0ACA700ABBCED /* TestViewController.swift */; };
 		3677DA7925760F1F00706FD5 /* MealForAddFoodCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3677DA7825760F1F00706FD5 /* MealForAddFoodCollectionViewCell.swift */; };
 		36A2DE2C256F9C7F00C64FB8 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A2DE2B256F9C7F00C64FB8 /* CategoryCollectionViewCell.swift */; };
 		36A2DE2E256FF1EB00C64FB8 /* MealCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A2DE2D256FF1EB00C64FB8 /* MealCollectionViewCell.swift */; };
@@ -61,7 +61,6 @@
 /* Begin PBXFileReference section */
 		0EBB0E0BBC418B047C2C44FE /* Pods_FinalTerm_18120099_18120106Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FinalTerm_18120099_18120106Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		360B6421257A8D200040BF80 /* DirectionPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionPopUpViewController.swift; sourceTree = "<group>"; };
-		3613360F259E5566001896A0 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		36150380257FDC1000201EEA /* ShoppingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListViewController.swift; sourceTree = "<group>"; };
 		36150382257FDC5800201EEA /* DatePickerPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerPopUpViewController.swift; sourceTree = "<group>"; };
 		36150384257FEBF000201EEA /* ShoppingListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListTableViewCell.swift; sourceTree = "<group>"; };
@@ -86,6 +85,7 @@
 		366D6A8C256F831C00693FD7 /* FinalTerm-18120099-18120106Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FinalTerm-18120099-18120106Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		366D6A90256F831C00693FD7 /* FinalTerm_18120099_18120106Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalTerm_18120099_18120106Tests.swift; sourceTree = "<group>"; };
 		366D6A92256F831C00693FD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		36723A1925A0ACA700ABBCED /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		3677DA7825760F1F00706FD5 /* MealForAddFoodCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealForAddFoodCollectionViewCell.swift; sourceTree = "<group>"; };
 		36A2DE2B256F9C7F00C64FB8 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		36A2DE2D256FF1EB00C64FB8 /* MealCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -146,7 +146,7 @@
 				87997F61257DFFBD00C9AF5F /* TipListViewController.swift */,
 				366D6A7D256F831B00693FD7 /* ViewController.swift */,
 				366D47B8259CFC5700926D8C /* LoginViewController.swift */,
-				3613360F259E5566001896A0 /* RegisterViewController.swift */,
+				36723A1925A0ACA700ABBCED /* TestViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -451,6 +451,7 @@
 				36150385257FEBF000201EEA /* ShoppingListTableViewCell.swift in Sources */,
 				3651797E2576508F00574610 /* IngredientListViewController.swift in Sources */,
 				36A2DE2C256F9C7F00C64FB8 /* CategoryCollectionViewCell.swift in Sources */,
+				36723A1A25A0ACA700ABBCED /* TestViewController.swift in Sources */,
 				366D47B9259CFC5700926D8C /* LoginViewController.swift in Sources */,
 				8788DD24259AF3C6007B8D8C /* DetailMenuTableViewCell.swift in Sources */,
 				366D47B5259CEE1F00926D8C /* Modal.swift in Sources */,
@@ -465,7 +466,6 @@
 				366D6A7A256F831B00693FD7 /* AppDelegate.swift in Sources */,
 				366D6A7C256F831B00693FD7 /* SceneDelegate.swift in Sources */,
 				360B6422257A8D200040BF80 /* DirectionPopUpViewController.swift in Sources */,
-				36133610259E5566001896A0 /* RegisterViewController.swift in Sources */,
 				366D47B2259CEBF800926D8C /* Delegate.swift in Sources */,
 				3640BE942574BC68003C7903 /* FoodPopUpViewController.swift in Sources */,
 				87997F60257DFFAD00C9AF5F /* TipListTableViewCell.swift in Sources */,
