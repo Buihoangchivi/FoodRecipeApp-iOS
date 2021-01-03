@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class TestViewController: UIViewController {
 
@@ -125,6 +126,18 @@ class TestViewController: UIViewController {
     }
     
     @IBAction func act_Check(_ sender: Any) {
+        //Tao tai khoan moi
+        Auth.auth().createUser(withEmail: EmailTextField.text!, password: PasswordTextField.text!) { (result, err) in
+            
+            //Kiem tra co loi hay khong
+            if err != nil {
+                print(err!)
+            }
+            else {
+                print("OK")
+                print(result!.user.uid)
+            }
+        }
     }
     
     @IBAction func act_CheckWithGoogle(_ sender: Any) {

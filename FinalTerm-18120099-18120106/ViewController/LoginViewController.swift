@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
     
@@ -68,7 +69,7 @@ class LoginViewController: UIViewController {
         else {
             ChangTextFieldState(UsernameTextField, UIColor.systemGreen, UsernameNotificationLabel, "Địa chỉ email hoặc tên đăng nhập hợp lệ.")
         }
-        ShowLoginButton()
+        //ShowLoginButton()
     }
     
     @IBAction func act_CheckValidPassword(_ sender: Any) {
@@ -79,10 +80,22 @@ class LoginViewController: UIViewController {
         else {
             ChangTextFieldState(PasswordTextField, UIColor.systemGreen, PasswordNotificationLabel, "Mật khẩu chính xác.")
         }
-        ShowLoginButton()
+        //ShowLoginButton()
     }
     
     @IBAction func act_Login(_ sender: Any) {
+        //Dang nhap
+        Auth.auth().signIn(withEmail: UsernameTextField.text!, password: PasswordTextField.text!) { (result, err) in
+            
+            //Kiem tra co loi hay khong
+            if err != nil {
+                print(err!)
+            }
+            else {
+                print("OK bro")
+                print(result!.user.uid)
+            }
+        }
     }
     
     @IBAction func act_ResetPassword(_ sender: Any) {
