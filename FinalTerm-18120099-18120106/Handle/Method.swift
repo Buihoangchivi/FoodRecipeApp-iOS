@@ -109,6 +109,67 @@ func AttributedStringWithColor(_ mainString: String, _ string: String, color: UI
     return attributedString
 }
 
+//Kiem tra ten nguoi dung co ton tai hay chua
+func CheckIfUsernameIsExist(_ username: String) -> Bool {
+    var result = false
+    return result
+}
+
+//Kiem tra email co ton tai hay chua
+func CheckIfEmailIsExist(_ email: String) -> Bool {
+    var result = false
+    return result
+}
+
+//Kiem tra email co hop le hay khong
+func CheckIfEmailIsValid(_ email: String) -> Bool {
+    let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+    let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+    return emailPred.evaluate(with: email)
+}
+
+//Kiem tra mat khau co hop le hay khong
+func CheckIfPasswordIsValid(_ password: String) -> Bool {
+    //Kiem tra co ton tai it nhat 1 chu in hoa hay khong
+    var RegEx  = ".*[A-Z]+.*"
+    var texttest = NSPredicate(format:"SELF MATCHES %@", RegEx)
+    let uppercaseResult = texttest.evaluate(with: password)
+    
+    //Kiem tra co ton tai it nhat 1 chu thuong hay khong
+    RegEx  = ".*[a-z]+.*"
+    texttest = NSPredicate(format:"SELF MATCHES %@", RegEx)
+    let lowercaseResult = texttest.evaluate(with: password)
+
+    //Kiem tra co ton tai it nhat 1 so hay khong
+    RegEx  = ".*[0-9]+.*"
+    texttest = NSPredicate(format:"SELF MATCHES %@", RegEx)
+    let numberResult = texttest.evaluate(with: password)
+
+    return uppercaseResult && lowercaseResult && numberResult
+}
+
+//Kiem tra mat khau tuong ung cua tai khoan co hop le hay khong
+func CheckIfPasswordIsCorrect(_ username: String, _ password: String) -> Bool {
+    var result = false
+    return result
+}
+
+//Thay doi trang thai mau sac cua khung nhap du lieu tuy vao du lieu co hop le hay khong
+func ChangTextFieldState(_ textfield: UITextField, _ color: UIColor, _ label: UILabel, _ text: String) {
+    label.text = text
+    label.textColor = color
+    textfield.layer.borderColor = color.cgColor
+    textfield.layer.borderWidth = 1
+    textfield.layer.cornerRadius = 7
+}
+
+//Kiem tra chuoi co chua toan cac ky tu trong bang ma ASCII hay khong
+extension String {
+    var isAlphanumeric: Bool {
+        return !isEmpty && range(of: "[^a-zA-Z0-9]", options: .regularExpression) == nil
+    }
+}
+
 //Padding cho TextField
 extension UITextField {
     func setLeftPaddingPoints(_ amount:CGFloat){
