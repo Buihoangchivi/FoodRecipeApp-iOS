@@ -165,6 +165,12 @@ func ChangTextFieldState(_ textfield: UITextField, _ color: UIColor, _ label: UI
     textfield.layer.cornerRadius = 7
 }
 
+//Binh thuong hoa trang thai cua khung
+func NormalizeTextFieldState(_ textfield: UITextField, _ label: UILabel) {
+    textfield.layer.borderWidth = 0
+    label.text = ""
+}
+
 //Kiem tra chuoi co chua toan cac ky tu trong bang ma ASCII hay khong
 extension String {
     var isAlphanumeric: Bool {

@@ -2948,7 +2948,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="act_CheckValidUsername:" destination="QFG-ja-eyL" eventType="editingChanged" id="f5K-En-E8o"/>
+                                    <action selector="act_ShowLoginButton:" destination="QFG-ja-eyL" eventType="editingChanged" id="0ck-1R-oUP"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="Wh8-0P-mA7">
@@ -2961,7 +2961,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <connections>
-                                    <action selector="act_CheckValidPassword:" destination="QFG-ja-eyL" eventType="editingChanged" id="TJe-iN-7Mc"/>
+                                    <action selector="act_ShowLoginButton:" destination="QFG-ja-eyL" eventType="editingChanged" id="RA0-9Q-3X3"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Món ngon mỗi ngày" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WuS-ao-6Kr">
@@ -2982,7 +2982,7 @@
                                     <action selector="act_ChangePasswordVisibility:" destination="QFG-ja-eyL" eventType="touchUpInside" id="7dz-HV-j9u"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" alpha="0.45000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E3J-xt-ecK">
+                            <button opaque="NO" alpha="0.45000000000000001" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E3J-xt-ecK">
                                 <rect key="frame" x="25" y="462" width="364" height="42"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -3128,13 +3128,13 @@
                         <viewLayoutGuide key="safeArea" id="8dt-Pf-TdP"/>
                     </view>
                     <connections>
+                        <outlet property="EmailNotificationLabel" destination="Mi0-JR-lH2" id="aBu-FK-l5x"/>
+                        <outlet property="EmailTextField" destination="j0c-JN-RN2" id="Mfm-mq-ODN"/>
                         <outlet property="HidePasswordButton" destination="in1-u2-BJn" id="K94-Ft-LRj"/>
                         <outlet property="LoginButton" destination="E3J-xt-ecK" id="PYo-BS-svn"/>
                         <outlet property="PasswordNotificationLabel" destination="dxW-Q3-htL" id="jxc-JF-Xqk"/>
                         <outlet property="PasswordTextField" destination="Wh8-0P-mA7" id="KYA-Da-BTF"/>
                         <outlet property="RegisterButton" destination="OpZ-be-e8w" id="T6I-fa-54X"/>
-                        <outlet property="UsernameNotificationLabel" destination="Mi0-JR-lH2" id="LNo-qk-maZ"/>
-                        <outlet property="UsernameTextField" destination="j0c-JN-RN2" id="VmQ-aO-r5s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L80-UG-Nlx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
