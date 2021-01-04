@@ -30,7 +30,7 @@ class TestViewController: UIViewController {
     func Init() {
         //Doi mau chu goi y trong cac o nhap ten nguoi dung, email, mat khau
         UsernameTextField.attributedPlaceholder = NSAttributedString(string: "Tên đăng nhập", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        EmailTextField.attributedPlaceholder = NSAttributedString(string: "Tài khoản email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        EmailTextField.attributedPlaceholder = NSAttributedString(string: "Địa chỉ email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Mật khẩu", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         
         //Canh le cho cac o
@@ -66,12 +66,15 @@ class TestViewController: UIViewController {
     }
     
     @IBAction func act_CheckValidUsername(_ sender: Any) {
+        
         //Ten dang nhap phai it nhat chua 2 ky tu
         if (UsernameTextField.text!.count < 2) {
             ChangTextFieldState(UsernameTextField, UIColor.red, UsernameNotificationLabel, "Tên đăng nhập quá ngắn (tối thiểu là 2 ký tự).")
+            ShowLoginButton()
         }
         else if (UsernameTextField.text!.isAlphanumeric == false) { //Cac ki tu chi chua cac chu cai tieng Anh va so
             ChangTextFieldState(UsernameTextField, UIColor.red, UsernameNotificationLabel, "Vui lòng tạo tên đăng nhập chỉ với số và các ký tự ASCII.")
+            ShowLoginButton()
         }
         else {
             CheckIfUsernameIsExist(UsernameTextField.text!) { (isTaken) in
@@ -81,16 +84,18 @@ class TestViewController: UIViewController {
                 else { //Ten nguoi dung hop le
                     ChangTextFieldState(self.UsernameTextField, UIColor.systemGreen, self.UsernameNotificationLabel, "Tên đăng nhập hợp lệ.")
                 }
+                self.ShowLoginButton()
             }
         }
         
-        ShowLoginButton()
     }
     
     @IBAction func act_CheckValidEmail(_ sender: Any) {
+        
         //Email co dinh dang hop le hay khong
         if (CheckIfEmailIsValid(EmailTextField.text!) == false) {
             ChangTextFieldState(EmailTextField, UIColor.red, EmailNotificationLabel, "Email có định dạng không hợp lệ.")
+            ShowLoginButton()
         }
         else {
             CheckIfEmailIsExist(EmailTextField.text!) { (isTaken) in
@@ -100,10 +105,10 @@ class TestViewController: UIViewController {
                 else { //Email hop le
                     ChangTextFieldState(self.EmailTextField, UIColor.systemGreen, self.EmailNotificationLabel, "Email hợp lệ.")
                 }
+                self.ShowLoginButton()
             }
         }
         
-        ShowLoginButton()
     }
     
     @IBAction func act_CheckValidPassword(_ sender: Any) {

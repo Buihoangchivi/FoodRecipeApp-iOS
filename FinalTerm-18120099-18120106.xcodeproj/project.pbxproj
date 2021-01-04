@@ -31,6 +31,7 @@
 		366D6A91256F831C00693FD7 /* FinalTerm_18120099_18120106Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366D6A90256F831C00693FD7 /* FinalTerm_18120099_18120106Tests.swift */; };
 		36723A1A25A0ACA700ABBCED /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36723A1925A0ACA700ABBCED /* TestViewController.swift */; };
 		3677DA7925760F1F00706FD5 /* MealForAddFoodCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3677DA7825760F1F00706FD5 /* MealForAddFoodCollectionViewCell.swift */; };
+		36A19A4D25A378C800FCE811 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A19A4C25A378C800FCE811 /* ResetPasswordViewController.swift */; };
 		36A2DE2C256F9C7F00C64FB8 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A2DE2B256F9C7F00C64FB8 /* CategoryCollectionViewCell.swift */; };
 		36A2DE2E256FF1EB00C64FB8 /* MealCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A2DE2D256FF1EB00C64FB8 /* MealCollectionViewCell.swift */; };
 		36DAB9A3257521C1005CA319 /* AddNewFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DAB9A2257521C1005CA319 /* AddNewFoodViewController.swift */; };
@@ -87,6 +88,7 @@
 		366D6A92256F831C00693FD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		36723A1925A0ACA700ABBCED /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		3677DA7825760F1F00706FD5 /* MealForAddFoodCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealForAddFoodCollectionViewCell.swift; sourceTree = "<group>"; };
+		36A19A4C25A378C800FCE811 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		36A2DE2B256F9C7F00C64FB8 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		36A2DE2D256FF1EB00C64FB8 /* MealCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCollectionViewCell.swift; sourceTree = "<group>"; };
 		36DAB9A2257521C1005CA319 /* AddNewFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewFoodViewController.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				366D6A7D256F831B00693FD7 /* ViewController.swift */,
 				366D47B8259CFC5700926D8C /* LoginViewController.swift */,
 				36723A1925A0ACA700ABBCED /* TestViewController.swift */,
+				36A19A4C25A378C800FCE811 /* ResetPasswordViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -459,6 +462,7 @@
 				36150381257FDC1100201EEA /* ShoppingListViewController.swift in Sources */,
 				3634DFA7257975D400A14EE2 /* EditDirectionTableViewCell.swift in Sources */,
 				874C217C257761F20033F8F8 /* DetailFoodViewController.swift in Sources */,
+				36A19A4D25A378C800FCE811 /* ResetPasswordViewController.swift in Sources */,
 				36150383257FDC5800201EEA /* DatePickerPopUpViewController.swift in Sources */,
 				87997F62257DFFBD00C9AF5F /* TipListViewController.swift in Sources */,
 				8746F58F2578EB3A00D388AE /* MenuViewController.swift in Sources */,

@@ -28,7 +28,7 @@ class LoginViewController: UIViewController {
     
     func Init() {
         //Doi mau chu goi y trong cac o nhap ten nguoi dung va mat khau
-        EmailTextField.attributedPlaceholder = NSAttributedString(string: "Địa chỉ email hoặc tên đăng nhập", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        EmailTextField.attributedPlaceholder = NSAttributedString(string: "Địa chỉ email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Mật khẩu", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         
         //Canh le cho 2 o Username va Password
@@ -141,6 +141,10 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func act_ResetPassword(_ sender: Any) {
+        let dest = self.storyboard?.instantiateViewController(identifier: "ResetPasswordViewController") as! ResetPasswordViewController
+        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        self.present(dest, animated: true, completion: nil)
     }
     
     @IBAction func act_Register(_ sender: Any) {
