@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class TestViewController: UIViewController {
 
@@ -29,7 +30,7 @@ class TestViewController: UIViewController {
     func Init() {
         //Doi mau chu goi y trong cac o nhap ten nguoi dung, email, mat khau
         UsernameTextField.attributedPlaceholder = NSAttributedString(string: "Tên đăng nhập", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        EmailTextField.attributedPlaceholder = NSAttributedString(string: "Tài khoản email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        EmailTextField.attributedPlaceholder = NSAttributedString(string: "Địa chỉ email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Mật khẩu", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         
         //Canh le cho cac o
@@ -65,34 +66,49 @@ class TestViewController: UIViewController {
     }
     
     @IBAction func act_CheckValidUsername(_ sender: Any) {
+        
         //Ten dang nhap phai it nhat chua 2 ky tu
         if (UsernameTextField.text!.count < 2) {
             ChangTextFieldState(UsernameTextField, UIColor.red, UsernameNotificationLabel, "Tên đăng nhập quá ngắn (tối thiểu là 2 ký tự).")
+            ShowLoginButton()
         }
         else if (UsernameTextField.text!.isAlphanumeric == false) { //Cac ki tu chi chua cac chu cai tieng Anh va so
             ChangTextFieldState(UsernameTextField, UIColor.red, UsernameNotificationLabel, "Vui lòng tạo tên đăng nhập chỉ với số và các ký tự ASCII.")
+            ShowLoginButton()
         }
-        else if (CheckIfUsernameIsExist(UsernameTextField.text!) == true) { //Kiem tra xem username da ton tai hay chua
-            ChangTextFieldState(UsernameTextField, UIColor.red, UsernameNotificationLabel, "Tên đăng nhập đã tồn tại.")
+        else {
+            CheckIfUsernameIsExist(UsernameTextField.text!) { (isTaken) in
+                if (isTaken == true) { //Kiem tra xem username da ton tai hay chua
+                    ChangTextFieldState(self.UsernameTextField, UIColor.red, self.UsernameNotificationLabel, "Tên đăng nhập đã tồn tại.")
+                }
+                else { //Ten nguoi dung hop le
+                    ChangTextFieldState(self.UsernameTextField, UIColor.systemGreen, self.UsernameNotificationLabel, "Tên đăng nhập hợp lệ.")
+                }
+                self.ShowLoginButton()
+            }
         }
-        else { //Ten nguoi dung hop le
-            ChangTextFieldState(UsernameTextField, UIColor.systemGreen, UsernameNotificationLabel, "Tên đăng nhập hợp lệ.")
-        }
-        ShowLoginButton()
+        
     }
     
     @IBAction func act_CheckValidEmail(_ sender: Any) {
+        
         //Email co dinh dang hop le hay khong
         if (CheckIfEmailIsValid(EmailTextField.text!) == false) {
             ChangTextFieldState(EmailTextField, UIColor.red, EmailNotificationLabel, "Email có định dạng không hợp lệ.")
+            ShowLoginButton()
         }
-        else if (CheckIfEmailIsExist(EmailTextField.text!) == true) { //Kiem tra xem email da ton tai hay chua
-            ChangTextFieldState(EmailTextField, UIColor.red, EmailNotificationLabel, "Email đã tồn tại.")
+        else {
+            CheckIfEmailIsExist(EmailTextField.text!) { (isTaken) in
+                if (isTaken == true) { //Kiem tra xem email da ton tai hay chua
+                    ChangTextFieldState(self.EmailTextField, UIColor.red, self.EmailNotificationLabel, "Email đã tồn tại.")
+                }
+                else { //Email hop le
+                    ChangTextFieldState(self.EmailTextField, UIColor.systemGreen, self.EmailNotificationLabel, "Email hợp lệ.")
+                }
+                self.ShowLoginButton()
+            }
         }
-        else { //Email hop le
-            ChangTextFieldState(EmailTextField, UIColor.systemGreen, EmailNotificationLabel, "Email hợp lệ.")
-        }
-        ShowLoginButton()
+        
     }
     
     @IBAction func act_CheckValidPassword(_ sender: Any) {
@@ -124,7 +140,48 @@ class TestViewController: UIViewController {
         }
     }
     
+    //Tao tai khoan moi
     @IBAction func act_Check(_ sender: Any) {
+        
+        //Khoa khung nhap username, email, mat khau va nut dang ky
+        UsernameTextField.isEnabled = false
+        UsernameTextField.alpha = 0.5
+        EmailTextField.isEnabled = false
+        EmailTextField.alpha = 0.5
+        PasswordTextField.isEnabled = false
+        PasswordTextField.alpha = 0.5
+        RegisterButton.isEnabled = false
+        RegisterButton.alpha = 0.45
+        
+        Auth.auth().createUser(withEmail: EmailTextField.text!, password: PasswordTextField.text!) { (result, err) in
+            
+            //Mo khoa khung nhap username, email, mat khau va nut dang ky
+            self.UsernameTextField.isEnabled = true
+            self.UsernameTextField.alpha = 1
+            self.EmailTextField.isEnabled = true
+            self.EmailTextField.alpha = 1
+            self.PasswordTextField.isEnabled = true
+            self.PasswordTextField.alpha = 1
+            self.RegisterButton.isEnabled = true
+            self.RegisterButton.alpha = 1
+            
+            //Kiem tra co loi hay khong
+            if err != nil {
+                print(err!)
+            }
+            else {
+                //UID
+                FirebaseRef.child("UserList/\(self.UsernameTextField.text!)/UID").setValue(result!.user.uid)
+                //Email
+                FirebaseRef.child("UserList/\(self.UsernameTextField.text!)/Email").setValue(self.EmailTextField.text!)
+                //Password
+                FirebaseRef.child("UserList/\(self.UsernameTextField.text!)/Password").setValue(self.PasswordTextField.text!)
+                
+                //Chuyen qua man hinh dang ky
+                self.act_Login(sender)
+            }
+        }
+        
     }
     
     @IBAction func act_CheckWithGoogle(_ sender: Any) {

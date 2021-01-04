@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import Firebase
+import FirebaseUI
 
 //Chuyển ngày sang dạng chuỗi
 func DateToString(_ date: Date, _ format: String) -> String {
@@ -110,15 +112,42 @@ func AttributedStringWithColor(_ mainString: String, _ string: String, color: UI
 }
 
 //Kiem tra ten nguoi dung co ton tai hay chua
-func CheckIfUsernameIsExist(_ username: String) -> Bool {
-    var result = false
-    return result
+func CheckIfUsernameIsExist(_ username: String, _ completion: @escaping (Bool) -> Void) {
+    
+    let ref = FirebaseRef.child("UserList/\(username)")
+    ref.observeSingleEvent(of: .value, with: { (snapshot) in
+        
+        //Xem thu key co ton tai hay khong
+        let result = snapshot.exists()
+        //Tra ve ket qua
+        completion(result)
+        
+    })
+    
 }
 
 //Kiem tra email co ton tai hay chua
-func CheckIfEmailIsExist(_ email: String) -> Bool {
+func CheckIfEmailIsExist(_ email: String, _ completion: @escaping (Bool) -> Void) {
+    
     var result = false
-    return result
+    let ref = FirebaseRef.child("UserList")
+    ref.observeSingleEvent(of: .value, with: { (snapshot) in
+        
+        //Duyet qua tat ca cac username de xem co ton tai email hay chua
+        for snapshotChild in snapshot.children {
+            let temp = snapshotChild as! DataSnapshot
+            if let account = temp.value as? [String:AnyObject] {
+                if (account["Email"] as! String == email) {
+                    result = true
+                    break
+                }
+            }
+        }
+        //Tra va ket qua
+        completion(result)
+        
+    })
+    
 }
 
 //Kiem tra email co hop le hay khong
@@ -161,6 +190,12 @@ func ChangTextFieldState(_ textfield: UITextField, _ color: UIColor, _ label: UI
     textfield.layer.borderColor = color.cgColor
     textfield.layer.borderWidth = 1
     textfield.layer.cornerRadius = 7
+}
+
+//Binh thuong hoa trang thai cua khung
+func NormalizeTextFieldState(_ textfield: UITextField, _ label: UILabel) {
+    textfield.layer.borderWidth = 0
+    label.text = ""
 }
 
 //Kiem tra chuoi co chua toan cac ky tu trong bang ma ASCII hay khong

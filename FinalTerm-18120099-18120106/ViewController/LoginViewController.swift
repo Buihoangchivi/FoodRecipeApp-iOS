@@ -7,16 +7,18 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
     
-    @IBOutlet weak var UsernameTextField: UITextField!
+    @IBOutlet weak var EmailTextField: UITextField!
     @IBOutlet weak var PasswordTextField: UITextField!
     @IBOutlet weak var HidePasswordButton: UIButton!
     @IBOutlet weak var LoginButton: UIButton!
     @IBOutlet weak var RegisterButton: UIButton!
     
-    @IBOutlet weak var UsernameNotificationLabel: UILabel!
+    @IBOutlet weak var EmailNotificationLabel: UILabel!
     @IBOutlet weak var PasswordNotificationLabel: UILabel!
     
     override func viewDidLoad() {
@@ -26,11 +28,11 @@ class LoginViewController: UIViewController {
     
     func Init() {
         //Doi mau chu goi y trong cac o nhap ten nguoi dung va mat khau
-        UsernameTextField.attributedPlaceholder = NSAttributedString(string: "Địa chỉ email hoặc tên đăng nhập", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        EmailTextField.attributedPlaceholder = NSAttributedString(string: "Địa chỉ email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Mật khẩu", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         
         //Canh le cho 2 o Username va Password
-        UsernameTextField.setLeftPaddingPoints(8)
+        EmailTextField.setLeftPaddingPoints(8)
         PasswordTextField.setLeftPaddingPoints(8)
         PasswordTextField.setRightPaddingPoints(45)
         
@@ -60,32 +62,89 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @IBAction func act_CheckValidUsername(_ sender: Any) {
-        //Kiểm tra username hoặc email có tồn tại hay chưa
-        if (CheckIfUsernameIsExist(UsernameTextField.text!) == false && CheckIfEmailIsExist(UsernameTextField.text!) == false) {
-            ChangTextFieldState(UsernameTextField, UIColor.red, UsernameNotificationLabel, "Địa chỉ email hoặc tên đăng nhập không tồn tại.")
+    @IBAction func act_ShowLoginButton(_ sender: Any) {
+        //Hien nut dang nhap
+        if (EmailTextField.text! != "" && PasswordTextField.text! != "" && LoginButton.isEnabled == false) {
+            LoginButton.isEnabled = true
+            LoginButton.alpha = 1
         }
-        else {
-            ChangTextFieldState(UsernameTextField, UIColor.systemGreen, UsernameNotificationLabel, "Địa chỉ email hoặc tên đăng nhập hợp lệ.")
+        else if ((EmailTextField.text! == "" || PasswordTextField.text! == "") && LoginButton.isEnabled == true) { //An nut dang nhap
+            LoginButton.isEnabled = false
+            LoginButton.alpha = 0.45
         }
-        ShowLoginButton()
-    }
-    
-    @IBAction func act_CheckValidPassword(_ sender: Any) {
-        //Kiểm tra mật khẩu có đúng hay không
-        if (CheckIfPasswordIsCorrect(UsernameTextField.text!, PasswordTextField.text!) == false) {
-            ChangTextFieldState(PasswordTextField, UIColor.red, PasswordNotificationLabel, "Mật khẩu không chính xác.")
-        }
-        else {
-            ChangTextFieldState(PasswordTextField, UIColor.systemGreen, PasswordNotificationLabel, "Mật khẩu chính xác.")
-        }
-        ShowLoginButton()
     }
     
     @IBAction func act_Login(_ sender: Any) {
+        //Khoa khung nhap email, mat khau va nut dang nhap
+        EmailTextField.isEnabled = false
+        EmailTextField.alpha = 0.5
+        PasswordTextField.isEnabled = false
+        PasswordTextField.alpha = 0.5
+        LoginButton.isEnabled = false
+        LoginButton.alpha = 0.45
+        //Dang nhap
+        Auth.auth().signIn(withEmail: EmailTextField.text!, password: PasswordTextField.text!) { (result, error) in
+            //Mo khoa 2 khung nhap email va mat khau
+            self.EmailTextField.isEnabled = true
+            self.EmailTextField.alpha = 1
+            self.PasswordTextField.isEnabled = true
+            self.PasswordTextField.alpha = 1
+            self.LoginButton.isEnabled = true
+            self.LoginButton.alpha = 1
+            
+            //Kiem tra co loi hay khong
+            if error != nil {
+                if let errCode = AuthErrorCode(rawValue: error!._code) {
+                    switch errCode {
+                        case .invalidEmail:
+                            ChangTextFieldState(self.EmailTextField, UIColor.red, self.EmailNotificationLabel, "Địa chỉ email không đúng định dạng.")
+                            NormalizeTextFieldState(self.PasswordTextField, self.PasswordNotificationLabel)
+                        case .wrongPassword:
+                            ChangTextFieldState(self.EmailTextField, UIColor.systemGreen, self.EmailNotificationLabel, "")
+                            ChangTextFieldState(self.PasswordTextField, UIColor.red, self.PasswordNotificationLabel, "Mật khẩu không chính xác.")
+                        case .tooManyRequests:
+                            ChangTextFieldState(self.EmailTextField, UIColor.systemGreen, self.EmailNotificationLabel, "")
+                            ChangTextFieldState(self.PasswordTextField, UIColor.red, self.PasswordNotificationLabel, "Tạm thời khoá tài khoản này do truy cập lỗi quá nhiều lần.")
+                        case .userDisabled:
+                            ChangTextFieldState(self.EmailTextField, UIColor.red, self.EmailNotificationLabel, "Tài khoản này đã bị vô hiệu hoá.")
+                        NormalizeTextFieldState(self.PasswordTextField, self.PasswordNotificationLabel)
+                        default:
+                            ChangTextFieldState(self.EmailTextField, UIColor.red, self.EmailNotificationLabel, "Địa chỉ email không hợp lệ.")
+                            NormalizeTextFieldState(self.PasswordTextField, self.PasswordNotificationLabel)
+                    }
+                }
+            }
+            else {
+                //Luu thong tin ten dang nhap
+                FirebaseRef.child("UserList").observeSingleEvent(of: .value, with: { (snapshot) in
+                    
+                    //Duyet qua tat ca cac username de tim username
+                    for snapshotChild in snapshot.children {
+                        let temp = snapshotChild as! DataSnapshot
+                        if let account = temp.value as? [String:AnyObject] {
+                            if (account["Email"] as! String == self.EmailTextField.text!) {
+                                CurrentUsername = temp.key
+                                break
+                            }
+                        }
+                    }
+                    
+                })
+                
+                //Hien thi man hinh trang chu cua ung dung
+                let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
+                dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                self.present(dest, animated: true, completion: nil)
+            }
+        }
     }
     
     @IBAction func act_ResetPassword(_ sender: Any) {
+        let dest = self.storyboard?.instantiateViewController(identifier: "ResetPasswordViewController") as! ResetPasswordViewController
+        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        self.present(dest, animated: true, completion: nil)
     }
     
     @IBAction func act_Register(_ sender: Any) {
@@ -99,18 +158,5 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func act_LoginWithFacebook(_ sender: Any) {
-    }
-    
-    func ShowLoginButton() {
-        //Hien nut dang ky
-        if (UsernameNotificationLabel.textColor == UIColor.systemGreen &&
-            PasswordNotificationLabel.textColor == UIColor.systemGreen) {
-            LoginButton.alpha = 1
-            LoginButton.isEnabled = true
-        }
-        else { //An nut dang ky
-            LoginButton.alpha = 0.45
-            LoginButton.isEnabled = false
-        }
     }
 }

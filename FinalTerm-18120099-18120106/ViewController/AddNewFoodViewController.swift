@@ -109,7 +109,7 @@ class AddNewFoodViewController: UIViewController {
     
     @IBAction func act_SaveNewFood(_ sender: Any) {
         var count = 0
-        FirebaseRef.child("UserList").observeSingleEvent(of: .value, with: { (snapshot) in
+        FirebaseRef.child("UserList/\(CurrentUsername)/FoodList").observeSingleEvent(of: .value, with: { (snapshot) in
             //Xac dinh ID cho mon an moi
             for snapshotChild in snapshot.children {
                 let temp = snapshotChild as! DataSnapshot
@@ -165,7 +165,7 @@ class AddNewFoodViewController: UIViewController {
             }
             
             //Day tat ca thong tin cua mon an len Firebase
-        FirebaseRef.child("UserList/\(count)").setValue(["Category": tempCategoryArr, "Direction": self.SelectedDirection, "Favorite": 0, "Image": "\(count).jpg","Ingredient": tempIngredientArr, "Meal": tempMealArr, "Name": self.FoodNameTextField.text!]) { (err, ref) in
+            FirebaseRef.child("UserList/\(CurrentUsername)/FoodList/\(count)").setValue(["Category": tempCategoryArr, "Direction": self.SelectedDirection, "Favorite": 0, "Image": "\(count).jpg","Ingredient": tempIngredientArr, "Meal": tempMealArr, "Name": self.FoodNameTextField.text!]) { (err, ref) in
                 self.delegate?.UpdateUI()
                 self.act_ShowHomeScreen(sender)
             }
