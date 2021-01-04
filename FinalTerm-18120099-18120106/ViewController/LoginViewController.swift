@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 import FirebaseAuth
 
 class LoginViewController: UIViewController {
@@ -114,8 +115,27 @@ class LoginViewController: UIViewController {
                 }
             }
             else {
-                print("OK bro")
-                print(result!.user.uid)
+                //Luu thong tin ten dang nhap
+                FirebaseRef.child("UserList").observeSingleEvent(of: .value, with: { (snapshot) in
+                    
+                    //Duyet qua tat ca cac username de tim username
+                    for snapshotChild in snapshot.children {
+                        let temp = snapshotChild as! DataSnapshot
+                        if let account = temp.value as? [String:AnyObject] {
+                            if (account["Email"] as! String == self.EmailTextField.text!) {
+                                CurrentUsername = temp.key
+                                break
+                            }
+                        }
+                    }
+                    
+                })
+                
+                //Hien thi man hinh trang chu cua ung dung
+                let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
+                dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                self.present(dest, animated: true, completion: nil)
             }
         }
     }
