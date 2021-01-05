@@ -11,7 +11,7 @@
 #import "SDDiskCache.h"
 
 static SDImageCacheConfig *_defaultCacheConfig;
-static const NSInteger kDefaultCacheMaxDiskAge = 2; // 2 seconds
+static const NSInteger kDefaultCacheMaxDiskAge = 60 * 60 * 24 * 7; // 1 week
 
 @implementation SDImageCacheConfig
 

@@ -17,12 +17,7 @@ pod 'Firebase/Analytics'
 pod 'Firebase/Database'
 pod 'Firebase/Storage'
 pod 'FirebaseUI/Storage'
-
-pod 'FirebaseUI/Auth'
-
-pod 'FirebaseUI/Google'
-pod 'FirebaseUI/Facebook'
-pod 'FirebaseUI/OAuth' # Used for Sign in with Apple, Twitter, etc
-pod 'FirebaseUI/Phone'
+pod 'Firebase/Auth'
+pod 'GoogleSignIn'
 
 end
