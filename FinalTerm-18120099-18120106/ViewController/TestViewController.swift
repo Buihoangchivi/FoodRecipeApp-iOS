@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import GoogleSignIn
 
 class TestViewController: UIViewController {
 
@@ -17,6 +18,8 @@ class TestViewController: UIViewController {
     @IBOutlet weak var HidePasswordButton: UIButton!
     @IBOutlet weak var RegisterButton: UIButton!
     @IBOutlet weak var SignInButton: UIButton!
+    @IBOutlet weak var GoogleSignUpButton: UIButton!
+    @IBOutlet weak var FacebookSignUpButton: UIButton!
     
     @IBOutlet weak var UsernameNotificationLabel: UILabel!
     @IBOutlet weak var EmailNotificationLabel: UILabel!
@@ -39,8 +42,10 @@ class TestViewController: UIViewController {
         PasswordTextField.setLeftPaddingPoints(8)
         PasswordTextField.setRightPaddingPoints(45)
         
-        //Bo tron goc cho nut Dang ky
+        //Bo tron goc cho nut Dang ky, dang ky bang Google va dang ky bang Facebook
         RegisterButton.layer.cornerRadius = 4.5
+        GoogleSignUpButton.layer.cornerRadius = 4
+        FacebookSignUpButton.layer.cornerRadius = 4
         
         //Thay doi mau dong chu 'Đăng nhập nào' de lam noi bat
         let FirstTitle = NSAttributedString(string: "Bạn đã có tài khoản rồi? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray])
@@ -49,6 +54,10 @@ class TestViewController: UIViewController {
         Title.append(FirstTitle)
         Title.append(LastTitle)
         SignInButton.setAttributedTitle(Title, for: UIControl.State.normal)
+        
+        //Dang nhap bang Google
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+        GIDSignIn.sharedInstance().delegate = self
     }
     
     @IBAction func act_ChangePasswordVisibility(_ sender: Any) {
@@ -170,6 +179,7 @@ class TestViewController: UIViewController {
                 print(err!)
             }
             else {
+                
                 //UID
                 FirebaseRef.child("UserList/\(self.UsernameTextField.text!)/UID").setValue(result!.user.uid)
                 //Email
@@ -185,6 +195,7 @@ class TestViewController: UIViewController {
     }
     
     @IBAction func act_CheckWithGoogle(_ sender: Any) {
+        GIDSignIn.sharedInstance().signIn()
     }
     
     @IBAction func act_CheckWithFacebook(_ sender: Any) {
@@ -196,4 +207,51 @@ class TestViewController: UIViewController {
         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         self.present(dest, animated: true, completion: nil)
     }
+}
+
+extension TestViewController: GIDSignInDelegate {
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        
+        if let error = error {
+          print(error)
+          return
+        }
+
+        guard let authentication = user.authentication else { return }
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
+        //print(credential)
+        
+        //Authenticate with Firebase using the credential
+        Auth.auth().signIn(with: credential) { (authResult, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            //Dang nhap thanh cong
+            print("Thanh cong roi!!!")
+            //print(Auth.auth().currentUser?.email)
+            //print(Auth.auth().currentUser?.displayName)
+            //print(Auth.auth().currentUser?.uid)
+            //Hien thi man hinh trang chu cua ung dung
+            let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
+            dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            self.present(dest, animated: true, completion: nil)
+            
+        }
+    }
+
+    @available(iOS 9.0, *)
+    func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any])
+      -> Bool {
+        return GIDSignIn.sharedInstance().handle(url)
+    }
+
+    //iOS 8 or older
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url)
+    }
+    
 }

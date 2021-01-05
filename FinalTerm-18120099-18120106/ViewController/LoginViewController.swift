@@ -18,7 +18,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var HidePasswordButton: UIButton!
     @IBOutlet weak var LoginButton: UIButton!
     @IBOutlet weak var RegisterButton: UIButton!
-    @IBOutlet weak var GoogleSignInButton: GIDSignInButton!
+    @IBOutlet weak var GoogleSignInButton: UIButton!
+    @IBOutlet weak var FacebookSignInButton: UIButton!
     
     @IBOutlet weak var EmailNotificationLabel: UILabel!
     @IBOutlet weak var PasswordNotificationLabel: UILabel!
@@ -26,8 +27,6 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Init();
-        GIDSignIn.sharedInstance()?.presentingViewController = self
-        GIDSignIn.sharedInstance().delegate = self
     }
     
     func Init() {
@@ -40,8 +39,10 @@ class LoginViewController: UIViewController {
         PasswordTextField.setLeftPaddingPoints(8)
         PasswordTextField.setRightPaddingPoints(45)
         
-        //Bo tron goc cho nut Dang nhap
+        //Bo tron goc cho nut Dang nhap, dang nhap bang Google va dang nhap bang Facebook
         LoginButton.layer.cornerRadius = 4.5
+        GoogleSignInButton.layer.cornerRadius = 4
+        FacebookSignInButton.layer.cornerRadius = 4
         
         //Thay doi mau dong chu 'Đăng ký ngay' de lam noi bat
         let FirstTitle = NSAttributedString(string: "Bạn chưa có tài khoản? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray])
@@ -50,6 +51,10 @@ class LoginViewController: UIViewController {
         Title.append(FirstTitle)
         Title.append(LastTitle)
         RegisterButton.setAttributedTitle(Title, for: UIControl.State.normal)
+        
+        //Dang nhap bang Google
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+        GIDSignIn.sharedInstance().delegate = self
     }
     
     @IBAction func act_ChangePasswordVisibility(_ sender: Any) {
@@ -163,10 +168,17 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func act_LoginWithFacebook(_ sender: Any) {
+        // Sign out from Google
+        GIDSignIn.sharedInstance().signOut()
+        
+        // Sign out from Firebase
         do {
             try Auth.auth().signOut()
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
+            
+            // Update screen after user successfully signed out
+            //updateScreen()
+        } catch let error as NSError {
+            print ("Error signing out from Firebase: %@", error)
         }
     }
 }
@@ -174,15 +186,14 @@ class LoginViewController: UIViewController {
 extension LoginViewController: GIDSignInDelegate {
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        // ...
+        
         if let error = error {
           print(error)
           return
         }
 
         guard let authentication = user.authentication else { return }
-        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
-                                                          accessToken: authentication.accessToken)
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
         //print(credential)
         
         //Authenticate with Firebase using the credential

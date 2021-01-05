@@ -3047,29 +3047,31 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6yb-df-Wsd">
-                                <rect key="frame" x="79.666666666666686" y="609" width="255" height="35"/>
+                                <rect key="frame" x="72" y="609" width="270" height="42"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="255" id="6HW-fe-yRF"/>
-                                    <constraint firstAttribute="height" constant="35" id="9Bb-Jm-ONR"/>
+                                    <constraint firstAttribute="width" constant="270" id="6HW-fe-yRF"/>
+                                    <constraint firstAttribute="height" constant="42" id="9Bb-Jm-ONR"/>
                                 </constraints>
-                                <inset key="titleEdgeInsets" minX="-2" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <inset key="imageEdgeInsets" minX="5" minY="7" maxX="230" maxY="7"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <inset key="titleEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="12" minY="10" maxX="236" maxY="10"/>
                                 <state key="normal" title="Đăng nhập bằng Google" image="google">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="act_LoginWithGoogle:" destination="QFG-ja-eyL" eventType="touchUpInside" id="M5F-19-NMR"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hjT-ak-DEN">
-                                <rect key="frame" x="79.666666666666686" y="657" width="255" height="35"/>
+                                <rect key="frame" x="72" y="676" width="270" height="42"/>
+                                <color key="backgroundColor" red="0.22821298241615295" green="0.35878992080688477" blue="0.596687912940979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="255" id="iIB-4f-kVb"/>
-                                    <constraint firstAttribute="height" constant="35" id="oAv-BA-9VW"/>
+                                    <constraint firstAttribute="width" constant="270" id="iIB-4f-kVb"/>
+                                    <constraint firstAttribute="height" constant="42" id="oAv-BA-9VW"/>
                                 </constraints>
-                                <inset key="titleEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <inset key="imageEdgeInsets" minX="3" minY="6" maxX="230" maxY="6"/>
+                                <inset key="titleEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="12" minY="10" maxX="236" maxY="10"/>
                                 <state key="normal" title="Đăng nhập bằng Facebook" image="facebook">
                                     <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 </state>
@@ -3118,7 +3120,7 @@
                             <constraint firstItem="dxW-Q3-htL" firstAttribute="leading" secondItem="8dt-Pf-TdP" secondAttribute="leading" constant="25" id="leU-78-hre"/>
                             <constraint firstItem="GaP-jH-ygv" firstAttribute="top" secondItem="hDN-jE-ByD" secondAttribute="bottom" constant="20" id="oaz-BR-qEx"/>
                             <constraint firstItem="8dt-Pf-TdP" firstAttribute="trailing" secondItem="E3J-xt-ecK" secondAttribute="trailing" constant="25" id="oro-nR-4KP"/>
-                            <constraint firstItem="hjT-ak-DEN" firstAttribute="top" secondItem="6yb-df-Wsd" secondAttribute="bottom" constant="13" id="pHx-y9-Cau"/>
+                            <constraint firstItem="hjT-ak-DEN" firstAttribute="top" secondItem="6yb-df-Wsd" secondAttribute="bottom" constant="25" id="pHx-y9-Cau"/>
                             <constraint firstItem="hDN-jE-ByD" firstAttribute="top" secondItem="E3J-xt-ecK" secondAttribute="bottom" constant="8" id="qpa-EP-aVl"/>
                             <constraint firstItem="Mi0-JR-lH2" firstAttribute="top" secondItem="j0c-JN-RN2" secondAttribute="bottom" constant="3" id="qta-BQ-nBH"/>
                             <constraint firstItem="8dt-Pf-TdP" firstAttribute="trailing" secondItem="Wh8-0P-mA7" secondAttribute="trailing" constant="25" id="qy7-Zu-edn"/>
@@ -3131,6 +3133,8 @@
                     <connections>
                         <outlet property="EmailNotificationLabel" destination="Mi0-JR-lH2" id="aBu-FK-l5x"/>
                         <outlet property="EmailTextField" destination="j0c-JN-RN2" id="Mfm-mq-ODN"/>
+                        <outlet property="FacebookSignInButton" destination="hjT-ak-DEN" id="tSL-0R-A1E"/>
+                        <outlet property="GoogleSignInButton" destination="6yb-df-Wsd" id="IpZ-B3-Bus"/>
                         <outlet property="HidePasswordButton" destination="in1-u2-BJn" id="K94-Ft-LRj"/>
                         <outlet property="LoginButton" destination="E3J-xt-ecK" id="PYo-BS-svn"/>
                         <outlet property="PasswordNotificationLabel" destination="dxW-Q3-htL" id="jxc-JF-Xqk"/>
@@ -3774,36 +3778,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cep-gZ-mbf">
-                                <rect key="frame" x="89.666666666666686" y="622" width="235" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="9B6-mt-gfY"/>
-                                    <constraint firstAttribute="width" constant="235" id="dZu-Vz-yPB"/>
-                                </constraints>
-                                <inset key="titleEdgeInsets" minX="-2" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <inset key="imageEdgeInsets" minX="5" minY="7" maxX="210" maxY="7"/>
-                                <state key="normal" title="Đăng ký bằng Google" image="google">
-                                    <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="act_CheckWithGoogle:" destination="3qG-yv-fCx" eventType="touchUpInside" id="Zlb-33-tuf"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MVs-Mh-zkd">
-                                <rect key="frame" x="89.666666666666686" y="670" width="235" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="235" id="DaV-ka-KpT"/>
-                                    <constraint firstAttribute="height" constant="35" id="tch-DQ-9uA"/>
-                                </constraints>
-                                <inset key="titleEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <inset key="imageEdgeInsets" minX="3" minY="6" maxX="210" maxY="6"/>
-                                <state key="normal" title="Đăng ký bằng Facebook" image="facebook">
-                                    <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="act_CheckWithFacebook:" destination="3qG-yv-fCx" eventType="touchUpInside" id="b2K-U6-Q4G"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="Cb1-WP-LBK">
                                 <rect key="frame" x="25" y="302" width="364" height="42"/>
                                 <color key="backgroundColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3835,36 +3809,69 @@
                                 <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="foy-4r-4HB">
+                                <rect key="frame" x="72" y="622" width="270" height="42"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="EbK-IF-YVb"/>
+                                    <constraint firstAttribute="width" constant="270" id="Kun-At-PKA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <inset key="titleEdgeInsets" minX="-35" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="12" minY="10" maxX="236" maxY="10"/>
+                                <state key="normal" title="Đăng ký bằng Google" image="google">
+                                    <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="act_CheckWithGoogle:" destination="3qG-yv-fCx" eventType="touchUpInside" id="7pc-gU-DMX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BqK-dp-hWH">
+                                <rect key="frame" x="72" y="689" width="270" height="42"/>
+                                <color key="backgroundColor" red="0.22821298239999999" green="0.3587899208" blue="0.59668791290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="pZo-he-ufP"/>
+                                    <constraint firstAttribute="width" constant="270" id="teN-ah-x7E"/>
+                                </constraints>
+                                <inset key="titleEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="12" minY="10" maxX="236" maxY="10"/>
+                                <state key="normal" title="Đăng ký bằng Facebook" image="facebook">
+                                    <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="act_CheckWithFacebook:" destination="3qG-yv-fCx" eventType="touchUpInside" id="mp2-dz-ZTg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="uOa-rJ-T5I" firstAttribute="leading" secondItem="MRp-4S-ewf" secondAttribute="leading" constant="25" id="1P3-TI-Fb3"/>
                             <constraint firstItem="8GO-l3-wfc" firstAttribute="leading" secondItem="MRp-4S-ewf" secondAttribute="leading" constant="25" id="4K2-NA-BCM"/>
+                            <constraint firstItem="BqK-dp-hWH" firstAttribute="top" secondItem="foy-4r-4HB" secondAttribute="bottom" constant="25" id="4YG-Bo-oWL"/>
                             <constraint firstItem="MRp-4S-ewf" firstAttribute="bottom" secondItem="D3A-lM-5bc" secondAttribute="bottom" id="732-bC-PF9"/>
                             <constraint firstItem="8GO-l3-wfc" firstAttribute="top" secondItem="Cb1-WP-LBK" secondAttribute="bottom" constant="3" id="7VJ-tb-PRf"/>
-                            <constraint firstItem="MVs-Mh-zkd" firstAttribute="centerX" secondItem="QVx-SQ-9U5" secondAttribute="centerX" id="Bq7-BS-tmN"/>
                             <constraint firstItem="MRp-4S-ewf" firstAttribute="trailing" secondItem="uOa-rJ-T5I" secondAttribute="trailing" constant="25" id="CAz-A9-g84"/>
                             <constraint firstItem="5M4-cm-2SB" firstAttribute="leading" secondItem="MRp-4S-ewf" secondAttribute="leading" constant="25" id="D1a-kL-afF"/>
+                            <constraint firstItem="foy-4r-4HB" firstAttribute="centerX" secondItem="QVx-SQ-9U5" secondAttribute="centerX" id="DQO-Xq-x18"/>
                             <constraint firstItem="MRp-4S-ewf" firstAttribute="trailing" secondItem="vCW-QT-WY4" secondAttribute="trailing" constant="25" id="IA0-ys-J98"/>
                             <constraint firstItem="BGD-ry-gVI" firstAttribute="centerY" secondItem="5M4-cm-2SB" secondAttribute="centerY" id="KKa-qN-Y6H"/>
                             <constraint firstItem="8bo-3g-B5Q" firstAttribute="leading" secondItem="FJe-PM-WYX" secondAttribute="trailing" constant="5" id="Lvs-iZ-KJ7"/>
                             <constraint firstItem="FJe-PM-WYX" firstAttribute="top" secondItem="uOa-rJ-T5I" secondAttribute="bottom" constant="25" id="MEF-6m-gal"/>
                             <constraint firstItem="2qN-t6-khF" firstAttribute="top" secondItem="MRp-4S-ewf" secondAttribute="top" constant="180" id="Mof-aO-YNh"/>
-                            <constraint firstItem="MVs-Mh-zkd" firstAttribute="top" secondItem="cep-gZ-mbf" secondAttribute="bottom" constant="13" id="Mow-7s-rCu"/>
                             <constraint firstItem="7cr-V8-epd" firstAttribute="leading" secondItem="MRp-4S-ewf" secondAttribute="leading" constant="25" id="N1T-xt-cXb"/>
-                            <constraint firstItem="cep-gZ-mbf" firstAttribute="centerX" secondItem="QVx-SQ-9U5" secondAttribute="centerX" id="PZz-vW-Mt0"/>
                             <constraint firstItem="D3A-lM-5bc" firstAttribute="centerX" secondItem="QVx-SQ-9U5" secondAttribute="centerX" id="TTT-E5-4oL"/>
                             <constraint firstItem="vCW-QT-WY4" firstAttribute="leading" secondItem="MRp-4S-ewf" secondAttribute="leading" constant="25" id="Vod-Yy-uBx"/>
                             <constraint firstItem="Pxq-dM-eRY" firstAttribute="leading" secondItem="QVx-SQ-9U5" secondAttribute="leading" constant="25" id="WQH-Fs-fAj"/>
                             <constraint firstItem="MRp-4S-ewf" firstAttribute="trailing" secondItem="Cb1-WP-LBK" secondAttribute="trailing" constant="25" id="WdZ-B1-imE"/>
+                            <constraint firstItem="BqK-dp-hWH" firstAttribute="centerX" secondItem="QVx-SQ-9U5" secondAttribute="centerX" id="Wr9-wE-oHk"/>
                             <constraint firstItem="mX7-Af-X03" firstAttribute="top" secondItem="vCW-QT-WY4" secondAttribute="bottom" constant="3" id="XMB-yM-IKG"/>
                             <constraint firstItem="5M4-cm-2SB" firstAttribute="top" secondItem="vCW-QT-WY4" secondAttribute="bottom" constant="28" id="aQx-YY-142"/>
                             <constraint firstItem="uOa-rJ-T5I" firstAttribute="top" secondItem="5M4-cm-2SB" secondAttribute="bottom" constant="28" id="bVn-Kx-O57"/>
                             <constraint firstAttribute="trailing" secondItem="8bo-3g-B5Q" secondAttribute="trailing" constant="25" id="bga-2r-dTf"/>
-                            <constraint firstItem="cep-gZ-mbf" firstAttribute="top" secondItem="FJe-PM-WYX" secondAttribute="bottom" constant="20" id="cge-mt-HMb"/>
                             <constraint firstItem="8bo-3g-B5Q" firstAttribute="centerY" secondItem="FJe-PM-WYX" secondAttribute="centerY" id="dx8-Zk-EOi"/>
                             <constraint firstItem="vCW-QT-WY4" firstAttribute="top" secondItem="Cb1-WP-LBK" secondAttribute="bottom" constant="28" id="fJ2-kf-X7E"/>
                             <constraint firstItem="MRp-4S-ewf" firstAttribute="trailing" secondItem="5M4-cm-2SB" secondAttribute="trailing" constant="25" id="hqA-lT-hdP"/>
+                            <constraint firstItem="foy-4r-4HB" firstAttribute="top" secondItem="FJe-PM-WYX" secondAttribute="bottom" constant="20" id="iCy-Yo-aTK"/>
                             <constraint firstItem="mX7-Af-X03" firstAttribute="leading" secondItem="MRp-4S-ewf" secondAttribute="leading" constant="25" id="ii9-yB-fQy"/>
                             <constraint firstItem="2qN-t6-khF" firstAttribute="centerX" secondItem="QVx-SQ-9U5" secondAttribute="centerX" id="ijQ-eT-4Uu"/>
                             <constraint firstItem="Cb1-WP-LBK" firstAttribute="top" secondItem="2qN-t6-khF" secondAttribute="bottom" constant="30" id="jYr-YE-ivG"/>
@@ -3880,6 +3887,8 @@
                     <connections>
                         <outlet property="EmailNotificationLabel" destination="mX7-Af-X03" id="yA4-o9-VVf"/>
                         <outlet property="EmailTextField" destination="vCW-QT-WY4" id="zxV-Is-xwn"/>
+                        <outlet property="FacebookSignUpButton" destination="BqK-dp-hWH" id="T0F-MQ-pgr"/>
+                        <outlet property="GoogleSignUpButton" destination="foy-4r-4HB" id="WoH-Z1-Sbl"/>
                         <outlet property="HidePasswordButton" destination="BGD-ry-gVI" id="VXJ-65-jZ7"/>
                         <outlet property="PasswordNotificationLabel" destination="7cr-V8-epd" id="e7j-fd-JUl"/>
                         <outlet property="PasswordTextField" destination="5M4-cm-2SB" id="FvH-1t-tvE"/>
