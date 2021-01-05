@@ -125,20 +125,7 @@ class LoginViewController: UIViewController {
             }
             else {
                 //Luu thong tin ten dang nhap
-                FirebaseRef.child("UserList").observeSingleEvent(of: .value, with: { (snapshot) in
-                    
-                    //Duyet qua tat ca cac username de tim username
-                    for snapshotChild in snapshot.children {
-                        let temp = snapshotChild as! DataSnapshot
-                        if let account = temp.value as? [String:AnyObject] {
-                            if (account["Email"] as! String == self.EmailTextField.text!) {
-                                CurrentUsername = temp.key
-                                break
-                            }
-                        }
-                    }
-                    
-                })
+                CurrentUsername = result!.user.uid
                 
                 //Hien thi man hinh trang chu cua ung dung
                 let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
@@ -203,11 +190,13 @@ extension LoginViewController: GIDSignInDelegate {
                 return
             }
             
-            //Dang nhap thanh cong
-            print("Thanh cong roi!!!")
-            //print(Auth.auth().currentUser?.email)
-            //print(Auth.auth().currentUser?.displayName)
-            //print(Auth.auth().currentUser?.uid)
+            //Ten
+            FirebaseRef.child("UserList/\(authResult!.user.uid)/DisplayName").setValue(authResult!.user.displayName)
+            //Email
+            FirebaseRef.child("UserList/\(authResult!.user.uid)/Email").setValue(authResult!.user.email)
+            //Luu thong tin dang nhap
+            CurrentUsername = authResult!.user.uid
+            
             //Hien thi man hinh trang chu cua ung dung
             let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
             dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext

@@ -138,7 +138,7 @@ class AddNewFoodViewController: UIViewController {
             //Upload anh mon an va ten anh len Firebase
             let metadata = StorageMetadata()
             metadata.contentType = "image/jpeg"
-            self.uploadTask = imageRef.child("/UserImages/\(count).jpg").putData((self.FoodImageView.image?.sd_imageData(as: .JPEG, compressionQuality: 1.0, firstFrameOnly: true))!, metadata: metadata) { (metadata, error) in
+            self.uploadTask = imageRef.child("/UserImages//\(CurrentUsername)/\(count).jpg").putData((self.FoodImageView.image?.sd_imageData(as: .JPEG, compressionQuality: 1.0, firstFrameOnly: true))!, metadata: metadata) { (metadata, error) in
                 }
             // Create a task listener handle
             self.uploadTask!.observe(.progress) { snapshot in

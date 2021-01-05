@@ -180,12 +180,10 @@ class TestViewController: UIViewController {
             }
             else {
                 
-                //UID
-                FirebaseRef.child("UserList/\(self.UsernameTextField.text!)/UID").setValue(result!.user.uid)
+                //Username
+                FirebaseRef.child("UserList/\(result!.user.uid)/Username").setValue(self.UsernameTextField.text!)
                 //Email
-                FirebaseRef.child("UserList/\(self.UsernameTextField.text!)/Email").setValue(self.EmailTextField.text!)
-                //Password
-                FirebaseRef.child("UserList/\(self.UsernameTextField.text!)/Password").setValue(self.PasswordTextField.text!)
+                FirebaseRef.child("UserList/\(result!.user.uid)/Email").setValue(self.EmailTextField.text!)
                 
                 //Chuyen qua man hinh dang ky
                 self.act_Login(sender)
@@ -229,11 +227,13 @@ extension TestViewController: GIDSignInDelegate {
                 return
             }
             
-            //Dang nhap thanh cong
-            print("Thanh cong roi!!!")
-            //print(Auth.auth().currentUser?.email)
-            //print(Auth.auth().currentUser?.displayName)
-            //print(Auth.auth().currentUser?.uid)
+            //Ten
+            FirebaseRef.child("UserList/\(authResult!.user.uid)/DisplayName").setValue(authResult!.user.displayName)
+            //Email
+            FirebaseRef.child("UserList/\(authResult!.user.uid)/Email").setValue(authResult!.user.email)
+            //Luu thong tin dang nhap
+            CurrentUsername = authResult!.user.uid
+            
             //Hien thi man hinh trang chu cua ung dung
             let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
             dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
