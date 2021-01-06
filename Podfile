@@ -18,6 +18,13 @@ pod 'Firebase/Database'
 pod 'Firebase/Storage'
 pod 'FirebaseUI/Storage'
 pod 'Firebase/Auth'
-pod 'GoogleSignIn'
+
+# Pod for Google
+  pod 'GoogleSignIn'
+
+# Pods for Facebook
+  pod 'Bolts'
+  pod 'FBSDKCoreKit'
+  pod 'FBSDKLoginKit'
 
 end

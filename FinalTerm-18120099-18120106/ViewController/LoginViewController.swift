@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import GoogleSignIn
+import FBSDKLoginKit
 
 class LoginViewController: UIViewController {
     
@@ -155,7 +156,52 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func act_LoginWithFacebook(_ sender: Any) {
-        // Sign out from Google
+        
+        let fbLoginManager = LoginManager()
+        fbLoginManager.logOut()
+        try! Auth.auth().signOut()
+        
+        fbLoginManager.logIn(permissions: ["public_profile", "email"], from: self) { (result, error) in
+            if let error = error {
+                print("Failed to login: \(error.localizedDescription)")
+                return
+            }
+               
+            guard let accessToken = AccessToken.current else {
+                print("Failed to get access token")
+                return
+            }
+        
+            let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
+               
+            // Perform login by calling Firebase APIs
+            Auth.auth().signIn(with: credential, completion: { (authResult, error) in
+                if let error = error {
+                    print("Login error: \(error.localizedDescription)")
+                    let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
+                    let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    alertController.addAction(okayAction)
+                    self.present(alertController, animated: true, completion: nil)
+                   
+                    return
+                }
+                
+                //Ten
+                FirebaseRef.child("UserList/\(authResult!.user.uid)/DisplayName").setValue(authResult!.user.displayName)
+                //Email
+                FirebaseRef.child("UserList/\(authResult!.user.uid)/Email").setValue(authResult!.user.email)
+                //Luu thong tin dang nhap
+                CurrentUsername = authResult!.user.uid
+                
+                //Hien thi man hinh trang chu cua ung dung
+                self.dismiss(animated: true, completion: nil)
+                self.performSegue(withIdentifier: "mainScreen", sender: nil)
+                   
+                })
+        
+            }
+        
+        /*// Sign out from Google
         GIDSignIn.sharedInstance().signOut()
         
         // Sign out from Firebase
@@ -166,7 +212,7 @@ class LoginViewController: UIViewController {
             //updateScreen()
         } catch let error as NSError {
             print ("Error signing out from Firebase: %@", error)
-        }
+        }*/
     }
 }
 
