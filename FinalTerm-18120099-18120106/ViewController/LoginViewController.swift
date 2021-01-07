@@ -41,9 +41,14 @@ class LoginViewController: UIViewController {
         PasswordTextField.setRightPaddingPoints(45)
         
         //Bo tron goc cho nut Dang nhap, dang nhap bang Google va dang nhap bang Facebook
-        LoginButton.layer.cornerRadius = 4.5
-        GoogleSignInButton.layer.cornerRadius = 4
-        FacebookSignInButton.layer.cornerRadius = 4
+        LoginButton.layer.cornerRadius = LoginButton.frame.height / 2
+        GoogleSignInButton.layer.cornerRadius = GoogleSignInButton.frame.height / 2
+        FacebookSignInButton.layer.cornerRadius = FacebookSignInButton.frame.height / 2
+        //Bo tron 2 khung nhap email va mat khau
+        EmailTextField.layer.cornerRadius = EmailTextField.frame.height / 2
+        EmailTextField.layer.masksToBounds = true
+        PasswordTextField.layer.cornerRadius = EmailTextField.frame.height / 2
+        PasswordTextField.layer.masksToBounds = true
         
         //Thay doi mau dong chu 'Đăng ký ngay' de lam noi bat
         let FirstTitle = NSAttributedString(string: "Bạn chưa có tài khoản? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray])
@@ -194,8 +199,10 @@ class LoginViewController: UIViewController {
                 CurrentUsername = authResult!.user.uid
                 
                 //Hien thi man hinh trang chu cua ung dung
-                self.dismiss(animated: true, completion: nil)
-                self.performSegue(withIdentifier: "mainScreen", sender: nil)
+                let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
+                dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                self.present(dest, animated: true, completion: nil)
                    
                 })
         

@@ -189,7 +189,6 @@ func ChangTextFieldState(_ textfield: UITextField, _ color: UIColor, _ label: UI
     label.textColor = color
     textfield.layer.borderColor = color.cgColor
     textfield.layer.borderWidth = 1
-    textfield.layer.cornerRadius = 7
 }
 
 //Binh thuong hoa trang thai cua khung

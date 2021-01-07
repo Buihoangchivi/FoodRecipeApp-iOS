@@ -1020,7 +1020,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="food-background" translatesAutoresizingMaskIntoConstraints="NO" id="PUg-KB-tJZ">
-                                        <rect key="frame" x="0.0" y="143.66666666666666" width="414" height="219.99999999999997"/>
+                                        <rect key="frame" x="0.0" y="143.66666666666666" width="414.00000000000045" height="219.99999999999997"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="220" id="RE0-pO-arf"/>
                                         </constraints>
@@ -2995,7 +2995,6 @@
                                 </state>
                                 <connections>
                                     <action selector="act_Login:" destination="QFG-ja-eyL" eventType="touchUpInside" id="nlp-B9-Suy"/>
-                                    <segue destination="BYZ-38-t0r" kind="presentation" identifier="mainScreen" modalPresentationStyle="fullScreen" id="SrA-2X-mTR"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hDN-jE-ByD">
@@ -3016,7 +3015,6 @@
                                 </state>
                                 <connections>
                                     <action selector="act_Register:" destination="QFG-ja-eyL" eventType="touchUpInside" id="q1y-DU-uTF"/>
-                                    <action selector="act_ResetPassword:" destination="QFG-ja-eyL" eventType="touchUpInside" id="hNf-VV-fNp"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HOẶC" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GaP-jH-ygv">
@@ -3056,7 +3054,8 @@
                                     <constraint firstAttribute="height" constant="42" id="9Bb-Jm-ONR"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <inset key="titleEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="contentEdgeInsets" minX="13" minY="0.0" maxX="-13" maxY="0.0"/>
+                                <inset key="titleEdgeInsets" minX="-18" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <inset key="imageEdgeInsets" minX="12" minY="10" maxX="236" maxY="10"/>
                                 <state key="normal" title="Đăng nhập bằng Google" image="google">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3072,6 +3071,7 @@
                                     <constraint firstAttribute="width" constant="270" id="iIB-4f-kVb"/>
                                     <constraint firstAttribute="height" constant="42" id="oAv-BA-9VW"/>
                                 </constraints>
+                                <inset key="contentEdgeInsets" minX="3" minY="0.0" maxX="-3" maxY="0.0"/>
                                 <inset key="titleEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <inset key="imageEdgeInsets" minX="12" minY="10" maxX="236" maxY="10"/>
                                 <state key="normal" title="Đăng nhập bằng Facebook" image="facebook">
@@ -3580,7 +3580,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="food-background" translatesAutoresizingMaskIntoConstraints="NO" id="Hz2-0m-vRt">
-                                                            <rect key="frame" x="-30" y="0.0" width="100" height="100"/>
+                                                            <rect key="frame" x="-30" y="0.0" width="100.00000000000045" height="100"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="100" id="Ahy-Xc-U2T"/>
                                                                 <constraint firstAttribute="width" constant="100" id="sWs-N4-Y73"/>
@@ -3811,37 +3811,41 @@
                                 <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="foy-4r-4HB">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hcD-Zv-44h">
                                 <rect key="frame" x="72" y="622" width="270" height="42"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="EbK-IF-YVb"/>
-                                    <constraint firstAttribute="width" constant="270" id="Kun-At-PKA"/>
+                                    <constraint firstAttribute="width" constant="270" id="1K7-xJ-huH"/>
+                                    <constraint firstAttribute="height" constant="42" id="HWT-IQ-FhZ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <inset key="titleEdgeInsets" minX="-35" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <inset key="imageEdgeInsets" minX="12" minY="10" maxX="236" maxY="10"/>
+                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="-20" maxY="0.0"/>
+                                <inset key="titleEdgeInsets" minX="-25" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="18" minY="10" maxX="230" maxY="10"/>
                                 <state key="normal" title="Đăng ký bằng Google" image="google">
                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="act_CheckWithGoogle:" destination="3qG-yv-fCx" eventType="touchUpInside" id="7pc-gU-DMX"/>
+                                    <action selector="act_CheckWithGoogle:" destination="3qG-yv-fCx" eventType="touchUpInside" id="0GU-GU-Dh8"/>
+                                    <action selector="act_LoginWithGoogle:" destination="QFG-ja-eyL" eventType="touchUpInside" id="0To-CF-9va"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BqK-dp-hWH">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lyv-Me-COf">
                                 <rect key="frame" x="72" y="689" width="270" height="42"/>
                                 <color key="backgroundColor" red="0.22821298239999999" green="0.3587899208" blue="0.59668791290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="pZo-he-ufP"/>
-                                    <constraint firstAttribute="width" constant="270" id="teN-ah-x7E"/>
+                                    <constraint firstAttribute="height" constant="42" id="CNA-jQ-Mer"/>
+                                    <constraint firstAttribute="width" constant="270" id="JiU-yj-nw2"/>
                                 </constraints>
-                                <inset key="titleEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <inset key="imageEdgeInsets" minX="12" minY="10" maxX="236" maxY="10"/>
+                                <inset key="contentEdgeInsets" minX="3" minY="0.0" maxX="-3" maxY="0.0"/>
+                                <inset key="titleEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="23" minY="10" maxX="225" maxY="10"/>
                                 <state key="normal" title="Đăng ký bằng Facebook" image="facebook">
                                     <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="act_CheckWithFacebook:" destination="3qG-yv-fCx" eventType="touchUpInside" id="mp2-dz-ZTg"/>
+                                    <action selector="act_CheckWithFacebook:" destination="3qG-yv-fCx" eventType="touchUpInside" id="8NJ-Xf-3yc"/>
+                                    <action selector="act_LoginWithFacebook:" destination="QFG-ja-eyL" eventType="touchUpInside" id="GI1-Bh-Yl0"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -3849,14 +3853,14 @@
                         <constraints>
                             <constraint firstItem="uOa-rJ-T5I" firstAttribute="leading" secondItem="MRp-4S-ewf" secondAttribute="leading" constant="25" id="1P3-TI-Fb3"/>
                             <constraint firstItem="8GO-l3-wfc" firstAttribute="leading" secondItem="MRp-4S-ewf" secondAttribute="leading" constant="25" id="4K2-NA-BCM"/>
-                            <constraint firstItem="BqK-dp-hWH" firstAttribute="top" secondItem="foy-4r-4HB" secondAttribute="bottom" constant="25" id="4YG-Bo-oWL"/>
                             <constraint firstItem="MRp-4S-ewf" firstAttribute="bottom" secondItem="D3A-lM-5bc" secondAttribute="bottom" id="732-bC-PF9"/>
                             <constraint firstItem="8GO-l3-wfc" firstAttribute="top" secondItem="Cb1-WP-LBK" secondAttribute="bottom" constant="3" id="7VJ-tb-PRf"/>
                             <constraint firstItem="MRp-4S-ewf" firstAttribute="trailing" secondItem="uOa-rJ-T5I" secondAttribute="trailing" constant="25" id="CAz-A9-g84"/>
                             <constraint firstItem="5M4-cm-2SB" firstAttribute="leading" secondItem="MRp-4S-ewf" secondAttribute="leading" constant="25" id="D1a-kL-afF"/>
-                            <constraint firstItem="foy-4r-4HB" firstAttribute="centerX" secondItem="QVx-SQ-9U5" secondAttribute="centerX" id="DQO-Xq-x18"/>
+                            <constraint firstItem="hcD-Zv-44h" firstAttribute="top" secondItem="FJe-PM-WYX" secondAttribute="bottom" constant="20" id="Gcb-L3-NgU"/>
                             <constraint firstItem="MRp-4S-ewf" firstAttribute="trailing" secondItem="vCW-QT-WY4" secondAttribute="trailing" constant="25" id="IA0-ys-J98"/>
                             <constraint firstItem="BGD-ry-gVI" firstAttribute="centerY" secondItem="5M4-cm-2SB" secondAttribute="centerY" id="KKa-qN-Y6H"/>
+                            <constraint firstItem="Lyv-Me-COf" firstAttribute="centerX" secondItem="QVx-SQ-9U5" secondAttribute="centerX" id="Kyc-AO-sqL"/>
                             <constraint firstItem="8bo-3g-B5Q" firstAttribute="leading" secondItem="FJe-PM-WYX" secondAttribute="trailing" constant="5" id="Lvs-iZ-KJ7"/>
                             <constraint firstItem="FJe-PM-WYX" firstAttribute="top" secondItem="uOa-rJ-T5I" secondAttribute="bottom" constant="25" id="MEF-6m-gal"/>
                             <constraint firstItem="2qN-t6-khF" firstAttribute="top" secondItem="MRp-4S-ewf" secondAttribute="top" constant="180" id="Mof-aO-YNh"/>
@@ -3865,15 +3869,14 @@
                             <constraint firstItem="vCW-QT-WY4" firstAttribute="leading" secondItem="MRp-4S-ewf" secondAttribute="leading" constant="25" id="Vod-Yy-uBx"/>
                             <constraint firstItem="Pxq-dM-eRY" firstAttribute="leading" secondItem="QVx-SQ-9U5" secondAttribute="leading" constant="25" id="WQH-Fs-fAj"/>
                             <constraint firstItem="MRp-4S-ewf" firstAttribute="trailing" secondItem="Cb1-WP-LBK" secondAttribute="trailing" constant="25" id="WdZ-B1-imE"/>
-                            <constraint firstItem="BqK-dp-hWH" firstAttribute="centerX" secondItem="QVx-SQ-9U5" secondAttribute="centerX" id="Wr9-wE-oHk"/>
                             <constraint firstItem="mX7-Af-X03" firstAttribute="top" secondItem="vCW-QT-WY4" secondAttribute="bottom" constant="3" id="XMB-yM-IKG"/>
                             <constraint firstItem="5M4-cm-2SB" firstAttribute="top" secondItem="vCW-QT-WY4" secondAttribute="bottom" constant="28" id="aQx-YY-142"/>
+                            <constraint firstItem="hcD-Zv-44h" firstAttribute="centerX" secondItem="QVx-SQ-9U5" secondAttribute="centerX" id="auJ-FI-3V4"/>
                             <constraint firstItem="uOa-rJ-T5I" firstAttribute="top" secondItem="5M4-cm-2SB" secondAttribute="bottom" constant="28" id="bVn-Kx-O57"/>
                             <constraint firstAttribute="trailing" secondItem="8bo-3g-B5Q" secondAttribute="trailing" constant="25" id="bga-2r-dTf"/>
                             <constraint firstItem="8bo-3g-B5Q" firstAttribute="centerY" secondItem="FJe-PM-WYX" secondAttribute="centerY" id="dx8-Zk-EOi"/>
                             <constraint firstItem="vCW-QT-WY4" firstAttribute="top" secondItem="Cb1-WP-LBK" secondAttribute="bottom" constant="28" id="fJ2-kf-X7E"/>
                             <constraint firstItem="MRp-4S-ewf" firstAttribute="trailing" secondItem="5M4-cm-2SB" secondAttribute="trailing" constant="25" id="hqA-lT-hdP"/>
-                            <constraint firstItem="foy-4r-4HB" firstAttribute="top" secondItem="FJe-PM-WYX" secondAttribute="bottom" constant="20" id="iCy-Yo-aTK"/>
                             <constraint firstItem="mX7-Af-X03" firstAttribute="leading" secondItem="MRp-4S-ewf" secondAttribute="leading" constant="25" id="ii9-yB-fQy"/>
                             <constraint firstItem="2qN-t6-khF" firstAttribute="centerX" secondItem="QVx-SQ-9U5" secondAttribute="centerX" id="ijQ-eT-4Uu"/>
                             <constraint firstItem="Cb1-WP-LBK" firstAttribute="top" secondItem="2qN-t6-khF" secondAttribute="bottom" constant="30" id="jYr-YE-ivG"/>
@@ -3882,6 +3885,7 @@
                             <constraint firstItem="7cr-V8-epd" firstAttribute="top" secondItem="5M4-cm-2SB" secondAttribute="bottom" constant="3" id="tHS-Jk-waV"/>
                             <constraint firstItem="FJe-PM-WYX" firstAttribute="leading" secondItem="Pxq-dM-eRY" secondAttribute="trailing" constant="5" id="vLD-Ba-cq5"/>
                             <constraint firstItem="Pxq-dM-eRY" firstAttribute="centerY" secondItem="FJe-PM-WYX" secondAttribute="centerY" id="y7l-Zt-nI1"/>
+                            <constraint firstItem="Lyv-Me-COf" firstAttribute="top" secondItem="hcD-Zv-44h" secondAttribute="bottom" constant="25" id="ynJ-q7-64f"/>
                             <constraint firstItem="5M4-cm-2SB" firstAttribute="trailing" secondItem="BGD-ry-gVI" secondAttribute="trailing" constant="10" id="yyx-uz-om0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="MRp-4S-ewf"/>
@@ -3889,8 +3893,8 @@
                     <connections>
                         <outlet property="EmailNotificationLabel" destination="mX7-Af-X03" id="yA4-o9-VVf"/>
                         <outlet property="EmailTextField" destination="vCW-QT-WY4" id="zxV-Is-xwn"/>
-                        <outlet property="FacebookSignUpButton" destination="BqK-dp-hWH" id="T0F-MQ-pgr"/>
-                        <outlet property="GoogleSignUpButton" destination="foy-4r-4HB" id="WoH-Z1-Sbl"/>
+                        <outlet property="FacebookSignUpButton" destination="Lyv-Me-COf" id="wRz-60-7Ea"/>
+                        <outlet property="GoogleSignUpButton" destination="hcD-Zv-44h" id="Kqn-Jw-sjl"/>
                         <outlet property="HidePasswordButton" destination="BGD-ry-gVI" id="VXJ-65-jZ7"/>
                         <outlet property="PasswordNotificationLabel" destination="7cr-V8-epd" id="e7j-fd-JUl"/>
                         <outlet property="PasswordTextField" destination="5M4-cm-2SB" id="FvH-1t-tvE"/>

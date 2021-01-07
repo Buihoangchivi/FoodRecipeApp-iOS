@@ -32,6 +32,7 @@ class AddNewFoodViewController: UIViewController {
     var imagePicker = UIImagePickerController()
     var delegate: AddNewFoodDelegate?
     var uploadTask: StorageUploadTask?
+    var isAddFoodImage = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +83,7 @@ class AddNewFoodViewController: UIViewController {
             imagePicker.delegate = self
             imagePicker.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             imagePicker.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            isAddFoodImage = false
             self.present(imagePicker, animated: true, completion: nil)
         }
     }
@@ -136,14 +138,16 @@ class AddNewFoodViewController: UIViewController {
             }
             
             //Upload anh mon an va ten anh len Firebase
-            let metadata = StorageMetadata()
-            metadata.contentType = "image/jpeg"
-            self.uploadTask = imageRef.child("/UserImages//\(CurrentUsername)/\(count).jpg").putData((self.FoodImageView.image?.sd_imageData(as: .JPEG, compressionQuality: 1.0, firstFrameOnly: true))!, metadata: metadata) { (metadata, error) in
+            if (self.isAddFoodImage == true) {
+                let metadata = StorageMetadata()
+                metadata.contentType = "image/jpeg"
+                self.uploadTask = imageRef.child("/UserImages//\(CurrentUsername)/\(count).jpg").putData((self.FoodImageView.image?.sd_imageData(as: .JPEG, compressionQuality: 1.0, firstFrameOnly: true))!, metadata: metadata) { (metadata, error) in
+                    }
+                // Create a task listener handle
+                self.uploadTask!.observe(.progress) { snapshot in
+                    let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
+                    self.DisplayValueInProgressBar(PercentCompleted: percentComplete)
                 }
-            // Create a task listener handle
-            self.uploadTask!.observe(.progress) { snapshot in
-                let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
-                self.DisplayValueInProgressBar(PercentCompleted: percentComplete)
             }
             
             //Ghi du lieu danh sach nguyen lieu len Firebase
@@ -226,6 +230,7 @@ extension AddNewFoodViewController: UIImagePickerControllerDelegate, UINavigatio
         picker.dismiss(animated: true) {
             if let image = info[UIImagePickerController.InfoKey.originalImage] {
                 self.FoodImageView.image = image as? UIImage
+                self.isAddFoodImage = true
             }
         }
     }
