@@ -17,12 +17,14 @@ pod 'Firebase/Analytics'
 pod 'Firebase/Database'
 pod 'Firebase/Storage'
 pod 'FirebaseUI/Storage'
+pod 'Firebase/Auth'
 
-pod 'FirebaseUI/Auth'
+# Pod for Google
+  pod 'GoogleSignIn'
 
-pod 'FirebaseUI/Google'
-pod 'FirebaseUI/Facebook'
-pod 'FirebaseUI/OAuth' # Used for Sign in with Apple, Twitter, etc
-pod 'FirebaseUI/Phone'
+# Pods for Facebook
+  pod 'Bolts'
+  pod 'FBSDKCoreKit'
+  pod 'FBSDKLoginKit'
 
 end

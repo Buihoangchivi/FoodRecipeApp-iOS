@@ -29,8 +29,12 @@ class ResetPasswordViewController: UIViewController {
         //Canh le o nhap email
         EmailTextField.setLeftPaddingPoints(8)
         
+        //Bo tron goc cho o nhap dia chi Email
+        EmailTextField.layer.cornerRadius = EmailTextField.frame.height / 2
+        EmailTextField.layer.masksToBounds = true
         //Bo tron goc cho nut Dat lai mat khau
-        ResetPasswordButton.layer.cornerRadius = 4.5
+        ResetPasswordButton.layer.cornerRadius = ResetPasswordButton.frame.height / 2
+        ResetPasswordButton.layer.masksToBounds = true
         
         //Thay doi mau dong chu 'Đăng nhập nào' de lam noi bat
         let FirstTitle = NSAttributedString(string: "Bạn đã có tài khoản rồi? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray])

@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import GoogleSignIn
+import FBSDKLoginKit
 
 class LoginViewController: UIViewController {
     
@@ -17,6 +19,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var HidePasswordButton: UIButton!
     @IBOutlet weak var LoginButton: UIButton!
     @IBOutlet weak var RegisterButton: UIButton!
+    @IBOutlet weak var GoogleSignInButton: UIButton!
+    @IBOutlet weak var FacebookSignInButton: UIButton!
     
     @IBOutlet weak var EmailNotificationLabel: UILabel!
     @IBOutlet weak var PasswordNotificationLabel: UILabel!
@@ -36,8 +40,15 @@ class LoginViewController: UIViewController {
         PasswordTextField.setLeftPaddingPoints(8)
         PasswordTextField.setRightPaddingPoints(45)
         
-        //Bo tron goc cho nut Dang nhap
-        LoginButton.layer.cornerRadius = 4.5
+        //Bo tron goc cho nut Dang nhap, dang nhap bang Google va dang nhap bang Facebook
+        LoginButton.layer.cornerRadius = LoginButton.frame.height / 2
+        GoogleSignInButton.layer.cornerRadius = GoogleSignInButton.frame.height / 2
+        FacebookSignInButton.layer.cornerRadius = FacebookSignInButton.frame.height / 2
+        //Bo tron 2 khung nhap email va mat khau
+        EmailTextField.layer.cornerRadius = EmailTextField.frame.height / 2
+        EmailTextField.layer.masksToBounds = true
+        PasswordTextField.layer.cornerRadius = EmailTextField.frame.height / 2
+        PasswordTextField.layer.masksToBounds = true
         
         //Thay doi mau dong chu 'Đăng ký ngay' de lam noi bat
         let FirstTitle = NSAttributedString(string: "Bạn chưa có tài khoản? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray])
@@ -46,6 +57,10 @@ class LoginViewController: UIViewController {
         Title.append(FirstTitle)
         Title.append(LastTitle)
         RegisterButton.setAttributedTitle(Title, for: UIControl.State.normal)
+        
+        //Dang nhap bang Google
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+        GIDSignIn.sharedInstance().delegate = self
     }
     
     @IBAction func act_ChangePasswordVisibility(_ sender: Any) {
@@ -116,20 +131,7 @@ class LoginViewController: UIViewController {
             }
             else {
                 //Luu thong tin ten dang nhap
-                FirebaseRef.child("UserList").observeSingleEvent(of: .value, with: { (snapshot) in
-                    
-                    //Duyet qua tat ca cac username de tim username
-                    for snapshotChild in snapshot.children {
-                        let temp = snapshotChild as! DataSnapshot
-                        if let account = temp.value as? [String:AnyObject] {
-                            if (account["Email"] as! String == self.EmailTextField.text!) {
-                                CurrentUsername = temp.key
-                                break
-                            }
-                        }
-                    }
-                    
-                })
+                CurrentUsername = result!.user.uid
                 
                 //Hien thi man hinh trang chu cua ung dung
                 let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
@@ -155,8 +157,117 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func act_LoginWithGoogle(_ sender: Any) {
+        GIDSignIn.sharedInstance().signIn()
     }
     
     @IBAction func act_LoginWithFacebook(_ sender: Any) {
+        
+        let fbLoginManager = LoginManager()
+        fbLoginManager.logOut()
+        try! Auth.auth().signOut()
+        
+        fbLoginManager.logIn(permissions: ["public_profile", "email"], from: self) { (result, error) in
+            if let error = error {
+                print("Failed to login: \(error.localizedDescription)")
+                return
+            }
+               
+            guard let accessToken = AccessToken.current else {
+                print("Failed to get access token")
+                return
+            }
+        
+            let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
+               
+            // Perform login by calling Firebase APIs
+            Auth.auth().signIn(with: credential, completion: { (authResult, error) in
+                if let error = error {
+                    print("Login error: \(error.localizedDescription)")
+                    let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
+                    let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    alertController.addAction(okayAction)
+                    self.present(alertController, animated: true, completion: nil)
+                   
+                    return
+                }
+                
+                //Ten
+                FirebaseRef.child("UserList/\(authResult!.user.uid)/DisplayName").setValue(authResult!.user.displayName)
+                //Email
+                FirebaseRef.child("UserList/\(authResult!.user.uid)/Email").setValue(authResult!.user.email)
+                //Luu thong tin dang nhap
+                CurrentUsername = authResult!.user.uid
+                
+                //Hien thi man hinh trang chu cua ung dung
+                let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
+                dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                self.present(dest, animated: true, completion: nil)
+                   
+                })
+        
+            }
+        
+        /*// Sign out from Google
+        GIDSignIn.sharedInstance().signOut()
+        
+        // Sign out from Firebase
+        do {
+            try Auth.auth().signOut()
+            
+            // Update screen after user successfully signed out
+            //updateScreen()
+        } catch let error as NSError {
+            print ("Error signing out from Firebase: %@", error)
+        }*/
     }
+}
+
+extension LoginViewController: GIDSignInDelegate {
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        
+        if let error = error {
+          print(error)
+          return
+        }
+
+        guard let authentication = user.authentication else { return }
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
+        //print(credential)
+        
+        //Authenticate with Firebase using the credential
+        Auth.auth().signIn(with: credential) { (authResult, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            //Ten
+            FirebaseRef.child("UserList/\(authResult!.user.uid)/DisplayName").setValue(authResult!.user.displayName)
+            //Email
+            FirebaseRef.child("UserList/\(authResult!.user.uid)/Email").setValue(authResult!.user.email)
+            //Luu thong tin dang nhap
+            CurrentUsername = authResult!.user.uid
+            
+            //Hien thi man hinh trang chu cua ung dung
+            let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
+            dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            self.present(dest, animated: true, completion: nil)
+            
+        }
+    }
+
+    @available(iOS 9.0, *)
+    func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any])
+      -> Bool {
+        return GIDSignIn.sharedInstance().handle(url)
+    }
+
+    //iOS 8 or older
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url)
+    }
+    
 }

@@ -41,7 +41,7 @@ class DetailMenuViewController: UIViewController {
         //Hien thi danh sach cac mon an rieng do nguoi dung tu them
         if (isUserFood == true) {
             Ref = FirebaseRef.child("UserList/\(CurrentUsername)/FoodList")
-            folderName = "/UserImages/"
+            folderName = "/UserImages//\(CurrentUsername)"
             CategoryNameLb.text = "Công thức nhà mình"
         }
         else { //Hien thi danh sach mon an chung

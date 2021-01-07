@@ -8,6 +8,8 @@
 
 import UIKit
 import FirebaseAuth
+import GoogleSignIn
+import FBSDKLoginKit
 
 class TestViewController: UIViewController {
 
@@ -17,6 +19,8 @@ class TestViewController: UIViewController {
     @IBOutlet weak var HidePasswordButton: UIButton!
     @IBOutlet weak var RegisterButton: UIButton!
     @IBOutlet weak var SignInButton: UIButton!
+    @IBOutlet weak var GoogleSignUpButton: UIButton!
+    @IBOutlet weak var FacebookSignUpButton: UIButton!
     
     @IBOutlet weak var UsernameNotificationLabel: UILabel!
     @IBOutlet weak var EmailNotificationLabel: UILabel!
@@ -39,8 +43,17 @@ class TestViewController: UIViewController {
         PasswordTextField.setLeftPaddingPoints(8)
         PasswordTextField.setRightPaddingPoints(45)
         
-        //Bo tron goc cho nut Dang ky
-        RegisterButton.layer.cornerRadius = 4.5
+        //Bo tron goc cho nut Dang ky, dang ky bang Google va dang ky bang Facebook
+        RegisterButton.layer.cornerRadius = RegisterButton.frame.height / 2
+        GoogleSignUpButton.layer.cornerRadius = GoogleSignUpButton.frame.height / 2
+        FacebookSignUpButton.layer.cornerRadius = FacebookSignUpButton.frame.height / 2
+        //Bo tron 3 khung nhap username, email va mat khau
+        UsernameTextField.layer.cornerRadius = UsernameTextField.frame.height / 2
+        UsernameTextField.layer.masksToBounds = true
+        EmailTextField.layer.cornerRadius = EmailTextField.frame.height / 2
+        EmailTextField.layer.masksToBounds = true
+        PasswordTextField.layer.cornerRadius = EmailTextField.frame.height / 2
+        PasswordTextField.layer.masksToBounds = true
         
         //Thay doi mau dong chu 'Đăng nhập nào' de lam noi bat
         let FirstTitle = NSAttributedString(string: "Bạn đã có tài khoản rồi? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray])
@@ -49,6 +62,10 @@ class TestViewController: UIViewController {
         Title.append(FirstTitle)
         Title.append(LastTitle)
         SignInButton.setAttributedTitle(Title, for: UIControl.State.normal)
+        
+        //Dang nhap bang Google
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+        GIDSignIn.sharedInstance().delegate = self
     }
     
     @IBAction func act_ChangePasswordVisibility(_ sender: Any) {
@@ -170,12 +187,11 @@ class TestViewController: UIViewController {
                 print(err!)
             }
             else {
-                //UID
-                FirebaseRef.child("UserList/\(self.UsernameTextField.text!)/UID").setValue(result!.user.uid)
+                
+                //Username
+                FirebaseRef.child("UserList/\(result!.user.uid)/Username").setValue(self.UsernameTextField.text!)
                 //Email
-                FirebaseRef.child("UserList/\(self.UsernameTextField.text!)/Email").setValue(self.EmailTextField.text!)
-                //Password
-                FirebaseRef.child("UserList/\(self.UsernameTextField.text!)/Password").setValue(self.PasswordTextField.text!)
+                FirebaseRef.child("UserList/\(result!.user.uid)/Email").setValue(self.EmailTextField.text!)
                 
                 //Chuyen qua man hinh dang ky
                 self.act_Login(sender)
@@ -185,9 +201,57 @@ class TestViewController: UIViewController {
     }
     
     @IBAction func act_CheckWithGoogle(_ sender: Any) {
+        GIDSignIn.sharedInstance().signIn()
     }
     
     @IBAction func act_CheckWithFacebook(_ sender: Any) {
+        
+        let fbLoginManager = LoginManager()
+        fbLoginManager.logOut()
+        try! Auth.auth().signOut()
+        
+        fbLoginManager.logIn(permissions: ["public_profile", "email"], from: self) { (result, error) in
+            if let error = error {
+                print("Failed to login: \(error.localizedDescription)")
+                return
+            }
+               
+            guard let accessToken = AccessToken.current else {
+                print("Failed to get access token")
+                return
+            }
+        
+            let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
+               
+            // Perform login by calling Firebase APIs
+            Auth.auth().signIn(with: credential, completion: { (authResult, error) in
+                if let error = error {
+                    print("Login error: \(error.localizedDescription)")
+                    let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
+                    let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    alertController.addAction(okayAction)
+                    self.present(alertController, animated: true, completion: nil)
+                   
+                    return
+                }
+                
+                //Ten
+                FirebaseRef.child("UserList/\(authResult!.user.uid)/DisplayName").setValue(authResult!.user.displayName)
+                //Email
+                FirebaseRef.child("UserList/\(authResult!.user.uid)/Email").setValue(authResult!.user.email)
+                //Luu thong tin dang nhap
+                CurrentUsername = authResult!.user.uid
+                
+                //Hien thi man hinh trang chu cua ung dung
+                let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
+                dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                self.present(dest, animated: true, completion: nil)
+                   
+                })
+        
+            }
+        
     }
     
     @IBAction func act_Login(_ sender: Any) {
@@ -196,4 +260,53 @@ class TestViewController: UIViewController {
         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         self.present(dest, animated: true, completion: nil)
     }
+}
+
+extension TestViewController: GIDSignInDelegate {
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        
+        if let error = error {
+          print(error)
+          return
+        }
+
+        guard let authentication = user.authentication else { return }
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
+        //print(credential)
+        
+        //Authenticate with Firebase using the credential
+        Auth.auth().signIn(with: credential) { (authResult, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            //Ten
+            FirebaseRef.child("UserList/\(authResult!.user.uid)/DisplayName").setValue(authResult!.user.displayName)
+            //Email
+            FirebaseRef.child("UserList/\(authResult!.user.uid)/Email").setValue(authResult!.user.email)
+            //Luu thong tin dang nhap
+            CurrentUsername = authResult!.user.uid
+            
+            //Hien thi man hinh trang chu cua ung dung
+            let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
+            dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            self.present(dest, animated: true, completion: nil)
+            
+        }
+    }
+
+    @available(iOS 9.0, *)
+    func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any])
+      -> Bool {
+        return GIDSignIn.sharedInstance().handle(url)
+    }
+
+    //iOS 8 or older
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url)
+    }
+    
 }
