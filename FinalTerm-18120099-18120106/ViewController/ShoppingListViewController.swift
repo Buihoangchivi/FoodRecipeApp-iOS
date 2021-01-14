@@ -16,7 +16,7 @@ class ShoppingListViewController: UIViewController {
     @IBOutlet weak var EstablishMenuButton: UIButton!
     @IBOutlet weak var ShoppingListTableView: UITableView!
     @IBOutlet weak var ShoppingListView: UIView!
-    
+    @IBOutlet weak var MenuButton: UIButton!
     var dateData = Date()
     var ShoppingList = [(FoodName: String, IngredientName: String, Value: String, Check: Bool)]()
     var IngredientList = [(Name: String, Unit: String)]()
@@ -51,6 +51,12 @@ class ShoppingListViewController: UIViewController {
         LoadDataFromFirebase(dateData)
     }
     
+    @IBAction func act_ShowMenu(_ sender: Any) {
+        let myPopUp = self.storyboard?.instantiateViewController(identifier: "MenuViewController") as! MenuViewController
+        myPopUp.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        myPopUp.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        self.present(myPopUp, animated: true, completion: nil)
+    }
     @IBAction func act_ShowHomeScreen(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
         delegate?.DismissWithCondition(0)
