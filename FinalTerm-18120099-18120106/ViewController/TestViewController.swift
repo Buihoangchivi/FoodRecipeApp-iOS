@@ -255,10 +255,11 @@ class TestViewController: UIViewController {
     }
     
     @IBAction func act_Login(_ sender: Any) {
-        let dest = self.storyboard?.instantiateViewController(identifier: "LoginViewController") as! LoginViewController
+        /*let dest = self.storyboard?.instantiateViewController(identifier: "LoginViewController") as! LoginViewController
         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        self.present(dest, animated: true, completion: nil)
+        self.present(dest, animated: true, completion: nil)*/
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

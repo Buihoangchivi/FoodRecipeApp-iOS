@@ -14,6 +14,7 @@ import FBSDKLoginKit
 
 class LoginViewController: UIViewController {
     
+    @IBOutlet weak var BackButton: UIButton!
     @IBOutlet weak var EmailTextField: UITextField!
     @IBOutlet weak var PasswordTextField: UITextField!
     @IBOutlet weak var HidePasswordButton: UIButton!
@@ -140,6 +141,10 @@ class LoginViewController: UIViewController {
                 self.present(dest, animated: true, completion: nil)
             }
         }
+    }
+    
+    @IBAction func act_BackToStartUpScreen(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func act_ResetPassword(_ sender: Any) {
