@@ -17,6 +17,7 @@
 		363BA1CC257251A300A43B4A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 363BA1CB257251A300A43B4A /* GoogleService-Info.plist */; };
 		3640BE942574BC68003C7903 /* FoodPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3640BE932574BC68003C7903 /* FoodPopUpViewController.swift */; };
 		365150AA25B2031A0080D31D /* StartUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365150A925B2031A0080D31D /* StartUpViewController.swift */; };
+		365150AC25B20C2C0080D31D /* AdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365150AB25B20C2C0080D31D /* AdminViewController.swift */; };
 		3651797E2576508F00574610 /* IngredientListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3651797D2576508F00574610 /* IngredientListViewController.swift */; };
 		36517980257659DA00574610 /* IngredientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3651797F257659DA00574610 /* IngredientTableViewCell.swift */; };
 		366D47B2259CEBF800926D8C /* Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366D47B1259CEBF800926D8C /* Delegate.swift */; };
@@ -71,6 +72,7 @@
 		363BA1CB257251A300A43B4A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3640BE932574BC68003C7903 /* FoodPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPopUpViewController.swift; sourceTree = "<group>"; };
 		365150A925B2031A0080D31D /* StartUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartUpViewController.swift; sourceTree = "<group>"; };
+		365150AB25B20C2C0080D31D /* AdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
 		3651797D2576508F00574610 /* IngredientListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientListViewController.swift; sourceTree = "<group>"; };
 		3651797F257659DA00574610 /* IngredientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientTableViewCell.swift; sourceTree = "<group>"; };
 		366D47B1259CEBF800926D8C /* Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegate.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				36723A1925A0ACA700ABBCED /* TestViewController.swift */,
 				36A19A4C25A378C800FCE811 /* ResetPasswordViewController.swift */,
 				365150A925B2031A0080D31D /* StartUpViewController.swift */,
+				365150AB25B20C2C0080D31D /* AdminViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 				366D47B9259CFC5700926D8C /* LoginViewController.swift in Sources */,
 				8788DD24259AF3C6007B8D8C /* DetailMenuTableViewCell.swift in Sources */,
 				366D47B5259CEE1F00926D8C /* Modal.swift in Sources */,
+				365150AC25B20C2C0080D31D /* AdminViewController.swift in Sources */,
 				874C217E257762380033F8F8 /* DetailIngredientFoodTableViewCell.swift in Sources */,
 				36DAB9A3257521C1005CA319 /* AddNewFoodViewController.swift in Sources */,
 				3634DFA52579745100A14EE2 /* DirectionListViewController.swift in Sources */,

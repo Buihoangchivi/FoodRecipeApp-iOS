@@ -2965,8 +2965,8 @@
                                     <action selector="act_ShowLoginButton:" destination="QFG-ja-eyL" eventType="editingChanged" id="RA0-9Q-3X3"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Món ngon mỗi ngày" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WuS-ao-6Kr">
-                                <rect key="frame" x="84" y="244" width="246" height="48"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Người dùng đăng nhập" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WuS-ao-6Kr">
+                                <rect key="frame" x="66" y="244" width="282" height="48"/>
                                 <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="30"/>
                                 <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <nil key="highlightedColor"/>
@@ -3726,8 +3726,8 @@
                                     <action selector="act_CheckValidPassword:" destination="3qG-yv-fCx" eventType="editingChanged" id="Ttw-rK-w0A"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Món ngon mỗi ngày" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2qN-t6-khF">
-                                <rect key="frame" x="84" y="224" width="246" height="48"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Người dùng đăng ký" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2qN-t6-khF">
+                                <rect key="frame" x="81.333333333333329" y="224" width="251.66666666666669" height="48"/>
                                 <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="30"/>
                                 <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <nil key="highlightedColor"/>
@@ -3946,11 +3946,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cbB-cv-UcC">
-                                <rect key="frame" x="97" y="552" width="220" height="40"/>
+                                <rect key="frame" x="82" y="556" width="250" height="44"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="220" id="4aC-ah-p0U"/>
-                                    <constraint firstAttribute="height" constant="40" id="beF-Z3-Djf"/>
+                                    <constraint firstAttribute="width" constant="250" id="4aC-ah-p0U"/>
+                                    <constraint firstAttribute="height" constant="44" id="beF-Z3-Djf"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                 <state key="normal" title="Quản trị viên">
@@ -3961,11 +3961,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ba9-QM-FcZ">
-                                <rect key="frame" x="97" y="482" width="220" height="40"/>
+                                <rect key="frame" x="82" y="482" width="250" height="44"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="220" id="AP8-Ta-bys"/>
-                                    <constraint firstAttribute="height" constant="40" id="gfs-Sg-hBa"/>
+                                    <constraint firstAttribute="width" constant="250" id="AP8-Ta-bys"/>
+                                    <constraint firstAttribute="height" constant="44" id="gfs-Sg-hBa"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                 <state key="normal" title="Người dùng">
@@ -4094,6 +4094,137 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W21-gT-vcK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-609" y="836"/>
+        </scene>
+        <!--Admin View Controller-->
+        <scene sceneID="e7q-5O-OhR">
+            <objects>
+                <viewController storyboardIdentifier="AdminViewController" id="bZn-a7-eEv" customClass="AdminViewController" customModule="FinalTerm_18120099_18120106" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2in-6i-hUC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="WiK-ug-C41">
+                                <rect key="frame" x="25" y="352" width="364" height="42"/>
+                                <color key="backgroundColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="OtN-Ve-4ve"/>
+                                </constraints>
+                                <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="act_ShowLoginButton:" destination="bZn-a7-eEv" eventType="editingChanged" id="cj7-dp-NWn"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="NOi-Db-Ljb">
+                                <rect key="frame" x="25" y="422" width="364" height="42"/>
+                                <color key="backgroundColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="NrK-zR-xPe"/>
+                                </constraints>
+                                <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <connections>
+                                    <action selector="act_ShowLoginButton:" destination="bZn-a7-eEv" eventType="editingChanged" id="N9g-qt-jkT"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quản trị viên đăng nhập" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cS-Sj-VTU">
+                                <rect key="frame" x="56.333333333333343" y="264" width="301.33333333333326" height="48"/>
+                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="30"/>
+                                <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sxO-PW-rgF">
+                                <rect key="frame" x="352" y="432" width="27" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="27" id="EqP-FQ-5pC"/>
+                                    <constraint firstAttribute="height" constant="22" id="gZD-CU-jqw"/>
+                                </constraints>
+                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="eye.slash" catalog="system"/>
+                                <connections>
+                                    <action selector="act_ChangePasswordVisibility:" destination="bZn-a7-eEv" eventType="touchUpInside" id="tIU-kq-G6f"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" alpha="0.44999998807907104" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gs0-Tl-YER">
+                                <rect key="frame" x="25" y="492" width="364" height="42"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="jYx-LN-qz1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                <state key="normal" title="Đăng nhập">
+                                    <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="act_Login:" destination="bZn-a7-eEv" eventType="touchUpInside" id="56M-us-2uI"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihI-3V-Hxb">
+                                <rect key="frame" x="25" y="397" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kNZ-TF-x1I">
+                                <rect key="frame" x="25" y="467" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4VI-Ub-BsX">
+                                <rect key="frame" x="25" y="69" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="HvH-Ff-Awp"/>
+                                    <constraint firstAttribute="height" constant="35" id="hRc-Wb-Fba"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <state key="normal" image="arrow.left" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22"/>
+                                </state>
+                                <connections>
+                                    <action selector="act_BackToStartUpScreen:" destination="bZn-a7-eEv" eventType="touchUpInside" id="icB-nS-pLM"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="W90-Cf-Jxk" firstAttribute="trailing" secondItem="WiK-ug-C41" secondAttribute="trailing" constant="25" id="2gD-Hh-P06"/>
+                            <constraint firstItem="NOi-Db-Ljb" firstAttribute="trailing" secondItem="sxO-PW-rgF" secondAttribute="trailing" constant="10" id="3ci-i8-Jig"/>
+                            <constraint firstItem="ihI-3V-Hxb" firstAttribute="leading" secondItem="W90-Cf-Jxk" secondAttribute="leading" constant="25" id="7y7-sO-2t4"/>
+                            <constraint firstItem="sxO-PW-rgF" firstAttribute="centerY" secondItem="NOi-Db-Ljb" secondAttribute="centerY" id="9y9-mF-cEY"/>
+                            <constraint firstItem="4VI-Ub-BsX" firstAttribute="leading" secondItem="2in-6i-hUC" secondAttribute="leading" constant="25" id="Mbu-j9-877"/>
+                            <constraint firstItem="6cS-Sj-VTU" firstAttribute="top" secondItem="W90-Cf-Jxk" secondAttribute="top" constant="220" id="RDd-sB-hw0"/>
+                            <constraint firstItem="gs0-Tl-YER" firstAttribute="leading" secondItem="W90-Cf-Jxk" secondAttribute="leading" constant="25" id="UeV-MN-ejr"/>
+                            <constraint firstItem="NOi-Db-Ljb" firstAttribute="leading" secondItem="W90-Cf-Jxk" secondAttribute="leading" constant="25" id="WL6-Ws-Qkh"/>
+                            <constraint firstItem="W90-Cf-Jxk" firstAttribute="trailing" secondItem="NOi-Db-Ljb" secondAttribute="trailing" constant="25" id="Wbc-0u-ky7"/>
+                            <constraint firstItem="gs0-Tl-YER" firstAttribute="top" secondItem="NOi-Db-Ljb" secondAttribute="bottom" constant="28" id="Zxh-vc-zgf"/>
+                            <constraint firstItem="ihI-3V-Hxb" firstAttribute="top" secondItem="WiK-ug-C41" secondAttribute="bottom" constant="3" id="eCF-Ry-2yW"/>
+                            <constraint firstItem="kNZ-TF-x1I" firstAttribute="top" secondItem="NOi-Db-Ljb" secondAttribute="bottom" constant="3" id="fNC-sD-3pZ"/>
+                            <constraint firstItem="6cS-Sj-VTU" firstAttribute="centerX" secondItem="2in-6i-hUC" secondAttribute="centerX" id="fXh-SA-leG"/>
+                            <constraint firstItem="W90-Cf-Jxk" firstAttribute="trailing" secondItem="gs0-Tl-YER" secondAttribute="trailing" constant="25" id="fxO-eN-lAi"/>
+                            <constraint firstItem="WiK-ug-C41" firstAttribute="leading" secondItem="W90-Cf-Jxk" secondAttribute="leading" constant="25" id="ibS-hs-yZ9"/>
+                            <constraint firstItem="WiK-ug-C41" firstAttribute="top" secondItem="6cS-Sj-VTU" secondAttribute="bottom" constant="40" id="l5z-ZM-Ue7"/>
+                            <constraint firstItem="NOi-Db-Ljb" firstAttribute="top" secondItem="WiK-ug-C41" secondAttribute="bottom" constant="28" id="nmb-3b-1IP"/>
+                            <constraint firstItem="4VI-Ub-BsX" firstAttribute="top" secondItem="W90-Cf-Jxk" secondAttribute="top" constant="25" id="wIZ-fQ-pMd"/>
+                            <constraint firstItem="kNZ-TF-x1I" firstAttribute="leading" secondItem="W90-Cf-Jxk" secondAttribute="leading" constant="25" id="zN4-B6-VJ4"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="W90-Cf-Jxk"/>
+                    </view>
+                    <connections>
+                        <outlet property="BackButton" destination="4VI-Ub-BsX" id="VWc-pR-iuG"/>
+                        <outlet property="EmailNotificationLabel" destination="ihI-3V-Hxb" id="tcR-UZ-eea"/>
+                        <outlet property="EmailTextField" destination="WiK-ug-C41" id="h5V-Wo-Ddo"/>
+                        <outlet property="HidePasswordButton" destination="sxO-PW-rgF" id="Eql-BJ-ZsW"/>
+                        <outlet property="LoginButton" destination="gs0-Tl-YER" id="Rbn-Uh-K1z"/>
+                        <outlet property="PasswordNotificationLabel" destination="kNZ-TF-x1I" id="Upo-21-TKE"/>
+                        <outlet property="PasswordTextField" destination="NOi-Db-Ljb" id="VME-lG-S4b"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y7d-F9-4i4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-610" y="139"/>
         </scene>
     </scenes>
     <resources>

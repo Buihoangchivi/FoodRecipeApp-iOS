@@ -41,6 +41,16 @@ class StartUpViewController: UIViewController {
     }
     
     @IBAction func act_ChooseAdminMode(_ sender: Any) {
+        
+        //Tat che do nguoi dung, bat che do quan tri vien
+        isUserMode = false
+        
+        //Hien thi man hinh dang nhap danh cho nguoi dung
+        let dest = self.storyboard?.instantiateViewController(identifier: "AdminViewController") as! AdminViewController
+        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        self.present(dest, animated: true, completion: nil)
+        
     }
     
 }
