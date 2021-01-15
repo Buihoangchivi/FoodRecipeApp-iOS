@@ -25,6 +25,13 @@ class StartUpViewController: UIViewController {
         UserButton.layer.cornerRadius = UserButton.frame.height / 2
         AdminButton.layer.cornerRadius = AdminButton.frame.height / 2
         
+        //Cài ảnh nền cho view
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage.image = #imageLiteral(resourceName: "background")
+        backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
+        backgroundImage.alpha = 0.45
+        self.view.insertSubview(backgroundImage, at: 0)
+        
     }
     
     @IBAction func act_ChooseUserMode(_ sender: Any) {

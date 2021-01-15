@@ -2947,7 +2947,7 @@
                                 </constraints>
                                 <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                 <connections>
                                     <action selector="act_ShowLoginButton:" destination="QFG-ja-eyL" eventType="editingChanged" id="0ck-1R-oUP"/>
                                 </connections>
@@ -2960,7 +2960,7 @@
                                 </constraints>
                                 <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                                 <connections>
                                     <action selector="act_ShowLoginButton:" destination="QFG-ja-eyL" eventType="editingChanged" id="RA0-9Q-3X3"/>
                                 </connections>
@@ -3708,7 +3708,7 @@
                                 </constraints>
                                 <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                 <connections>
                                     <action selector="act_CheckValidEmail:" destination="3qG-yv-fCx" eventType="editingChanged" id="3Yl-RP-1UN"/>
                                 </connections>
@@ -3721,7 +3721,7 @@
                                 </constraints>
                                 <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                                 <connections>
                                     <action selector="act_CheckValidPassword:" destination="3qG-yv-fCx" eventType="editingChanged" id="Ttw-rK-w0A"/>
                                 </connections>
@@ -3805,7 +3805,7 @@
                                 </constraints>
                                 <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                 <connections>
                                     <action selector="act_CheckValidUsername:" destination="3qG-yv-fCx" eventType="editingChanged" id="Gwz-PK-67K"/>
                                 </connections>
@@ -3933,26 +3933,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="food" translatesAutoresizingMaskIntoConstraints="NO" id="Gwr-vI-CIH">
-                                <rect key="frame" x="0.0" y="44" width="414" height="220"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="220" id="J9M-T9-COJ"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Món ngon mỗi ngày" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Mh-tL-1Sq">
-                                <rect key="frame" x="84" y="354" width="246" height="48"/>
-                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="30"/>
+                                <rect key="frame" x="59.333333333333343" y="324" width="295.33333333333326" height="57.666666666666686"/>
+                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="36"/>
                                 <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cbB-cv-UcC">
-                                <rect key="frame" x="82" y="556" width="250" height="44"/>
+                                <rect key="frame" x="72" y="525.66666666666663" width="270" height="44"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="4aC-ah-p0U"/>
+                                    <constraint firstAttribute="width" constant="270" id="4aC-ah-p0U"/>
                                     <constraint firstAttribute="height" constant="44" id="beF-Z3-Djf"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
                                 <state key="normal" title="Quản trị viên">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -3961,13 +3955,13 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ba9-QM-FcZ">
-                                <rect key="frame" x="82" y="482" width="250" height="44"/>
+                                <rect key="frame" x="72" y="461.66666666666669" width="270" height="44"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="AP8-Ta-bys"/>
+                                    <constraint firstAttribute="width" constant="270" id="AP8-Ta-bys"/>
                                     <constraint firstAttribute="height" constant="44" id="gfs-Sg-hBa"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
                                 <state key="normal" title="Người dùng">
                                     <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 </state>
@@ -3978,14 +3972,11 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="9Mh-tL-1Sq" firstAttribute="top" secondItem="uJN-0U-dS0" secondAttribute="top" constant="280" id="1cF-P4-Cvz"/>
                             <constraint firstItem="ba9-QM-FcZ" firstAttribute="centerX" secondItem="BY1-dg-ncH" secondAttribute="centerX" id="8K5-TS-rsa"/>
-                            <constraint firstItem="cbB-cv-UcC" firstAttribute="top" secondItem="ba9-QM-FcZ" secondAttribute="bottom" constant="30" id="CMz-0Z-pCO"/>
-                            <constraint firstItem="Gwr-vI-CIH" firstAttribute="top" secondItem="uJN-0U-dS0" secondAttribute="top" id="TdA-Ad-6pn"/>
-                            <constraint firstItem="uJN-0U-dS0" firstAttribute="trailing" secondItem="Gwr-vI-CIH" secondAttribute="trailing" id="VFb-OS-tmb"/>
+                            <constraint firstItem="cbB-cv-UcC" firstAttribute="top" secondItem="ba9-QM-FcZ" secondAttribute="bottom" constant="20" id="CMz-0Z-pCO"/>
                             <constraint firstItem="cbB-cv-UcC" firstAttribute="centerX" secondItem="BY1-dg-ncH" secondAttribute="centerX" id="aiK-8y-28D"/>
-                            <constraint firstItem="9Mh-tL-1Sq" firstAttribute="top" secondItem="Gwr-vI-CIH" secondAttribute="bottom" constant="90" id="boZ-U1-c6O"/>
                             <constraint firstItem="ba9-QM-FcZ" firstAttribute="top" secondItem="9Mh-tL-1Sq" secondAttribute="bottom" constant="80" id="f9k-mi-kbw"/>
-                            <constraint firstItem="Gwr-vI-CIH" firstAttribute="leading" secondItem="uJN-0U-dS0" secondAttribute="leading" id="ubj-sh-0wi"/>
                             <constraint firstItem="9Mh-tL-1Sq" firstAttribute="centerX" secondItem="BY1-dg-ncH" secondAttribute="centerX" id="xBG-Tz-ghA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="uJN-0U-dS0"/>
@@ -4008,26 +3999,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="IYK-Dc-hOi">
-                                <rect key="frame" x="25" y="400" width="364" height="42"/>
+                                <rect key="frame" x="25" y="402" width="364" height="42"/>
                                 <color key="backgroundColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="41P-cQ-IEi"/>
                                 </constraints>
                                 <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                 <connections>
                                     <action selector="act_CheckValidEmail:" destination="Y4e-Mc-3E9" eventType="editingChanged" id="jZY-rf-wxS"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Đặt lại mật khẩu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JGl-Az-9s9">
-                                <rect key="frame" x="101" y="334" width="212" height="36"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
+                                <rect key="frame" x="104.66666666666669" y="324" width="205" height="48"/>
+                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="30"/>
                                 <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" alpha="0.45000000000000001" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F69-ma-LkG">
-                                <rect key="frame" x="25" y="472" width="364" height="42"/>
+                                <rect key="frame" x="25" y="474" width="364" height="42"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="qRi-76-pdA"/>
@@ -4051,13 +4042,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YPe-3m-Cs3">
-                                <rect key="frame" x="25" y="445" width="0.0" height="0.0"/>
+                                <rect key="frame" x="25" y="447" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chúng tôi đã gửi thư đến địa chỉ email trên tài khoản của bạn. Vui lòng kiểm tra email để có thể đặt lại mật khẩu." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjc-mQ-V6A">
-                                <rect key="frame" x="25" y="385" width="364" height="68.333333333333314"/>
+                                <rect key="frame" x="25" y="387" width="364" height="68.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -4078,7 +4069,7 @@
                             <constraint firstItem="F69-ma-LkG" firstAttribute="leading" secondItem="o9G-IP-Lob" secondAttribute="leading" constant="25" id="ZTZ-Td-9Dg"/>
                             <constraint firstItem="JGl-Az-9s9" firstAttribute="centerX" secondItem="5Gt-X6-wcG" secondAttribute="centerX" id="ad4-du-leA"/>
                             <constraint firstItem="o9G-IP-Lob" firstAttribute="trailing" secondItem="F69-ma-LkG" secondAttribute="trailing" constant="25" id="cGd-Vw-MSS"/>
-                            <constraint firstItem="JGl-Az-9s9" firstAttribute="top" secondItem="o9G-IP-Lob" secondAttribute="top" constant="290" id="otA-eC-wjF"/>
+                            <constraint firstItem="JGl-Az-9s9" firstAttribute="top" secondItem="o9G-IP-Lob" secondAttribute="top" constant="280" id="otA-eC-wjF"/>
                             <constraint firstItem="F69-ma-LkG" firstAttribute="top" secondItem="IYK-Dc-hOi" secondAttribute="bottom" constant="30" id="w5s-4f-o6f"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="o9G-IP-Lob"/>
@@ -4104,39 +4095,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="WiK-ug-C41">
-                                <rect key="frame" x="25" y="352" width="364" height="42"/>
+                                <rect key="frame" x="25" y="382" width="364" height="42"/>
                                 <color key="backgroundColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="OtN-Ve-4ve"/>
                                 </constraints>
                                 <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                 <connections>
                                     <action selector="act_ShowLoginButton:" destination="bZn-a7-eEv" eventType="editingChanged" id="cj7-dp-NWn"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="NOi-Db-Ljb">
-                                <rect key="frame" x="25" y="422" width="364" height="42"/>
+                                <rect key="frame" x="25" y="452" width="364" height="42"/>
                                 <color key="backgroundColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="NrK-zR-xPe"/>
                                 </constraints>
                                 <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                                 <connections>
                                     <action selector="act_ShowLoginButton:" destination="bZn-a7-eEv" eventType="editingChanged" id="N9g-qt-jkT"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quản trị viên đăng nhập" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cS-Sj-VTU">
-                                <rect key="frame" x="56.333333333333343" y="264" width="301.33333333333326" height="48"/>
+                                <rect key="frame" x="56.333333333333343" y="294" width="301.33333333333326" height="48"/>
                                 <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="30"/>
                                 <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sxO-PW-rgF">
-                                <rect key="frame" x="352" y="432" width="27" height="22"/>
+                                <rect key="frame" x="352" y="462" width="27" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="27" id="EqP-FQ-5pC"/>
                                     <constraint firstAttribute="height" constant="22" id="gZD-CU-jqw"/>
@@ -4147,8 +4138,8 @@
                                     <action selector="act_ChangePasswordVisibility:" destination="bZn-a7-eEv" eventType="touchUpInside" id="tIU-kq-G6f"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" alpha="0.44999998807907104" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gs0-Tl-YER">
-                                <rect key="frame" x="25" y="492" width="364" height="42"/>
+                            <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gs0-Tl-YER">
+                                <rect key="frame" x="25" y="522" width="364" height="42"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="jYx-LN-qz1"/>
@@ -4162,13 +4153,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihI-3V-Hxb">
-                                <rect key="frame" x="25" y="397" width="0.0" height="0.0"/>
+                                <rect key="frame" x="25" y="427" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kNZ-TF-x1I">
-                                <rect key="frame" x="25" y="467" width="0.0" height="0.0"/>
+                                <rect key="frame" x="25" y="497" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -4195,7 +4186,7 @@
                             <constraint firstItem="ihI-3V-Hxb" firstAttribute="leading" secondItem="W90-Cf-Jxk" secondAttribute="leading" constant="25" id="7y7-sO-2t4"/>
                             <constraint firstItem="sxO-PW-rgF" firstAttribute="centerY" secondItem="NOi-Db-Ljb" secondAttribute="centerY" id="9y9-mF-cEY"/>
                             <constraint firstItem="4VI-Ub-BsX" firstAttribute="leading" secondItem="2in-6i-hUC" secondAttribute="leading" constant="25" id="Mbu-j9-877"/>
-                            <constraint firstItem="6cS-Sj-VTU" firstAttribute="top" secondItem="W90-Cf-Jxk" secondAttribute="top" constant="220" id="RDd-sB-hw0"/>
+                            <constraint firstItem="6cS-Sj-VTU" firstAttribute="top" secondItem="W90-Cf-Jxk" secondAttribute="top" constant="250" id="RDd-sB-hw0"/>
                             <constraint firstItem="gs0-Tl-YER" firstAttribute="leading" secondItem="W90-Cf-Jxk" secondAttribute="leading" constant="25" id="UeV-MN-ejr"/>
                             <constraint firstItem="NOi-Db-Ljb" firstAttribute="leading" secondItem="W90-Cf-Jxk" secondAttribute="leading" constant="25" id="WL6-Ws-Qkh"/>
                             <constraint firstItem="W90-Cf-Jxk" firstAttribute="trailing" secondItem="NOi-Db-Ljb" secondAttribute="trailing" constant="25" id="Wbc-0u-ky7"/>
@@ -4244,7 +4235,6 @@
         <image name="close" width="90" height="90"/>
         <image name="eye.slash" catalog="system" width="64" height="42"/>
         <image name="facebook" width="512" height="512"/>
-        <image name="food" width="1030" height="538"/>
         <image name="food-background" width="1899" height="1922"/>
         <image name="google" width="512" height="512"/>
         <image name="heart" catalog="system" width="64" height="54"/>

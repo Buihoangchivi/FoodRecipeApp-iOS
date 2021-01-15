@@ -20,6 +20,13 @@ class ResetPasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Init()
+        
+        //Cài ảnh nền cho view
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage.image = #imageLiteral(resourceName: "user-background")
+        backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
+        backgroundImage.alpha = 0.4
+        self.view.insertSubview(backgroundImage, at: 0)
     }
 
     func Init() {
@@ -37,7 +44,7 @@ class ResetPasswordViewController: UIViewController {
         ResetPasswordButton.layer.masksToBounds = true
         
         //Thay doi mau dong chu 'Đăng nhập nào' de lam noi bat
-        let FirstTitle = NSAttributedString(string: "Bạn đã có tài khoản rồi? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray])
+        let FirstTitle = NSAttributedString(string: "Bạn đã có tài khoản rồi? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         let LastTitle = NSAttributedString(string: "Đăng nhập nào.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
         let Title = NSMutableAttributedString()
         Title.append(FirstTitle)

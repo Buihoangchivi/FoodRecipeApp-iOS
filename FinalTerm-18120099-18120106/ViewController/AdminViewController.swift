@@ -25,6 +25,13 @@ class AdminViewController: UIViewController {
         super.viewDidLoad()
 
         Init()
+        
+        //Cài ảnh nền cho view
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage.image = #imageLiteral(resourceName: "admin-background")
+        backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
+        backgroundImage.alpha = 0.5
+        self.view.insertSubview(backgroundImage, at: 0)
     }
     
     func Init() {
@@ -71,7 +78,7 @@ class AdminViewController: UIViewController {
         }
         else if ((EmailTextField.text! == "" || PasswordTextField.text! == "") && LoginButton.isEnabled == true) { //An nut dang nhap
             LoginButton.isEnabled = false
-            LoginButton.alpha = 0.45
+            LoginButton.alpha = 0.7
         }
     }
     
