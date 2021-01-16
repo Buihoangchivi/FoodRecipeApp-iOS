@@ -123,14 +123,28 @@ class AdminViewController: UIViewController {
                 }
             }
             else {
-                //Luu thong tin ten dang nhap
-                CurrentUsername = result!.user.uid
                 
-                //Hien thi man hinh trang chu cua ung dung
-                let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
-                dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-                dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-                self.present(dest, animated: true, completion: nil)
+                //Kiem tra xem co phai la tai khoan Admin hay khong
+                FirebaseRef.child("AdminList/\(result!.user.uid)").observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                    //Tai khoan vua dang nhap la tai khoan Admin
+                    if (snapshot.exists() == true) {
+                        
+                        //Hien thi man hinh trang chu cua ung dung
+                        let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
+                        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                        self.present(dest, animated: true, completion: nil)
+                        
+                    }
+                    else { //Tai khoan vua dang nhap khong phai la tai khoan Admin
+                        
+                        ChangTextFieldState(self.EmailTextField, UIColor.red, self.EmailNotificationLabel, "Đây không phải là tài khoản của quản trị viên.")
+                        NormalizeTextFieldState(self.PasswordTextField, self.PasswordNotificationLabel)
+                        
+                    }
+                    
+                })
             }
         }
     }

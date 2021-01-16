@@ -111,7 +111,22 @@ class AddNewFoodViewController: UIViewController {
     
     @IBAction func act_SaveNewFood(_ sender: Any) {
         var count = 0
-        FirebaseRef.child("UserList/\(CurrentUsername)/FoodList").observeSingleEvent(of: .value, with: { (snapshot) in
+        var path = ""
+        var imagePath = ""
+        //Che do User
+        if (isUserMode == true) {
+            
+            path = "UserList/\(CurrentUsername)/FoodList"
+            imagePath = "/UserImages//\(CurrentUsername)"
+            
+        }
+        else { //Che do Admin
+            
+            path = "FoodList"
+            imagePath = "/FoodImages"
+            
+        }
+        FirebaseRef.child(path).observeSingleEvent(of: .value, with: { (snapshot) in
             //Xac dinh ID cho mon an moi
             for snapshotChild in snapshot.children {
                 let temp = snapshotChild as! DataSnapshot
@@ -141,7 +156,7 @@ class AddNewFoodViewController: UIViewController {
             if (self.isAddFoodImage == true) {
                 let metadata = StorageMetadata()
                 metadata.contentType = "image/jpeg"
-                self.uploadTask = imageRef.child("/UserImages//\(CurrentUsername)/\(count).jpg").putData((self.FoodImageView.image?.sd_imageData(as: .JPEG, compressionQuality: 1.0, firstFrameOnly: true))!, metadata: metadata) { (metadata, error) in
+                self.uploadTask = imageRef.child("\(imagePath)/\(count).jpg").putData((self.FoodImageView.image?.sd_imageData(as: .JPEG, compressionQuality: 1.0, firstFrameOnly: true))!, metadata: metadata) { (metadata, error) in
                     }
                 // Create a task listener handle
                 self.uploadTask!.observe(.progress) { snapshot in
@@ -169,7 +184,7 @@ class AddNewFoodViewController: UIViewController {
             }
             
             //Day tat ca thong tin cua mon an len Firebase
-            FirebaseRef.child("UserList/\(CurrentUsername)/FoodList/\(count)").setValue(["Category": tempCategoryArr, "Direction": self.SelectedDirection, "Favorite": 0, "Image": "\(count).jpg","Ingredient": tempIngredientArr, "Meal": tempMealArr, "Name": self.FoodNameTextField.text!]) { (err, ref) in
+            FirebaseRef.child("\(path)/\(count)").setValue(["Category": tempCategoryArr, "Direction": self.SelectedDirection, "Favorite": 0, "Image": "\(count).jpg","Ingredient": tempIngredientArr, "Meal": tempMealArr, "Name": self.FoodNameTextField.text!]) { (err, ref) in
                 self.delegate?.UpdateUI()
                 self.act_ShowHomeScreen(sender)
             }
