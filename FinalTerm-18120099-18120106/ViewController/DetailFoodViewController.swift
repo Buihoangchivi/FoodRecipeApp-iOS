@@ -95,10 +95,25 @@ class DetailFoodViewController: UIViewController{
                 self.FavoriteButton.tintColor = UIColor.white
             self.FavoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
             }
-            //Hien thi nut yeu thich
-            self.FavoriteButton.isHidden = false
-            self.FavoriteButtonBackground.isHidden = false
-            }})
+            
+            //Chi hien thi nut "Chon mon" va yeu thich o che do User
+            if (isUserMode == false) {
+                
+                self.btnAddtoMenu.isEnabled = false
+                self.btnAddtoMenu.alpha = 0.5
+                
+                self.FavoriteButton.isEnabled = false
+                
+            }
+            else {
+                
+                //Hien thi nut yeu thich
+                self.FavoriteButton.isHidden = false
+                self.FavoriteButtonBackground.isHidden = false
+                
+            }
+            
+                        }})
         Ref.child("\(FoodID)/Ingredient").observeSingleEvent(of: .value, with: { (snapshot) in
                 for snapshotChild in snapshot.children {
                     let temp = snapshotChild as! DataSnapshot
@@ -117,6 +132,7 @@ class DetailFoodViewController: UIViewController{
                       }
                 }
           })
+        
         Ref.child("\(FoodID)/Direction").observeSingleEvent(of: .value, with: { (snapshot) in
                 for snapshotChild in snapshot.children {
                     let temp = snapshotChild as! DataSnapshot

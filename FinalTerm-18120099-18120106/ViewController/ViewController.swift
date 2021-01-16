@@ -103,111 +103,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Init()
-        /*let index = 1
-        //Lay thong tin tat ca nguyen lieu cua mon an id 'index' tu Firebase
-        foodInfoRef.child("\(index)/Ingredient").observeSingleEvent(of: .value, with: { (snapshot) in
-        for snapshotChild in snapshot.children {
-            let temp = snapshotChild as! DataSnapshot
-            if let arr = temp.value as? NSArray {
-                var infoArr = [String]()
-                foodInfoRef.child("IngredientList/\(arr[0])").observeSingleEvent(of: .value, with: { (snapshot) in
-                for snapshotChild in snapshot.children {
-                    let temp = snapshotChild as! DataSnapshot
-                    infoArr += [temp.value as! String]
-                }
-                    //Chi so cua nguyen lieu
-                    //print(arr[0])
-                    //Gia tri cua nguyen lieu
-                    //print(arr[1])
-                    //Ket qua
-                    print("\(infoArr[0]): \(arr[1]) \(infoArr[1])")
-            })
-            }}})
-        
-        //Cap nhat thong tin len Firebase
-        let ingredientIndex = 0
-        //Thay doi loai nguyen lieu id 'ingredientIndex' cho mon an id 'index'
-        foodInfoRef.child("\(index)/Ingredient/\(ingredientIndex)/").updateChildValues(["0": 2])
-        //Thay doi gia tri cua nguyen lieu id 1 cho mon an id 0
-        foodInfoRef.child("\(index)/Ingredient/\(ingredientIndex)/").updateChildValues(["1": 93])*/
-        
-        /*for i in 3...15 {
-            foodInfoRef.child("FoodInfo\(i)").setValue(["Image": "\(i).jpg", "Name": "\(i)"])
-        }*/
-        //Lay dia chi
-        //let ref = Database.database().reference(withPath: "Food0")
-        
-        //Doc du lieu
-        /*ref.observeSingleEvent(of: .value, with: { (snapshot) in
-        if let food = snapshot.value as? [String:Any] {
-            print(food["Name"]!)
-            print(food["Image"]!)
-        }})*/
-        
-        //Xoa du lieu
-        //ref.removeValue()
-        
-        //Cap nhat du lieu
-        //ref.updateChildValues(["Image": "abc"])
-        
-        //Tao node moi roi ghi du lieu luon
-        /*let aFoodRef = ref.child("Food0")
-        let food = FoodInfomation()
-        food.Image = "0"
-        food.Name = "Name0"
-        let a = ["Name": food.Name, "Image": food.Image]
-        aFoodRef.setValue(a)*/
-        
-        //Upload anh
-        /*//Tao duong dan
-        let foodRef = Storage.storage().reference().child("Images/image0.jpg")
-        // File located on disk
-        let localFile = URL(string: "/Users/buivanvi/Downloads/fish+lemongrass-3.jpg")!
-
-        // Upload the file to the path "images/rivers.jpg"
-        let uploadTask = foodRef.putFile(from: localFile, metadata: nil) { metadata, error in
-          if let errorU = error {
-            print("Errorrrrrrrrrrr")
-            print(errorU.localizedDescription)
-          }
-          else {
-            // Metadata contains file metadata such as size, content-type.
-            let size = metadata!.size
-              // You can also access to download URL after upload.
-            foodRef.downloadURL { (url, error) in
-                guard let downloadURL = url else {
-                    // Uh-oh, an error occurred!
-                    return
-                }
-                print(size)
-                print(downloadURL)
-            }
-            }
-        }
-        uploadTask.resume()*/
-        
-        //Download anh
-        /*
-        let imageRef = ref.child("/FoodImages/4.jpg")
-        FoodImage1.sd_setImage(with: imageRef)*/
-        // Create a reference to the file you want to download
-        /*let imageName = "0.jpg"
-        let islandRef = ref.child("/\(imageName)")
-
-        // Create local filesystem URL
-        let localURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent(imageName)
-        print(localURL)
-        // Download to the local filesystem
-        let downloadTask = islandRef.write(toFile: localURL) { url, error in
-          if let error = error {
-            print("ahihi")
-            print(error.localizedDescription)
-          } else {
-            print("OK")
-          }
-        }
-        //downloadTask.resume()*/
-        
     }
 
     func Init() {
@@ -242,6 +137,14 @@ class ViewController: UIViewController {
         FoodNameOutletList = [FoodName0, FoodName1, FoodName2, FoodName3, FoodName4, FoodName5]
         FoodButtonOutletList = [FoodButton0, FoodButton1, FoodButton2, FoodButton3, FoodButton4, FoodButton5]
         FoodFavoriteButtonOutletList = [FoodFavoriteButton0, FoodFavoriteButton1, FoodFavoriteButton2, FoodFavoriteButton3, FoodFavoriteButton4, FoodFavoriteButton5]
+        
+        //Không hiển thị nút danh sách thực đơn ở chế độ Admin
+        if (isUserMode == false) {
+            
+            //Vo hieu hoa nut danh sach thuc don
+            ShoppingButton.isEnabled = false
+            
+        }
         
         //Xac dinh co tat ca bao nhieu mon an luu tru tren Firebase
         //Tu do suy ra duoc tong so trang
@@ -596,11 +499,19 @@ class ViewController: UIViewController {
                 }
                 //Neu dang bi vo hieu hoa thi bat nut len
                 if (self.FoodButtonOutletList[i].isEnabled == false) {
+                    
+                    //Chi hien thi nut yeu thich o che do User
+                    if (isUserMode == true) {
+                    
+                        self.FoodFavoriteButtonOutletList[i].isEnabled = true
+                        self.FoodFavoriteButtonOutletList[i].isHidden = false
+                        
+                    }
+                    
+                    self.FoodNameOutletList[i].isHidden = false
                     self.FoodButtonOutletList[i].isEnabled = true
                     self.FoodImageOutletList[i].isHidden = false
-                    self.FoodNameOutletList[i].isHidden = false
-                    self.FoodFavoriteButtonOutletList[i].isEnabled = true
-                    self.FoodFavoriteButtonOutletList[i].isHidden = false
+                    
                 }
             }
             })
