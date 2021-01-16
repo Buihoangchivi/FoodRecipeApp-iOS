@@ -154,7 +154,14 @@ class DetailFoodViewController: UIViewController{
     }
     
     @IBAction func act_EditIngredient(_ sender: Any) {
-        if (isIngredientView == true) {
+        let dest = self.storyboard?.instantiateViewController(identifier: "EditFoodViewController") as! EditFoodViewController
+        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        dest.delegate = self
+        dest.editFoodRef = Ref.child("\(FoodID)")
+        dest.editImageRef = imageRef.child("\(self.folderName)")
+        self.present(dest, animated: true, completion: nil)
+        /*if (isIngredientView == true) {
             let dest = self.storyboard?.instantiateViewController(identifier: "IngredientListViewController") as! IngredientListViewController
             dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
@@ -170,7 +177,7 @@ class DetailFoodViewController: UIViewController{
             dest.delegate = self
             dest.DirectionList = self.DirectionList
             self.present(dest, animated: true, completion: nil)
-        }
+        }*/
         
     }
         
@@ -345,6 +352,7 @@ extension DetailFoodViewController: DatePickerDalegate{
     }
 }
 
+//Delegate cua nguyen lieu va cac buoc thuc hien
 extension DetailFoodViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (isIngredientView == true) {
@@ -379,4 +387,12 @@ extension DetailFoodViewController:UITableViewDelegate,UITableViewDataSource{
             return cell
         }
     }
+}
+
+//Delegate cua chinh sua mon an
+extension DetailFoodViewController: EditFoodDelegate {
+    func UpdateUI() {
+        print("Update")
+    }
+    
 }

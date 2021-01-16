@@ -294,7 +294,7 @@ extension AddNewFoodViewController: UICollectionViewDataSource, UICollectionView
             
             if (SelectedMeal[indexPath.row] == true) {
                 cell.MealLabel.font = UIFont(name: cell.MealLabel.font.familyName, size: 20)
-                cell.MealLabel.textColor = UIColor.black
+                cell.MealLabel.textColor = UIColor.systemGreen
                 cell.layer.borderWidth = 1
                 cell.layer.borderColor = UIColor.systemGreen.cgColor
             }

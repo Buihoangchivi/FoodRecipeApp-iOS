@@ -3390,23 +3390,20 @@
                                             <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         </state>
                                         <connections>
-                                            <action selector="act_ShowIngredientList:" destination="A17-lq-Y1N" eventType="touchUpInside" id="emW-cO-NUf"/>
+                                            <action selector="act_ShowIngredientList:" destination="ikI-gK-9di" eventType="touchUpInside" id="42d-Gb-A2r"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ep7-M1-xWn">
-                                        <rect key="frame" x="314" y="100.66666666666666" width="80" height="35"/>
+                                        <rect key="frame" x="284" y="100.66666666666666" width="110" height="35"/>
                                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="80" id="7dd-Ht-4D9"/>
+                                            <constraint firstAttribute="width" constant="110" id="7dd-Ht-4D9"/>
                                             <constraint firstAttribute="height" constant="35" id="RMm-zG-yhq"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <state key="normal" title="Thêm">
+                                        <state key="normal" title="Chỉnh sửa">
                                             <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         </state>
-                                        <connections>
-                                            <action selector="act_AddFoodImage:" destination="A17-lq-Y1N" eventType="touchUpInside" id="Mh7-3u-VNQ"/>
-                                        </connections>
                                     </button>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Dzf-HL-HAV">
                                         <rect key="frame" x="0.0" y="407.66666666666669" width="414" height="50"/>
@@ -3444,8 +3441,8 @@
                                             </collectionViewCell>
                                         </cells>
                                         <connections>
-                                            <outlet property="dataSource" destination="A17-lq-Y1N" id="asf-1N-fam"/>
-                                            <outlet property="delegate" destination="A17-lq-Y1N" id="vxB-vr-C2h"/>
+                                            <outlet property="dataSource" destination="ikI-gK-9di" id="gv0-lu-mff"/>
+                                            <outlet property="delegate" destination="ikI-gK-9di" id="eyf-kR-nbH"/>
                                         </connections>
                                     </collectionView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vsD-4H-mh0">
@@ -3491,8 +3488,8 @@
                                             </collectionViewCell>
                                         </cells>
                                         <connections>
-                                            <outlet property="dataSource" destination="A17-lq-Y1N" id="Zvw-sr-hRa"/>
-                                            <outlet property="delegate" destination="A17-lq-Y1N" id="cwR-oZ-4tD"/>
+                                            <outlet property="dataSource" destination="ikI-gK-9di" id="nm0-zy-rE5"/>
+                                            <outlet property="delegate" destination="ikI-gK-9di" id="qet-Kx-XyD"/>
                                         </connections>
                                     </collectionView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BTM-wR-faY">
@@ -3506,9 +3503,6 @@
                                         <state key="normal" title="Huỷ">
                                             <color key="titleColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
-                                        <connections>
-                                            <action selector="act_ShowHomeScreen:" destination="A17-lq-Y1N" eventType="touchUpInside" id="bRM-RC-tAV"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s1R-lL-Bsl">
                                         <rect key="frame" x="219" y="712" width="150" height="45"/>
@@ -3521,9 +3515,6 @@
                                         <state key="normal" title="Lưu">
                                             <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         </state>
-                                        <connections>
-                                            <action selector="act_SaveNewFood:" destination="A17-lq-Y1N" eventType="touchUpInside" id="F58-np-Pb4"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8JC-Pp-6gf">
                                         <rect key="frame" x="314" y="630.66666666666663" width="80" height="35"/>
@@ -3537,7 +3528,7 @@
                                             <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         </state>
                                         <connections>
-                                            <action selector="act_ShowStepsList:" destination="A17-lq-Y1N" eventType="touchUpInside" id="kkS-kI-INr"/>
+                                            <action selector="act_ShowStepsList:" destination="ikI-gK-9di" eventType="touchUpInside" id="TKC-1F-cEe"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -3596,6 +3587,17 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="weR-gL-42s"/>
                     </view>
+                    <connections>
+                        <outlet property="AddImageButton" destination="ep7-M1-xWn" id="ODk-Ak-52d"/>
+                        <outlet property="AddIngredientButton" destination="1gY-Rc-2Xl" id="oPP-o0-CRm"/>
+                        <outlet property="AddStepButton" destination="8JC-Pp-6gf" id="Qp7-1W-EDo"/>
+                        <outlet property="CancelButton" destination="BTM-wR-faY" id="jhe-c6-FV0"/>
+                        <outlet property="CategoryCollectionView" destination="Dzf-HL-HAV" id="fG7-36-InL"/>
+                        <outlet property="FoodImageView" destination="9a7-Dz-de5" id="6iT-UO-u24"/>
+                        <outlet property="FoodNameTextField" destination="3IF-Dg-74G" id="8TY-Me-nJk"/>
+                        <outlet property="MealCollectionView" destination="vsD-4H-mh0" id="u0X-PC-uCR"/>
+                        <outlet property="SaveButton" destination="s1R-lL-Bsl" id="5qe-JU-Bjb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i3j-jZ-C17" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

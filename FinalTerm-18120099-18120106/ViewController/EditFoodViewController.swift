@@ -24,6 +24,10 @@ class EditFoodViewController: UIViewController {
     @IBOutlet weak var CancelButton: UIButton!
     @IBOutlet weak var SaveButton: UIButton!
     
+    //Duong dan luu thong tin va hinh anh mon an tren Firebase
+    var editFoodRef = DatabaseReference()
+    var editImageRef = StorageReference()
+    
     var SelectedCategory = [Bool]()
     var SelectedMeal = [Bool]()
     var SelectedIngredient = [(ID: Int, Name: String, Value: Double, Unit: String)]()
@@ -36,10 +40,12 @@ class EditFoodViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        Init()
+        UIInit()
+        FoodInfoInit()
     }
     
-    func Init() {
+    //Khoi tao giao dien man hinh chinh sua
+    func UIInit() {
             //Bo tron goc cho cac nut them anh, them nguyen lieu, them buoc
             AddImageButton.layer.cornerRadius = 17.5
             AddIngredientButton.layer.cornerRadius = 17.5
@@ -64,6 +70,92 @@ class EditFoodViewController: UIViewController {
             layout = MealCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
             layout.sectionInset = UIEdgeInsets(top: 5,left: 10,bottom: 0,right: 15)
         }
+    
+    //Khoi tao du lieu mon an can chinh sua len man hinh
+    func FoodInfoInit() {
+        
+        //Hien thi thong tin mon an
+        editFoodRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            if let food = snapshot.value as? [String:Any] {
+                //Hien thi hinh anh mon an
+                //self.FoodImageOutletList[i].sd_setImage(with: imageRef.child("/FoodImages/\(food["Image"]!)"), maxImageSize: 1 << 30, placeholderImage: UIImage(named: "food-background"), options: .retryFailed, completion: nil)
+                //Hien thi ten mon an
+                self.FoodNameTextField.text = food["Name"] as? String
+                
+                //Cap nhat danh sach loai mon an
+                if let arr = food["Category"] as? NSArray {
+                    
+                    for category in arr {
+                        
+                        if let index = category as? Int {
+                            
+                            self.SelectedCategory[index] = true
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+                //Cap nhat danh sach loai bua an
+                if let arr = food["Meal"] as? NSArray {
+                    
+                    for meal in arr {
+                        
+                        if let index = meal as? Int {
+                            
+                            self.SelectedMeal[index] = true
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+                //Cap nhat danh sach nguyen lieu
+                if let arr = food["Ingredient"] as? NSArray {
+                    
+                    for pair in arr {
+                        
+                        if let pairArr = pair as? NSArray {
+                            
+                            var infoArr = [String]()
+                            FirebaseRef.child("IngredientList/\(pairArr[0])").observeSingleEvent(of: .value, with: { (snapshot) in
+                                
+                                for snapshotChild in snapshot.children {
+                                    let temp = snapshotChild as! DataSnapshot
+                                    infoArr += [temp.value as! String]
+                                }
+                                
+                                self.SelectedIngredient += [(ID: pairArr[0] as! Int, Name: infoArr[0], Value: pairArr[1] as! Double, Unit: infoArr[1])]
+                                
+                            })
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+                //Cap nhat danh sach cac buoc che ben mon an
+                if let arr = food["Direction"] as? NSArray {
+                 
+                    for step in arr {
+                            
+                        self.SelectedDirection += [step as! String]
+                        
+                    }
+                    
+                }
+                
+                //Cap nhat Collection View cho loai mon an va loai bua an
+                self.CategoryCollectionView.reloadData()
+                self.MealCollectionView.reloadData()
+            }
+        })
+        
+    }
     
     @IBAction func act_AddFoodImage(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
@@ -284,7 +376,7 @@ extension EditFoodViewController: UICollectionViewDataSource, UICollectionViewDe
             
             if (SelectedMeal[indexPath.row] == true) {
                 cell.MealLabel.font = UIFont(name: cell.MealLabel.font.familyName, size: 20)
-                cell.MealLabel.textColor = UIColor.black
+                cell.MealLabel.textColor = UIColor.systemGreen
                 cell.layer.borderWidth = 1
                 cell.layer.borderColor = UIColor.systemGreen.cgColor
             }
