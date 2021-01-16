@@ -14,6 +14,7 @@ import FBSDKLoginKit
 
 class LoginViewController: UIViewController {
     
+    @IBOutlet weak var MissPassButton: UIButton!
     @IBOutlet weak var EmailTextField: UITextField!
     @IBOutlet weak var PasswordTextField: UITextField!
     @IBOutlet weak var HidePasswordButton: UIButton!
@@ -31,6 +32,13 @@ class LoginViewController: UIViewController {
     }
     
     func Init() {
+        //Khoi tao mau app
+        FirebaseRef.child("Setting").observeSingleEvent(of: .value, with: { (snapshot) in
+        if let food = snapshot.value as? [String:Any] {
+            self.LoginButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
+            self.MissPassButton.setTitleColor(UIColor(named: "\(food["Color"]!)"), for: .normal)
+            }})
+        
         //Doi mau chu goi y trong cac o nhap ten nguoi dung va mat khau
         EmailTextField.attributedPlaceholder = NSAttributedString(string: "Địa chỉ email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Mật khẩu", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])

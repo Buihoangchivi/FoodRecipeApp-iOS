@@ -29,6 +29,13 @@ class DirectionPopUpViewController: UIViewController {
     }
     
     func Init() {
+        //Khoi tao mau app
+        FirebaseRef.child("Setting").observeSingleEvent(of: .value, with: { (snapshot) in
+        if let food = snapshot.value as? [String:Any] {
+        self.SaveDirectionButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
+         self.CancelDirectionButton.setTitleColor(UIColor(named: "\(food["Color"]!)"), for: .normal)
+         self.CancelDirectionButton.layer.borderColor = UIColor(named: "\(food["Color"]!)")?.cgColor
+            }})
         //Lam mo nen cua view
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -42,7 +49,6 @@ class DirectionPopUpViewController: UIViewController {
         
         //Bo tron goc cho 2 nut Huy va Luu/Sua
         CancelDirectionButton.layer.cornerRadius = 22
-        CancelDirectionButton.layer.borderColor = UIColor.systemGreen.cgColor
         CancelDirectionButton.layer.borderWidth = 1
         SaveDirectionButton.layer.cornerRadius = 22
         

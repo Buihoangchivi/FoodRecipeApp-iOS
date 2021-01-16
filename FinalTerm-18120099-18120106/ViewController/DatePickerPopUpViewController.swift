@@ -42,6 +42,14 @@ class DatePickerPopUpViewController: UIViewController {
     }
     
     func Init() {
+        //Khoi tao mau app
+        FirebaseRef.child("Setting").observeSingleEvent(of: .value, with: { (snapshot) in
+        if let food = snapshot.value as? [String:Any] {
+            self.ChooseButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
+            self.CancelButton.layer.borderColor = UIColor(named: "\(food["Color"]!)")?.cgColor
+            self.CancelButton.setTitleColor(UIColor(named: "\(food["Color"]!)"), for: .normal)
+            }})
+        
         //Lam mo nen cua view
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -55,7 +63,6 @@ class DatePickerPopUpViewController: UIViewController {
         
         //Bo tron goc cho 2 nut Huy va Chon ngay
         CancelButton.layer.cornerRadius = 22
-        CancelButton.layer.borderColor = UIColor.systemGreen.cgColor
         CancelButton.layer.borderWidth = 1
         ChooseButton.layer.cornerRadius = 22
         

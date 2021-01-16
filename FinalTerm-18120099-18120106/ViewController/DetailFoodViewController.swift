@@ -12,8 +12,9 @@ import FirebaseUI
 
 class DetailFoodViewController: UIViewController{
     
+    @IBOutlet weak var HeaderLb: UILabel!
     @IBOutlet weak var FoodImageView: UIImageView!
-    
+
     @IBOutlet weak var FoodNameLabel: UILabel!
     @IBOutlet weak var NumberPersonLabel: UILabel!
     @IBOutlet weak var IngredientDash: UILabel!
@@ -50,10 +51,18 @@ class DetailFoodViewController: UIViewController{
     }
     
     func Init() {
+        //Khoi tao mau app
+        FirebaseRef.child("Setting").observe(.value, with: { (snapshot) in
+        if let food = snapshot.value as? [String:Any] {
+        self.HeaderLb.backgroundColor = UIColor(named: "\(food["Color"]!)")
+        self.IngredientButton.setTitleColor(UIColor(named: "\(food["Color"]!)"), for: .normal)
+        self.btnAddtoMenu.backgroundColor = UIColor(named: "\(food["Color"]!)")
+        self.btnAddIngre.setTitleColor(UIColor(named: "\(food["Color"]!)"), for: .normal)
+        self.btnAddIngre.layer.borderColor = UIColor(named: "\(food["Color"]!)")?.cgColor
+                   }})
         //Bo tron goc cho cac nut
         btnAddtoMenu.layer.cornerRadius = 22
         btnAddIngre.layer.cornerRadius = 22
-        btnAddIngre.layer.borderColor = UIColor.systemGreen.cgColor
         btnAddIngre.layer.borderWidth = 1
         IngredientButton.layer.cornerRadius = 10
         DirectionButton.layer.cornerRadius = 10
