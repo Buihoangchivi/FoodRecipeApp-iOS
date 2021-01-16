@@ -37,6 +37,8 @@
 		36DAB9A3257521C1005CA319 /* AddNewFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DAB9A2257521C1005CA319 /* AddNewFoodViewController.swift */; };
 		36E6E6992585D0F0007EEA32 /* ChangeCurrentPagePopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E6E6982585D0F0007EEA32 /* ChangeCurrentPagePopUpVC.swift */; };
 		81B71440F3D7338D7D04EF46 /* Pods_FinalTerm_18120099_18120106.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABDB6492BAB0F53D5553D11 /* Pods_FinalTerm_18120099_18120106.framework */; };
+		87032E9625B182EB003663FE /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87032E9525B182EB003663FE /* SettingViewController.swift */; };
+		87032E9825B18334003663FE /* SettingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87032E9725B18334003663FE /* SettingCollectionViewCell.swift */; };
 		8746F58F2578EB3A00D388AE /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8746F58E2578EB3A00D388AE /* MenuViewController.swift */; };
 		8746F5912578EB4D00D388AE /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8746F5902578EB4D00D388AE /* MenuTableViewCell.swift */; };
 		874C217C257761F20033F8F8 /* DetailFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874C217B257761F20033F8F8 /* DetailFoodViewController.swift */; };
@@ -95,6 +97,8 @@
 		36E6E6982585D0F0007EEA32 /* ChangeCurrentPagePopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCurrentPagePopUpVC.swift; sourceTree = "<group>"; };
 		4ABDB6492BAB0F53D5553D11 /* Pods_FinalTerm_18120099_18120106.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FinalTerm_18120099_18120106.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		533BC05158045272D7206855 /* Pods-FinalTerm-18120099-18120106.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalTerm-18120099-18120106.debug.xcconfig"; path = "Target Support Files/Pods-FinalTerm-18120099-18120106/Pods-FinalTerm-18120099-18120106.debug.xcconfig"; sourceTree = "<group>"; };
+		87032E9525B182EB003663FE /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		87032E9725B18334003663FE /* SettingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCollectionViewCell.swift; sourceTree = "<group>"; };
 		8746F58E2578EB3A00D388AE /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		8746F5902578EB4D00D388AE /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		874C217B257761F20033F8F8 /* DetailFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFoodViewController.swift; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 				366D47B8259CFC5700926D8C /* LoginViewController.swift */,
 				36723A1925A0ACA700ABBCED /* TestViewController.swift */,
 				36A19A4C25A378C800FCE811 /* ResetPasswordViewController.swift */,
+				87032E9525B182EB003663FE /* SettingViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -175,6 +180,7 @@
 				36A2DE2B256F9C7F00C64FB8 /* CategoryCollectionViewCell.swift */,
 				36A2DE2D256FF1EB00C64FB8 /* MealCollectionViewCell.swift */,
 				3677DA7825760F1F00706FD5 /* MealForAddFoodCollectionViewCell.swift */,
+				87032E9725B18334003663FE /* SettingCollectionViewCell.swift */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -459,11 +465,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87032E9825B18334003663FE /* SettingCollectionViewCell.swift in Sources */,
 				36150381257FDC1100201EEA /* ShoppingListViewController.swift in Sources */,
 				3634DFA7257975D400A14EE2 /* EditDirectionTableViewCell.swift in Sources */,
 				874C217C257761F20033F8F8 /* DetailFoodViewController.swift in Sources */,
 				36A19A4D25A378C800FCE811 /* ResetPasswordViewController.swift in Sources */,
 				36150383257FDC5800201EEA /* DatePickerPopUpViewController.swift in Sources */,
+				87032E9625B182EB003663FE /* SettingViewController.swift in Sources */,
 				87997F62257DFFBD00C9AF5F /* TipListViewController.swift in Sources */,
 				8746F58F2578EB3A00D388AE /* MenuViewController.swift in Sources */,
 				36517980257659DA00574610 /* IngredientTableViewCell.swift in Sources */,

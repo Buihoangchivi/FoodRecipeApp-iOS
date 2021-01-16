@@ -11,6 +11,7 @@ import Firebase
 import FirebaseUI
 
 class TipListViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
+    @IBOutlet weak var HeaderLb: UILabel!
     @IBOutlet weak var TipListTBV: UITableView!
     @IBOutlet weak var SearchTipsButton: UIButton!
     @IBOutlet weak var CancelTipsButton: UIButton!
@@ -33,6 +34,11 @@ class TipListViewController: UIViewController,UITableViewDelegate, UITableViewDa
     }
     
     func Init(){
+        //Khoi tao mau app
+        FirebaseRef.child("Setting").observe(.value, with: { (snapshot) in
+        if let food = snapshot.value as? [String:Any] {
+        self.HeaderLb.backgroundColor = UIColor(named: "\(food["Color"]!)")
+            }})
         FirebaseRef.child("TipList").observeSingleEvent(of: .value, with: { (snapshot) in
               for snapshotChild in snapshot.children {
                 let temp = snapshotChild as! DataSnapshot

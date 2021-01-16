@@ -19,6 +19,9 @@ class DetailMenuViewController: UIViewController {
     var Ref = DatabaseReference()
     var folderName = ""
     var searchFoodName = ""
+    
+    
+    @IBOutlet weak var HeaderLb: UILabel!
     @IBOutlet weak var FoodListTBV: UITableView!
     @IBOutlet weak var SearchFoodsButton: UIButton!
     @IBOutlet weak var CancelFoodsButton: UIButton!
@@ -37,6 +40,11 @@ class DetailMenuViewController: UIViewController {
     }
     
     func Init() {
+        //Khoi tao mau app
+        FirebaseRef.child("Setting").observeSingleEvent(of: .value, with: { (snapshot) in
+        if let food = snapshot.value as? [String:Any] {
+        self.HeaderLb.backgroundColor = UIColor(named: "\(food["Color"]!)")
+            }})
         FoodList = [(ID: Int, Name: String, ImageName: String, Favorite: Bool)]()
         //Hien thi danh sach cac mon an rieng do nguoi dung tu them
         if (isUserFood == true) {

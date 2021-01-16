@@ -10,6 +10,7 @@ import UIKit
 
 class DirectionListViewController: UIViewController {
     
+    @IBOutlet weak var HeaderLb: UILabel!
     @IBOutlet weak var CancelButton: UIButton!
     @IBOutlet weak var SaveButton: UIButton!
     @IBOutlet weak var EditButton: UIButton!
@@ -26,9 +27,16 @@ class DirectionListViewController: UIViewController {
     }
     
     func Init() {
+        //Khoi tao mau app
+        FirebaseRef.child("Setting").observe(.value, with: { (snapshot) in
+        if let food = snapshot.value as? [String:Any] {
+        self.HeaderLb.backgroundColor = UIColor(named: "\(food["Color"]!)")
+        self.SaveButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
+         self.CancelButton.setTitleColor(UIColor(named: "\(food["Color"]!)"), for: .normal)
+         self.CancelButton.layer.borderColor = UIColor(named: "\(food["Color"]!)")?.cgColor
+            }})
         //Bo tron goc cho cac nut luu hoac huy thay doi
         CancelButton.layer.cornerRadius = 22
-        CancelButton.layer.borderColor = UIColor.systemGreen.cgColor
         CancelButton.layer.borderWidth = 1
         SaveButton.layer.cornerRadius = 22
         
