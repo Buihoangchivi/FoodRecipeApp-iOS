@@ -1,16 +1,16 @@
 //
-//  AddNewFoodViewController.swift
+//  EditFoodViewController.swift
 //  FinalTerm-18120099-18120106
 //
-//  Created by Bui Van Vi on 11/30/20.
-//  Copyright © 2020 Bui Van Vi. All rights reserved.
+//  Created by Bui Van Vi on 1/16/21.
+//  Copyright © 2021 Bui Van Vi. All rights reserved.
 //
 
 import UIKit
 import Firebase
 
-class AddNewFoodViewController: UIViewController {
-
+class EditFoodViewController: UIViewController {
+    
     @IBOutlet weak var FoodImageView: UIImageView!
     
     @IBOutlet weak var CategoryCollectionView: UICollectionView!
@@ -30,50 +30,40 @@ class AddNewFoodViewController: UIViewController {
     var TempSelectedIngredient = [(ID: Int, Name: String, Value: Double, Unit: String)]()
     var SelectedDirection = [String]()
     var imagePicker = UIImagePickerController()
-    var delegate: AddNewFoodDelegate?
+    var delegate: EditFoodDelegate?
     var uploadTask: StorageUploadTask?
     var isAddFoodImage = false
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         Init()
     }
     
     func Init() {
-        //Bo tron goc cho cac nut them anh, them nguyen lieu, them buoc
-        AddImageButton.layer.cornerRadius = 17.5
-        AddIngredientButton.layer.cornerRadius = 17.5
-        AddStepButton.layer.cornerRadius = 17.5
-        CancelButton.layer.cornerRadius = 22
-        CancelButton.layer.borderColor = UIColor.systemGreen.cgColor
-        CancelButton.layer.borderWidth = 1
-        SaveButton.layer.cornerRadius = 22
-        
-        //Bo tron goc cho anh mon an
-        //FoodImageView.layer.cornerRadius = 100
-        
-        //Khoi tao cho cac List
-        SelectedCategory = Array(repeating: false, count: CategoryList.count)
-        SelectedMeal = Array(repeating: false, count: MealList.count)
-        
-        //Layout thanh loai thuc an
-        var layout = CategoryCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.sectionInset = UIEdgeInsets(top: 5,left: 10,bottom: 0,right: 15)
-        
-        //Layout thanh loai bua an
-        layout = MealCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.sectionInset = UIEdgeInsets(top: 5,left: 10,bottom: 0,right: 15)
-    }
-    
-    @IBAction func act_ShowHomeScreen(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-        delegate?.DismissWithCondition(0)
-    }
-    
-    @IBAction func act_ShowShoppingListScreen(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-        delegate?.DismissWithCondition(2)
-    }
+            //Bo tron goc cho cac nut them anh, them nguyen lieu, them buoc
+            AddImageButton.layer.cornerRadius = 17.5
+            AddIngredientButton.layer.cornerRadius = 17.5
+            AddStepButton.layer.cornerRadius = 17.5
+            CancelButton.layer.cornerRadius = 22
+            CancelButton.layer.borderColor = UIColor.systemGreen.cgColor
+            CancelButton.layer.borderWidth = 1
+            SaveButton.layer.cornerRadius = 22
+            
+            //Bo tron goc cho anh mon an
+            //FoodImageView.layer.cornerRadius = 100
+            
+            //Khoi tao cho cac List
+            SelectedCategory = Array(repeating: false, count: CategoryList.count)
+            SelectedMeal = Array(repeating: false, count: MealList.count)
+            
+            //Layout thanh loai thuc an
+            var layout = CategoryCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+            layout.sectionInset = UIEdgeInsets(top: 5,left: 10,bottom: 0,right: 15)
+            
+            //Layout thanh loai bua an
+            layout = MealCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+            layout.sectionInset = UIEdgeInsets(top: 5,left: 10,bottom: 0,right: 15)
+        }
     
     @IBAction func act_AddFoodImage(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
@@ -185,7 +175,7 @@ class AddNewFoodViewController: UIViewController {
             //Day tat ca thong tin cua mon an len Firebase
             FirebaseRef.child("\(path)/\(count)").setValue(["Category": tempCategoryArr, "Direction": self.SelectedDirection, "Favorite": 0, "Image": "\(count).jpg","Ingredient": tempIngredientArr, "Meal": tempMealArr, "Name": self.FoodNameTextField.text!]) { (err, ref) in
                 self.delegate?.UpdateUI()
-                self.act_ShowHomeScreen(sender)
+                self.dismiss(animated: true, completion: nil)
             }
         })
     }
@@ -200,7 +190,7 @@ class AddNewFoodViewController: UIViewController {
 }
 
 //Delegate cua nguyen lieu
-extension AddNewFoodViewController : IngredientDelegate {
+extension EditFoodViewController : IngredientDelegate {
     func UpdateIngredient(ingredient: (ID: Int, Name: String, Value: Double, Unit: String)) {
         var check = false
         for i in 0..<SelectedIngredient.count {
@@ -228,14 +218,14 @@ extension AddNewFoodViewController : IngredientDelegate {
 }
 
 //Delegate cua cac buoc
-extension AddNewFoodViewController: DirectionDelegate {
+extension EditFoodViewController: DirectionDelegate {
     func SaveChange(List: [String]) {
         SelectedDirection = List
     }
 }
 
 //Delegate chon hinh anh tu thu vien
-extension AddNewFoodViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension EditFoodViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         imagePicker.dismiss(animated: true, completion: nil)
     }
@@ -250,7 +240,7 @@ extension AddNewFoodViewController: UIImagePickerControllerDelegate, UINavigatio
     }
 }
 
-extension AddNewFoodViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension EditFoodViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if (collectionView == CategoryCollectionView) {

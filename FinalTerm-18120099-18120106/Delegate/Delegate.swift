@@ -41,3 +41,7 @@ protocol IngredientDelegate : class {
     func UpdateIngredient(ingredient: (ID: Int, Name: String, Value: Double, Unit: String))
     func SaveChange()
 }
+
+protocol EditFoodDelegate: class {
+    func UpdateUI()
+}

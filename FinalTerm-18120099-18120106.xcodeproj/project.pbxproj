@@ -36,6 +36,7 @@
 		36A19A4D25A378C800FCE811 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A19A4C25A378C800FCE811 /* ResetPasswordViewController.swift */; };
 		36A2DE2C256F9C7F00C64FB8 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A2DE2B256F9C7F00C64FB8 /* CategoryCollectionViewCell.swift */; };
 		36A2DE2E256FF1EB00C64FB8 /* MealCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A2DE2D256FF1EB00C64FB8 /* MealCollectionViewCell.swift */; };
+		36BE95BF25B2F5C9007B4695 /* EditFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BE95BE25B2F5C9007B4695 /* EditFoodViewController.swift */; };
 		36DAB9A3257521C1005CA319 /* AddNewFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DAB9A2257521C1005CA319 /* AddNewFoodViewController.swift */; };
 		36E6E6992585D0F0007EEA32 /* ChangeCurrentPagePopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E6E6982585D0F0007EEA32 /* ChangeCurrentPagePopUpVC.swift */; };
 		81B71440F3D7338D7D04EF46 /* Pods_FinalTerm_18120099_18120106.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABDB6492BAB0F53D5553D11 /* Pods_FinalTerm_18120099_18120106.framework */; };
@@ -95,6 +96,7 @@
 		36A19A4C25A378C800FCE811 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		36A2DE2B256F9C7F00C64FB8 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		36A2DE2D256FF1EB00C64FB8 /* MealCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCollectionViewCell.swift; sourceTree = "<group>"; };
+		36BE95BE25B2F5C9007B4695 /* EditFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFoodViewController.swift; sourceTree = "<group>"; };
 		36DAB9A2257521C1005CA319 /* AddNewFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewFoodViewController.swift; sourceTree = "<group>"; };
 		36E6E6982585D0F0007EEA32 /* ChangeCurrentPagePopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCurrentPagePopUpVC.swift; sourceTree = "<group>"; };
 		4ABDB6492BAB0F53D5553D11 /* Pods_FinalTerm_18120099_18120106.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FinalTerm_18120099_18120106.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -156,6 +158,7 @@
 				36A19A4C25A378C800FCE811 /* ResetPasswordViewController.swift */,
 				365150A925B2031A0080D31D /* StartUpViewController.swift */,
 				365150AB25B20C2C0080D31D /* AdminViewController.swift */,
+				36BE95BE25B2F5C9007B4695 /* EditFoodViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 				8788DD22259AF3AB007B8D8C /* DetailMenuViewController.swift in Sources */,
 				36A2DE2E256FF1EB00C64FB8 /* MealCollectionViewCell.swift in Sources */,
 				36150385257FEBF000201EEA /* ShoppingListTableViewCell.swift in Sources */,
+				36BE95BF25B2F5C9007B4695 /* EditFoodViewController.swift in Sources */,
 				3651797E2576508F00574610 /* IngredientListViewController.swift in Sources */,
 				36A2DE2C256F9C7F00C64FB8 /* CategoryCollectionViewCell.swift in Sources */,
 				36723A1A25A0ACA700ABBCED /* TestViewController.swift in Sources */,
