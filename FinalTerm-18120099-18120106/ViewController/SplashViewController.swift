@@ -13,8 +13,6 @@ import FirebaseUI
 class SplashViewController: UIViewController {
     var checkID = 0
     var imageID = 0
-    let checkedImage = UIImage(named: "checked") as! UIImage
-    let uncheckedImage = UIImage(named: "uncheck") as! UIImage
     @IBOutlet weak var btnCheck: UIButton!
     @IBOutlet weak var SplashImage: UIImageView!
     @IBOutlet weak var Continue: UIButton!
@@ -28,17 +26,24 @@ class SplashViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     func Init(){
+        
+        //Khoi tao mau app
+        FirebaseRef.child("Setting").observeSingleEvent(of: .value, with: { (snapshot) in
+        if let food = snapshot.value as? [String:Any] {
+            self.Continue.backgroundColor = UIColor(named: "\(food["Color"]!)")
+            self.Continue.isHidden = false
+            }})
+        
         //Random hinh anh hien len
         imageID = Int.random(in: 1..<7)
         SplashImage.image = UIImage(named: "Splash\(imageID)")
         imageID = imageID - 1
+        
         //Chinh border cho UIView
         TipView.layer.addBorder(edge: UIRectEdge.top, color: UIColor.white, thickness: 2)
         TipView.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor.white, thickness: 2)
-        // Bo tron va chinh mau cho button Continue
-        Continue.layer.cornerRadius = 22
-        Continue.layer.backgroundColor = UIColor(named: "BlueColor")?.cgColor
-        btnCheck.setImage(uncheckedImage, for: .normal)
+        // Bo tron cho nut Continue
+        Continue.layer.cornerRadius = Continue.frame.height / 2
         // Random meo hay
     FirebaseRef.child("Setting/\(imageID)").observeSingleEvent(of: .value, with: { (snapshot) in
             if let food = snapshot.value as? [String:Any] {
@@ -47,21 +52,22 @@ class SplashViewController: UIViewController {
                 print("\(food["Name"]!)")
                 self.TipDetailLb.text = "\(food["Detail"]!)"
                    }})
-            // Set hinh anh cho checkbox
-            btnCheck.setImage(uncheckedImage, for: .normal)
     }
     @IBAction func act_Check(_ sender: Any) {
-        let button = sender as! UIButton
                //Cap nhat tren firebase
         if (checkID == 0) {
-            button.setImage(checkedImage, for: .normal)
+            
+            btnCheck.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
             checkID = 1
             FirebaseRef.child("Setting").updateChildValues(["SplashScreen": 1])
+            
             }
         else {
-            button.setImage(uncheckedImage, for: .normal)
+            
+            btnCheck.setImage(UIImage(systemName: "square"), for: .normal)
             checkID = 0
             FirebaseRef.child("Setting").updateChildValues(["SplashScreen": 0])
+            
         }
     }
     /*
