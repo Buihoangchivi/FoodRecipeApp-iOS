@@ -25,6 +25,7 @@ class SplashViewController: UIViewController {
         Init()
         // Do any additional setup after loading the view.
     }
+    
     func Init(){
         
         //Khoi tao mau app
@@ -42,8 +43,10 @@ class SplashViewController: UIViewController {
         //Chinh border cho UIView
         TipView.layer.addBorder(edge: UIRectEdge.top, color: UIColor.white, thickness: 2)
         TipView.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor.white, thickness: 2)
+        
         // Bo tron cho nut Continue
         Continue.layer.cornerRadius = Continue.frame.height / 2
+        
         // Random meo hay
     FirebaseRef.child("Setting/\(imageID)").observeSingleEvent(of: .value, with: { (snapshot) in
             if let food = snapshot.value as? [String:Any] {
@@ -53,6 +56,7 @@ class SplashViewController: UIViewController {
                 self.TipDetailLb.text = "\(food["Detail"]!)"
                    }})
     }
+    
     @IBAction func act_Check(_ sender: Any) {
                //Cap nhat tren firebase
         if (checkID == 0) {
@@ -70,16 +74,16 @@ class SplashViewController: UIViewController {
             
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func act_ShowLoginScreen(_ sender: Any) {
+        
+        let dest = self.storyboard?.instantiateViewController(identifier: "StartUpViewController") as! StartUpViewController
+        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        self.present(dest, animated: true, completion: nil)
+        
     }
-    */
-
+    
 }
 extension CALayer{
     func addBorder(edge: UIRectEdge, color: UIColor, thickness: CGFloat)

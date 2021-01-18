@@ -26,3 +26,4 @@ let CategoryList = ["Thịt heo", "Thịt bò", "Thịt gà", "Thịt vịt", "H
 let MealList = ["Bữa sáng", "Bữa trưa", "Bữa tối", "Bữa phụ", "Khác"]
 var CurrentUsername = ""
 var isUserMode = false
+var ColorScheme = UIColor()
