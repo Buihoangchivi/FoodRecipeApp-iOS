@@ -211,3 +211,12 @@ extension UITextField {
         self.rightViewMode = .always
     }
 }
+
+//Hien thi tien do upload anh
+func DisplayValueInProgressBar(PercentCompleted value: Double) {
+    print(value)
+    if (value == 100.0) {
+        print("Done!")
+        uploadTask!.removeAllObservers()
+    }
+}

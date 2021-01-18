@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseUI
 
 class EditFoodViewController: UIViewController {
     
@@ -35,11 +36,12 @@ class EditFoodViewController: UIViewController {
     var SelectedDirection = [String]()
     var imagePicker = UIImagePickerController()
     var delegate: EditFoodDelegate?
-    var uploadTask: StorageUploadTask?
     var isAddFoodImage = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        SDImageCache.shared.clearMemory()
+        SDImageCache.shared.clearDisk()
         UIInit()
         FoodInfoInit()
     }
@@ -54,9 +56,6 @@ class EditFoodViewController: UIViewController {
             CancelButton.layer.borderColor = UIColor.systemGreen.cgColor
             CancelButton.layer.borderWidth = 1
             SaveButton.layer.cornerRadius = 22
-            
-            //Bo tron goc cho anh mon an
-            //FoodImageView.layer.cornerRadius = 100
             
             //Khoi tao cho cac List
             SelectedCategory = Array(repeating: false, count: CategoryList.count)
@@ -78,8 +77,7 @@ class EditFoodViewController: UIViewController {
         editFoodRef.observeSingleEvent(of: .value, with: { (snapshot) in
             
             if let food = snapshot.value as? [String:Any] {
-                //Hien thi hinh anh mon an
-                //self.FoodImageOutletList[i].sd_setImage(with: imageRef.child("/FoodImages/\(food["Image"]!)"), maxImageSize: 1 << 30, placeholderImage: UIImage(named: "food-background"), options: .retryFailed, completion: nil)
+                
                 //Hien thi ten mon an
                 self.FoodNameTextField.text = food["Name"] as? String
                 
@@ -155,9 +153,12 @@ class EditFoodViewController: UIViewController {
             }
         })
         
+        //Hien thi hinh anh mon an
+        FoodImageView.sd_setImage(with: editImageRef, maxImageSize: 1 << 30, placeholderImage: UIImage(named: "food-background"), options: .retryFailed, completion: nil)
+        
     }
     
-    @IBAction func act_AddFoodImage(_ sender: Any) {
+    @IBAction func act_EditFoodImage(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
             imagePicker.sourceType = .savedPhotosAlbum
             imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .savedPhotosAlbum)!
@@ -190,34 +191,17 @@ class EditFoodViewController: UIViewController {
         self.present(dest, animated: true, completion: nil)
     }
     
-    @IBAction func act_SaveNewFood(_ sender: Any) {
-        var count = 0
-        var path = ""
-        var imagePath = ""
-        //Che do User
-        if (isUserMode == true) {
-            
-            path = "UserList/\(CurrentUsername)/FoodList"
-            imagePath = "/UserImages//\(CurrentUsername)"
-            
-        }
-        else { //Che do Admin
-            
-            path = "FoodList"
-            imagePath = "/FoodImages"
-            
-        }
-        FirebaseRef.child(path).observeSingleEvent(of: .value, with: { (snapshot) in
+    @IBAction func act_SaveChange(_ sender: Any) {
+        
+        var imageName = ""
+        editFoodRef.observeSingleEvent(of: .value, with: { (snapshot) in
             //Xac dinh ID cho mon an moi
             for snapshotChild in snapshot.children {
                 let temp = snapshotChild as! DataSnapshot
-                if let id = Int(temp.key) {
-                    if id != count {
-                        break
-                    }
-                    else {
-                        count += 1
-                    }
+                if temp.key == "Image" {
+                    
+                    imageName = temp.value as! String
+                    
                 }
             }
             
@@ -231,19 +215,6 @@ class EditFoodViewController: UIViewController {
             if (tempCategoryArr.count == 0) {
                 //Loai khac
                 tempCategoryArr += [self.SelectedCategory.count - 1]
-            }
-            
-            //Upload anh mon an va ten anh len Firebase
-            if (self.isAddFoodImage == true) {
-                let metadata = StorageMetadata()
-                metadata.contentType = "image/jpeg"
-                self.uploadTask = imageRef.child("\(imagePath)/\(count).jpg").putData((self.FoodImageView.image?.sd_imageData(as: .JPEG, compressionQuality: 1.0, firstFrameOnly: true))!, metadata: metadata) { (metadata, error) in
-                    }
-                // Create a task listener handle
-                self.uploadTask!.observe(.progress) { snapshot in
-                    let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
-                    self.DisplayValueInProgressBar(PercentCompleted: percentComplete)
-                }
             }
             
             //Ghi du lieu danh sach nguyen lieu len Firebase
@@ -264,21 +235,53 @@ class EditFoodViewController: UIViewController {
                 tempMealArr += [self.SelectedMeal.count - 1]
             }
             
-            //Day tat ca thong tin cua mon an len Firebase
-            FirebaseRef.child("\(path)/\(count)").setValue(["Category": tempCategoryArr, "Direction": self.SelectedDirection, "Favorite": 0, "Image": "\(count).jpg","Ingredient": tempIngredientArr, "Meal": tempMealArr, "Name": self.FoodNameTextField.text!]) { (err, ref) in
+            //Cap nhat tat ca thong tin cua mon an len Firebase
+            self.editFoodRef.setValue(["Category": tempCategoryArr, "Direction": self.SelectedDirection, "Favorite": 0, "Image": imageName, "Ingredient": tempIngredientArr, "Meal": tempMealArr, "Name": self.FoodNameTextField.text!])
+            
+            //Upload anh mon an va ten anh len Firebase
+            if (self.isAddFoodImage == true) {
+                
+                let metadata = StorageMetadata()
+                metadata.contentType = "image/jpeg"
+                uploadTask = self.editImageRef.putData((self.FoodImageView.image?.sd_imageData(as: .JPEG, compressionQuality: 1.0, firstFrameOnly: true))!, metadata: metadata) { (metadata, error) in }
+                
+                // Create a task listener handle
+                uploadTask!.observe(.progress) { snapshot in
+                    
+                    let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
+                    DisplayValueInProgressBar(PercentCompleted: percentComplete)
+                    
+                    //Hoan thanh upload anh len tren Firebase thi bat dau cap nhat du lieu mon an
+                    if (percentComplete == 100.0) {
+                        
+                        //Cap nhat lai giao dien cua man hinh Chi tiet mon an
+                        self.delegate?.UpdateUI()
+                        self.delegate?.UpdateUI()
+                        self.dismiss(animated: true, completion: nil)
+                            
+                    }
+                
+                }
+            
+            }
+            else {
+                
+                //Cap nhat lai giao dien cua man hinh Chi tiet mon an
                 self.delegate?.UpdateUI()
                 self.dismiss(animated: true, completion: nil)
+                
             }
+            
         })
+        
     }
-
-    func DisplayValueInProgressBar(PercentCompleted value: Double) {
-        print(value)
-        if (value == 100.0) {
-            print("Done!")
-            uploadTask!.removeAllObservers()
-        }
+    
+    @IBAction func act_ShowDetailScreen(_ sender: Any) {
+        
+        self.dismiss(animated: true, completion: nil)
+        
     }
+    
 }
 
 //Delegate cua nguyen lieu
