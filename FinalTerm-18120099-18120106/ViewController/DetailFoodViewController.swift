@@ -34,7 +34,7 @@ class DetailFoodViewController: UIViewController{
     
     @IBOutlet weak var FavoriteButtonBackground: UIView!
     
-    var TempSelectedIngredient = [(ID: Int, Name: String, Value: Double, Unit: String)]()
+    //var TempSelectedIngredient = [(ID: Int, Name: String, Value: Double, Unit: String)]()
     var SelectedIngredientList = [(ID: Int, Name: String, Value: Double, Unit: String)]()
     var DirectionList = [String]()
     var FoodID = 0
@@ -43,14 +43,15 @@ class DetailFoodViewController: UIViewController{
     var delegate: DetailFoodDelegate?
     var Ref = foodInfoRef
     var folderName = "/FoodImages"
+    var foodImageName = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Init()
-        // Do any additional setup after loading the view.
+        UIInit()
+        FoodInfoInit()
     }
     
-    func Init() {
+    func UIInit() {
         //Khoi tao mau app
         FirebaseRef.child("Setting").observe(.value, with: { (snapshot) in
         if let food = snapshot.value as? [String:Any] {
@@ -59,7 +60,7 @@ class DetailFoodViewController: UIViewController{
         self.btnAddtoMenu.backgroundColor = UIColor(named: "\(food["Color"]!)")
         self.btnAddIngre.setTitleColor(UIColor(named: "\(food["Color"]!)"), for: .normal)
         self.btnAddIngre.layer.borderColor = UIColor(named: "\(food["Color"]!)")?.cgColor
-                   }})
+        }})
         //Bo tron goc cho cac nut
         btnAddtoMenu.layer.cornerRadius = 22
         btnAddIngre.layer.cornerRadius = 22
@@ -82,32 +83,62 @@ class DetailFoodViewController: UIViewController{
         else if (NumberOfPeople == 10) {
             UpNumberButton.isEnabled = false
         }
+        
+    }
+    
+    func FoodInfoInit() {
+        
+        //Doc va hien thi thong tin cua mon an
         Ref.child("\(FoodID)").observeSingleEvent(of: .value, with: { (snapshot) in
-        if let food = snapshot.value as? [String:Any] {
-            //Xoa cache
-            //SDImageCache.shared.clearMemory()
-            //SDImageCache.shared.clearDisk()
             
-            //Hien thi hinh anh mon an
-            self.FoodImageView.sd_setImage(with: imageRef.child("\(self.folderName)/\(food["Image"]!)"), maxImageSize: 1 << 30, placeholderImage: UIImage(named: "food-background"), options: .retryFailed, completion: nil)
-            
-            //Hien thi ten mon an
-            self.FoodNameLabel.text = "\(food["Name"]!)"
-            
-            //Hien thi trang thai yeu thich cua mon an
-            //Yeu thich
-            if (food["Favorite"] as! Int == 1) {
-                self.FavoriteButton.tintColor = UIColor.red
-            self.FavoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            if let food = snapshot.value as? [String:Any] {
+                
+                //Hien thi hinh anh mon an
+                self.FoodImageView.sd_setImage(with: imageRef.child("\(self.folderName)/\(food["Image"]!)"), maxImageSize: 1 << 30, placeholderImage: UIImage(named: "food-background"), options: .retryFailed, completion: nil)
+                
+                //Luu tru ten anh mon an
+                self.foodImageName = food["Image"] as! String
+                
+                //Hien thi ten mon an
+                self.FoodNameLabel.text = "\(food["Name"]!)"
+                
+                //Hien thi trang thai yeu thich cua mon an
+                //Yeu thich
+                if (food["Favorite"] as! Int == 1) {
+                    self.FavoriteButton.tintColor = UIColor.red
+                    self.FavoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                }
+                else { //Khong yeu thich
+                    self.FavoriteButton.tintColor = UIColor.white
+                    self.FavoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
+                }
+                
+                //Chi hien thi nut "Chon mon" va yeu thich o che do User
+                if (isUserMode == false) {
+                    
+                    self.btnAddtoMenu.isEnabled = false
+                    self.btnAddtoMenu.alpha = 0.5
+                    
+                    self.FavoriteButton.isEnabled = false
+                    
+                }
+                else {
+                    
+                    //Hien thi nut yeu thich
+                    self.FavoriteButton.isHidden = false
+                    self.FavoriteButtonBackground.isHidden = false
+                    
+                }
+                    
+                //Xoa cache
+                //SDImageCache.shared.clearMemory()
+                //SDImageCache.shared.clearDisk()
+                
             }
-            else { //Khong yeu thich
-                self.FavoriteButton.tintColor = UIColor.white
-            self.FavoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
-            }
-            //Hien thi nut yeu thich
-            self.FavoriteButton.isHidden = false
-            self.FavoriteButtonBackground.isHidden = false
-            }})
+            
+        })
+        
+        //Doc du lieu nguyen lieu mon an
         Ref.child("\(FoodID)/Ingredient").observeSingleEvent(of: .value, with: { (snapshot) in
                 for snapshotChild in snapshot.children {
                     let temp = snapshotChild as! DataSnapshot
@@ -118,7 +149,7 @@ class DetailFoodViewController: UIViewController{
                                     let temp = snapshotChild as! DataSnapshot
                                     infoArr += [temp.value as! String]
                                 }
-                                self.SelectedIngredientList += [(ID: arr[0] as! Int, Name: infoArr[0], Value: arr[1] as! Double, Unit: infoArr[1])]
+                            self.SelectedIngredientList += [(ID: arr[0] as! Int, Name: infoArr[0], Value: arr[1] as! Double, Unit: infoArr[1])]
                             DispatchQueue.main.async {
                                 self.ContentTableView.reloadData()
                             }
@@ -126,6 +157,8 @@ class DetailFoodViewController: UIViewController{
                       }
                 }
           })
+        
+        //Doc du lieu cac buoc thuc hien mon an
         Ref.child("\(FoodID)/Direction").observeSingleEvent(of: .value, with: { (snapshot) in
                 for snapshotChild in snapshot.children {
                     let temp = snapshotChild as! DataSnapshot
@@ -135,6 +168,7 @@ class DetailFoodViewController: UIViewController{
                     self.ContentTableView.reloadData()
                 }
         })
+        
       }
     
     
@@ -147,7 +181,14 @@ class DetailFoodViewController: UIViewController{
     }
     
     @IBAction func act_EditIngredient(_ sender: Any) {
-        if (isIngredientView == true) {
+        let dest = self.storyboard?.instantiateViewController(identifier: "EditFoodViewController") as! EditFoodViewController
+        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        dest.delegate = self
+        dest.editFoodRef = Ref.child("\(FoodID)")
+        dest.editImageRef = imageRef.child("\(self.folderName)/\(foodImageName)")
+        self.present(dest, animated: true, completion: nil)
+        /*if (isIngredientView == true) {
             let dest = self.storyboard?.instantiateViewController(identifier: "IngredientListViewController") as! IngredientListViewController
             dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
@@ -163,7 +204,7 @@ class DetailFoodViewController: UIViewController{
             dest.delegate = self
             dest.DirectionList = self.DirectionList
             self.present(dest, animated: true, completion: nil)
-        }
+        }*/
         
     }
         
@@ -274,7 +315,7 @@ class DetailFoodViewController: UIViewController{
 }
 
 //Delegate cua nguyen lieu
-extension DetailFoodViewController : IngredientDelegate {
+/*extension DetailFoodViewController : IngredientDelegate {
     func UpdateIngredient(ingredient: (ID: Int, Name: String, Value: Double, Unit: String)) {
         var check = false
         for i in 0..<SelectedIngredientList.count {
@@ -283,6 +324,8 @@ extension DetailFoodViewController : IngredientDelegate {
                 check = true
             }
         }
+        
+        //Truong hop them moi nguyen lieu
         if (check == false) {
             TempSelectedIngredient += [ingredient]
         }
@@ -300,7 +343,7 @@ extension DetailFoodViewController : IngredientDelegate {
         SelectedIngredientList = TempSelectedIngredient
         ContentTableView.reloadData()
     }
-}
+}*/
 
 //Delegate cua cac buoc
 extension DetailFoodViewController: DirectionDelegate {
@@ -338,6 +381,7 @@ extension DetailFoodViewController: DatePickerDalegate{
     }
 }
 
+//Delegate cua nguyen lieu va cac buoc thuc hien
 extension DetailFoodViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (isIngredientView == true) {
@@ -372,4 +416,20 @@ extension DetailFoodViewController:UITableViewDelegate,UITableViewDataSource{
             return cell
         }
     }
+}
+
+//Delegate cua chinh sua mon an
+extension DetailFoodViewController: EditFoodDelegate {
+    func UpdateUI() {
+        
+        //Reset lai danh sach nguyen lieu va buoc thuc hien mon an
+        SelectedIngredientList = [(ID: Int, Name: String, Value: Double, Unit: String)]()
+        DirectionList = [String]()
+        
+        //Cap nhat lai giao dien sau khi chinh sua
+        UIInit()
+        FoodInfoInit()
+        
+    }
+    
 }

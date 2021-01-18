@@ -177,12 +177,6 @@ func CheckIfPasswordIsValid(_ password: String) -> Bool {
     return uppercaseResult && lowercaseResult && numberResult
 }
 
-//Kiem tra mat khau tuong ung cua tai khoan co hop le hay khong
-func CheckIfPasswordIsCorrect(_ username: String, _ password: String) -> Bool {
-    var result = false
-    return result
-}
-
 //Thay doi trang thai mau sac cua khung nhap du lieu tuy vao du lieu co hop le hay khong
 func ChangTextFieldState(_ textfield: UITextField, _ color: UIColor, _ label: UILabel, _ text: String) {
     label.text = text
@@ -215,5 +209,14 @@ extension UITextField {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
         self.rightView = paddingView
         self.rightViewMode = .always
+    }
+}
+
+//Hien thi tien do upload anh
+func DisplayValueInProgressBar(PercentCompleted value: Double) {
+    print(value)
+    if (value == 100.0) {
+        print("Done!")
+        uploadTask!.removeAllObservers()
     }
 }

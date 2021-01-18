@@ -14,6 +14,7 @@ import FBSDKLoginKit
 
 class LoginViewController: UIViewController {
     
+    @IBOutlet weak var BackButton: UIButton!
     @IBOutlet weak var MissPassButton: UIButton!
     @IBOutlet weak var EmailTextField: UITextField!
     @IBOutlet weak var PasswordTextField: UITextField!
@@ -29,6 +30,13 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Init();
+        
+        //Cài ảnh nền cho view
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage.image = #imageLiteral(resourceName: "user-background")
+        backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
+        backgroundImage.alpha = 0.4
+        self.view.insertSubview(backgroundImage, at: 0)
     }
     
     func Init() {
@@ -59,7 +67,7 @@ class LoginViewController: UIViewController {
         PasswordTextField.layer.masksToBounds = true
         
         //Thay doi mau dong chu 'Đăng ký ngay' de lam noi bat
-        let FirstTitle = NSAttributedString(string: "Bạn chưa có tài khoản? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray])
+        let FirstTitle = NSAttributedString(string: "Bạn chưa có tài khoản? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         let LastTitle = NSAttributedString(string: "Đăng ký ngay.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
         let Title = NSMutableAttributedString()
         Title.append(FirstTitle)
@@ -148,6 +156,10 @@ class LoginViewController: UIViewController {
                 self.present(dest, animated: true, completion: nil)
             }
         }
+    }
+    
+    @IBAction func act_BackToStartUpScreen(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func act_ResetPassword(_ sender: Any) {

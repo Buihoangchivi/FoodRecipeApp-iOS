@@ -16,6 +16,8 @@
 		3634DFA7257975D400A14EE2 /* EditDirectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3634DFA6257975D400A14EE2 /* EditDirectionTableViewCell.swift */; };
 		363BA1CC257251A300A43B4A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 363BA1CB257251A300A43B4A /* GoogleService-Info.plist */; };
 		3640BE942574BC68003C7903 /* FoodPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3640BE932574BC68003C7903 /* FoodPopUpViewController.swift */; };
+		365150AA25B2031A0080D31D /* StartUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365150A925B2031A0080D31D /* StartUpViewController.swift */; };
+		365150AC25B20C2C0080D31D /* AdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365150AB25B20C2C0080D31D /* AdminViewController.swift */; };
 		3651797E2576508F00574610 /* IngredientListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3651797D2576508F00574610 /* IngredientListViewController.swift */; };
 		36517980257659DA00574610 /* IngredientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3651797F257659DA00574610 /* IngredientTableViewCell.swift */; };
 		366D47B2259CEBF800926D8C /* Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366D47B1259CEBF800926D8C /* Delegate.swift */; };
@@ -34,6 +36,7 @@
 		36A19A4D25A378C800FCE811 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A19A4C25A378C800FCE811 /* ResetPasswordViewController.swift */; };
 		36A2DE2C256F9C7F00C64FB8 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A2DE2B256F9C7F00C64FB8 /* CategoryCollectionViewCell.swift */; };
 		36A2DE2E256FF1EB00C64FB8 /* MealCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A2DE2D256FF1EB00C64FB8 /* MealCollectionViewCell.swift */; };
+		36BE95BF25B2F5C9007B4695 /* EditFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BE95BE25B2F5C9007B4695 /* EditFoodViewController.swift */; };
 		36DAB9A3257521C1005CA319 /* AddNewFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DAB9A2257521C1005CA319 /* AddNewFoodViewController.swift */; };
 		36E6E6992585D0F0007EEA32 /* ChangeCurrentPagePopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E6E6982585D0F0007EEA32 /* ChangeCurrentPagePopUpVC.swift */; };
 		81B71440F3D7338D7D04EF46 /* Pods_FinalTerm_18120099_18120106.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABDB6492BAB0F53D5553D11 /* Pods_FinalTerm_18120099_18120106.framework */; };
@@ -72,6 +75,8 @@
 		3634DFA6257975D400A14EE2 /* EditDirectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDirectionTableViewCell.swift; sourceTree = "<group>"; };
 		363BA1CB257251A300A43B4A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3640BE932574BC68003C7903 /* FoodPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPopUpViewController.swift; sourceTree = "<group>"; };
+		365150A925B2031A0080D31D /* StartUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartUpViewController.swift; sourceTree = "<group>"; };
+		365150AB25B20C2C0080D31D /* AdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
 		3651797D2576508F00574610 /* IngredientListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientListViewController.swift; sourceTree = "<group>"; };
 		3651797F257659DA00574610 /* IngredientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientTableViewCell.swift; sourceTree = "<group>"; };
 		366D47B1259CEBF800926D8C /* Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegate.swift; sourceTree = "<group>"; };
@@ -94,6 +99,7 @@
 		36A19A4C25A378C800FCE811 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		36A2DE2B256F9C7F00C64FB8 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		36A2DE2D256FF1EB00C64FB8 /* MealCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCollectionViewCell.swift; sourceTree = "<group>"; };
+		36BE95BE25B2F5C9007B4695 /* EditFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFoodViewController.swift; sourceTree = "<group>"; };
 		36DAB9A2257521C1005CA319 /* AddNewFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewFoodViewController.swift; sourceTree = "<group>"; };
 		36E6E6982585D0F0007EEA32 /* ChangeCurrentPagePopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCurrentPagePopUpVC.swift; sourceTree = "<group>"; };
 		4ABDB6492BAB0F53D5553D11 /* Pods_FinalTerm_18120099_18120106.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FinalTerm_18120099_18120106.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -156,6 +162,9 @@
 				366D47B8259CFC5700926D8C /* LoginViewController.swift */,
 				36723A1925A0ACA700ABBCED /* TestViewController.swift */,
 				36A19A4C25A378C800FCE811 /* ResetPasswordViewController.swift */,
+				365150A925B2031A0080D31D /* StartUpViewController.swift */,
+				365150AB25B20C2C0080D31D /* AdminViewController.swift */,
+				36BE95BE25B2F5C9007B4695 /* EditFoodViewController.swift */,
 				87032E9525B182EB003663FE /* SettingViewController.swift */,
 				8706527425B2ACD100AE1D46 /* SplashViewController.swift */,
 			);
@@ -483,12 +492,14 @@
 				8788DD22259AF3AB007B8D8C /* DetailMenuViewController.swift in Sources */,
 				36A2DE2E256FF1EB00C64FB8 /* MealCollectionViewCell.swift in Sources */,
 				36150385257FEBF000201EEA /* ShoppingListTableViewCell.swift in Sources */,
+				36BE95BF25B2F5C9007B4695 /* EditFoodViewController.swift in Sources */,
 				3651797E2576508F00574610 /* IngredientListViewController.swift in Sources */,
 				36A2DE2C256F9C7F00C64FB8 /* CategoryCollectionViewCell.swift in Sources */,
 				36723A1A25A0ACA700ABBCED /* TestViewController.swift in Sources */,
 				366D47B9259CFC5700926D8C /* LoginViewController.swift in Sources */,
 				8788DD24259AF3C6007B8D8C /* DetailMenuTableViewCell.swift in Sources */,
 				366D47B5259CEE1F00926D8C /* Modal.swift in Sources */,
+				365150AC25B20C2C0080D31D /* AdminViewController.swift in Sources */,
 				874C217E257762380033F8F8 /* DetailIngredientFoodTableViewCell.swift in Sources */,
 				36DAB9A3257521C1005CA319 /* AddNewFoodViewController.swift in Sources */,
 				3634DFA52579745100A14EE2 /* DirectionListViewController.swift in Sources */,
@@ -501,6 +512,7 @@
 				366D6A7C256F831B00693FD7 /* SceneDelegate.swift in Sources */,
 				360B6422257A8D200040BF80 /* DirectionPopUpViewController.swift in Sources */,
 				366D47B2259CEBF800926D8C /* Delegate.swift in Sources */,
+				365150AA25B2031A0080D31D /* StartUpViewController.swift in Sources */,
 				3640BE942574BC68003C7903 /* FoodPopUpViewController.swift in Sources */,
 				87997F60257DFFAD00C9AF5F /* TipListTableViewCell.swift in Sources */,
 				3677DA7925760F1F00706FD5 /* MealForAddFoodCollectionViewCell.swift in Sources */,

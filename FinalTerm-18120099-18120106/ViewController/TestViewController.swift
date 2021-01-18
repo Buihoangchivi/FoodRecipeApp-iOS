@@ -29,6 +29,13 @@ class TestViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Init();
+        
+        //Cài ảnh nền cho view
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage.image = #imageLiteral(resourceName: "user-background")
+        backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
+        backgroundImage.alpha = 0.4
+        self.view.insertSubview(backgroundImage, at: 0)
     }
     
     func Init() {
@@ -61,7 +68,7 @@ class TestViewController: UIViewController {
         PasswordTextField.layer.masksToBounds = true
         
         //Thay doi mau dong chu 'Đăng nhập nào' de lam noi bat
-        let FirstTitle = NSAttributedString(string: "Bạn đã có tài khoản rồi? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray])
+        let FirstTitle = NSAttributedString(string: "Bạn đã có tài khoản rồi? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         let LastTitle = NSAttributedString(string: "Đăng nhập nào.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
         let Title = NSMutableAttributedString()
         Title.append(FirstTitle)
@@ -260,10 +267,11 @@ class TestViewController: UIViewController {
     }
     
     @IBAction func act_Login(_ sender: Any) {
-        let dest = self.storyboard?.instantiateViewController(identifier: "LoginViewController") as! LoginViewController
+        /*let dest = self.storyboard?.instantiateViewController(identifier: "LoginViewController") as! LoginViewController
         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        self.present(dest, animated: true, completion: nil)
+        self.present(dest, animated: true, completion: nil)*/
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

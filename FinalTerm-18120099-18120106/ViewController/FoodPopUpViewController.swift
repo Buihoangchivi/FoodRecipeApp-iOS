@@ -76,6 +76,14 @@ class FoodPopUpViewController: UIViewController {
                 
             self.FoodNameLabel.text = "\(food["Name"]!)"
             }})
+        
+        //Chi hien thi nut "Chon mon" o che do User
+        if (isUserMode == false) {
+            
+            ChooseFoodButton.isEnabled = false
+            ChooseFoodButton.alpha = 0.5
+            
+        }
     }
     
     @IBAction func act_ClosePopUp(_ sender: Any) {

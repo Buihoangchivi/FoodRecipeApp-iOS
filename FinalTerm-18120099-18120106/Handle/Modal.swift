@@ -19,6 +19,10 @@ let imageRef = Storage.storage().reference()
 let FirebaseRef = Database.database().reference()
 let foodInfoRef = FirebaseRef.child("FoodList")
 
+//Bien quan ly upload anh
+var uploadTask: StorageUploadTask?
+
 let CategoryList = ["Thịt heo", "Thịt bò", "Thịt gà", "Thịt vịt", "Hải sản", "Cá", "Bánh", "Trái cây", "Ăn chay", "Giảm cân", "Chiên xào", "Món canh", "Món nướng", "Món kho", "Món nhậu", "Tiết kiệm", "Ngày lễ, tết", "Khác"]
 let MealList = ["Bữa sáng", "Bữa trưa", "Bữa tối", "Bữa phụ", "Khác"]
 var CurrentUsername = ""
+var isUserMode = false

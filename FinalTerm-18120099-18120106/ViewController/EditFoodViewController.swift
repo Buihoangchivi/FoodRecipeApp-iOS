@@ -1,18 +1,17 @@
 //
-//  AddNewFoodViewController.swift
+//  EditFoodViewController.swift
 //  FinalTerm-18120099-18120106
 //
-//  Created by Bui Van Vi on 11/30/20.
-//  Copyright © 2020 Bui Van Vi. All rights reserved.
+//  Created by Bui Van Vi on 1/16/21.
+//  Copyright © 2021 Bui Van Vi. All rights reserved.
 //
 
 import UIKit
 import Firebase
+import FirebaseUI
 
-class AddNewFoodViewController: UIViewController {
-
-    @IBOutlet weak var AddButon: UIButton!
-    @IBOutlet weak var HeaderLb: UILabel!
+class EditFoodViewController: UIViewController {
+    
     @IBOutlet weak var FoodImageView: UIImageView!
     
     @IBOutlet weak var CategoryCollectionView: UICollectionView!
@@ -26,68 +25,140 @@ class AddNewFoodViewController: UIViewController {
     @IBOutlet weak var CancelButton: UIButton!
     @IBOutlet weak var SaveButton: UIButton!
     
+    //Duong dan luu thong tin va hinh anh mon an tren Firebase
+    var editFoodRef = DatabaseReference()
+    var editImageRef = StorageReference()
+    
     var SelectedCategory = [Bool]()
     var SelectedMeal = [Bool]()
     var SelectedIngredient = [(ID: Int, Name: String, Value: Double, Unit: String)]()
     var TempSelectedIngredient = [(ID: Int, Name: String, Value: Double, Unit: String)]()
     var SelectedDirection = [String]()
     var imagePicker = UIImagePickerController()
-    var delegate: AddNewFoodDelegate?
+    var delegate: EditFoodDelegate?
     var isAddFoodImage = false
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        Init()
+        SDImageCache.shared.clearMemory()
+        SDImageCache.shared.clearDisk()
+        UIInit()
+        FoodInfoInit()
     }
     
-    func Init() {
-        //Khoi tao mau app
-        FirebaseRef.child("Setting").observeSingleEvent(of: .value, with: { (snapshot) in
-        if let food = snapshot.value as? [String:Any] {
-        self.HeaderLb.backgroundColor = UIColor(named: "\(food["Color"]!)")
-        self.AddButon.tintColor = UIColor(named: "\(food["Color"]!)")
-        self.AddImageButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
-        self.AddIngredientButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
-        self.AddStepButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
-        self.SaveButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
-         self.CancelButton.setTitleColor(UIColor(named: "\(food["Color"]!)"), for: .normal)
-         self.CancelButton.layer.borderColor = UIColor(named: "\(food["Color"]!)")?.cgColor
-            }})
-        //Bo tron goc cho cac nut them anh, them nguyen lieu, them buoc
-        AddImageButton.layer.cornerRadius = 17.5
-        AddIngredientButton.layer.cornerRadius = 17.5
-        AddStepButton.layer.cornerRadius = 17.5
-        CancelButton.layer.cornerRadius = 22
-        CancelButton.layer.borderWidth = 1
-        SaveButton.layer.cornerRadius = 22
+    //Khoi tao giao dien man hinh chinh sua
+    func UIInit() {
+            //Bo tron goc cho cac nut them anh, them nguyen lieu, them buoc
+            AddImageButton.layer.cornerRadius = 17.5
+            AddIngredientButton.layer.cornerRadius = 17.5
+            AddStepButton.layer.cornerRadius = 17.5
+            CancelButton.layer.cornerRadius = 22
+            CancelButton.layer.borderColor = UIColor.systemGreen.cgColor
+            CancelButton.layer.borderWidth = 1
+            SaveButton.layer.cornerRadius = 22
+            
+            //Khoi tao cho cac List
+            SelectedCategory = Array(repeating: false, count: CategoryList.count)
+            SelectedMeal = Array(repeating: false, count: MealList.count)
+            
+            //Layout thanh loai thuc an
+            var layout = CategoryCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+            layout.sectionInset = UIEdgeInsets(top: 5,left: 10,bottom: 0,right: 15)
+            
+            //Layout thanh loai bua an
+            layout = MealCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+            layout.sectionInset = UIEdgeInsets(top: 5,left: 10,bottom: 0,right: 15)
+        }
+    
+    //Khoi tao du lieu mon an can chinh sua len man hinh
+    func FoodInfoInit() {
         
-        //Bo tron goc cho anh mon an
-        //FoodImageView.layer.cornerRadius = 100
+        //Hien thi thong tin mon an
+        editFoodRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            if let food = snapshot.value as? [String:Any] {
+                
+                //Hien thi ten mon an
+                self.FoodNameTextField.text = food["Name"] as? String
+                
+                //Cap nhat danh sach loai mon an
+                if let arr = food["Category"] as? NSArray {
+                    
+                    for category in arr {
+                        
+                        if let index = category as? Int {
+                            
+                            self.SelectedCategory[index] = true
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+                //Cap nhat danh sach loai bua an
+                if let arr = food["Meal"] as? NSArray {
+                    
+                    for meal in arr {
+                        
+                        if let index = meal as? Int {
+                            
+                            self.SelectedMeal[index] = true
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+                //Cap nhat danh sach nguyen lieu
+                if let arr = food["Ingredient"] as? NSArray {
+                    
+                    for pair in arr {
+                        
+                        if let pairArr = pair as? NSArray {
+                            
+                            var infoArr = [String]()
+                            FirebaseRef.child("IngredientList/\(pairArr[0])").observeSingleEvent(of: .value, with: { (snapshot) in
+                                
+                                for snapshotChild in snapshot.children {
+                                    let temp = snapshotChild as! DataSnapshot
+                                    infoArr += [temp.value as! String]
+                                }
+                                
+                                self.SelectedIngredient += [(ID: pairArr[0] as! Int, Name: infoArr[0], Value: pairArr[1] as! Double, Unit: infoArr[1])]
+                                
+                            })
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+                //Cap nhat danh sach cac buoc che ben mon an
+                if let arr = food["Direction"] as? NSArray {
+                 
+                    for step in arr {
+                            
+                        self.SelectedDirection += [step as! String]
+                        
+                    }
+                    
+                }
+                
+                //Cap nhat Collection View cho loai mon an va loai bua an
+                self.CategoryCollectionView.reloadData()
+                self.MealCollectionView.reloadData()
+            }
+        })
         
-        //Khoi tao cho cac List
-        SelectedCategory = Array(repeating: false, count: CategoryList.count)
-        SelectedMeal = Array(repeating: false, count: MealList.count)
+        //Hien thi hinh anh mon an
+        FoodImageView.sd_setImage(with: editImageRef, maxImageSize: 1 << 30, placeholderImage: UIImage(named: "food-background"), options: .retryFailed, completion: nil)
         
-        //Layout thanh loai thuc an
-        var layout = CategoryCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.sectionInset = UIEdgeInsets(top: 5,left: 10,bottom: 0,right: 15)
-        
-        //Layout thanh loai bua an
-        layout = MealCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.sectionInset = UIEdgeInsets(top: 5,left: 10,bottom: 0,right: 15)
     }
     
-    @IBAction func act_ShowHomeScreen(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-        delegate?.DismissWithCondition(0)
-    }
-    
-    @IBAction func act_ShowShoppingListScreen(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-        delegate?.DismissWithCondition(2)
-    }
-    
-    @IBAction func act_AddFoodImage(_ sender: Any) {
+    @IBAction func act_EditFoodImage(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
             imagePicker.sourceType = .savedPhotosAlbum
             imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .savedPhotosAlbum)!
@@ -120,34 +191,17 @@ class AddNewFoodViewController: UIViewController {
         self.present(dest, animated: true, completion: nil)
     }
     
-    @IBAction func act_SaveNewFood(_ sender: Any) {
-        var count = 0
-        var path = ""
-        var imagePath = ""
-        //Che do User
-        if (isUserMode == true) {
-            
-            path = "UserList/\(CurrentUsername)/FoodList"
-            imagePath = "/UserImages//\(CurrentUsername)"
-            
-        }
-        else { //Che do Admin
-            
-            path = "FoodList"
-            imagePath = "/FoodImages"
-            
-        }
-        FirebaseRef.child(path).observeSingleEvent(of: .value, with: { (snapshot) in
+    @IBAction func act_SaveChange(_ sender: Any) {
+        
+        var imageName = ""
+        editFoodRef.observeSingleEvent(of: .value, with: { (snapshot) in
             //Xac dinh ID cho mon an moi
             for snapshotChild in snapshot.children {
                 let temp = snapshotChild as! DataSnapshot
-                if let id = Int(temp.key) {
-                    if id != count {
-                        break
-                    }
-                    else {
-                        count += 1
-                    }
+                if temp.key == "Image" {
+                    
+                    imageName = temp.value as! String
+                    
                 }
             }
             
@@ -161,19 +215,6 @@ class AddNewFoodViewController: UIViewController {
             if (tempCategoryArr.count == 0) {
                 //Loai khac
                 tempCategoryArr += [self.SelectedCategory.count - 1]
-            }
-            
-            //Upload anh mon an va ten anh len Firebase
-            if (self.isAddFoodImage == true) {
-                let metadata = StorageMetadata()
-                metadata.contentType = "image/jpeg"
-                uploadTask = imageRef.child("\(imagePath)/\(count).jpg").putData((self.FoodImageView.image?.sd_imageData(as: .JPEG, compressionQuality: 1.0, firstFrameOnly: true))!, metadata: metadata) { (metadata, error) in
-                    }
-                // Create a task listener handle
-                uploadTask!.observe(.progress) { snapshot in
-                    let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
-                    DisplayValueInProgressBar(PercentCompleted: percentComplete)
-                }
             }
             
             //Ghi du lieu danh sach nguyen lieu len Firebase
@@ -194,18 +235,57 @@ class AddNewFoodViewController: UIViewController {
                 tempMealArr += [self.SelectedMeal.count - 1]
             }
             
-            //Day tat ca thong tin cua mon an len Firebase
-            FirebaseRef.child("\(path)/\(count)").setValue(["Category": tempCategoryArr, "Direction": self.SelectedDirection, "Favorite": 0, "Image": "\(count).jpg","Ingredient": tempIngredientArr, "Meal": tempMealArr, "Name": self.FoodNameTextField.text!]) { (err, ref) in
-                self.delegate?.UpdateUI()
-                self.act_ShowHomeScreen(sender)
+            //Cap nhat tat ca thong tin cua mon an len Firebase
+            self.editFoodRef.setValue(["Category": tempCategoryArr, "Direction": self.SelectedDirection, "Favorite": 0, "Image": imageName, "Ingredient": tempIngredientArr, "Meal": tempMealArr, "Name": self.FoodNameTextField.text!])
+            
+            //Upload anh mon an va ten anh len Firebase
+            if (self.isAddFoodImage == true) {
+                
+                let metadata = StorageMetadata()
+                metadata.contentType = "image/jpeg"
+                uploadTask = self.editImageRef.putData((self.FoodImageView.image?.sd_imageData(as: .JPEG, compressionQuality: 1.0, firstFrameOnly: true))!, metadata: metadata) { (metadata, error) in }
+                
+                // Create a task listener handle
+                uploadTask!.observe(.progress) { snapshot in
+                    
+                    let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
+                    DisplayValueInProgressBar(PercentCompleted: percentComplete)
+                    
+                    //Hoan thanh upload anh len tren Firebase thi bat dau cap nhat du lieu mon an
+                    if (percentComplete == 100.0) {
+                        
+                        //Cap nhat lai giao dien cua man hinh Chi tiet mon an
+                        self.delegate?.UpdateUI()
+                        self.delegate?.UpdateUI()
+                        self.dismiss(animated: true, completion: nil)
+                            
+                    }
+                
+                }
+            
             }
+            else {
+                
+                //Cap nhat lai giao dien cua man hinh Chi tiet mon an
+                self.delegate?.UpdateUI()
+                self.dismiss(animated: true, completion: nil)
+                
+            }
+            
         })
+        
+    }
+    
+    @IBAction func act_ShowDetailScreen(_ sender: Any) {
+        
+        self.dismiss(animated: true, completion: nil)
+        
     }
     
 }
 
 //Delegate cua nguyen lieu
-extension AddNewFoodViewController : IngredientDelegate {
+extension EditFoodViewController : IngredientDelegate {
     func UpdateIngredient(ingredient: (ID: Int, Name: String, Value: Double, Unit: String)) {
         var check = false
         for i in 0..<SelectedIngredient.count {
@@ -233,14 +313,14 @@ extension AddNewFoodViewController : IngredientDelegate {
 }
 
 //Delegate cua cac buoc
-extension AddNewFoodViewController: DirectionDelegate {
+extension EditFoodViewController: DirectionDelegate {
     func SaveChange(List: [String]) {
         SelectedDirection = List
     }
 }
 
 //Delegate chon hinh anh tu thu vien
-extension AddNewFoodViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension EditFoodViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         imagePicker.dismiss(animated: true, completion: nil)
     }
@@ -255,7 +335,7 @@ extension AddNewFoodViewController: UIImagePickerControllerDelegate, UINavigatio
     }
 }
 
-extension AddNewFoodViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension EditFoodViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if (collectionView == CategoryCollectionView) {
