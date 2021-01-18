@@ -39,6 +39,11 @@ class TestViewController: UIViewController {
     }
     
     func Init() {
+        //Khoi tao mau app
+        FirebaseRef.child("Setting").observeSingleEvent(of: .value, with: { (snapshot) in
+        if let food = snapshot.value as? [String:Any] {
+            self.RegisterButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
+            }})
         //Doi mau chu goi y trong cac o nhap ten nguoi dung, email, mat khau
         UsernameTextField.attributedPlaceholder = NSAttributedString(string: "Tên đăng nhập", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         EmailTextField.attributedPlaceholder = NSAttributedString(string: "Địa chỉ email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])

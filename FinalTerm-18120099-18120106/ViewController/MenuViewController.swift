@@ -9,9 +9,10 @@
 import UIKit
 
 class MenuViewController: UIViewController {
-    var MenuList = ["Món ăn yêu thích","Công thức nhà mình","Mẹo hay","Món ăn ngày lễ","Món ăn chay","Món ăn giảm cân","Món bánh ngon","Món nhậu cơ bản", "Chính sách quyền riêng tư","Liên hệ"]
+    var MenuList = ["Món ăn yêu thích","Công thức nhà mình","Mẹo hay","Món ăn ngày lễ","Món ăn chay","Món ăn giảm cân","Món bánh ngon","Món nhậu cơ bản", "Chính sách quyền riêng tư","Liên hệ","Cài đặt"]
     @IBOutlet weak var MenuTBV: UITableView!
     
+    @IBOutlet weak var MenuLb: UILabel!
     @IBOutlet weak var MenuRightConstraint: NSLayoutConstraint!
     
     var delegate: ReloadDataDelegate?
@@ -37,6 +38,11 @@ class MenuViewController: UIViewController {
     }
     
     func Init() {
+        //Khoi tao mau app
+        FirebaseRef.child("Setting").observe(.value, with: { (snapshot) in
+        if let food = snapshot.value as? [String:Any] {
+            self.MenuLb.textColor = UIColor(named: "\(food["Color"]!)")
+            }})
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = view.bounds
@@ -91,6 +97,14 @@ extension MenuViewController : UITableViewDelegate, UITableViewDataSource{
             self.present(dest, animated: true, completion: nil)
         }
         else {
+            if (indexPath.row == 10)
+            {
+                let dest = self.storyboard?.instantiateViewController(identifier: "SettingViewController") as! SettingViewController
+                dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                self.present(dest, animated: true, completion: nil)
+            }
+            else {
             let dest = self.storyboard?.instantiateViewController(identifier: "DetailMenuViewController") as! DetailMenuViewController
             dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
@@ -113,6 +127,7 @@ extension MenuViewController : UITableViewDelegate, UITableViewDataSource{
                 dest.CategoryID = 0
             }
             self.present(dest, animated: true, completion: nil)
+            }
         }
         //Bo chon cell
         tableView.deselectRow(at: indexPath, animated: true)

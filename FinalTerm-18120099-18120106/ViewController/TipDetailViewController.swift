@@ -10,6 +10,7 @@ import UIKit
 
 class TipDetailViewController: UIViewController {
 
+    @IBOutlet weak var HeaderLb: UILabel!
     @IBOutlet weak var TipImageView: UIImageView!
     
     @IBOutlet weak var LbTipDetail: UILabel!
@@ -18,7 +19,14 @@ class TipDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+    func Init(){
+      //Khoi tao mau app
+        FirebaseRef.child("Setting").observeSingleEvent(of: .value, with: { (snapshot) in
+        if let food = snapshot.value as? [String:Any] {
+        self.HeaderLb.backgroundColor = UIColor(named: "\(food["Color"]!)")
+            }})
+    }
+            
     @IBAction func btnBack(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }

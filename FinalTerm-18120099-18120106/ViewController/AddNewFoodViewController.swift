@@ -11,6 +11,8 @@ import Firebase
 
 class AddNewFoodViewController: UIViewController {
 
+    @IBOutlet weak var AddButon: UIButton!
+    @IBOutlet weak var HeaderLb: UILabel!
     @IBOutlet weak var FoodImageView: UIImageView!
     
     @IBOutlet weak var CategoryCollectionView: UICollectionView!
@@ -39,12 +41,23 @@ class AddNewFoodViewController: UIViewController {
     }
     
     func Init() {
+        //Khoi tao mau app
+        FirebaseRef.child("Setting").observeSingleEvent(of: .value, with: { (snapshot) in
+        if let food = snapshot.value as? [String:Any] {
+        self.HeaderLb.backgroundColor = UIColor(named: "\(food["Color"]!)")
+        self.AddButon.tintColor = UIColor(named: "\(food["Color"]!)")
+        self.AddImageButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
+        self.AddIngredientButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
+        self.AddStepButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
+        self.SaveButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
+         self.CancelButton.setTitleColor(UIColor(named: "\(food["Color"]!)"), for: .normal)
+         self.CancelButton.layer.borderColor = UIColor(named: "\(food["Color"]!)")?.cgColor
+            }})
         //Bo tron goc cho cac nut them anh, them nguyen lieu, them buoc
         AddImageButton.layer.cornerRadius = 17.5
         AddIngredientButton.layer.cornerRadius = 17.5
         AddStepButton.layer.cornerRadius = 17.5
         CancelButton.layer.cornerRadius = 22
-        CancelButton.layer.borderColor = UIColor.systemGreen.cgColor
         CancelButton.layer.borderWidth = 1
         SaveButton.layer.cornerRadius = 22
         

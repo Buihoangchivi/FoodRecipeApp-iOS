@@ -11,6 +11,7 @@ import Firebase
 
 class IngredientListViewController: UIViewController {
 
+    @IBOutlet weak var HeaderLb: UILabel!
     @IBOutlet weak var SearchIngredientLabel: UILabel!
     @IBOutlet weak var IngredientTableView: UITableView!
     @IBOutlet weak var CancelButton: UIButton!
@@ -37,6 +38,14 @@ class IngredientListViewController: UIViewController {
     }
     
     func Init() {
+        //Khoi tao mau app
+        FirebaseRef.child("Setting").observeSingleEvent(of: .value, with: { (snapshot) in
+        if let food = snapshot.value as? [String:Any] {
+        self.HeaderLb.backgroundColor = UIColor(named: "\(food["Color"]!)")
+        self.SaveButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
+         self.CancelButton.setTitleColor(UIColor(named: "\(food["Color"]!)"), for: .normal)
+         self.CancelButton.layer.borderColor = UIColor(named: "\(food["Color"]!)")?.cgColor
+            }})
         //Bo tron goc cho khung tim kiem
         SearchIngredientLabel.layer.cornerRadius = 22
         SearchIngredientLabel.layer.borderWidth = 0.2
@@ -44,7 +53,6 @@ class IngredientListViewController: UIViewController {
         
         //Bo tron goc cho cac nut luu hoac huy thay doi
         CancelButton.layer.cornerRadius = 22
-        CancelButton.layer.borderColor = UIColor.systemGreen.cgColor
         CancelButton.layer.borderWidth = 1
         SaveButton.layer.cornerRadius = 22
         

@@ -30,6 +30,11 @@ class ResetPasswordViewController: UIViewController {
     }
 
     func Init() {
+        //Khoi tao mau app
+        FirebaseRef.child("Setting").observeSingleEvent(of: .value, with: { (snapshot) in
+        if let food = snapshot.value as? [String:Any] {
+            self.ResetPasswordButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
+            }})
         //Doi mau chu goi y trong cac o email
         EmailTextField.attributedPlaceholder = NSAttributedString(string: "Địa chỉ email sẽ nhận thư đặt lại mật khẩu", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         

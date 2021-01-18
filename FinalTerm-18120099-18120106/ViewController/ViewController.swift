@@ -13,6 +13,7 @@ import GoogleSignIn
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var HeaderLb: UILabel!
     @IBOutlet weak var HomeButton: UIButton!
     @IBOutlet weak var AddButton: UIButton!
     @IBOutlet weak var ShoppingButton: UIButton!
@@ -106,6 +107,15 @@ class ViewController: UIViewController {
     }
 
     func Init() {
+        //Khoi tao mau app
+        FirebaseRef.child("Setting").observe(.value, with: { (snapshot) in
+        if let food = snapshot.value as? [String:Any] {
+            self.HeaderLb.backgroundColor = UIColor(named: "\(food["Color"]!)")
+            self.NextPageButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
+            self.LastPageButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
+            self.HomeButton.tintColor = UIColor(named: "\(food["Color"]!)")
+            }})
+        
         //Khoi tao cho cac List
         SelectedCategory = Array(repeating: false, count: CategoryList.count)
         SelectedMeal = Array(repeating: false, count: MealList.count)
@@ -585,7 +595,10 @@ extension ViewController: AddNewFoodDelegate {
     func DismissWithCondition(_ index: Int) {
         if (index == 0) { //Quay ve man hinh Home
             HomeView.isHidden = false
-            HomeButton.tintColor = UIColor.systemGreen
+            FirebaseRef.child("Setting").observeSingleEvent(of: .value, with: { (snapshot) in
+            if let food = snapshot.value as? [String:Any] {
+                self.HomeButton.tintColor = UIColor(named: "\(food["Color"]!)")
+                }})
         }
         else if (index == 1) { //Hien thi man hinh them mon an moi
             let dest = self.storyboard?.instantiateViewController(identifier: "AddNewFoodViewController") as! AddNewFoodViewController
