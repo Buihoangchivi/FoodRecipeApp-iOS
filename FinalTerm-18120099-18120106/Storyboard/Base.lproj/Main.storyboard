@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4rt-3b-HnV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UOd-Cz-W2S">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -63,7 +63,6 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcU-aO-FQM">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
-                                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="90" id="Blq-uA-zAq"/>
                                         </constraints>
@@ -543,7 +542,6 @@
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="LastPage" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="28l-x5-fvl">
                                         <rect key="frame" x="319" y="816" width="60" height="28"/>
-                                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="28" id="qLw-KV-aXP"/>
                                             <constraint firstAttribute="width" constant="60" id="yJX-8k-dn4"/>
@@ -559,7 +557,6 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="NextPage" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r9R-bA-eYU">
                                         <rect key="frame" x="249" y="816" width="60" height="28"/>
-                                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="A2W-zE-9Fh"/>
                                             <constraint firstAttribute="height" constant="28" id="u6k-QE-ctK"/>
@@ -1021,7 +1018,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="food-background" translatesAutoresizingMaskIntoConstraints="NO" id="PUg-KB-tJZ">
-                                        <rect key="frame" x="0.0" y="143.66666666666666" width="414.00000000000045" height="219.99999999999997"/>
+                                        <rect key="frame" x="0.0" y="143.66666666666666" width="414" height="219.99999999999997"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="220" id="RE0-pO-arf"/>
                                         </constraints>
@@ -2154,23 +2151,13 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sjg-9l-EGq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KI0-Ct-TRy">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
-                    <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="90" id="hs5-7N-6yI"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </objects>
             <point key="canvasLocation" x="131.8840579710145" y="2195.7589285714284"/>
         </scene>
         <!--Splash View Controller-->
         <scene sceneID="Rqu-NJ-YCy">
             <objects>
-                <viewController id="4rt-3b-HnV" customClass="SplashViewController" customModule="FinalTerm_18120099_18120106" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SplashViewController" id="4rt-3b-HnV" customClass="SplashViewController" customModule="FinalTerm_18120099_18120106" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9pY-TW-kB7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2215,8 +2202,9 @@
                                 <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SR4-si-HtW">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SR4-si-HtW">
                                 <rect key="frame" x="132" y="712" width="150" height="50"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="7al-Pe-xhB"/>
                                     <constraint firstAttribute="height" constant="50" id="cjg-ni-sGP"/>
@@ -3616,7 +3604,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="food-background" translatesAutoresizingMaskIntoConstraints="NO" id="9a7-Dz-de5">
-                                        <rect key="frame" x="0.0" y="143.66666666666666" width="414.00000000000045" height="219.99999999999997"/>
+                                        <rect key="frame" x="0.0" y="143.66666666666666" width="414" height="219.99999999999997"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="220" id="gCS-bU-e7e"/>
                                         </constraints>
@@ -4174,7 +4162,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="food-background" translatesAutoresizingMaskIntoConstraints="NO" id="Hz2-0m-vRt">
-                                                            <rect key="frame" x="-30" y="0.0" width="100.00000000000045" height="100"/>
+                                                            <rect key="frame" x="-30" y="0.0" width="100" height="100"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="100" id="Ahy-Xc-U2T"/>
                                                                 <constraint firstAttribute="width" constant="100" id="sWs-N4-Y73"/>
@@ -4534,6 +4522,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ba9-QM-FcZ">
                                 <rect key="frame" x="72" y="461.66666666666669" width="270" height="44"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="270" id="AP8-Ta-bys"/>
                                     <constraint firstAttribute="height" constant="44" id="gfs-Sg-hBa"/>
@@ -4717,6 +4706,7 @@
                             </button>
                             <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gs0-Tl-YER">
                                 <rect key="frame" x="25" y="522" width="364" height="42"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="jYx-LN-qz1"/>
                                 </constraints>

@@ -107,31 +107,6 @@ class ViewController: UIViewController {
     }
 
     func Init() {
-        //Khoi tao mau app
-        FirebaseRef.child("Setting").observe(.value, with: { (snapshot) in
-            
-            self.HeaderLb.backgroundColor = ColorScheme
-            
-            if (self.NextPageButton.isEnabled == true) {
-                
-                self.NextPageButton.backgroundColor = ColorScheme
-                self.LastPageButton.backgroundColor = ColorScheme
-                
-            }
-            
-            if (self.PrevPageButton.isEnabled == true) {
-                
-                self.PrevPageButton.backgroundColor = ColorScheme
-                self.FirstPageButton.backgroundColor = ColorScheme
-                
-            }
-            
-            self.HomeButton.tintColor = ColorScheme
-            
-            self.CategoryCollectionView.reloadData()
-            self.MealCollectionView.reloadData()
-            
-        })
         
         //Khoi tao cho cac List
         SelectedCategory = Array(repeating: false, count: CategoryList.count)
@@ -170,6 +145,35 @@ class ViewController: UIViewController {
             
             //Vo hieu hoa nut danh sach thuc don
             ShoppingButton.isEnabled = false
+            
+        }
+        else { //Hiển thị màu ở chế độ User
+            
+            //Khoi tao mau app
+            FirebaseRef.child("UserList/\(CurrentUsername)/Color").observe(.value, with: { (snapshot) in
+                
+                self.HeaderLb.backgroundColor = ColorScheme
+                
+                if (self.NextPageButton.isEnabled == true) {
+                    
+                    self.NextPageButton.backgroundColor = ColorScheme
+                    self.LastPageButton.backgroundColor = ColorScheme
+                    
+                }
+                
+                if (self.PrevPageButton.isEnabled == true) {
+                    
+                    self.PrevPageButton.backgroundColor = ColorScheme
+                    self.FirstPageButton.backgroundColor = ColorScheme
+                    
+                }
+                
+                self.HomeButton.tintColor = ColorScheme
+                
+                self.CategoryCollectionView.reloadData()
+                self.MealCollectionView.reloadData()
+                
+            })
             
         }
         

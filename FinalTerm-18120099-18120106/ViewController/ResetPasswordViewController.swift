@@ -31,9 +31,6 @@ class ResetPasswordViewController: UIViewController {
         backgroundImage.alpha = 0.4
         self.view.insertSubview(backgroundImage, at: 0)
         
-        //Cài đặt màu cho các nút và các dòng chữ
-        ResetPasswordButton.backgroundColor = ColorScheme
-        
         //Doi mau chu goi y trong cac o email
         EmailTextField.attributedPlaceholder = NSAttributedString(string: "Địa chỉ email sẽ nhận thư đặt lại mật khẩu", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         
@@ -49,7 +46,7 @@ class ResetPasswordViewController: UIViewController {
         
         //Thay doi mau dong chu 'Đăng nhập nào' de lam noi bat
         let FirstTitle = NSAttributedString(string: "Bạn đã có tài khoản rồi? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        let LastTitle = NSAttributedString(string: "Đăng nhập nào.", attributes: [NSAttributedString.Key.foregroundColor: ColorScheme])
+        let LastTitle = NSAttributedString(string: "Đăng nhập nào.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
         let Title = NSMutableAttributedString()
         Title.append(FirstTitle)
         Title.append(LastTitle)

@@ -22,8 +22,15 @@ class SplashViewController: UIViewController {
     @IBOutlet weak var ShowLb: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Khoi tao mau app
+        FirebaseRef.child("UserList/\(CurrentUsername)").observeSingleEvent(of: .value, with: { (snapshot) in
+            if let food = snapshot.value as? [String:Any] {
+                ColorScheme = UIColor(named: "\(food["Color"]!)")!
+            }}
+        )
+        
         Init()
-        // Do any additional setup after loading the view.
     }
     
     func Init(){
@@ -48,7 +55,7 @@ class SplashViewController: UIViewController {
         Continue.layer.cornerRadius = Continue.frame.height / 2
         
         // Random meo hay
-    FirebaseRef.child("Setting/\(imageID)").observeSingleEvent(of: .value, with: { (snapshot) in
+        FirebaseRef.child("Setting/\(imageID)").observeSingleEvent(of: .value, with: { (snapshot) in
             if let food = snapshot.value as? [String:Any] {
                    //Hien thi ten meo
                 self.TipLb.text = "\(food["Name"]!)"
@@ -77,7 +84,8 @@ class SplashViewController: UIViewController {
     
     @IBAction func act_ShowLoginScreen(_ sender: Any) {
         
-        let dest = self.storyboard?.instantiateViewController(identifier: "StartUpViewController") as! StartUpViewController
+        //Hiển thị màn hình trang chủ
+        let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         self.present(dest, animated: true, completion: nil)

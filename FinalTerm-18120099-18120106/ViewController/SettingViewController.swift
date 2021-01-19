@@ -40,7 +40,7 @@ extension SettingViewController: UICollectionViewDataSource, UICollectionViewDel
         collectionView.deselectItem(at: indexPath, animated: true)
         //Cap nhat data tren Firebase
         ColorScheme = UIColor(named: ColorList[indexPath.row])!
-        FirebaseRef.child("Setting").updateChildValues(["Color": ColorList[indexPath.row]])
+        FirebaseRef.child("UserList/\(CurrentUsername)").updateChildValues(["Color": ColorList[indexPath.row]])
         HeaderLb.backgroundColor = ColorScheme
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
