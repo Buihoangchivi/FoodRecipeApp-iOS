@@ -35,10 +35,8 @@ class TipListViewController: UIViewController,UITableViewDelegate, UITableViewDa
     
     func Init(){
         //Khoi tao mau app
-        FirebaseRef.child("Setting").observe(.value, with: { (snapshot) in
-        if let food = snapshot.value as? [String:Any] {
-        self.HeaderLb.backgroundColor = UIColor(named: "\(food["Color"]!)")
-            }})
+        HeaderLb.backgroundColor = ColorScheme
+        
         FirebaseRef.child("TipList").observeSingleEvent(of: .value, with: { (snapshot) in
               for snapshotChild in snapshot.children {
                 let temp = snapshotChild as! DataSnapshot

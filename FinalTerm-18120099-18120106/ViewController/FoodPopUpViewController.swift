@@ -31,13 +31,9 @@ class FoodPopUpViewController: UIViewController {
     
     func Init() {
         //Khoi tao mau app
-        FirebaseRef.child("Setting").observe(.value, with: { (snapshot) in
-        if let food = snapshot.value as? [String:Any] {
-            self.ChooseFoodButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
-            self.DetailFoodButton.setTitleColor(UIColor(named: "\(food["Color"]!)"), for: .normal)
-            self.DetailFoodButton.layer.borderColor = UIColor(named: "\(food["Color"]!)")?.cgColor
-            }})
-        
+        ChooseFoodButton.backgroundColor = ColorScheme
+        DetailFoodButton.setTitleColor(ColorScheme, for: .normal)
+        DetailFoodButton.layer.borderColor = ColorScheme.cgColor
         
         //Lam mo nen cua view
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)

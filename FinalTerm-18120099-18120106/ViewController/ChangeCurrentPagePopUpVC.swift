@@ -31,12 +31,10 @@ class ChangeCurrentPagePopUpVC: UIViewController {
     
     func Init() {
         //Khoi tao mau app
-        FirebaseRef.child("Setting").observeSingleEvent(of: .value, with: { (snapshot) in
-        if let food = snapshot.value as? [String:Any] {
-         self.ChooseButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
-         self.CancelButton.setTitleColor(UIColor(named: "\(food["Color"]!)"), for: .normal)
-         self.CancelButton.layer.borderColor = UIColor(named: "\(food["Color"]!)")?.cgColor
-            }})
+        ChooseButton.backgroundColor = ColorScheme
+        CancelButton.setTitleColor(ColorScheme, for: .normal)
+        CancelButton.layer.borderColor = ColorScheme.cgColor
+        
         //Lam mo nen cua view
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)

@@ -15,7 +15,6 @@ class StartUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         Init()
     }
     
@@ -31,6 +30,9 @@ class StartUpViewController: UIViewController {
         backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
         backgroundImage.alpha = 0.45
         self.view.insertSubview(backgroundImage, at: 0)
+        
+        //Cài đặt màu cho nút User
+        UserButton.backgroundColor = ColorScheme
         
     }
     

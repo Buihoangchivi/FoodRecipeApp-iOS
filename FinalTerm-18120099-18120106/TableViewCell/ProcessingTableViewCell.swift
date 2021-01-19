@@ -12,6 +12,7 @@ class ProcessingTableViewCell: UITableViewCell {
 
     @IBOutlet weak var lbDetail: UILabel!
     @IBOutlet weak var lbStep: UILabel!
+    @IBOutlet weak var CircleImage: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

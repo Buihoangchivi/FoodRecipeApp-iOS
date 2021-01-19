@@ -41,18 +41,17 @@ class AddNewFoodViewController: UIViewController {
     }
     
     func Init() {
-        //Khoi tao mau app
-        FirebaseRef.child("Setting").observeSingleEvent(of: .value, with: { (snapshot) in
-        if let food = snapshot.value as? [String:Any] {
-        self.HeaderLb.backgroundColor = UIColor(named: "\(food["Color"]!)")
-        self.AddButon.tintColor = UIColor(named: "\(food["Color"]!)")
-        self.AddImageButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
-        self.AddIngredientButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
-        self.AddStepButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
-        self.SaveButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
-         self.CancelButton.setTitleColor(UIColor(named: "\(food["Color"]!)"), for: .normal)
-         self.CancelButton.layer.borderColor = UIColor(named: "\(food["Color"]!)")?.cgColor
-            }})
+        
+        //Chinh mau cho man hinh
+        HeaderLb.backgroundColor = ColorScheme
+        AddButon.tintColor = ColorScheme
+        AddImageButton.backgroundColor = ColorScheme
+        AddIngredientButton.backgroundColor = ColorScheme
+        AddStepButton.backgroundColor = ColorScheme
+        SaveButton.backgroundColor = ColorScheme
+        CancelButton.setTitleColor(ColorScheme, for: .normal)
+        CancelButton.layer.borderColor = ColorScheme.cgColor
+        
         //Bo tron goc cho cac nut them anh, them nguyen lieu, them buoc
         AddImageButton.layer.cornerRadius = 17.5
         AddIngredientButton.layer.cornerRadius = 17.5
@@ -60,9 +59,6 @@ class AddNewFoodViewController: UIViewController {
         CancelButton.layer.cornerRadius = 22
         CancelButton.layer.borderWidth = 1
         SaveButton.layer.cornerRadius = 22
-        
-        //Bo tron goc cho anh mon an
-        //FoodImageView.layer.cornerRadius = 100
         
         //Khoi tao cho cac List
         SelectedCategory = Array(repeating: false, count: CategoryList.count)
@@ -277,7 +273,7 @@ extension AddNewFoodViewController: UICollectionViewDataSource, UICollectionView
             
             if (SelectedCategory[indexPath.row] == true) {
                 cell.CategoryLabel.font = UIFont(name: cell.CategoryLabel.font.familyName, size: 20)
-                cell.CategoryLabel.backgroundColor = UIColor.systemGreen
+                cell.CategoryLabel.backgroundColor = ColorScheme
                 cell.CategoryLabel.textColor = UIColor.white
                 cell.layer.borderWidth = 0
             }
@@ -299,9 +295,9 @@ extension AddNewFoodViewController: UICollectionViewDataSource, UICollectionView
             
             if (SelectedMeal[indexPath.row] == true) {
                 cell.MealLabel.font = UIFont(name: cell.MealLabel.font.familyName, size: 20)
-                cell.MealLabel.textColor = UIColor.systemGreen
+                cell.MealLabel.textColor = ColorScheme
                 cell.layer.borderWidth = 1
-                cell.layer.borderColor = UIColor.systemGreen.cgColor
+                cell.layer.borderColor = ColorScheme.cgColor
             }
             else {
                 cell.MealLabel.font = UIFont(name: cell.MealLabel.font.familyName, size: 17)

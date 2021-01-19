@@ -39,13 +39,11 @@ class IngredientListViewController: UIViewController {
     
     func Init() {
         //Khoi tao mau app
-        FirebaseRef.child("Setting").observeSingleEvent(of: .value, with: { (snapshot) in
-        if let food = snapshot.value as? [String:Any] {
-        self.HeaderLb.backgroundColor = UIColor(named: "\(food["Color"]!)")
-        self.SaveButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
-         self.CancelButton.setTitleColor(UIColor(named: "\(food["Color"]!)"), for: .normal)
-         self.CancelButton.layer.borderColor = UIColor(named: "\(food["Color"]!)")?.cgColor
-            }})
+        HeaderLb.backgroundColor = ColorScheme
+        SaveButton.backgroundColor = ColorScheme
+        CancelButton.setTitleColor(ColorScheme, for: .normal)
+        CancelButton.layer.borderColor = ColorScheme.cgColor
+        
         //Bo tron goc cho khung tim kiem
         SearchIngredientLabel.layer.cornerRadius = 22
         SearchIngredientLabel.layer.borderWidth = 0.2
@@ -156,6 +154,9 @@ extension IngredientListViewController : UITableViewDataSource, UITableViewDeleg
         cell.SaveIngredientButton.addTarget(self, action: #selector(act_SaveIngredient), for: .touchUpInside)
         //Dinh nghia tag va target cho cac nut chinh sua nguyen lieu
         cell.CancelIngredientButton.addTarget(self, action: #selector(act_CancelIngredient), for: .touchUpInside)
+        
+        //Thay doi mau duong gach nhap so luong
+        cell.DashLabel.backgroundColor = ColorScheme
         
         //Xu ly nguyen lieu dang duoc Edit
         if (indexPath.row == CurrentEditRow) {

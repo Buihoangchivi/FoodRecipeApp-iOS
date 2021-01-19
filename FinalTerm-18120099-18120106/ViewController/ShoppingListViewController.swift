@@ -32,12 +32,13 @@ class ShoppingListViewController: UIViewController {
     
     func Init() {
         //Khoi tao mau app
-               FirebaseRef.child("Setting").observeSingleEvent(of: .value, with: { (snapshot) in
-               if let food = snapshot.value as? [String:Any] {
-                   self.HeaderLb.backgroundColor = UIColor(named: "\(food["Color"]!)")
-                   self.EstablishMenuButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
-                   self.ShoppingButton.tintColor = UIColor(named: "\(food["Color"]!)")
-                   }})
+        FirebaseRef.child("Setting").observe(.value, with: { (snapshot) in
+            if let food = snapshot.value as? [String:Any] {
+               self.HeaderLb.backgroundColor = UIColor(named: "\(food["Color"]!)")
+               self.EstablishMenuButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
+               self.ShoppingButton.tintColor = UIColor(named: "\(food["Color"]!)")
+               }
+        })
         
         //An dau ngan cach giua cac TableViewCell
         ShoppingListTableView.separatorStyle = .none

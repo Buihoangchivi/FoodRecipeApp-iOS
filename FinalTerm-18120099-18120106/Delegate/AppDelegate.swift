@@ -18,6 +18,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        //Khoi tao mau app
+        FirebaseRef.child("Setting").observeSingleEvent(of: .value, with: { (snapshot) in
+        if let food = snapshot.value as? [String:Any] {
+            ColorScheme = UIColor(named: "\(food["Color"]!)")!
+            }})
+        
+        //Khoi tao danh sach mau
+        for index in 0..<25 {
+            
+            ColorList += ["\(index)"]
+            
+        }
+        
         return true
     }
     

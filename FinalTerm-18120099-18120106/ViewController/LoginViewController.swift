@@ -15,7 +15,7 @@ import FBSDKLoginKit
 class LoginViewController: UIViewController {
     
     @IBOutlet weak var BackButton: UIButton!
-    @IBOutlet weak var MissPassButton: UIButton!
+    @IBOutlet weak var ForgetPasswordButton: UIButton!
     @IBOutlet weak var EmailTextField: UITextField!
     @IBOutlet weak var PasswordTextField: UITextField!
     @IBOutlet weak var HidePasswordButton: UIButton!
@@ -30,6 +30,9 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Init();
+    }
+    
+    func Init() {
         
         //Cài ảnh nền cho view
         let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
@@ -37,15 +40,10 @@ class LoginViewController: UIViewController {
         backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
         backgroundImage.alpha = 0.4
         self.view.insertSubview(backgroundImage, at: 0)
-    }
-    
-    func Init() {
-        //Khoi tao mau app
-        FirebaseRef.child("Setting").observeSingleEvent(of: .value, with: { (snapshot) in
-        if let food = snapshot.value as? [String:Any] {
-            self.LoginButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
-            self.MissPassButton.setTitleColor(UIColor(named: "\(food["Color"]!)"), for: .normal)
-            }})
+        
+        //Cài đặt màu cho các nút và các dòng chữ
+        LoginButton.backgroundColor = ColorScheme
+        ForgetPasswordButton.setTitleColor(ColorScheme, for: .normal)
         
         //Doi mau chu goi y trong cac o nhap ten nguoi dung va mat khau
         EmailTextField.attributedPlaceholder = NSAttributedString(string: "Địa chỉ email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
@@ -68,7 +66,7 @@ class LoginViewController: UIViewController {
         
         //Thay doi mau dong chu 'Đăng ký ngay' de lam noi bat
         let FirstTitle = NSAttributedString(string: "Bạn chưa có tài khoản? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        let LastTitle = NSAttributedString(string: "Đăng ký ngay.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
+        let LastTitle = NSAttributedString(string: "Đăng ký ngay.", attributes: [NSAttributedString.Key.foregroundColor: ColorScheme])
         let Title = NSMutableAttributedString()
         Title.append(FirstTitle)
         Title.append(LastTitle)
@@ -81,13 +79,13 @@ class LoginViewController: UIViewController {
     
     @IBAction func act_ChangePasswordVisibility(_ sender: Any) {
         //An mat khau
-        if (HidePasswordButton.tintColor == UIColor.systemGreen) {
+        if (HidePasswordButton.tintColor == ColorScheme) {
             HidePasswordButton.tintColor = UIColor.lightGray
             HidePasswordButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
             PasswordTextField.isSecureTextEntry = true
         }
         else { //Hien mat khau
-            HidePasswordButton.tintColor = UIColor.systemGreen
+            HidePasswordButton.tintColor = ColorScheme
             HidePasswordButton.setImage(UIImage(systemName: "eye"), for: .normal)
             PasswordTextField.isSecureTextEntry = false
         }

@@ -41,10 +41,8 @@ class DetailMenuViewController: UIViewController {
     
     func Init() {
         //Khoi tao mau app
-        FirebaseRef.child("Setting").observeSingleEvent(of: .value, with: { (snapshot) in
-        if let food = snapshot.value as? [String:Any] {
-        self.HeaderLb.backgroundColor = UIColor(named: "\(food["Color"]!)")
-            }})
+        HeaderLb.backgroundColor = ColorScheme
+        
         FoodList = [(ID: Int, Name: String, ImageName: String, Favorite: Bool)]()
         //Hien thi danh sach cac mon an rieng do nguoi dung tu them
         if (isUserFood == true) {

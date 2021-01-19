@@ -29,6 +29,9 @@ class TestViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Init();
+    }
+    
+    func Init() {
         
         //Cài ảnh nền cho view
         let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
@@ -36,9 +39,10 @@ class TestViewController: UIViewController {
         backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
         backgroundImage.alpha = 0.4
         self.view.insertSubview(backgroundImage, at: 0)
-    }
-    
-    func Init() {
+        
+        //Cài đặt màu cho các nút và các dòng chữ
+        RegisterButton.backgroundColor = ColorScheme
+        
         //Khoi tao mau app
         FirebaseRef.child("Setting").observeSingleEvent(of: .value, with: { (snapshot) in
         if let food = snapshot.value as? [String:Any] {
@@ -69,7 +73,7 @@ class TestViewController: UIViewController {
         
         //Thay doi mau dong chu 'Đăng nhập nào' de lam noi bat
         let FirstTitle = NSAttributedString(string: "Bạn đã có tài khoản rồi? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        let LastTitle = NSAttributedString(string: "Đăng nhập nào.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
+        let LastTitle = NSAttributedString(string: "Đăng nhập nào.", attributes: [NSAttributedString.Key.foregroundColor: ColorScheme])
         let Title = NSMutableAttributedString()
         Title.append(FirstTitle)
         Title.append(LastTitle)
@@ -82,13 +86,13 @@ class TestViewController: UIViewController {
     
     @IBAction func act_ChangePasswordVisibility(_ sender: Any) {
         //An mat khau
-        if (HidePasswordButton.tintColor == UIColor.systemGreen) {
+        if (HidePasswordButton.tintColor == ColorScheme) {
             HidePasswordButton.tintColor = UIColor.lightGray
             HidePasswordButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
             PasswordTextField.isSecureTextEntry = true
         }
         else { //Hien mat khau
-            HidePasswordButton.tintColor = UIColor.systemGreen
+            HidePasswordButton.tintColor = ColorScheme
             HidePasswordButton.setImage(UIImage(systemName: "eye"), for: .normal)
             PasswordTextField.isSecureTextEntry = false
         }

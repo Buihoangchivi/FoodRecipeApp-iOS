@@ -28,13 +28,11 @@ class DirectionListViewController: UIViewController {
     
     func Init() {
         //Khoi tao mau app
-        FirebaseRef.child("Setting").observe(.value, with: { (snapshot) in
-        if let food = snapshot.value as? [String:Any] {
-        self.HeaderLb.backgroundColor = UIColor(named: "\(food["Color"]!)")
-        self.SaveButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
-         self.CancelButton.setTitleColor(UIColor(named: "\(food["Color"]!)"), for: .normal)
-         self.CancelButton.layer.borderColor = UIColor(named: "\(food["Color"]!)")?.cgColor
-            }})
+        HeaderLb.backgroundColor = ColorScheme
+        SaveButton.backgroundColor = ColorScheme
+        CancelButton.setTitleColor(ColorScheme, for: .normal)
+        CancelButton.layer.borderColor = ColorScheme.cgColor
+        
         //Bo tron goc cho cac nut luu hoac huy thay doi
         CancelButton.layer.cornerRadius = 22
         CancelButton.layer.borderWidth = 1
@@ -73,7 +71,7 @@ class DirectionListViewController: UIViewController {
         }
         else { //Bat che do chinh sua
             DirectionTableView.isEditing = true
-            EditButton.tintColor = UIColor.systemGreen
+            EditButton.tintColor = ColorScheme
         }
         DirectionTableView.reloadData()
     }

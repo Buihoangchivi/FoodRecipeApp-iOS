@@ -43,12 +43,9 @@ class DatePickerPopUpViewController: UIViewController {
     
     func Init() {
         //Khoi tao mau app
-        FirebaseRef.child("Setting").observeSingleEvent(of: .value, with: { (snapshot) in
-        if let food = snapshot.value as? [String:Any] {
-            self.ChooseButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
-            self.CancelButton.layer.borderColor = UIColor(named: "\(food["Color"]!)")?.cgColor
-            self.CancelButton.setTitleColor(UIColor(named: "\(food["Color"]!)"), for: .normal)
-            }})
+        ChooseButton.backgroundColor = ColorScheme
+        CancelButton.layer.borderColor = ColorScheme.cgColor
+        CancelButton.setTitleColor(ColorScheme, for: .normal)
         
         //Lam mo nen cua view
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
