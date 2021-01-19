@@ -7,7 +7,7 @@
 //
 
 import UIKit
-var ColorList = ["RedColor","YellowColor","GreenColor","OrangeColor","PurpleColor","BlueColor"]
+
 class SettingViewController: UIViewController {
     @IBOutlet weak var HeaderLb: UILabel!
     @IBOutlet weak var ColorCV: UICollectionView!
@@ -39,7 +39,7 @@ class SettingViewController: UIViewController {
 }
 extension SettingViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return ColorList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -55,9 +55,9 @@ extension SettingViewController: UICollectionViewDataSource, UICollectionViewDel
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let collectionViewWidth = collectionView.bounds.width
-        return CGSize(width: collectionViewWidth/3.5, height: collectionViewWidth/3.5)
+        return CGSize(width: collectionViewWidth/5.3, height: collectionViewWidth/5.3)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
 }

@@ -25,6 +25,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ColorScheme = UIColor(named: "\(food["Color"]!)")!
             }})
         
+        //Khoi tao danh sach mau
+        for index in 0..<25 {
+            
+            ColorList += ["\(index)"]
+            
+        }
+        
         return true
     }
     
