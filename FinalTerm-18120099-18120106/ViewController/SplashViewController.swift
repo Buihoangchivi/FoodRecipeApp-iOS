@@ -12,7 +12,7 @@ import FirebaseUI
 
 class SplashViewController: UIViewController {
     var checkID = 0
-    var imageID = 0
+    var splashID = 0
     @IBOutlet weak var btnCheck: UIButton!
     @IBOutlet weak var SplashImage: UIImageView!
     @IBOutlet weak var Continue: UIButton!
@@ -33,19 +33,10 @@ class SplashViewController: UIViewController {
         Init()
     }
     
-    func Init(){
-        
-        //Khoi tao mau app
-        FirebaseRef.child("Setting").observeSingleEvent(of: .value, with: { (snapshot) in
-        if let food = snapshot.value as? [String:Any] {
-            self.Continue.backgroundColor = UIColor(named: "\(food["Color"]!)")
-            self.Continue.isHidden = false
-            }})
+    func Init() {
         
         //Random hinh anh hien len
-        imageID = Int.random(in: 1..<7)
-        SplashImage.image = UIImage(named: "Splash\(imageID)")
-        imageID = imageID - 1
+        splashID = Int.random(in: 0..<5)
         
         //Chinh border cho UIView
         TipView.layer.addBorder(edge: UIRectEdge.top, color: UIColor.white, thickness: 2)
@@ -55,13 +46,21 @@ class SplashViewController: UIViewController {
         Continue.layer.cornerRadius = Continue.frame.height / 2
         
         // Random meo hay
-        FirebaseRef.child("Setting/\(imageID)").observeSingleEvent(of: .value, with: { (snapshot) in
-            if let food = snapshot.value as? [String:Any] {
-                   //Hien thi ten meo
-                self.TipLb.text = "\(food["Name"]!)"
-                print("\(food["Name"]!)")
-                self.TipDetailLb.text = "\(food["Detail"]!)"
-                   }})
+        FirebaseRef.child("Setting/\(splashID)").observeSingleEvent(of: .value, with: { (snapshot) in
+            if let splashInfo = snapshot.value as? [String:Any] {
+                
+                //Hien thi ten meo
+                self.TipLb.text = "\(splashInfo["Name"]!)"
+                
+                //Hiển thị mô tả mẹo
+                self.TipDetailLb.text = "\(splashInfo["Detail"]!)"
+                
+                //Hiển thị ảnh của mẹo
+                self.SplashImage.sd_setImage(with: imageRef.child("/SettingImages/\(splashInfo["Image"]!)"), maxImageSize: 1 << 30, placeholderImage: UIImage(), options: .retryFailed, completion: nil)
+                
+            }
+        })
+        
     }
     
     @IBAction func act_Check(_ sender: Any) {
