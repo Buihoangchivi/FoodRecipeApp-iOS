@@ -205,6 +205,10 @@ class TestViewController: UIViewController {
                 FirebaseRef.child("UserList/\(result!.user.uid)/Username").setValue(self.UsernameTextField.text!)
                 //Email
                 FirebaseRef.child("UserList/\(result!.user.uid)/Email").setValue(self.EmailTextField.text!)
+                //Màu nền
+                FirebaseRef.child("UserList/\(result!.user.uid)/Color").setValue("\(Int.random(in: 0..<25))")
+                //Hiển thị Splash Screen
+                FirebaseRef.child("UserList/\(result!.user.uid)/SplashScreen").setValue(1)
                 
                 //Chuyen qua man hinh dang ky
                 self.act_Login(sender)

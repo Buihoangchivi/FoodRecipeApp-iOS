@@ -22,14 +22,6 @@ class SplashViewController: UIViewController {
     @IBOutlet weak var ShowLb: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //Khoi tao mau app
-        FirebaseRef.child("UserList/\(CurrentUsername)").observeSingleEvent(of: .value, with: { (snapshot) in
-            if let food = snapshot.value as? [String:Any] {
-                ColorScheme = UIColor(named: "\(food["Color"]!)")!
-            }}
-        )
-        
         Init()
     }
     
@@ -64,21 +56,23 @@ class SplashViewController: UIViewController {
     }
     
     @IBAction func act_Check(_ sender: Any) {
-               //Cap nhat tren firebase
-        if (checkID == 0) {
+        
+        //Cap nhat tren firebase
+        if (checkID == 0) { //Không hiện SplashScreen nữa
             
             btnCheck.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
             checkID = 1
-            FirebaseRef.child("Setting").updateChildValues(["SplashScreen": 1])
+            FirebaseRef.child("UserList/\(CurrentUsername)").updateChildValues(["SplashScreen": 0])
             
-            }
-        else {
+        }
+        else { //Tiếp tục hiện SplashScreen trong lần sau
             
             btnCheck.setImage(UIImage(systemName: "square"), for: .normal)
             checkID = 0
-            FirebaseRef.child("Setting").updateChildValues(["SplashScreen": 0])
+            FirebaseRef.child("UserList/\(CurrentUsername)").updateChildValues(["SplashScreen": 1])
             
         }
+        
     }
     
     @IBAction func act_ShowLoginScreen(_ sender: Any) {

@@ -140,14 +140,13 @@ class LoginViewController: UIViewController {
                 }
             }
             else {
+                
                 //Luu thong tin ten dang nhap
                 CurrentUsername = result!.user.uid
                 
-                //Hien thi man hinh trang chu cua ung dung
-                let dest = self.storyboard?.instantiateViewController(identifier: "SplashViewController") as! SplashViewController
-                dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-                dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-                self.present(dest, animated: true, completion: nil)
+                //Chuyển màn hình thích hợp
+                self.ChangeScreen()
+                
             }
         }
     }
@@ -212,11 +211,8 @@ class LoginViewController: UIViewController {
                 //Luu thong tin dang nhap
                 CurrentUsername = authResult!.user.uid
                 
-                //Hien thi man hinh trang chu cua ung dung
-                let dest = self.storyboard?.instantiateViewController(identifier: "SplashViewController") as! SplashViewController
-                dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-                dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-                self.present(dest, animated: true, completion: nil)
+                //Chuyển màn hình thích hợp
+                self.ChangeScreen()
                    
                 })
         
@@ -235,6 +231,48 @@ class LoginViewController: UIViewController {
             print ("Error signing out from Firebase: %@", error)
         }*/
     }
+    
+    func ChangeScreen() {
+        
+        //Khoi tao mau app
+        FirebaseRef.child("UserList/\(CurrentUsername)").observeSingleEvent(of: .value, with: { (snapshot) in
+            if let food = snapshot.value as? [String:Any] {
+                ColorScheme = UIColor(named: "\(food["Color"]!)")!
+            }}
+        )
+        
+        //Hien thi man hinh trang chu cua ung dung
+        FirebaseRef.child("UserList/\(CurrentUsername)").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            if let user = snapshot.value as? [String:Any] {
+                
+                if let isCheck = user["SplashScreen"] as? Int {
+                    
+                    if (isCheck == 0) { //Không hiển thị SplashScreen
+                        
+                        let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
+                        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                        self.present(dest, animated: true, completion: nil)
+                        
+                    }
+                    else { //Hiển thị SplashScreen
+                        
+                        let dest = self.storyboard?.instantiateViewController(identifier: "SplashViewController") as! SplashViewController
+                        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                        self.present(dest, animated: true, completion: nil)
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        })
+        
+    }
+    
 }
 
 extension LoginViewController: GIDSignInDelegate {
@@ -264,11 +302,8 @@ extension LoginViewController: GIDSignInDelegate {
             //Luu thong tin dang nhap
             CurrentUsername = authResult!.user.uid
             
-            //Hien thi man hinh trang chu cua ung dung
-            let dest = self.storyboard?.instantiateViewController(identifier: "SplashViewController") as! SplashViewController
-            dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-            dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-            self.present(dest, animated: true, completion: nil)
+            //Chuyển màn hình thích hợp
+            self.ChangeScreen()
             
         }
     }

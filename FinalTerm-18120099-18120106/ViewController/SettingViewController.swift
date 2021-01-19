@@ -11,21 +11,77 @@ import UIKit
 class SettingViewController: UIViewController {
     @IBOutlet weak var HeaderLb: UILabel!
     @IBOutlet weak var ColorCV: UICollectionView!
+    @IBOutlet weak var ShowSplashScreenButton: UIButton!
+    
+    var check = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        Init()
+    }
+    
+    func Init() {
+        
         //Khoi tao mau app
         HeaderLb.backgroundColor = ColorScheme
         
         ColorCV.delegate = self
         ColorCV.dataSource = self
-        // Do any additional setup after loading the view.
+        
+        //Hien thi man hinh trang chu cua ung dung
+        FirebaseRef.child("UserList/\(CurrentUsername)").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            if let user = snapshot.value as? [String:Any] {
+                
+                if let isCheck = user["SplashScreen"] as? Int {
+                    
+                    if (isCheck == 1) { //Hiển thị SplashScreen
+                        
+                        self.ShowSplashScreenButton.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
+                        //FirebaseRef.child("UserList/\(CurrentUsername)").updateChildValues(["SplashScreen": 0])
+                        
+                    }
+                    else { //Không hiển thị SplashScreen
+                        
+                        self.ShowSplashScreenButton.setImage(UIImage(systemName: "square"), for: .normal)
+                        //FirebaseRef.child("UserList/\(CurrentUsername)").updateChildValues(["SplashScreen": 1])
+                        
+                    }
+                    self.check = isCheck
+                    
+                }
+                
+            }
+            
+        })
+        
     }
 
+    @IBAction func act_ShowSplashScreen(_ sender: Any) {
+        
+        if (check == 0) { //Chuyển từ ẩn sang hiển thị SplashScreen
+            
+            self.ShowSplashScreenButton.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
+            check = 1
+            FirebaseRef.child("UserList/\(CurrentUsername)").updateChildValues(["SplashScreen": 1])
+            
+        }
+        else { //Chuyển từ hiển thị sang ẩn SplashScreen
+            
+            self.ShowSplashScreenButton.setImage(UIImage(systemName: "square"), for: .normal)
+            check = 0
+            FirebaseRef.child("UserList/\(CurrentUsername)").updateChildValues(["SplashScreen": 0])
+            
+        }
+        
+    }
+    
     @IBAction func act_Back(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
 }
+
 extension SettingViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return ColorList.count

@@ -769,7 +769,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b23-na-LYR">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                         <connections>
-                                            <action selector="act_ClosePopUp:" destination="muN-6l-Ya4" eventType="touchUpInside" id="N4w-Hu-DrO"/>
+                                            <action selector="act_ClosePopUp:" destination="muN-6l-Ya4" eventType="touchUpInside" id="dNp-E1-H8z"/>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rTn-YT-LHf">
@@ -1018,7 +1018,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="food-background" translatesAutoresizingMaskIntoConstraints="NO" id="PUg-KB-tJZ">
-                                        <rect key="frame" x="0.0" y="143.66666666666666" width="414.00000000000045" height="219.99999999999997"/>
+                                        <rect key="frame" x="0.0" y="143.66666666666666" width="414" height="219.99999999999997"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="220" id="RE0-pO-arf"/>
                                         </constraints>
@@ -2128,18 +2128,42 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vc0-eV-Zxl">
+                                <rect key="frame" x="20" y="579" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="87B-V5-3hM"/>
+                                    <constraint firstAttribute="height" constant="25" id="oTo-6I-uij"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="square" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20"/>
+                                </state>
+                                <connections>
+                                    <action selector="act_ShowSplashScreen:" destination="5xu-tl-9uo" eventType="touchUpInside" id="pY7-X6-rdb"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hiển thị màn hình chào mừng." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h6g-zP-9zo">
+                                <rect key="frame" x="50" y="579.66666666666663" width="266.66666666666669" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="b5t-Jk-flJ" firstAttribute="top" secondItem="JOi-eh-PfD" secondAttribute="top" id="5OZ-yq-Odm"/>
                             <constraint firstItem="Ywf-DN-Txg" firstAttribute="leading" secondItem="Zgf-uF-hQF" secondAttribute="leading" constant="15" id="CiF-Aj-Iun"/>
                             <constraint firstItem="6x0-XW-ctx" firstAttribute="centerX" secondItem="JOi-eh-PfD" secondAttribute="centerX" id="FE1-rM-IS8"/>
+                            <constraint firstItem="Vc0-eV-Zxl" firstAttribute="top" secondItem="6x0-XW-ctx" secondAttribute="bottom" constant="20" id="NF5-b9-Q3f"/>
                             <constraint firstItem="ebK-k2-xpp" firstAttribute="top" secondItem="Zgf-uF-hQF" secondAttribute="top" constant="4" id="Ow4-Rp-gRg"/>
                             <constraint firstItem="9GS-Z5-GyM" firstAttribute="leading" secondItem="Zgf-uF-hQF" secondAttribute="leading" constant="20" id="P66-Ot-kdD"/>
                             <constraint firstItem="ebK-k2-xpp" firstAttribute="centerX" secondItem="JOi-eh-PfD" secondAttribute="centerX" id="U8b-Mh-oRV"/>
+                            <constraint firstItem="h6g-zP-9zo" firstAttribute="leading" secondItem="Vc0-eV-Zxl" secondAttribute="trailing" constant="5" id="UaK-TR-lqh"/>
+                            <constraint firstItem="Vc0-eV-Zxl" firstAttribute="leading" secondItem="Zgf-uF-hQF" secondAttribute="leading" constant="20" id="X3h-Vp-i4G"/>
                             <constraint firstItem="Ywf-DN-Txg" firstAttribute="firstBaseline" secondItem="ebK-k2-xpp" secondAttribute="firstBaseline" id="XO4-Lr-YN3"/>
                             <constraint firstItem="b5t-Jk-flJ" firstAttribute="trailing" secondItem="Zgf-uF-hQF" secondAttribute="trailing" id="cfz-Pl-cah"/>
                             <constraint firstItem="9GS-Z5-GyM" firstAttribute="top" secondItem="b5t-Jk-flJ" secondAttribute="bottom" constant="30" id="ehQ-XV-Yqc"/>
+                            <constraint firstItem="h6g-zP-9zo" firstAttribute="centerY" secondItem="Vc0-eV-Zxl" secondAttribute="centerY" id="fwG-9a-9lz"/>
                             <constraint firstItem="6x0-XW-ctx" firstAttribute="top" secondItem="9GS-Z5-GyM" secondAttribute="bottom" constant="15" id="gFx-cz-zSh"/>
                             <constraint firstItem="b5t-Jk-flJ" firstAttribute="leading" secondItem="Zgf-uF-hQF" secondAttribute="leading" id="l1z-E1-rMU"/>
                         </constraints>
@@ -2148,6 +2172,7 @@
                     <connections>
                         <outlet property="ColorCV" destination="6x0-XW-ctx" id="8jO-aj-UOk"/>
                         <outlet property="HeaderLb" destination="b5t-Jk-flJ" id="VBm-Ld-Uhx"/>
+                        <outlet property="ShowSplashScreenButton" destination="Vc0-eV-Zxl" id="Vvf-8f-Jxs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sjg-9l-EGq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3604,7 +3629,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="food-background" translatesAutoresizingMaskIntoConstraints="NO" id="9a7-Dz-de5">
-                                        <rect key="frame" x="0.0" y="143.66666666666666" width="414.00000000000045" height="219.99999999999997"/>
+                                        <rect key="frame" x="0.0" y="143.66666666666666" width="414" height="219.99999999999997"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="220" id="gCS-bU-e7e"/>
                                         </constraints>
@@ -4162,7 +4187,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="food-background" translatesAutoresizingMaskIntoConstraints="NO" id="Hz2-0m-vRt">
-                                                            <rect key="frame" x="-30" y="0.0" width="100.00000000000045" height="100"/>
+                                                            <rect key="frame" x="-30" y="0.0" width="100" height="100"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="100" id="Ahy-Xc-U2T"/>
                                                                 <constraint firstAttribute="width" constant="100" id="sWs-N4-Y73"/>

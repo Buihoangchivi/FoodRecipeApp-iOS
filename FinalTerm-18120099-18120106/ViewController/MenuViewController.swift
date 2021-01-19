@@ -39,12 +39,10 @@ class MenuViewController: UIViewController {
     
     func Init() {
         //Khoi tao mau app
-        FirebaseRef.child("Setting").observe(.value, with: { (snapshot) in
-        if let food = snapshot.value as? [String:Any] {
-            
-            self.MenuLb.textColor = UIColor(named: "\(food["Color"]!)")
-            }
-            
+        FirebaseRef.child("UserList/\(CurrentUsername)/Color").observe(.value, with: { (snapshot) in
+                
+                self.MenuLb.textColor = ColorScheme
+                
         })
         
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
