@@ -15,16 +15,17 @@ class TipDetailViewController: UIViewController {
     
     @IBOutlet weak var LbTipDetail: UILabel!
     @IBOutlet weak var LbTipName: UILabel!
+    @IBOutlet weak var CircleImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Init()
     }
     func Init(){
-      //Khoi tao mau app
-        FirebaseRef.child("Setting").observeSingleEvent(of: .value, with: { (snapshot) in
-        if let food = snapshot.value as? [String:Any] {
-        self.HeaderLb.backgroundColor = UIColor(named: "\(food["Color"]!)")
-            }})
+        //Khoi tao mau app
+        HeaderLb.backgroundColor = ColorScheme
+        CircleImage.tintColor = ColorScheme
+        
     }
             
     @IBAction func btnBack(_ sender: Any) {

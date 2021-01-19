@@ -30,12 +30,11 @@ class DirectionPopUpViewController: UIViewController {
     
     func Init() {
         //Khoi tao mau app
-        FirebaseRef.child("Setting").observeSingleEvent(of: .value, with: { (snapshot) in
-        if let food = snapshot.value as? [String:Any] {
-        self.SaveDirectionButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
-         self.CancelDirectionButton.setTitleColor(UIColor(named: "\(food["Color"]!)"), for: .normal)
-         self.CancelDirectionButton.layer.borderColor = UIColor(named: "\(food["Color"]!)")?.cgColor
-            }})
+        SaveDirectionButton.backgroundColor = ColorScheme
+        CancelDirectionButton.setTitleColor(ColorScheme, for: .normal)
+        CancelDirectionButton.layer.borderColor = ColorScheme.cgColor
+        StepNumberLabel.textColor = ColorScheme
+
         //Lam mo nen cua view
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)

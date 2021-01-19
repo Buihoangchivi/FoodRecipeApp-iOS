@@ -109,12 +109,29 @@ class ViewController: UIViewController {
     func Init() {
         //Khoi tao mau app
         FirebaseRef.child("Setting").observe(.value, with: { (snapshot) in
-        if let food = snapshot.value as? [String:Any] {
-            self.HeaderLb.backgroundColor = UIColor(named: "\(food["Color"]!)")
-            self.NextPageButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
-            self.LastPageButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
-            self.HomeButton.tintColor = UIColor(named: "\(food["Color"]!)")
-            }})
+            
+            self.HeaderLb.backgroundColor = ColorScheme
+            
+            if (self.NextPageButton.isEnabled == true) {
+                
+                self.NextPageButton.backgroundColor = ColorScheme
+                self.LastPageButton.backgroundColor = ColorScheme
+                
+            }
+            
+            if (self.PrevPageButton.isEnabled == true) {
+                
+                self.PrevPageButton.backgroundColor = ColorScheme
+                self.FirstPageButton.backgroundColor = ColorScheme
+                
+            }
+            
+            self.HomeButton.tintColor = ColorScheme
+            
+            self.CategoryCollectionView.reloadData()
+            self.MealCollectionView.reloadData()
+            
+        })
         
         //Khoi tao cho cac List
         SelectedCategory = Array(repeating: false, count: CategoryList.count)
@@ -362,7 +379,7 @@ class ViewController: UIViewController {
         if (isActive == true) {
             button.layer.borderWidth = 0
             button.tintColor  = UIColor.white
-            button.backgroundColor = UIColor.systemGreen
+            button.backgroundColor = ColorScheme
         }
         else {
             button.layer.borderWidth = 1
@@ -682,7 +699,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
             
             if (SelectedCategory[indexPath.row] == true) {
                 cell.CategoryLabel.font = UIFont(name: cell.CategoryLabel.font.familyName, size: 20)
-                cell.CategoryLabel.backgroundColor = UIColor.systemGreen
+                cell.CategoryLabel.backgroundColor = ColorScheme
                 cell.CategoryLabel.textColor = UIColor.white
                 cell.layer.borderWidth = 0
             }
@@ -703,7 +720,8 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
             
             if (SelectedMeal[indexPath.row] == true) {
                 cell.MealLabel.font = UIFont(name: cell.MealLabel.font.familyName, size: 20)
-                cell.MealLabel.textColor = UIColor.black
+                cell.MealLabel.textColor = ColorScheme
+                cell.DashLabel.backgroundColor = ColorScheme
                 cell.DashLabel.isHidden = false
             }
             else {

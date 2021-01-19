@@ -20,7 +20,6 @@ class DetailFoodViewController: UIViewController{
     @IBOutlet weak var IngredientDash: UILabel!
     @IBOutlet weak var DirectionDash: UILabel!
     @IBOutlet weak var TextLabel: UILabel!
-    @IBOutlet weak var NumberLabel: UILabel!
     
     @IBOutlet weak var ContentTableView: UITableView!
     
@@ -34,7 +33,6 @@ class DetailFoodViewController: UIViewController{
     
     @IBOutlet weak var FavoriteButtonBackground: UIView!
     
-    //var TempSelectedIngredient = [(ID: Int, Name: String, Value: Double, Unit: String)]()
     var SelectedIngredientList = [(ID: Int, Name: String, Value: Double, Unit: String)]()
     var DirectionList = [String]()
     var FoodID = 0
@@ -53,14 +51,14 @@ class DetailFoodViewController: UIViewController{
     
     func UIInit() {
         //Khoi tao mau app
-        FirebaseRef.child("Setting").observe(.value, with: { (snapshot) in
-        if let food = snapshot.value as? [String:Any] {
-        self.HeaderLb.backgroundColor = UIColor(named: "\(food["Color"]!)")
-        self.IngredientButton.setTitleColor(UIColor(named: "\(food["Color"]!)"), for: .normal)
-        self.btnAddtoMenu.backgroundColor = UIColor(named: "\(food["Color"]!)")
-        self.btnAddIngre.setTitleColor(UIColor(named: "\(food["Color"]!)"), for: .normal)
-        self.btnAddIngre.layer.borderColor = UIColor(named: "\(food["Color"]!)")?.cgColor
-        }})
+        HeaderLb.backgroundColor = ColorScheme
+        IngredientButton.setTitleColor(ColorScheme, for: .normal)
+        IngredientDash.backgroundColor = ColorScheme
+        DirectionDash.backgroundColor = ColorScheme
+        btnAddtoMenu.backgroundColor = ColorScheme
+        btnAddIngre.setTitleColor(ColorScheme, for: .normal)
+        btnAddIngre.layer.borderColor = ColorScheme.cgColor
+        
         //Bo tron goc cho cac nut
         btnAddtoMenu.layer.cornerRadius = 22
         btnAddIngre.layer.cornerRadius = 22
@@ -213,13 +211,14 @@ class DetailFoodViewController: UIViewController{
             isIngredientView = false
             //Thay doi trang thai cua nut duoc chon
             IngredientButton.setTitleColor(UIColor.black, for: .normal)
-            DirectionButton.setTitleColor(UIColor.systemGreen, for: .normal)
+            DirectionButton.setTitleColor(ColorScheme, for: .normal)
+            
             //Thay doi dau gach
             IngredientDash.isHidden = true
             DirectionDash.isHidden = false
             //Thay doi thong tin khau phan an thanh thong tin tong so buoc
             TextLabel.text = "Tổng số bước:"
-            NumberLabel.text = "\(DirectionList.count)"
+            NumberPersonLabel.text = "\(DirectionList.count)"
             //An 2 nut dieu chinh khau phan an
             DownNumberButton.isHidden = true
             DownNumberButton.isEnabled = false
@@ -238,13 +237,14 @@ class DetailFoodViewController: UIViewController{
             isIngredientView = true
             //Thay doi trang thai cua nut duoc chon
             DirectionButton.setTitleColor(UIColor.black, for: .normal)
-            IngredientButton.setTitleColor(UIColor.systemGreen, for: .normal)
+            IngredientButton.setTitleColor(ColorScheme, for: .normal)
+            
             //Thay doi dau gach
             IngredientDash.isHidden = false
             DirectionDash.isHidden = true
             //Thay doi thong tin tong so buoc thanh thong tin khau phan an
             TextLabel.text = "Khẩu phần ăn:"
-            NumberLabel.text = "\(NumberOfPeople)"
+            NumberPersonLabel.text = "\(NumberOfPeople)"
             //An 2 nut dieu chinh khau phan an
             DownNumberButton.isHidden = false
             if (NumberOfPeople > 1) {
@@ -349,7 +349,7 @@ class DetailFoodViewController: UIViewController{
 extension DetailFoodViewController: DirectionDelegate {
     func SaveChange(List: [String]) {
         DirectionList = List
-        NumberLabel.text = "\(DirectionList.count)"
+        NumberPersonLabel.text = "\(DirectionList.count)"
         ContentTableView.reloadData()
     }
 }
@@ -411,6 +411,7 @@ extension DetailFoodViewController:UITableViewDelegate,UITableViewDataSource{
         }
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProcessingCell") as! ProcessingTableViewCell
+            cell.CircleImage.tintColor = ColorScheme
             cell.lbStep.text = "Bước \(indexPath.row + 1)"
             cell.lbDetail.text = "\(DirectionList[indexPath.row])"
             return cell

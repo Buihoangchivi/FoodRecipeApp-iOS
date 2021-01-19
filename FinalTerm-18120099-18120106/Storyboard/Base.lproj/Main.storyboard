@@ -1755,6 +1755,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="CircleImage" destination="AlN-gy-hUc" id="8Wf-N1-Bwa"/>
                                             <outlet property="lbDetail" destination="a5w-2f-7im" id="7co-t9-Ku8"/>
                                             <outlet property="lbStep" destination="zpZ-nb-2W0" id="gK8-rE-7RC"/>
                                         </connections>
@@ -1918,8 +1919,7 @@
                         <outlet property="HeaderLb" destination="LnQ-By-FCC" id="Hey-i2-8p7"/>
                         <outlet property="IngredientButton" destination="j9G-M0-VqJ" id="YAj-py-aZJ"/>
                         <outlet property="IngredientDash" destination="tdw-Am-w88" id="3oe-aE-uCo"/>
-                        <outlet property="NumberLabel" destination="saQ-YA-Ks7" id="loo-eL-j4q"/>
-                        <outlet property="NumberPersonLabel" destination="saQ-YA-Ks7" id="ypb-Rv-cJc"/>
+                        <outlet property="NumberPersonLabel" destination="saQ-YA-Ks7" id="lzg-jz-LE4"/>
                         <outlet property="TextLabel" destination="eJE-fh-PGK" id="cso-wE-rjk"/>
                         <outlet property="UpNumberButton" destination="p9N-jh-Cqh" id="pmL-bz-lIE"/>
                         <outlet property="btnAddIngre" destination="2rV-Av-MnO" id="caZ-36-31v"/>
@@ -2699,6 +2699,7 @@
                         <viewLayoutGuide key="safeArea" id="gv2-fi-04q"/>
                     </view>
                     <connections>
+                        <outlet property="CircleImage" destination="Lqt-KT-G2h" id="pmt-Ba-E2Y"/>
                         <outlet property="HeaderLb" destination="VmL-8K-NRc" id="lR6-ct-kDC"/>
                         <outlet property="LbTipDetail" destination="aqG-yI-gCK" id="fD4-mc-MVw"/>
                         <outlet property="LbTipName" destination="YR2-YZ-gry" id="UaV-NN-ysw"/>
@@ -2727,17 +2728,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kFn-F6-492">
-                                <rect key="frame" x="359" y="45" width="35" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="35" id="Uez-fT-ftx"/>
-                                    <constraint firstAttribute="height" constant="35" id="VDH-63-9h1"/>
-                                </constraints>
-                                <color key="tintColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <state key="normal" image="magnifyingglass" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22"/>
-                                </state>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MUA SẮM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yj5-iL-3TI">
                                 <rect key="frame" x="154" y="48" width="106" height="28"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="23"/>
@@ -3037,11 +3027,9 @@
                             <constraint firstItem="Dng-bp-5iB" firstAttribute="leading" secondItem="dQq-qn-R9N" secondAttribute="leading" id="77b-9n-7n5"/>
                             <constraint firstItem="Yid-4K-sqf" firstAttribute="top" secondItem="dQq-qn-R9N" secondAttribute="top" constant="1" id="7dK-sM-uUd"/>
                             <constraint firstAttribute="bottom" secondItem="ebX-wj-zbI" secondAttribute="bottom" constant="10" id="AlS-n4-Usz"/>
-                            <constraint firstItem="dQq-qn-R9N" firstAttribute="trailing" secondItem="kFn-F6-492" secondAttribute="trailing" constant="20" id="Atq-zb-mvu"/>
                             <constraint firstItem="Dng-bp-5iB" firstAttribute="trailing" secondItem="dQq-qn-R9N" secondAttribute="trailing" id="HKg-XE-5oT"/>
                             <constraint firstAttribute="bottom" secondItem="3uU-qy-guT" secondAttribute="bottom" constant="10" id="LOT-Uu-J5f"/>
                             <constraint firstItem="Dng-bp-5iB" firstAttribute="top" secondItem="tRY-Bf-yMG" secondAttribute="bottom" id="Noc-tO-peu"/>
-                            <constraint firstItem="kFn-F6-492" firstAttribute="top" secondItem="dQq-qn-R9N" secondAttribute="top" constant="1" id="Nv2-np-5p2"/>
                             <constraint firstItem="Yid-4K-sqf" firstAttribute="leading" secondItem="dQq-qn-R9N" secondAttribute="leading" constant="20" id="SoM-Sw-Mcz"/>
                             <constraint firstItem="yj5-iL-3TI" firstAttribute="top" secondItem="dQq-qn-R9N" secondAttribute="top" constant="4" id="SpD-bi-Fn7"/>
                             <constraint firstItem="tRY-Bf-yMG" firstAttribute="trailing" secondItem="dQq-qn-R9N" secondAttribute="trailing" id="Y2R-sQ-7tH"/>
@@ -3857,6 +3845,7 @@
                         <outlet property="AddStepButton" destination="8JC-Pp-6gf" id="Qp7-1W-EDo"/>
                         <outlet property="CancelButton" destination="BTM-wR-faY" id="jhe-c6-FV0"/>
                         <outlet property="CategoryCollectionView" destination="Dzf-HL-HAV" id="fG7-36-InL"/>
+                        <outlet property="EditLabel" destination="BGC-pH-9r6" id="n9J-Qe-lm5"/>
                         <outlet property="FoodImageView" destination="9a7-Dz-de5" id="6iT-UO-u24"/>
                         <outlet property="FoodNameTextField" destination="3IF-Dg-74G" id="8TY-Me-nJk"/>
                         <outlet property="MealCollectionView" destination="vsD-4H-mh0" id="u0X-PC-uCR"/>
