@@ -100,10 +100,29 @@ class DetailFoodViewController: UIViewController{
                 //Hien thi ten mon an
                 self.FoodNameLabel.text = "\(food["Name"]!)"
                 
-                //Hien thi trang thai yeu thich cua mon an
-                FirebaseRef.child("UserList/\(CurrentUsername)/Favorite/\(snapshot.key)").observeSingleEvent(of: .value) { (snapshot) in
+                if (self.Ref.parent?.key == nil) { //Hiển thị trạng thái yêu thích trong chi tiết món ăn chung
                     
-                    if (snapshot.exists() == true) { //Yeu thich
+                    FirebaseRef.child("UserList/\(CurrentUsername)/Favorite/\(snapshot.key)").observeSingleEvent(of: .value) { (snapshot) in
+                        
+                        if (snapshot.exists() == true) { //Yeu thich
+                            
+                            self.FavoriteButton.tintColor = UIColor.red
+                            self.FavoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                            
+                        }
+                        else { //Khong yeu thich
+                            
+                            self.FavoriteButton.tintColor = UIColor.black
+                            self.FavoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
+                            
+                        }
+                        
+                    }
+                    
+                }
+                else { //Hiển thị trạng thái yêu thích trong chi tiết món ăn riêng của User
+                    
+                    if (food["Favorite"] as! Int == 1) { //Yeu thich
                         
                         self.FavoriteButton.tintColor = UIColor.red
                         self.FavoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
@@ -111,12 +130,14 @@ class DetailFoodViewController: UIViewController{
                     }
                     else { //Khong yeu thich
                         
-                        self.FavoriteButton.tintColor = UIColor.black
+                        self.FavoriteButton.tintColor = UIColor.white
                         self.FavoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
                         
                     }
                     
                 }
+                
+                
                 
                 //Chi hien thi nut "Chon mon" va yeu thich o che do User
                 if (isUserMode == false) {
@@ -311,7 +332,16 @@ class DetailFoodViewController: UIViewController{
             FavoriteButton.tintColor = UIColor.red
             FavoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
             //Cap nhat data tren Firebase
-            FirebaseRef.child("UserList/\(CurrentUsername)/Favorite/\(FoodID)").setValue("")
+            if (self.Ref.parent?.key == nil) { //Hiển thị trạng thái yêu thích trong chi tiết món ăn chung
+                
+                FirebaseRef.child("UserList/\(CurrentUsername)/Favorite/\(FoodID)").setValue("")
+                
+            }
+            else { //Hiển thị trạng thái yêu thích trong chi tiết món ăn riêng của User
+                
+                Ref.child("\(FoodID)").updateChildValues(["Favorite": 1])
+                
+            }
             
         }
         else { //Xoa khoi danh sach yeu thich
@@ -319,7 +349,16 @@ class DetailFoodViewController: UIViewController{
             FavoriteButton.tintColor = UIColor.white
             FavoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
             //Cap nhat data tren Firebase
-            FirebaseRef.child("UserList/\(CurrentUsername)/Favorite/\(FoodID)").removeValue()
+            if (self.Ref.parent?.key == nil) { //Hiển thị trạng thái yêu thích trong chi tiết món ăn chung
+                
+                FirebaseRef.child("UserList/\(CurrentUsername)/Favorite/\(FoodID)").removeValue()
+                
+            }
+            else { //Hiển thị trạng thái yêu thích trong chi tiết món ăn riêng của User
+                
+                Ref.child("\(FoodID)").updateChildValues(["Favorite": 0])
+                
+            }
             
         }
     }
