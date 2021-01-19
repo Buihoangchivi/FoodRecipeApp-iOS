@@ -27,6 +27,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var EmailNotificationLabel: UILabel!
     @IBOutlet weak var PasswordNotificationLabel: UILabel!
     
+    @IBOutlet weak var TitleLb: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         Init();
@@ -42,8 +43,14 @@ class LoginViewController: UIViewController {
         self.view.insertSubview(backgroundImage, at: 0)
         
         //Doi mau chu goi y trong cac o nhap ten nguoi dung va mat khau
-        EmailTextField.attributedPlaceholder = NSAttributedString(string: "Địa chỉ email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Mật khẩu", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+         if(TitleLb.text == "Người dùng đăng nhập"){
+               EmailTextField.attributedPlaceholder = NSAttributedString(string: "Địa chỉ email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+               PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Mật khẩu", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+               }
+               else{
+                   EmailTextField.attributedPlaceholder = NSAttributedString(string: "Email address", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+                   PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+               }
         
         //Canh le cho 2 o Username va Password
         EmailTextField.setLeftPaddingPoints(8)

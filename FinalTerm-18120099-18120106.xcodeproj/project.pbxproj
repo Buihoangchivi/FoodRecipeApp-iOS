@@ -52,6 +52,8 @@
 		87997F60257DFFAD00C9AF5F /* TipListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87997F5F257DFFAD00C9AF5F /* TipListTableViewCell.swift */; };
 		87997F62257DFFBD00C9AF5F /* TipListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87997F61257DFFBD00C9AF5F /* TipListViewController.swift */; };
 		87997F64257DFFCB00C9AF5F /* TipDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87997F63257DFFCB00C9AF5F /* TipDetailViewController.swift */; };
+		879CD44325B738BE000BE33F /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879CD44225B738BE000BE33F /* AboutViewController.swift */; };
+		879CD44525B7398A000BE33F /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879CD44425B7398A000BE33F /* ContactViewController.swift */; };
 		87BD52B12577986C0099C569 /* ProcessingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BD52B02577986C0099C569 /* ProcessingTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -119,6 +121,8 @@
 		879CD43C25B714C2000BE33F /* vi-VN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "vi-VN"; path = "vi-VN.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		879CD43D25B714C2000BE33F /* vi-VN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "vi-VN"; path = "vi-VN.lproj/Main.strings"; sourceTree = "<group>"; };
 		879CD43F25B714EE000BE33F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		879CD44225B738BE000BE33F /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		879CD44425B7398A000BE33F /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		87BD52B02577986C0099C569 /* ProcessingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingTableViewCell.swift; sourceTree = "<group>"; };
 		8AE80B337E77A6200CD88425 /* Pods-FinalTerm-18120099-18120106.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalTerm-18120099-18120106.release.xcconfig"; path = "Target Support Files/Pods-FinalTerm-18120099-18120106/Pods-FinalTerm-18120099-18120106.release.xcconfig"; sourceTree = "<group>"; };
 		9951FC1BE239973A2F94AB87 /* Pods-FinalTerm-18120099-18120106Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalTerm-18120099-18120106Tests.release.xcconfig"; path = "Target Support Files/Pods-FinalTerm-18120099-18120106Tests/Pods-FinalTerm-18120099-18120106Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -169,7 +173,9 @@
 				365150AB25B20C2C0080D31D /* AdminViewController.swift */,
 				36BE95BE25B2F5C9007B4695 /* EditFoodViewController.swift */,
 				87032E9525B182EB003663FE /* SettingViewController.swift */,
+				879CD44225B738BE000BE33F /* AboutViewController.swift */,
 				8706527425B2ACD100AE1D46 /* SplashViewController.swift */,
+				879CD44425B7398A000BE33F /* ContactViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -511,6 +517,7 @@
 				36E6E6992585D0F0007EEA32 /* ChangeCurrentPagePopUpVC.swift in Sources */,
 				366D47B7259CEF7E00926D8C /* Method.swift in Sources */,
 				8746F5912578EB4D00D388AE /* MenuTableViewCell.swift in Sources */,
+				879CD44525B7398A000BE33F /* ContactViewController.swift in Sources */,
 				366D6A7E256F831B00693FD7 /* ViewController.swift in Sources */,
 				366D6A7A256F831B00693FD7 /* AppDelegate.swift in Sources */,
 				366D6A7C256F831B00693FD7 /* SceneDelegate.swift in Sources */,
@@ -519,6 +526,7 @@
 				365150AA25B2031A0080D31D /* StartUpViewController.swift in Sources */,
 				3640BE942574BC68003C7903 /* FoodPopUpViewController.swift in Sources */,
 				87997F60257DFFAD00C9AF5F /* TipListTableViewCell.swift in Sources */,
+				879CD44325B738BE000BE33F /* AboutViewController.swift in Sources */,
 				3677DA7925760F1F00706FD5 /* MealForAddFoodCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
