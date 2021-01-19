@@ -32,12 +32,12 @@ class ShoppingListViewController: UIViewController {
     
     func Init() {
         //Khoi tao mau app
-        FirebaseRef.child("Setting").observe(.value, with: { (snapshot) in
-            if let food = snapshot.value as? [String:Any] {
-               self.HeaderLb.backgroundColor = UIColor(named: "\(food["Color"]!)")
-               self.EstablishMenuButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
-               self.ShoppingButton.tintColor = UIColor(named: "\(food["Color"]!)")
-               }
+        FirebaseRef.child("UserList/\(CurrentUsername)/Color").observe(.value, with: { (snapshot) in
+            
+            self.HeaderLb.backgroundColor = ColorScheme
+            self.EstablishMenuButton.backgroundColor = ColorScheme
+            self.ShoppingButton.tintColor = ColorScheme
+            
         })
         
         //An dau ngan cach giua cac TableViewCell
@@ -342,6 +342,7 @@ extension ShoppingListViewController: UITableViewDelegate,UITableViewDataSource{
             cell.DeleteButton.isHidden = false
             cell.DeleteButton.isEnabled = true
             //Hien thi dau cham dau ten
+            cell.CircleImageView.tintColor = ColorScheme
             cell.CircleImageView.isHidden = false
         }
         //Cell chua thong tin nguyen lieu
