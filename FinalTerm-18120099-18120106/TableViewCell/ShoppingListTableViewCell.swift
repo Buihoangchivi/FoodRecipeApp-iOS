@@ -21,6 +21,7 @@ class ShoppingListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         DeleteButton.layer.cornerRadius = 12
+        CircleImageView.tintColor = ColorScheme
         // Initialization code
     }
 

@@ -9,7 +9,7 @@
 import UIKit
 
 class MenuViewController: UIViewController {
-    var MenuList = ["Món ăn yêu thích","Công thức nhà mình","Mẹo hay","Món ăn ngày lễ","Món ăn chay","Món ăn giảm cân","Món bánh ngon","Món nhậu cơ bản", "Chính sách quyền riêng tư","Liên hệ","Cài đặt"]
+    var MenuList = ["Món ăn yêu thích","Công thức nhà mình","Mẹo hay","Món ăn ngày lễ","Món ăn chay","Món ăn giảm cân","Món bánh ngon","Món nhậu cơ bản", "Liên hệ","Cài đặt"]
     @IBOutlet weak var MenuTBV: UITableView!
     
     @IBOutlet weak var MenuLb: UILabel!
@@ -99,7 +99,7 @@ extension MenuViewController : UITableViewDelegate, UITableViewDataSource{
             self.present(dest, animated: true, completion: nil)
         }
         else {
-            if (indexPath.row == 10)
+            if (indexPath.row == 9)
             {
                 let dest = self.storyboard?.instantiateViewController(identifier: "SettingViewController") as! SettingViewController
                 dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
@@ -107,6 +107,14 @@ extension MenuViewController : UITableViewDelegate, UITableViewDataSource{
                 self.present(dest, animated: true, completion: nil)
             }
             else {
+                if(indexPath.row == 8)
+                {
+                    let dest = self.storyboard?.instantiateViewController(identifier: "ContactViewController") as! ContactViewController
+                    dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                    dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                    self.present(dest, animated: true, completion: nil)
+                }
+                else{
             let dest = self.storyboard?.instantiateViewController(identifier: "DetailMenuViewController") as! DetailMenuViewController
             dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
@@ -129,6 +137,7 @@ extension MenuViewController : UITableViewDelegate, UITableViewDataSource{
                 dest.CategoryID = 0
             }
             self.present(dest, animated: true, completion: nil)
+            }
             }
         }
         //Bo chon cell

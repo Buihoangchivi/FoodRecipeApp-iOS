@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UOd-Cz-W2S">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="g7P-tN-PN9">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
@@ -1927,6 +1927,141 @@
             </objects>
             <point key="canvasLocation" x="1671.0144927536232" y="138.61607142857142"/>
         </scene>
+        <!--Contact View Controller-->
+        <scene sceneID="DbU-9z-ORw">
+            <objects>
+                <viewController storyboardIdentifier="ContactViewController" id="MPO-bV-ItF" customClass="ContactViewController" customModule="FinalTerm_18120099_18120106" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="X4n-Xe-gNt">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Gb-2u-TaK">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="EJY-K4-Hyu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THÔNG TIN VỀ CHÚNG TÔI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ho-dZ-dTw">
+                                <rect key="frame" x="70.666666666666686" y="48" width="273" height="26.333333333333329"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
+                                <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u2H-EN-fEH">
+                                <rect key="frame" x="15" y="43.666666666666664" width="35" height="34.999999999999993"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="dmg-K1-N2b"/>
+                                    <constraint firstAttribute="height" constant="35" id="nlP-g6-7ZF"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <state key="normal" image="arrow.left" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22"/>
+                                </state>
+                                <connections>
+                                    <action selector="act_Back:" destination="MPO-bV-ItF" eventType="touchUpInside" id="Rqb-Gn-3P2"/>
+                                    <action selector="act_Back:" destination="5xu-tl-9uo" eventType="touchUpInside" id="Rsv-5R-Daa"/>
+                                    <action selector="act_Back:" destination="gBo-Cd-QYu" eventType="touchUpInside" id="Ue2-qS-dQd"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mobile App Development (iOS)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iQc-lX-Tw1">
+                                <rect key="frame" x="40" y="120" width="334" height="24"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VNUHCM - University of Science" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vf8-Mw-G7h">
+                                <rect key="frame" x="40" y="164" width="288" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DmF-ut-VEA">
+                                <rect key="frame" x="40" y="243" width="76" height="24"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18120099@student.hcmus.edu.vn" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kgL-TD-vfV">
+                                <rect key="frame" x="40" y="287" width="303" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18120106@student.hcmus.edu.vn" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ode-nI-Wrd">
+                                <rect key="frame" x="40" y="331" width="299.66666666666669" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Developers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XJb-lI-dtF">
+                                <rect key="frame" x="40" y="410" width="107" height="24"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lê Nguyễn Thạnh Trung - 18120099" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c88-r6-uc3">
+                                <rect key="frame" x="40" y="454" width="317.66666666666669" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bùi Văn Vĩ - 18120106" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ff1-eO-V3V">
+                                <rect key="frame" x="40" y="498" width="195" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright 2021" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jex-ZD-o0R">
+                                <rect key="frame" x="40" y="577" width="135.66666666666666" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="iQc-lX-Tw1" firstAttribute="top" secondItem="9Gb-2u-TaK" secondAttribute="bottom" constant="30" id="1xX-5N-uiy"/>
+                            <constraint firstItem="ode-nI-Wrd" firstAttribute="leading" secondItem="RhY-Yx-G6h" secondAttribute="leading" constant="40" id="6Sk-P2-lp5"/>
+                            <constraint firstItem="9Gb-2u-TaK" firstAttribute="leading" secondItem="RhY-Yx-G6h" secondAttribute="leading" id="BOw-rR-KxL"/>
+                            <constraint firstItem="Vf8-Mw-G7h" firstAttribute="top" secondItem="iQc-lX-Tw1" secondAttribute="bottom" constant="20" id="EB7-pl-5dy"/>
+                            <constraint firstItem="ode-nI-Wrd" firstAttribute="top" secondItem="kgL-TD-vfV" secondAttribute="bottom" constant="20" id="GUv-qg-Ysc"/>
+                            <constraint firstItem="kgL-TD-vfV" firstAttribute="leading" secondItem="RhY-Yx-G6h" secondAttribute="leading" constant="40" id="LeJ-6z-hHC"/>
+                            <constraint firstItem="jex-ZD-o0R" firstAttribute="top" secondItem="ff1-eO-V3V" secondAttribute="bottom" constant="55" id="N07-Zz-1GR"/>
+                            <constraint firstItem="c88-r6-uc3" firstAttribute="leading" secondItem="RhY-Yx-G6h" secondAttribute="leading" constant="40" id="Rue-i9-1Mu"/>
+                            <constraint firstItem="u2H-EN-fEH" firstAttribute="leading" secondItem="RhY-Yx-G6h" secondAttribute="leading" constant="15" id="Skb-4v-9ko"/>
+                            <constraint firstItem="DmF-ut-VEA" firstAttribute="leading" secondItem="RhY-Yx-G6h" secondAttribute="leading" constant="40" id="UGa-Xb-WK6"/>
+                            <constraint firstItem="iQc-lX-Tw1" firstAttribute="leading" secondItem="RhY-Yx-G6h" secondAttribute="leading" constant="40" id="Umt-z3-hNT"/>
+                            <constraint firstItem="RhY-Yx-G6h" firstAttribute="trailing" secondItem="iQc-lX-Tw1" secondAttribute="trailing" constant="40" id="Z2Y-nY-7Iy"/>
+                            <constraint firstItem="ff1-eO-V3V" firstAttribute="leading" secondItem="RhY-Yx-G6h" secondAttribute="leading" constant="40" id="ZTh-ef-4Il"/>
+                            <constraint firstItem="c88-r6-uc3" firstAttribute="top" secondItem="XJb-lI-dtF" secondAttribute="bottom" constant="20" id="Zn8-lf-uEG"/>
+                            <constraint firstItem="9Gb-2u-TaK" firstAttribute="top" secondItem="X4n-Xe-gNt" secondAttribute="top" id="ajP-ca-Et9"/>
+                            <constraint firstItem="5ho-dZ-dTw" firstAttribute="centerX" secondItem="X4n-Xe-gNt" secondAttribute="centerX" id="b1T-uN-naL"/>
+                            <constraint firstItem="XJb-lI-dtF" firstAttribute="top" secondItem="ode-nI-Wrd" secondAttribute="bottom" constant="55" id="bBA-Iq-UyA"/>
+                            <constraint firstItem="9Gb-2u-TaK" firstAttribute="trailing" secondItem="RhY-Yx-G6h" secondAttribute="trailing" id="brL-4k-57o"/>
+                            <constraint firstItem="kgL-TD-vfV" firstAttribute="top" secondItem="DmF-ut-VEA" secondAttribute="bottom" constant="20" id="cCk-n1-F4B"/>
+                            <constraint firstItem="ff1-eO-V3V" firstAttribute="top" secondItem="c88-r6-uc3" secondAttribute="bottom" constant="20" id="d8N-OM-jW5"/>
+                            <constraint firstItem="5ho-dZ-dTw" firstAttribute="top" secondItem="RhY-Yx-G6h" secondAttribute="top" constant="4" id="nVe-Kx-MLI"/>
+                            <constraint firstItem="u2H-EN-fEH" firstAttribute="centerY" secondItem="5ho-dZ-dTw" secondAttribute="centerY" id="qoS-hw-MVs"/>
+                            <constraint firstItem="jex-ZD-o0R" firstAttribute="leading" secondItem="RhY-Yx-G6h" secondAttribute="leading" constant="40" id="tHJ-bo-0fs"/>
+                            <constraint firstItem="Vf8-Mw-G7h" firstAttribute="leading" secondItem="RhY-Yx-G6h" secondAttribute="leading" constant="40" id="u5Q-Cu-KUV"/>
+                            <constraint firstItem="XJb-lI-dtF" firstAttribute="leading" secondItem="RhY-Yx-G6h" secondAttribute="leading" constant="40" id="vUv-j4-AMu"/>
+                            <constraint firstItem="DmF-ut-VEA" firstAttribute="top" secondItem="Vf8-Mw-G7h" secondAttribute="bottom" constant="55" id="xV6-CI-eZZ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="RhY-Yx-G6h"/>
+                    </view>
+                    <connections>
+                        <outlet property="CopyrightLb" destination="jex-ZD-o0R" id="bLl-ZX-S3z"/>
+                        <outlet property="HeaderLb" destination="9Gb-2u-TaK" id="x06-VK-pC1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FXQ-mF-kLZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-610" y="2196"/>
+        </scene>
         <!--Menu View Controller-->
         <scene sceneID="Dco-Z1-a4n">
             <objects>
@@ -3415,6 +3550,7 @@
                         <outlet property="PasswordNotificationLabel" destination="dxW-Q3-htL" id="jxc-JF-Xqk"/>
                         <outlet property="PasswordTextField" destination="Wh8-0P-mA7" id="KYA-Da-BTF"/>
                         <outlet property="RegisterButton" destination="OpZ-be-e8w" id="T6I-fa-54X"/>
+                        <outlet property="TitleLb" destination="WuS-ao-6Kr" id="gBU-xw-QKE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L80-UG-Nlx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -4802,6 +4938,7 @@
                         <outlet property="LoginButton" destination="gs0-Tl-YER" id="Rbn-Uh-K1z"/>
                         <outlet property="PasswordNotificationLabel" destination="kNZ-TF-x1I" id="Upo-21-TKE"/>
                         <outlet property="PasswordTextField" destination="NOi-Db-Ljb" id="VME-lG-S4b"/>
+                        <outlet property="TitleLb" destination="6cS-Sj-VTU" id="xqz-NO-o6s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y7d-F9-4i4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
