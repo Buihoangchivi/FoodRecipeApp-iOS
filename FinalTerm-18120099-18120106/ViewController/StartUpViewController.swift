@@ -31,9 +31,6 @@ class StartUpViewController: UIViewController {
         backgroundImage.alpha = 0.45
         self.view.insertSubview(backgroundImage, at: 0)
         
-        //Cài đặt màu cho nút User
-        UserButton.backgroundColor = ColorScheme
-        
     }
     
     @IBAction func act_ChooseUserMode(_ sender: Any) {

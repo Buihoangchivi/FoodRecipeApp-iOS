@@ -107,31 +107,6 @@ class ViewController: UIViewController {
     }
 
     func Init() {
-        //Khoi tao mau app
-        FirebaseRef.child("Setting").observe(.value, with: { (snapshot) in
-            
-            self.HeaderLb.backgroundColor = ColorScheme
-            
-            if (self.NextPageButton.isEnabled == true) {
-                
-                self.NextPageButton.backgroundColor = ColorScheme
-                self.LastPageButton.backgroundColor = ColorScheme
-                
-            }
-            
-            if (self.PrevPageButton.isEnabled == true) {
-                
-                self.PrevPageButton.backgroundColor = ColorScheme
-                self.FirstPageButton.backgroundColor = ColorScheme
-                
-            }
-            
-            self.HomeButton.tintColor = ColorScheme
-            
-            self.CategoryCollectionView.reloadData()
-            self.MealCollectionView.reloadData()
-            
-        })
         
         //Khoi tao cho cac List
         SelectedCategory = Array(repeating: false, count: CategoryList.count)
@@ -171,7 +146,57 @@ class ViewController: UIViewController {
             //Vo hieu hoa nut danh sach thuc don
             ShoppingButton.isEnabled = false
             
+            HeaderLb.backgroundColor = ColorScheme
+            
+            if (NextPageButton.isEnabled == true) {
+                
+                NextPageButton.backgroundColor = ColorScheme
+                LastPageButton.backgroundColor = ColorScheme
+                
+            }
+            
+            if (PrevPageButton.isEnabled == true) {
+                
+                PrevPageButton.backgroundColor = ColorScheme
+                FirstPageButton.backgroundColor = ColorScheme
+                
+            }
+            
+            HomeButton.tintColor = ColorScheme
+            
         }
+        else { //Chế độ User
+            
+            //Hiển thị màu cho màn hình trang chủ
+            FirebaseRef.child("UserList/\(CurrentUsername)/Color").observe(.value, with: { (snapshot) in
+                
+                self.HeaderLb.backgroundColor = ColorScheme
+                
+                if (self.NextPageButton.isEnabled == true) {
+                    
+                    self.NextPageButton.backgroundColor = ColorScheme
+                    self.LastPageButton.backgroundColor = ColorScheme
+                    
+                }
+                
+                if (self.PrevPageButton.isEnabled == true) {
+                    
+                    self.PrevPageButton.backgroundColor = ColorScheme
+                    self.FirstPageButton.backgroundColor = ColorScheme
+                    
+                }
+                
+                self.HomeButton.tintColor = ColorScheme
+                
+                self.CategoryCollectionView.reloadData()
+                self.MealCollectionView.reloadData()
+                
+            })
+            
+        }
+            
+        
+        
         
         //Xac dinh co tat ca bao nhieu mon an luu tru tren Firebase
         //Tu do suy ra duoc tong so trang

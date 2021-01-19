@@ -41,10 +41,6 @@ class LoginViewController: UIViewController {
         backgroundImage.alpha = 0.4
         self.view.insertSubview(backgroundImage, at: 0)
         
-        //Cài đặt màu cho các nút và các dòng chữ
-        LoginButton.backgroundColor = ColorScheme
-        ForgetPasswordButton.setTitleColor(ColorScheme, for: .normal)
-        
         //Doi mau chu goi y trong cac o nhap ten nguoi dung va mat khau
         EmailTextField.attributedPlaceholder = NSAttributedString(string: "Địa chỉ email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Mật khẩu", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
@@ -66,7 +62,7 @@ class LoginViewController: UIViewController {
         
         //Thay doi mau dong chu 'Đăng ký ngay' de lam noi bat
         let FirstTitle = NSAttributedString(string: "Bạn chưa có tài khoản? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        let LastTitle = NSAttributedString(string: "Đăng ký ngay.", attributes: [NSAttributedString.Key.foregroundColor: ColorScheme])
+        let LastTitle = NSAttributedString(string: "Đăng ký ngay.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
         let Title = NSMutableAttributedString()
         Title.append(FirstTitle)
         Title.append(LastTitle)
@@ -79,13 +75,13 @@ class LoginViewController: UIViewController {
     
     @IBAction func act_ChangePasswordVisibility(_ sender: Any) {
         //An mat khau
-        if (HidePasswordButton.tintColor == ColorScheme) {
+        if (HidePasswordButton.tintColor == UIColor.systemGreen) {
             HidePasswordButton.tintColor = UIColor.lightGray
             HidePasswordButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
             PasswordTextField.isSecureTextEntry = true
         }
         else { //Hien mat khau
-            HidePasswordButton.tintColor = ColorScheme
+            HidePasswordButton.tintColor = UIColor.systemGreen
             HidePasswordButton.setImage(UIImage(systemName: "eye"), for: .normal)
             PasswordTextField.isSecureTextEntry = false
         }
@@ -144,14 +140,13 @@ class LoginViewController: UIViewController {
                 }
             }
             else {
+                
                 //Luu thong tin ten dang nhap
                 CurrentUsername = result!.user.uid
                 
-                //Hien thi man hinh trang chu cua ung dung
-                let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
-                dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-                dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-                self.present(dest, animated: true, completion: nil)
+                //Chuyển màn hình thích hợp
+                self.ChangeScreen()
+                
             }
         }
     }
@@ -216,11 +211,8 @@ class LoginViewController: UIViewController {
                 //Luu thong tin dang nhap
                 CurrentUsername = authResult!.user.uid
                 
-                //Hien thi man hinh trang chu cua ung dung
-                let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
-                dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-                dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-                self.present(dest, animated: true, completion: nil)
+                //Chuyển màn hình thích hợp
+                self.ChangeScreen()
                    
                 })
         
@@ -239,6 +231,48 @@ class LoginViewController: UIViewController {
             print ("Error signing out from Firebase: %@", error)
         }*/
     }
+    
+    func ChangeScreen() {
+        
+        //Khoi tao mau app
+        FirebaseRef.child("UserList/\(CurrentUsername)").observeSingleEvent(of: .value, with: { (snapshot) in
+            if let food = snapshot.value as? [String:Any] {
+                ColorScheme = UIColor(named: "\(food["Color"]!)")!
+            }}
+        )
+        
+        //Hien thi man hinh trang chu cua ung dung
+        FirebaseRef.child("UserList/\(CurrentUsername)").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            if let user = snapshot.value as? [String:Any] {
+                
+                if let isCheck = user["SplashScreen"] as? Int {
+                    
+                    if (isCheck == 0) { //Không hiển thị SplashScreen
+                        
+                        let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
+                        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                        self.present(dest, animated: true, completion: nil)
+                        
+                    }
+                    else { //Hiển thị SplashScreen
+                        
+                        let dest = self.storyboard?.instantiateViewController(identifier: "SplashViewController") as! SplashViewController
+                        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                        self.present(dest, animated: true, completion: nil)
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        })
+        
+    }
+    
 }
 
 extension LoginViewController: GIDSignInDelegate {
@@ -268,11 +302,8 @@ extension LoginViewController: GIDSignInDelegate {
             //Luu thong tin dang nhap
             CurrentUsername = authResult!.user.uid
             
-            //Hien thi man hinh trang chu cua ung dung
-            let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
-            dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-            dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-            self.present(dest, animated: true, completion: nil)
+            //Chuyển màn hình thích hợp
+            self.ChangeScreen()
             
         }
     }

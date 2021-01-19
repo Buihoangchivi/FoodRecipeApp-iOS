@@ -12,7 +12,7 @@ import FirebaseUI
 
 class SplashViewController: UIViewController {
     var checkID = 0
-    var imageID = 0
+    var splashID = 0
     @IBOutlet weak var btnCheck: UIButton!
     @IBOutlet weak var SplashImage: UIImageView!
     @IBOutlet weak var Continue: UIButton!
@@ -23,22 +23,12 @@ class SplashViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Init()
-        // Do any additional setup after loading the view.
     }
     
-    func Init(){
-        
-        //Khoi tao mau app
-        FirebaseRef.child("Setting").observeSingleEvent(of: .value, with: { (snapshot) in
-        if let food = snapshot.value as? [String:Any] {
-            self.Continue.backgroundColor = UIColor(named: "\(food["Color"]!)")
-            self.Continue.isHidden = false
-            }})
+    func Init() {
         
         //Random hinh anh hien len
-        imageID = Int.random(in: 1..<7)
-        SplashImage.image = UIImage(named: "Splash\(imageID)")
-        imageID = imageID - 1
+        splashID = Int.random(in: 0..<5)
         
         //Chinh border cho UIView
         TipView.layer.addBorder(edge: UIRectEdge.top, color: UIColor.white, thickness: 2)
@@ -48,36 +38,47 @@ class SplashViewController: UIViewController {
         Continue.layer.cornerRadius = Continue.frame.height / 2
         
         // Random meo hay
-    FirebaseRef.child("Setting/\(imageID)").observeSingleEvent(of: .value, with: { (snapshot) in
-            if let food = snapshot.value as? [String:Any] {
-                   //Hien thi ten meo
-                self.TipLb.text = "\(food["Name"]!)"
-                print("\(food["Name"]!)")
-                self.TipDetailLb.text = "\(food["Detail"]!)"
-                   }})
+        FirebaseRef.child("Setting/\(splashID)").observeSingleEvent(of: .value, with: { (snapshot) in
+            if let splashInfo = snapshot.value as? [String:Any] {
+                
+                //Hien thi ten meo
+                self.TipLb.text = "\(splashInfo["Name"]!)"
+                
+                //Hiển thị mô tả mẹo
+                self.TipDetailLb.text = "\(splashInfo["Detail"]!)"
+                
+                //Hiển thị ảnh của mẹo
+                self.SplashImage.sd_setImage(with: imageRef.child("/SettingImages/\(splashInfo["Image"]!)"), maxImageSize: 1 << 30, placeholderImage: UIImage(), options: .retryFailed, completion: nil)
+                
+            }
+        })
+        
     }
     
     @IBAction func act_Check(_ sender: Any) {
-               //Cap nhat tren firebase
-        if (checkID == 0) {
+        
+        //Cap nhat tren firebase
+        if (checkID == 0) { //Không hiện SplashScreen nữa
             
             btnCheck.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
             checkID = 1
-            FirebaseRef.child("Setting").updateChildValues(["SplashScreen": 1])
+            FirebaseRef.child("UserList/\(CurrentUsername)").updateChildValues(["SplashScreen": 0])
             
-            }
-        else {
+        }
+        else { //Tiếp tục hiện SplashScreen trong lần sau
             
             btnCheck.setImage(UIImage(systemName: "square"), for: .normal)
             checkID = 0
-            FirebaseRef.child("Setting").updateChildValues(["SplashScreen": 0])
+            FirebaseRef.child("UserList/\(CurrentUsername)").updateChildValues(["SplashScreen": 1])
             
         }
+        
     }
     
     @IBAction func act_ShowLoginScreen(_ sender: Any) {
         
-        let dest = self.storyboard?.instantiateViewController(identifier: "StartUpViewController") as! StartUpViewController
+        //Hiển thị màn hình trang chủ
+        let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         self.present(dest, animated: true, completion: nil)

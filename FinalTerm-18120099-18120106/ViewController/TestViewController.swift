@@ -40,9 +40,6 @@ class TestViewController: UIViewController {
         backgroundImage.alpha = 0.4
         self.view.insertSubview(backgroundImage, at: 0)
         
-        //Cài đặt màu cho các nút và các dòng chữ
-        RegisterButton.backgroundColor = ColorScheme
-        
         //Khoi tao mau app
         FirebaseRef.child("Setting").observeSingleEvent(of: .value, with: { (snapshot) in
         if let food = snapshot.value as? [String:Any] {
@@ -73,7 +70,7 @@ class TestViewController: UIViewController {
         
         //Thay doi mau dong chu 'Đăng nhập nào' de lam noi bat
         let FirstTitle = NSAttributedString(string: "Bạn đã có tài khoản rồi? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        let LastTitle = NSAttributedString(string: "Đăng nhập nào.", attributes: [NSAttributedString.Key.foregroundColor: ColorScheme])
+        let LastTitle = NSAttributedString(string: "Đăng nhập nào.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
         let Title = NSMutableAttributedString()
         Title.append(FirstTitle)
         Title.append(LastTitle)
@@ -86,13 +83,13 @@ class TestViewController: UIViewController {
     
     @IBAction func act_ChangePasswordVisibility(_ sender: Any) {
         //An mat khau
-        if (HidePasswordButton.tintColor == ColorScheme) {
+        if (HidePasswordButton.tintColor == UIColor.systemGreen) {
             HidePasswordButton.tintColor = UIColor.lightGray
             HidePasswordButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
             PasswordTextField.isSecureTextEntry = true
         }
         else { //Hien mat khau
-            HidePasswordButton.tintColor = ColorScheme
+            HidePasswordButton.tintColor = UIColor.systemGreen
             HidePasswordButton.setImage(UIImage(systemName: "eye"), for: .normal)
             PasswordTextField.isSecureTextEntry = false
         }
@@ -208,6 +205,10 @@ class TestViewController: UIViewController {
                 FirebaseRef.child("UserList/\(result!.user.uid)/Username").setValue(self.UsernameTextField.text!)
                 //Email
                 FirebaseRef.child("UserList/\(result!.user.uid)/Email").setValue(self.EmailTextField.text!)
+                //Màu nền
+                FirebaseRef.child("UserList/\(result!.user.uid)/Color").setValue("\(Int.random(in: 0..<25))")
+                //Hiển thị Splash Screen
+                FirebaseRef.child("UserList/\(result!.user.uid)/SplashScreen").setValue(1)
                 
                 //Chuyen qua man hinh dang ky
                 self.act_Login(sender)

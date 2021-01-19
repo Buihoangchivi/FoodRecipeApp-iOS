@@ -35,9 +35,6 @@ class AdminViewController: UIViewController {
         backgroundImage.alpha = 0.5
         self.view.insertSubview(backgroundImage, at: 0)
         
-        //Cài đặt màu cho nút đăng nhập
-        LoginButton.backgroundColor = ColorScheme
-        
         //Doi mau chu goi y trong cac o nhap ten nguoi dung va mat khau
         EmailTextField.attributedPlaceholder = NSAttributedString(string: "Địa chỉ email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Mật khẩu", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
@@ -60,13 +57,13 @@ class AdminViewController: UIViewController {
     
     @IBAction func act_ChangePasswordVisibility(_ sender: Any) {
         //An mat khau
-        if (HidePasswordButton.tintColor == ColorScheme) {
+        if (HidePasswordButton.tintColor == UIColor.systemGreen) {
             HidePasswordButton.tintColor = UIColor.lightGray
             HidePasswordButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
             PasswordTextField.isSecureTextEntry = true
         }
         else { //Hien mat khau
-            HidePasswordButton.tintColor = ColorScheme
+            HidePasswordButton.tintColor = UIColor.systemGreen
             HidePasswordButton.setImage(UIImage(systemName: "eye"), for: .normal)
             PasswordTextField.isSecureTextEntry = false
         }
