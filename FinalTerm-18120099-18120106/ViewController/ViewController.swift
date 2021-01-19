@@ -326,13 +326,13 @@ class ViewController: UIViewController {
             button.tintColor = UIColor.red
             button.setImage(UIImage(systemName: "heart.fill"), for: .normal)
             //Cap nhat data tren Firebase
-            foodInfoRef.child("\(foodID)").updateChildValues(["Favorite": 1])
+            FirebaseRef.child("UserList/\(CurrentUsername)/Favorite/\(foodID)").setValue("")
         }
         else { //Xoa khoi danh sach yeu thich
             button.tintColor = UIColor.black
             button.setImage(UIImage(systemName: "heart"), for: .normal)
             //Cap nhat data tren Firebase
-            foodInfoRef.child("\(foodID)").updateChildValues(["Favorite": 0])
+            FirebaseRef.child("UserList/\(CurrentUsername)/Favorite/\(foodID)").removeValue()
         }
     }
     
@@ -540,15 +540,23 @@ class ViewController: UIViewController {
                 self.FoodNameOutletList[i].attributedText = AttributedStringWithColor("\(food["Name"]!)", self.searchFoodName, color: UIColor.link)
                 
                 //Hien thi trang thai yeu thich cua mon an
-                //Yeu thich
-                if (food["Favorite"] as! Int == 1) {
-                    self.FoodFavoriteButtonOutletList[i].tintColor = UIColor.red
-                    self.FoodFavoriteButtonOutletList[i].setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                FirebaseRef.child("UserList/\(CurrentUsername)/Favorite/\(snapshot.key)").observeSingleEvent(of: .value) { (snapshot) in
+                    
+                    if (snapshot.exists() == true) { //Yeu thich
+                        
+                        self.FoodFavoriteButtonOutletList[i].tintColor = UIColor.red
+                        self.FoodFavoriteButtonOutletList[i].setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                        
+                    }
+                    else { //Khong yeu thich
+                        
+                        self.FoodFavoriteButtonOutletList[i].tintColor = UIColor.black
+                        self.FoodFavoriteButtonOutletList[i].setImage(UIImage(systemName: "heart"), for: .normal)
+                        
+                    }
+                    
                 }
-                else { //Khong yeu thich
-                    self.FoodFavoriteButtonOutletList[i].tintColor = UIColor.black
-                    self.FoodFavoriteButtonOutletList[i].setImage(UIImage(systemName: "heart"), for: .normal)
-                }
+                
                 //Neu dang bi vo hieu hoa thi bat nut len
                 if (self.FoodButtonOutletList[i].isEnabled == false) {
                     

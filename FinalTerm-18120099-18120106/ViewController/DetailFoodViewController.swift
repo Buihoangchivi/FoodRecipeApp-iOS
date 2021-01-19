@@ -101,14 +101,21 @@ class DetailFoodViewController: UIViewController{
                 self.FoodNameLabel.text = "\(food["Name"]!)"
                 
                 //Hien thi trang thai yeu thich cua mon an
-                //Yeu thich
-                if (food["Favorite"] as! Int == 1) {
-                    self.FavoriteButton.tintColor = UIColor.red
-                    self.FavoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-                }
-                else { //Khong yeu thich
-                    self.FavoriteButton.tintColor = UIColor.white
-                    self.FavoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
+                FirebaseRef.child("UserList/\(CurrentUsername)/Favorite/\(snapshot.key)").observeSingleEvent(of: .value) { (snapshot) in
+                    
+                    if (snapshot.exists() == true) { //Yeu thich
+                        
+                        self.FavoriteButton.tintColor = UIColor.red
+                        self.FavoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                        
+                    }
+                    else { //Khong yeu thich
+                        
+                        self.FavoriteButton.tintColor = UIColor.black
+                        self.FavoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
+                        
+                    }
+                    
                 }
                 
                 //Chi hien thi nut "Chon mon" va yeu thich o che do User
@@ -300,16 +307,20 @@ class DetailFoodViewController: UIViewController{
     @IBAction func act_ChangeFavoriteStatus(_ sender: Any) {
         //Them vao danh sach yeu thich
         if (FavoriteButton.tintColor == UIColor.white) {
+            
             FavoriteButton.tintColor = UIColor.red
             FavoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
             //Cap nhat data tren Firebase
-            Ref.child("\(FoodID)").updateChildValues(["Favorite": 1])
+            FirebaseRef.child("UserList/\(CurrentUsername)/Favorite/\(FoodID)").setValue("")
+            
         }
         else { //Xoa khoi danh sach yeu thich
+            
             FavoriteButton.tintColor = UIColor.white
             FavoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
             //Cap nhat data tren Firebase
-            Ref.child("\(FoodID)").updateChildValues(["Favorite": 0])
+            FirebaseRef.child("UserList/\(CurrentUsername)/Favorite/\(FoodID)").removeValue()
+            
         }
     }
 }
