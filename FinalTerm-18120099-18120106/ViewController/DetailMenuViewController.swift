@@ -68,43 +68,64 @@ class DetailMenuViewController: UIViewController {
         
         Ref.observeSingleEvent(of: .value, with: { (snapshot) in
             for snapshotChild in snapshot.children {
-                var check = false
+                
                 let temp = snapshotChild as! DataSnapshot
                 if let food = temp.value as? [String:AnyObject] {
+                    
+                    let id = Int(temp.key)!
+                    
                     //Truong hop hien thi danh sach mon an cua ca nhan nguoi dung tu them
                     if (self.isUserFood == true) {
-                        check = true
+                        
+                        self.FoodList += [(ID: id, Name: "\(food["Name"]!)", ImageName: "\(food["Image"]!)", Favorite: food["Favorite"] as! Bool)]
+                        
                     }
                     else {
+                        
                         //Truong hop hien thi danh sach yeu thich
                         if (self.isFavorite == true) {
-                            check = food["Favorite"] as! Bool
+                            
+                            //Lấy trạng thái yêu thích của món ăn
+                            FirebaseRef.child("UserList/\(CurrentUsername)/Favorite/\(id)").observeSingleEvent(of: .value) { (snapshot) in
+                                
+                                if (snapshot.exists() == true) {
+                                    
+                                    self.FoodList += [(ID: id, Name: "\(food["Name"]!)", ImageName: "\(food["Image"]!)", Favorite: true)]
+                                    self.ReloadData()
+                                    
+                                }
+                                
+                            }
+                            
                         }
-                        else {
+                        else { //Truong hop hien thi theo loai
                             //Kiem tra co thoa loai mon an dang loc hay khong
                             if (food["Category"] != nil) {
                                 let categoryArray = food["Category"] as! NSArray
                                 for i in 0..<categoryArray.count {
                                     if (categoryArray[i] as! Int == self.CategoryID) {
-                                        check = true
+                                        
+                                        //Lấy trạng thái yêu thích của món ăn
+                                        FirebaseRef.child("UserList/\(CurrentUsername)/Favorite/\(id)").observeSingleEvent(of: .value) { (snapshot) in
+                                            
+                                            self.FoodList += [(ID: id, Name: "\(food["Name"]!)", ImageName: "\(food["Image"]!)", Favorite: snapshot.exists())]
+                                            self.ReloadData()
+                                            
+                                        }
                                         break
                                     }
                                 }
                             }
                         }
+                        
                     }
-                //Neu thoa ca loai mon an va loai bua an thi dua mon an do vao List
-                if (check == true) {
-                    let id = Int(temp.key)!
-                    self.FoodList += [(ID: id, Name: "\(food["Name"]!)", ImageName: "\(food["Image"]!)", Favorite: food["Favorite"] as! Bool)]
-                }
             }
         }
-        DispatchQueue.main.async {
-            self.ReloadData()
-            self.FoodListTBV.isHidden = false
-        }
-    })
+            DispatchQueue.main.async {
+                self.ReloadData()
+                self.FoodListTBV.isHidden = false
+            }
+        })
     }
     
     @IBAction func btnBack(_ sender: Any) {
@@ -120,7 +141,16 @@ class DetailMenuViewController: UIViewController {
             button.tintColor = UIColor.red
             button.setImage(UIImage(systemName: "heart.fill"), for: .normal)
             //Cap nhat data tren Firebase
-            Ref.child("\(FoodList[foodID].ID)").updateChildValues(["Favorite": 1])
+            if (isUserFood == true) {
+                
+                Ref.child("\(FoodList[foodID].ID)").updateChildValues(["Favorite": 1])
+                
+            }
+            else {
+                
+                FirebaseRef.child("UserList/\(CurrentUsername)/Favorite/\(FoodList[foodID].ID)").setValue("")
+                
+            }
             
         }
         else { //Xoa khoi danh sach yeu thich
@@ -128,11 +158,20 @@ class DetailMenuViewController: UIViewController {
             button.tintColor = UIColor.black
             button.setImage(UIImage(systemName: "heart"), for: .normal)
             //Cap nhat data tren Firebase
-            Ref.child("\(FoodList[foodID].ID)").updateChildValues(["Favorite": 0])
+            if (isUserFood == true) {
+                
+                Ref.child("\(FoodList[foodID].ID)").updateChildValues(["Favorite": 0])
+                
+            }
+            else {
+                
+                FirebaseRef.child("UserList/\(CurrentUsername)/Favorite/\(FoodList[foodID].ID)").removeValue()
+                
+            }
             //Nếu đang hiển thị danh sách yêu thích thì cập nhật lại dữ liệu món ăn trên màn hình
             if (isFavorite == true) {
                 FoodList.remove(at: foodID)
-                FoodListTBV.reloadData()
+                ReloadData()
             }
         }
     }
