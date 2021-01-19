@@ -85,89 +85,117 @@ class DetailFoodViewController: UIViewController{
     }
     
     func FoodInfoInit() {
-        
-        //Doc va hien thi thong tin cua mon an
-        Ref.child("\(FoodID)").observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            if let food = snapshot.value as? [String:Any] {
-                
-                //Hien thi hinh anh mon an
-                self.FoodImageView.sd_setImage(with: imageRef.child("\(self.folderName)/\(food["Image"]!)"), maxImageSize: 1 << 30, placeholderImage: UIImage(named: "food-background"), options: .retryFailed, completion: nil)
-                
-                //Luu tru ten anh mon an
-                self.foodImageName = food["Image"] as! String
-                
-                //Hien thi ten mon an
-                self.FoodNameLabel.text = "\(food["Name"]!)"
-                
-                //Hien thi trang thai yeu thich cua mon an
-                //Yeu thich
-                if (food["Favorite"] as! Int == 1) {
-                    self.FavoriteButton.tintColor = UIColor.red
-                    self.FavoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-                }
-                else { //Khong yeu thich
-                    self.FavoriteButton.tintColor = UIColor.white
-                    self.FavoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
-                }
-                
-                //Chi hien thi nut "Chon mon" va yeu thich o che do User
-                if (isUserMode == false) {
-                    
-                    self.btnAddtoMenu.isEnabled = false
-                    self.btnAddtoMenu.alpha = 0.5
-                    
-                    self.FavoriteButton.isEnabled = false
-                    
-                }
-                else {
-                    
-                    //Hien thi nut yeu thich
-                    self.FavoriteButton.isHidden = false
-                    self.FavoriteButtonBackground.isHidden = false
-                    
-                }
-                    
-                //Xoa cache
-                //SDImageCache.shared.clearMemory()
-                //SDImageCache.shared.clearDisk()
-                
-            }
-            
-        })
-        
-        //Doc du lieu nguyen lieu mon an
-        Ref.child("\(FoodID)/Ingredient").observeSingleEvent(of: .value, with: { (snapshot) in
-                for snapshotChild in snapshot.children {
-                    let temp = snapshotChild as! DataSnapshot
-                        if let arr = temp.value as? NSArray {
-                            var infoArr = [String]()
-                            FirebaseRef.child("IngredientList/\(arr[0])").observeSingleEvent(of: .value, with: { (snapshot) in
-                                for snapshotChild in snapshot.children {
-                                    let temp = snapshotChild as! DataSnapshot
-                                    infoArr += [temp.value as! String]
-                                }
-                            self.SelectedIngredientList += [(ID: arr[0] as! Int, Name: infoArr[0], Value: arr[1] as! Double, Unit: infoArr[1])]
-                            DispatchQueue.main.async {
-                                self.ContentTableView.reloadData()
-                            }
-                            })
+      
+      //Doc va hien thi thong tin cua mon an
+      Ref.child("\(FoodID)").observeSingleEvent(of: .value, with: { (snapshot) in
+          
+          if let food = snapshot.value as? [String:Any] {
+              
+              //Hien thi hinh anh mon an
+              self.FoodImageView.sd_setImage(with: imageRef.child("\(self.folderName)/\(food["Image"]!)"), maxImageSize: 1 << 30, placeholderImage: UIImage(named: "food-background"), options: .retryFailed, completion: nil)
+              
+              //Luu tru ten anh mon an
+              self.foodImageName = food["Image"] as! String
+              
+              //Hien thi ten mon an
+              self.FoodNameLabel.text = "\(food["Name"]!)"
+              
+              if (self.Ref.parent?.key == nil) { //Hiển thị trạng thái yêu thích trong chi tiết món ăn chung
+                  
+                  FirebaseRef.child("UserList/\(CurrentUsername)/Favorite/\(snapshot.key)").observeSingleEvent(of: .value) { (snapshot) in
+                      
+                      if (snapshot.exists() == true) { //Yeu thich
+                          
+                          self.FavoriteButton.tintColor = UIColor.red
+                          self.FavoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                          
                       }
-                }
-          })
-        
-        //Doc du lieu cac buoc thuc hien mon an
-        Ref.child("\(FoodID)/Direction").observeSingleEvent(of: .value, with: { (snapshot) in
-                for snapshotChild in snapshot.children {
-                    let temp = snapshotChild as! DataSnapshot
-                        self.DirectionList += [temp.value as! String]
+                      else { //Khong yeu thich
+                          
+                          self.FavoriteButton.tintColor = UIColor.white
+                          self.FavoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
+                          
+                      }
+                      
+                  }
+                  
+              }
+              else { //Hiển thị trạng thái yêu thích trong chi tiết món ăn riêng của User
+                  
+                  if (food["Favorite"] as! Int == 1) { //Yeu thich
+                      
+                      self.FavoriteButton.tintColor = UIColor.red
+                      self.FavoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                      
+                  }
+                  else { //Khong yeu thich
+                      
+                      self.FavoriteButton.tintColor = UIColor.white
+                      self.FavoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
+                      
+                  }
+                  
+              }
+              
+              
+              
+              //Chi hien thi nut "Chon mon" va yeu thich o che do User
+              if (isUserMode == false) {
+                  
+                  self.btnAddtoMenu.isEnabled = false
+                  self.btnAddtoMenu.alpha = 0.5
+                  
+                  self.FavoriteButton.isEnabled = false
+                  
+              }
+              else {
+                  
+                  //Hien thi nut yeu thich
+                  self.FavoriteButton.isHidden = false
+                  self.FavoriteButtonBackground.isHidden = false
+                  
+              }
+                  
+              //Xoa cache
+              //SDImageCache.shared.clearMemory()
+              //SDImageCache.shared.clearDisk()
+              
+          }
+          
+      })
+      
+      //Doc du lieu nguyen lieu mon an
+      Ref.child("\(FoodID)/Ingredient").observeSingleEvent(of: .value, with: { (snapshot) in
+              for snapshotChild in snapshot.children {
+                  let temp = snapshotChild as! DataSnapshot
+                      if let arr = temp.value as? NSArray {
+                          var infoArr = [String]()
+                          FirebaseRef.child("IngredientList/\(arr[0])").observeSingleEvent(of: .value, with: { (snapshot) in
+                              for snapshotChild in snapshot.children {
+                                  let temp = snapshotChild as! DataSnapshot
+                                  infoArr += [temp.value as! String]
+                              }
+                          self.SelectedIngredientList += [(ID: arr[0] as! Int, Name: infoArr[0], Value: arr[1] as! Double, Unit: infoArr[1])]
+                          DispatchQueue.main.async {
+                              self.ContentTableView.reloadData()
+                          }
+                          })
                     }
-                DispatchQueue.main.async {
-                    self.ContentTableView.reloadData()
-                }
+              }
         })
-        
-      }
+      
+      //Doc du lieu cac buoc thuc hien mon an
+      Ref.child("\(FoodID)/Direction").observeSingleEvent(of: .value, with: { (snapshot) in
+              for snapshotChild in snapshot.children {
+                  let temp = snapshotChild as! DataSnapshot
+                      self.DirectionList += [temp.value as! String]
+                  }
+              DispatchQueue.main.async {
+                  self.ContentTableView.reloadData()
+              }
+      })
+      
+    }
     
     
     @IBAction func act_AddFoodToShoppingList(_ sender: Any) {
@@ -300,16 +328,38 @@ class DetailFoodViewController: UIViewController{
     @IBAction func act_ChangeFavoriteStatus(_ sender: Any) {
         //Them vao danh sach yeu thich
         if (FavoriteButton.tintColor == UIColor.white) {
+            
             FavoriteButton.tintColor = UIColor.red
             FavoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
             //Cap nhat data tren Firebase
-            Ref.child("\(FoodID)").updateChildValues(["Favorite": 1])
+            if (self.Ref.parent?.key == nil) { //Hiển thị trạng thái yêu thích trong chi tiết món ăn chung
+                
+                FirebaseRef.child("UserList/\(CurrentUsername)/Favorite/\(FoodID)").setValue("")
+                
+            }
+            else { //Hiển thị trạng thái yêu thích trong chi tiết món ăn riêng của User
+                
+                Ref.child("\(FoodID)").updateChildValues(["Favorite": 1])
+                
+            }
+            
         }
         else { //Xoa khoi danh sach yeu thich
+            
             FavoriteButton.tintColor = UIColor.white
             FavoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
             //Cap nhat data tren Firebase
-            Ref.child("\(FoodID)").updateChildValues(["Favorite": 0])
+            if (self.Ref.parent?.key == nil) { //Hiển thị trạng thái yêu thích trong chi tiết món ăn chung
+                
+                FirebaseRef.child("UserList/\(CurrentUsername)/Favorite/\(FoodID)").removeValue()
+                
+            }
+            else { //Hiển thị trạng thái yêu thích trong chi tiết món ăn riêng của User
+                
+                Ref.child("\(FoodID)").updateChildValues(["Favorite": 0])
+                
+            }
+            
         }
     }
 }

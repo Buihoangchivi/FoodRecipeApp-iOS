@@ -32,9 +32,13 @@ class ShoppingListViewController: UIViewController {
     
     func Init() {
         //Khoi tao mau app
-        HeaderLb.backgroundColor = ColorScheme
-        EstablishMenuButton.backgroundColor = ColorScheme
-        ShoppingButton.tintColor = ColorScheme
+        FirebaseRef.child("UserList/\(CurrentUsername)/Color").observe(.value, with: { (snapshot) in
+            
+            self.HeaderLb.backgroundColor = ColorScheme
+            self.EstablishMenuButton.backgroundColor = ColorScheme
+            self.ShoppingButton.tintColor = ColorScheme
+            
+        })
         
         //An dau ngan cach giua cac TableViewCell
         ShoppingListTableView.separatorStyle = .none
