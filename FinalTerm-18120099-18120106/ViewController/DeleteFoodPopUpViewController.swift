@@ -19,8 +19,9 @@ class DeleteFoodPopUpViewController: UIViewController {
     @IBOutlet weak var VerticalConstraint: NSLayoutConstraint!
     
     var FoodName = ""
+    var FoodID = -1
     
-    //var delegate: DatePickerDalegate?
+    var delegate: DeleteFoodDelegate?
     
     override func viewWillAppear(_ animated: Bool) {
         VerticalConstraint.constant += view.bounds.height
@@ -72,10 +73,20 @@ class DeleteFoodPopUpViewController: UIViewController {
     }
     
     @IBAction func act_ClosePopUp(_ sender: Any) {
+        
         self.dismiss(animated: true, completion: nil)
+        
     }
     
     @IBAction func act_DeleteFood(_ sender: Any) {
+        
+        //Xoá dữ liệu món ăn trên Firebase
+        foodInfoRef.child("\(FoodID)").removeValue()
+        
+        //Đóng giao diện Popup
+        self.dismiss(animated: true, completion: nil)
+        delegate?.Reload()
+        
     }
     
 }

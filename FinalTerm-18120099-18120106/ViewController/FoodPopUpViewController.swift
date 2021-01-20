@@ -115,8 +115,9 @@ class FoodPopUpViewController: UIViewController {
             let dest = self.storyboard?.instantiateViewController(identifier: "DeleteFoodPopUpViewController") as! DeleteFoodPopUpViewController
             dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-            //dest.delegate = self
+            dest.delegate = self
             dest.FoodName = FoodNameLabel.text!
+            dest.FoodID = FoodID
             self.present(dest, animated: true, completion: nil)
             
         }
@@ -148,4 +149,16 @@ extension FoodPopUpViewController: DatePickerDalegate{
             }
             }
     }
+}
+
+extension FoodPopUpViewController: DeleteFoodDelegate {
+    
+    func Reload() {
+        
+        delegate?.Reload()
+        
+        self.dismiss(animated: true, completion: nil)
+        
+    }
+
 }
