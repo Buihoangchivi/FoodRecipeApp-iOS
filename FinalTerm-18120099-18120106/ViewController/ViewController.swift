@@ -140,11 +140,15 @@ class ViewController: UIViewController {
         FoodButtonOutletList = [FoodButton0, FoodButton1, FoodButton2, FoodButton3, FoodButton4, FoodButton5]
         FoodFavoriteButtonOutletList = [FoodFavoriteButton0, FoodFavoriteButton1, FoodFavoriteButton2, FoodFavoriteButton3, FoodFavoriteButton4, FoodFavoriteButton5]
         
-        //Không hiển thị nút danh sách thực đơn ở chế độ Admin
+        //Không hiển thị nút danh sách thực đơn và nút Menu ở chế độ Admin
         if (isUserMode == false) {
             
             //Vo hieu hoa nut danh sach thuc don
             ShoppingButton.isEnabled = false
+            
+            //Ẩn nút Menu
+            MenuButton.isHidden = true
+            MenuButton.isEnabled = false
             
             HeaderLb.backgroundColor = ColorScheme
             

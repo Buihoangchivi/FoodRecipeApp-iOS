@@ -37,6 +37,7 @@
 		36A2DE2C256F9C7F00C64FB8 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A2DE2B256F9C7F00C64FB8 /* CategoryCollectionViewCell.swift */; };
 		36A2DE2E256FF1EB00C64FB8 /* MealCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A2DE2D256FF1EB00C64FB8 /* MealCollectionViewCell.swift */; };
 		36BE95BF25B2F5C9007B4695 /* EditFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BE95BE25B2F5C9007B4695 /* EditFoodViewController.swift */; };
+		36D8B3BC25B894C00062BC65 /* DeleteFoodPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D8B3BB25B894C00062BC65 /* DeleteFoodPopUpViewController.swift */; };
 		36DAB9A3257521C1005CA319 /* AddNewFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DAB9A2257521C1005CA319 /* AddNewFoodViewController.swift */; };
 		36E6E6992585D0F0007EEA32 /* ChangeCurrentPagePopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E6E6982585D0F0007EEA32 /* ChangeCurrentPagePopUpVC.swift */; };
 		81B71440F3D7338D7D04EF46 /* Pods_FinalTerm_18120099_18120106.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABDB6492BAB0F53D5553D11 /* Pods_FinalTerm_18120099_18120106.framework */; };
@@ -102,6 +103,7 @@
 		36A2DE2B256F9C7F00C64FB8 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		36A2DE2D256FF1EB00C64FB8 /* MealCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCollectionViewCell.swift; sourceTree = "<group>"; };
 		36BE95BE25B2F5C9007B4695 /* EditFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFoodViewController.swift; sourceTree = "<group>"; };
+		36D8B3BB25B894C00062BC65 /* DeleteFoodPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteFoodPopUpViewController.swift; sourceTree = "<group>"; };
 		36DAB9A2257521C1005CA319 /* AddNewFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewFoodViewController.swift; sourceTree = "<group>"; };
 		36E6E6982585D0F0007EEA32 /* ChangeCurrentPagePopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCurrentPagePopUpVC.swift; sourceTree = "<group>"; };
 		4ABDB6492BAB0F53D5553D11 /* Pods_FinalTerm_18120099_18120106.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FinalTerm_18120099_18120106.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,6 +178,7 @@
 				879CD44225B738BE000BE33F /* AboutViewController.swift */,
 				8706527425B2ACD100AE1D46 /* SplashViewController.swift */,
 				879CD44425B7398A000BE33F /* ContactViewController.swift */,
+				36D8B3BB25B894C00062BC65 /* DeleteFoodPopUpViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 				36E6E6992585D0F0007EEA32 /* ChangeCurrentPagePopUpVC.swift in Sources */,
 				366D47B7259CEF7E00926D8C /* Method.swift in Sources */,
 				8746F5912578EB4D00D388AE /* MenuTableViewCell.swift in Sources */,
+				36D8B3BC25B894C00062BC65 /* DeleteFoodPopUpViewController.swift in Sources */,
 				879CD44525B7398A000BE33F /* ContactViewController.swift in Sources */,
 				366D6A7E256F831B00693FD7 /* ViewController.swift in Sources */,
 				366D6A7A256F831B00693FD7 /* AppDelegate.swift in Sources */,

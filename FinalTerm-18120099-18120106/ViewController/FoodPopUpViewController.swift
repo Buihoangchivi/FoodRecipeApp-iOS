@@ -31,9 +31,9 @@ class FoodPopUpViewController: UIViewController {
     
     func Init() {
         //Khoi tao mau app
-        ChooseFoodButton.backgroundColor = ColorScheme
-        DetailFoodButton.setTitleColor(ColorScheme, for: .normal)
-        DetailFoodButton.layer.borderColor = ColorScheme.cgColor
+        DetailFoodButton.backgroundColor = ColorScheme
+        ChooseFoodButton.setTitleColor(ColorScheme, for: .normal)
+        ChooseFoodButton.layer.borderColor = ColorScheme.cgColor
         
         //Lam mo nen cua view
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
@@ -47,9 +47,9 @@ class FoodPopUpViewController: UIViewController {
         PopUpView.layer.cornerRadius = 10
         
         //Bo tron goc cho 2 nut Chi tiet va Chon mon
-        DetailFoodButton.layer.cornerRadius = 22
-        DetailFoodButton.layer.borderWidth = 1
-        ChooseFoodButton.layer.cornerRadius = 22
+        DetailFoodButton.layer.cornerRadius = DetailFoodButton.frame.height / 2
+        ChooseFoodButton.layer.borderWidth = 1
+        ChooseFoodButton.layer.cornerRadius = ChooseFoodButton.frame.height / 2
         
         //Bo tron cho nut Close
         CloseButton.layer.cornerRadius = 15
@@ -73,11 +73,10 @@ class FoodPopUpViewController: UIViewController {
             self.FoodNameLabel.text = "\(food["Name"]!)"
             }})
         
-        //Chi hien thi nut "Chon mon" o che do User
+        //Hiển thị nút "Xoá món" ở chế độ Admin
         if (isUserMode == false) {
             
-            ChooseFoodButton.isEnabled = false
-            ChooseFoodButton.alpha = 0.5
+            ChooseFoodButton.setTitle("Xoá món", for: .normal)
             
         }
     }
@@ -100,11 +99,28 @@ class FoodPopUpViewController: UIViewController {
     }
     
     @IBAction func act_ChooseFood(_ sender: Any) {
-        let dest = self.storyboard?.instantiateViewController(identifier: "DatePickerPopUpViewController") as! DatePickerPopUpViewController
-        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        dest.delegate = self
-        self.present(dest, animated: true, completion: nil)
+        
+        //Chọn món ở chế độ User
+        if (isUserMode == true) {
+         
+            let dest = self.storyboard?.instantiateViewController(identifier: "DatePickerPopUpViewController") as! DatePickerPopUpViewController
+            dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            dest.delegate = self
+            self.present(dest, animated: true, completion: nil)
+            
+        }
+        else { //Xoá món ở chế độ Admin
+            
+            let dest = self.storyboard?.instantiateViewController(identifier: "DeleteFoodPopUpViewController") as! DeleteFoodPopUpViewController
+            dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            //dest.delegate = self
+            dest.FoodName = FoodNameLabel.text!
+            self.present(dest, animated: true, completion: nil)
+            
+        }
+        
     }
 }
 
