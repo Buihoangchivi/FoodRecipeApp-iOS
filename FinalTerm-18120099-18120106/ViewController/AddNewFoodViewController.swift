@@ -190,8 +190,21 @@ class AddNewFoodViewController: UIViewController {
                 tempMealArr += [self.SelectedMeal.count - 1]
             }
             
+            var newFoodInfo = [String:Any]()
+            
             //Day tat ca thong tin cua mon an len Firebase
-            FirebaseRef.child("\(path)/\(count)").setValue(["Category": tempCategoryArr, "Direction": self.SelectedDirection, "Favorite": 0, "Image": "\(count).jpg","Ingredient": tempIngredientArr, "Meal": tempMealArr, "Name": self.FoodNameTextField.text!]) { (err, ref) in
+            if (self.isAddFoodImage == true) {
+                
+                newFoodInfo = ["Category": tempCategoryArr, "Direction": self.SelectedDirection, "Favorite": 0, "Image": "\(count).jpg", "Ingredient": tempIngredientArr, "Meal": tempMealArr, "Name": self.FoodNameTextField.text!]
+                
+            }
+            else {
+                
+                newFoodInfo = ["Category": tempCategoryArr, "Direction": self.SelectedDirection, "Favorite": 0, "Image": "", "Ingredient": tempIngredientArr, "Meal": tempMealArr, "Name": self.FoodNameTextField.text!]
+                
+            }
+            
+            FirebaseRef.child("\(path)/\(count)").setValue(newFoodInfo) { (err, ref) in
                 self.delegate?.UpdateUI()
                 self.act_ShowHomeScreen(sender)
             }
