@@ -793,30 +793,30 @@
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cGk-e5-itQ">
-                                                <rect key="frame" x="25" y="340" width="150" height="45"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <rect key="frame" x="195" y="340" width="150" height="45"/>
+                                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="DxS-K5-gyK"/>
                                                     <constraint firstAttribute="width" constant="150" id="Ygm-Q6-rJK"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 <state key="normal" title="Chi tiết">
-                                                    <color key="titleColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="act_ShowDetailFood:" destination="muN-6l-Ya4" eventType="touchUpInside" id="CDF-kS-AL9"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g7N-N6-Wek">
-                                                <rect key="frame" x="195" y="340" width="150" height="45"/>
-                                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <rect key="frame" x="25" y="340" width="150" height="45"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="J2A-tQ-tM1"/>
                                                     <constraint firstAttribute="width" constant="150" id="JhK-Rr-HEW"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 <state key="normal" title="Chọn món">
-                                                    <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <color key="titleColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="act_ChooseFood:" destination="muN-6l-Ya4" eventType="touchUpInside" id="FtN-2d-xI0"/>
@@ -840,12 +840,12 @@
                                             <constraint firstAttribute="height" constant="430" id="4yq-8K-W14"/>
                                             <constraint firstItem="g7N-N6-Wek" firstAttribute="top" secondItem="p8L-LU-JsX" secondAttribute="bottom" constant="40" id="9pp-Aj-uTZ"/>
                                             <constraint firstItem="1FT-K9-6vX" firstAttribute="centerX" secondItem="rTn-YT-LHf" secondAttribute="centerX" id="9yu-Rg-waY"/>
-                                            <constraint firstItem="cGk-e5-itQ" firstAttribute="leading" secondItem="rTn-YT-LHf" secondAttribute="leading" constant="25" id="DoF-VJ-ff0"/>
                                             <constraint firstAttribute="trailing" secondItem="tAR-Tb-LM4" secondAttribute="centerX" id="Fjh-LW-SYq"/>
                                             <constraint firstAttribute="width" constant="370" id="MJ7-sL-PY5"/>
-                                            <constraint firstAttribute="trailing" secondItem="g7N-N6-Wek" secondAttribute="trailing" constant="25" id="c3I-aK-gUD"/>
+                                            <constraint firstAttribute="trailing" secondItem="cGk-e5-itQ" secondAttribute="trailing" constant="25" id="ciE-Bq-TbL"/>
                                             <constraint firstItem="p8L-LU-JsX" firstAttribute="top" secondItem="1FT-K9-6vX" secondAttribute="bottom" constant="20" id="iBs-Eg-ssn"/>
                                             <constraint firstItem="cGk-e5-itQ" firstAttribute="top" secondItem="p8L-LU-JsX" secondAttribute="bottom" constant="40" id="iE2-BP-MP5"/>
+                                            <constraint firstItem="g7N-N6-Wek" firstAttribute="leading" secondItem="rTn-YT-LHf" secondAttribute="leading" constant="25" id="oLT-2h-dWO"/>
                                             <constraint firstItem="p8L-LU-JsX" firstAttribute="centerX" secondItem="rTn-YT-LHf" secondAttribute="centerX" id="vRs-Iu-NBF"/>
                                             <constraint firstItem="tAR-Tb-LM4" firstAttribute="centerY" secondItem="rTn-YT-LHf" secondAttribute="top" id="ybN-Da-P6Q"/>
                                             <constraint firstItem="1FT-K9-6vX" firstAttribute="top" secondItem="rTn-YT-LHf" secondAttribute="top" constant="30" id="z4b-xG-UXF"/>
@@ -4934,6 +4934,133 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y7d-F9-4i4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-610" y="139"/>
+        </scene>
+        <!--Delete Food Pop Up View Controller-->
+        <scene sceneID="e1r-Kj-PRI">
+            <objects>
+                <viewController storyboardIdentifier="DeleteFoodPopUpViewController" id="SMg-qX-eiu" customClass="DeleteFoodPopUpViewController" customModule="FinalTerm_18120099_18120106" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ijT-fm-IWm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Utw-zI-3sa">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7OA-Ur-MYF">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                        <connections>
+                                            <action selector="act_ClosePopUp:" destination="SMg-qX-eiu" eventType="touchUpInside" id="d6M-i3-LWo"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tv6-Iw-rJu">
+                                        <rect key="frame" x="22" y="338" width="370" height="220"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hYb-z2-Nha">
+                                                <rect key="frame" x="25" y="155" width="150" height="45"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="150" id="azY-3r-kGc"/>
+                                                    <constraint firstAttribute="height" constant="45" id="p1f-UM-1hk"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                <state key="normal" title="Huỷ">
+                                                    <color key="titleColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="act_ClosePopUp:" destination="SMg-qX-eiu" eventType="touchUpInside" id="Enw-If-Yqq"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FRm-VT-yhf">
+                                                <rect key="frame" x="195" y="155" width="150" height="45"/>
+                                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="150" id="K0f-fn-wtz"/>
+                                                    <constraint firstAttribute="height" constant="45" id="RPR-83-0Lc"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                <state key="normal" title="Xoá">
+                                                    <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="act_DeleteFood:" destination="SMg-qX-eiu" eventType="touchUpInside" id="yVW-9q-fau"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2FV-Z2-TY3">
+                                                <rect key="frame" x="355" y="-15" width="30" height="30"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="C65-Sy-cAG"/>
+                                                    <constraint firstAttribute="width" constant="30" id="zIk-AQ-tyb"/>
+                                                </constraints>
+                                                <state key="normal" image="close"/>
+                                                <connections>
+                                                    <action selector="act_ClosePopUp:" destination="SMg-qX-eiu" eventType="touchUpInside" id="q2T-Eq-jS5"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="hYb-z2-Nha" secondAttribute="bottom" constant="20" id="0W7-3P-oQQ"/>
+                                            <constraint firstItem="hYb-z2-Nha" firstAttribute="leading" secondItem="Tv6-Iw-rJu" secondAttribute="leading" constant="25" id="1pw-Rg-fHm"/>
+                                            <constraint firstAttribute="width" constant="370" id="3pn-OA-RRq"/>
+                                            <constraint firstAttribute="bottom" secondItem="FRm-VT-yhf" secondAttribute="bottom" constant="20" id="b9q-Km-qmc"/>
+                                            <constraint firstItem="2FV-Z2-TY3" firstAttribute="centerY" secondItem="Tv6-Iw-rJu" secondAttribute="top" id="eoH-Tq-th8"/>
+                                            <constraint firstAttribute="height" constant="220" id="idd-TL-aa6"/>
+                                            <constraint firstAttribute="trailing" secondItem="2FV-Z2-TY3" secondAttribute="centerX" id="kdi-gb-bzL"/>
+                                            <constraint firstAttribute="trailing" secondItem="FRm-VT-yhf" secondAttribute="trailing" constant="25" id="qGx-Yt-sZq"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bạn thật sự muốn xoá món ăn này?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wpP-D5-bns">
+                                        <rect key="frame" x="51.666666666666657" y="378" width="311" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O2e-QD-zdh">
+                                        <rect key="frame" x="207" y="422" width="0.0" height="0.0"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="320" id="Nnn-cT-4JP"/>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="70" id="wMv-2P-7NR"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="23"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="7OA-Ur-MYF" secondAttribute="bottom" id="481-kn-0XX"/>
+                                    <constraint firstItem="O2e-QD-zdh" firstAttribute="centerX" secondItem="Utw-zI-3sa" secondAttribute="centerX" id="9Sq-pa-feW"/>
+                                    <constraint firstItem="Tv6-Iw-rJu" firstAttribute="centerX" secondItem="Utw-zI-3sa" secondAttribute="centerX" id="Fc9-lv-Vbz"/>
+                                    <constraint firstItem="7OA-Ur-MYF" firstAttribute="top" secondItem="Utw-zI-3sa" secondAttribute="top" id="IFR-IU-qK3"/>
+                                    <constraint firstItem="Tv6-Iw-rJu" firstAttribute="centerY" secondItem="Utw-zI-3sa" secondAttribute="centerY" id="NMf-HU-Lv6"/>
+                                    <constraint firstItem="7OA-Ur-MYF" firstAttribute="leading" secondItem="Utw-zI-3sa" secondAttribute="leading" id="g6U-Xk-l94"/>
+                                    <constraint firstItem="wpP-D5-bns" firstAttribute="top" secondItem="Tv6-Iw-rJu" secondAttribute="top" constant="40" id="iK9-8G-bdc"/>
+                                    <constraint firstItem="O2e-QD-zdh" firstAttribute="top" secondItem="wpP-D5-bns" secondAttribute="bottom" constant="20" id="nJ5-Am-cZr"/>
+                                    <constraint firstAttribute="trailing" secondItem="7OA-Ur-MYF" secondAttribute="trailing" id="pBL-2s-dvJ"/>
+                                    <constraint firstItem="wpP-D5-bns" firstAttribute="centerX" secondItem="Utw-zI-3sa" secondAttribute="centerX" id="z41-go-9q2"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Utw-zI-3sa" secondAttribute="bottom" id="8S4-6x-kUT"/>
+                            <constraint firstItem="Utw-zI-3sa" firstAttribute="trailing" secondItem="fBC-xB-YBM" secondAttribute="trailing" id="A0V-rB-fKv"/>
+                            <constraint firstItem="Utw-zI-3sa" firstAttribute="leading" secondItem="fBC-xB-YBM" secondAttribute="leading" id="ThA-EX-PeD"/>
+                            <constraint firstItem="Utw-zI-3sa" firstAttribute="top" secondItem="ijT-fm-IWm" secondAttribute="top" id="wmK-tJ-2m1"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="fBC-xB-YBM"/>
+                    </view>
+                    <connections>
+                        <outlet property="CancelButton" destination="hYb-z2-Nha" id="06O-cI-BNE"/>
+                        <outlet property="CloseButton" destination="2FV-Z2-TY3" id="E9b-9z-5fp"/>
+                        <outlet property="DeleteButton" destination="FRm-VT-yhf" id="y4z-aI-zs7"/>
+                        <outlet property="FoodNameLabel" destination="O2e-QD-zdh" id="mHA-Db-TDk"/>
+                        <outlet property="PopUpView" destination="Tv6-Iw-rJu" id="TMz-jq-eV4"/>
+                        <outlet property="VerticalConstraint" destination="NMf-HU-Lv6" id="0sx-IB-GPt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Jt-SO-aqR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1671" y="-567"/>
         </scene>
     </scenes>
     <resources>

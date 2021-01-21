@@ -45,3 +45,7 @@ protocol IngredientDelegate : class {
 protocol EditFoodDelegate: class {
     func UpdateUI()
 }
+
+protocol DeleteFoodDelegate: class {
+    func Reload()
+}

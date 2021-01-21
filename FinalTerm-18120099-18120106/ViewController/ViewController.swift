@@ -140,11 +140,15 @@ class ViewController: UIViewController {
         FoodButtonOutletList = [FoodButton0, FoodButton1, FoodButton2, FoodButton3, FoodButton4, FoodButton5]
         FoodFavoriteButtonOutletList = [FoodFavoriteButton0, FoodFavoriteButton1, FoodFavoriteButton2, FoodFavoriteButton3, FoodFavoriteButton4, FoodFavoriteButton5]
         
-        //Không hiển thị nút danh sách thực đơn ở chế độ Admin
+        //Không hiển thị nút danh sách thực đơn và nút Menu ở chế độ Admin
         if (isUserMode == false) {
             
             //Vo hieu hoa nut danh sach thuc don
             ShoppingButton.isEnabled = false
+            
+            //Ẩn nút Menu
+            MenuButton.isHidden = true
+            MenuButton.isEnabled = false
             
             HeaderLb.backgroundColor = ColorScheme
             
@@ -482,8 +486,12 @@ class ViewController: UIViewController {
                 self.CurrentPage = 0
             }
             else {
-                self.CurrentPage = 1
                 self.TotalPage = (self.FoodIDList.count - 1) / 6 + 1
+                if (self.CurrentPage > self.TotalPage) {
+                    
+                    self.CurrentPage = 1
+                    
+                }
             }
             
             //Cap nhat trang thai cua cac nut phan trang
@@ -524,16 +532,31 @@ class ViewController: UIViewController {
         }
         
         //Cap nhat 6 mon an
-        for i in 0...5 {
-            //Kiem tra xem co du 6 mon an de hien thi hay khong
-            //Neu khong thi vo hieu hoa nut
-            if (self.FoodIDList.count <= (self.CurrentPage - 1) * 6 + i || self.CurrentPage == 0) {
-                continue
-            }
-            //Doc du lieu 6 mon an tuong ung voi so trang hien tai
-            foodInfoRef.child("\(FoodIDList[(self.CurrentPage - 1) * 6 + i])").observeSingleEvent(of: .value, with: { (snapshot) in
+        foodInfoRef.observeSingleEvent(of: .value) { (snapshot) in
+            
+            var foodList = [[String:AnyObject]]()
+            
+            for snapshotChild in snapshot.children {
+            let temp = snapshotChild as! DataSnapshot
+            if let food = temp.value as? [String:AnyObject] {
+            
+                foodList += [food]
                 
-            if let food = snapshot.value as? [String:Any] {
+                }
+                
+            }
+            
+            for i in 0...5 {
+                //Kiem tra xem co du 6 mon an de hien thi hay khong
+                //Neu khong thi vo hieu hoa nut
+                if (self.FoodIDList.count <= (self.CurrentPage - 1) * 6 + i || self.CurrentPage == 0) {
+                    continue
+                }
+                //Doc du lieu 6 mon an tuong ung voi so trang hien tai
+                //foodInfoRef.child("\(self.FoodIDList[(self.CurrentPage - 1) * 6 + i])").observeSingleEvent(of: .value, with: { (snapshot) in
+                    
+                let food = foodList[(self.CurrentPage - 1) * 6 + i]
+                
                 //Hien thi hinh anh mon an
                 self.FoodImageOutletList[i].sd_setImage(with: imageRef.child("/FoodImages/\(food["Image"]!)"), maxImageSize: 1 << 30, placeholderImage: UIImage(named: "food-background"), options: .retryFailed, completion: nil)
                 //Hien thi ten mon an
@@ -574,8 +597,9 @@ class ViewController: UIViewController {
                     
                 }
             }
-            })
+            
         }
+        
     }
     
     func AnimationChangePage(Width temp: CGFloat) {
@@ -629,17 +653,24 @@ class ViewController: UIViewController {
 //Delegate
 extension ViewController: ReloadDataDelegate {
     func Reload() {
-        LoadFoodInfo()
+        
+        //Xoa cache
+        SDImageCache.shared.clearMemory()
+        SDImageCache.shared.clearDisk()
+        UpdateFoodList()
+        
     }
 }
 
 //Delegate them mon an moi
 extension ViewController: AddNewFoodDelegate {
     func UpdateUI() {
+        
         //Xoa cache
         SDImageCache.shared.clearMemory()
         SDImageCache.shared.clearDisk()
         UpdateFoodList()
+        
     }
     
     func DismissWithCondition(_ index: Int) {

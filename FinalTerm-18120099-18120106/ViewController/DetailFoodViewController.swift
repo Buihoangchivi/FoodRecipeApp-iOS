@@ -364,37 +364,6 @@ class DetailFoodViewController: UIViewController{
     }
 }
 
-//Delegate cua nguyen lieu
-/*extension DetailFoodViewController : IngredientDelegate {
-    func UpdateIngredient(ingredient: (ID: Int, Name: String, Value: Double, Unit: String)) {
-        var check = false
-        for i in 0..<SelectedIngredientList.count {
-            if (SelectedIngredientList[i].ID == ingredient.ID) {
-                TempSelectedIngredient[i] = ingredient
-                check = true
-            }
-        }
-        
-        //Truong hop them moi nguyen lieu
-        if (check == false) {
-            TempSelectedIngredient += [ingredient]
-        }
-    }
-    
-    func SaveChange() {
-        var i = 0
-        while i < TempSelectedIngredient.count {
-            if (TempSelectedIngredient[i].Value == 0) {
-                TempSelectedIngredient.remove(at: i)
-                i -= 1
-            }
-            i += 1
-        }
-        SelectedIngredientList = TempSelectedIngredient
-        ContentTableView.reloadData()
-    }
-}*/
-
 //Delegate cua cac buoc
 extension DetailFoodViewController: DirectionDelegate {
     func SaveChange(List: [String]) {
@@ -478,7 +447,6 @@ extension DetailFoodViewController: EditFoodDelegate {
         DirectionList = [String]()
         
         //Cap nhat lai giao dien sau khi chinh sua
-        UIInit()
         FoodInfoInit()
         
     }
