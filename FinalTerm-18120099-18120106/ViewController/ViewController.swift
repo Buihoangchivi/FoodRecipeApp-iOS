@@ -198,9 +198,6 @@ class ViewController: UIViewController {
             })
             
         }
-            
-        
-        
         
         //Xac dinh co tat ca bao nhieu mon an luu tru tren Firebase
         //Tu do suy ra duoc tong so trang
@@ -487,7 +484,7 @@ class ViewController: UIViewController {
             }
             else {
                 self.TotalPage = (self.FoodIDList.count - 1) / 6 + 1
-                if (self.CurrentPage > self.TotalPage) {
+                if (self.CurrentPage > self.TotalPage || self.CurrentPage == 0) {
                     
                     self.CurrentPage = 1
                     
@@ -495,20 +492,56 @@ class ViewController: UIViewController {
             }
             
             //Cap nhat trang thai cua cac nut phan trang
-            if (self.TotalPage < 2) {
+            if (self.TotalPage < 2) { //Truong hop nhieu nhat 1 trang nen khong di chuyen trang duoc
+                
                 if (self.NextPageButton.isEnabled == true) {
                     self.ChangButtonState(self.NextPageButton, false)
                     self.ChangButtonState(self.LastPageButton, false)
                 }
+                
+                if (self.PrevPageButton.isEnabled == true) {
+                    self.ChangButtonState(self.PrevPageButton, false)
+                    self.ChangButtonState(self.FirstPageButton, false)
+                }
+                
             }
-            else {
-                if (self.NextPageButton.isEnabled == false) {
+            else { //Truong hop it nhat 2 trang
+                
+                if (self.CurrentPage == 1) { //O trang dau tien
+                    
+                    //Co the tien toi trang sau
                     self.ChangButtonState(self.NextPageButton, true)
                     self.ChangButtonState(self.LastPageButton, true)
+                    
+                    //Khong the quay ve trang truoc
+                    self.ChangButtonState(self.PrevPageButton, false)
+                    self.ChangButtonState(self.FirstPageButton, false)
+                    
                 }
+                else if (self.CurrentPage == self.TotalPage) { //O trang cuoi cung
+                    
+                    //Khong the tien toi trang sau
+                    self.ChangButtonState(self.NextPageButton, false)
+                    self.ChangButtonState(self.LastPageButton, false)
+                    
+                    //Co the quay ve trang truoc
+                    self.ChangButtonState(self.PrevPageButton, true)
+                    self.ChangButtonState(self.FirstPageButton, true)
+                    
+                }
+                else { //O cac trang giua
+                    
+                    //Co the quay ve trang truoc
+                    self.ChangButtonState(self.NextPageButton, true)
+                    self.ChangButtonState(self.LastPageButton, true)
+                    
+                    //Co the tien toi trang sau
+                    self.ChangButtonState(self.PrevPageButton, true)
+                    self.ChangButtonState(self.FirstPageButton, true)
+                    
+                }
+                
             }
-            self.ChangButtonState(self.PrevPageButton, false)
-            self.ChangButtonState(self.FirstPageButton, false)
             
             //Cap nhat 6 mon an
             self.LoadFoodInfo()
@@ -555,7 +588,7 @@ class ViewController: UIViewController {
                 //Doc du lieu 6 mon an tuong ung voi so trang hien tai
                 //foodInfoRef.child("\(self.FoodIDList[(self.CurrentPage - 1) * 6 + i])").observeSingleEvent(of: .value, with: { (snapshot) in
                     
-                let food = foodList[(self.CurrentPage - 1) * 6 + i]
+                let food = foodList[self.FoodIDList[(self.CurrentPage - 1) * 6 + i]]
                 
                 //Hien thi hinh anh mon an
                 self.FoodImageOutletList[i].sd_setImage(with: imageRef.child("/FoodImages/\(food["Image"]!)"), maxImageSize: 1 << 30, placeholderImage: UIImage(named: "food-background"), options: .retryFailed, completion: nil)

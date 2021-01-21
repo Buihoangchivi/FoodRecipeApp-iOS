@@ -93,7 +93,7 @@ class EditFoodViewController: UIViewController {
                 self.FoodNameTextField.text = food["Name"] as? String
                 
                 //
-                self.fav = food["Favorite"] as! Int
+                //self.fav = food["Favorite"] as! Int
                 
                 //Cap nhat danh sach loai mon an
                 if let arr = food["Category"] as? NSArray {
