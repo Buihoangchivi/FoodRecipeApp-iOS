@@ -9,12 +9,14 @@
 import UIKit
 
 class MenuViewController: UIViewController {
-    var MenuList = ["Món ăn yêu thích","Công thức nhà mình","Mẹo hay","Món ăn ngày lễ","Món ăn chay","Món ăn giảm cân","Món bánh ngon","Món nhậu cơ bản", "Liên hệ","Cài đặt"]
+    var MenuList = ["Món ăn yêu thích","Công thức nhà mình","Mẹo hay","Món ăn ngày lễ","Món ăn chay","Món ăn giảm cân","Món bánh ngon","Món nhậu cơ bản", "Liên hệ","Cài đặt", "Đăng xuất"]
     @IBOutlet weak var MenuTBV: UITableView!
     
     @IBOutlet weak var MenuLb: UILabel!
     @IBOutlet weak var MenuRightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var UserMailLb: UILabel!
+    @IBOutlet weak var UserNameLb: UILabel!
     var delegate: ReloadDataDelegate?
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,6 +46,20 @@ class MenuViewController: UIViewController {
                 self.MenuLb.textColor = ColorScheme
                 
         })
+        // Cập nhật thông tin user
+        FirebaseRef.child("UserList/\(CurrentUsername)").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            if let user = snapshot.value as? [String:Any] {
+                
+                let Name = user["DisplayName"] as? String
+                let Name1 = user["Username"] as? String
+                self.UserNameLb.text = Name ?? Name1
+                let Mail = user["Email"] as? String
+                self.UserMailLb.text = Mail
+            }
+            
+        })
+        
         
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -115,6 +131,14 @@ extension MenuViewController : UITableViewDelegate, UITableViewDataSource{
                     self.present(dest, animated: true, completion: nil)
                 }
                 else{
+                    if(indexPath.row == 10)
+                {
+                        let dest = self.storyboard?.instantiateViewController(identifier: "StartUpViewController") as! StartUpViewController
+                        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                        self.present(dest, animated: true, completion: nil)
+                    }
+                  else{
             let dest = self.storyboard?.instantiateViewController(identifier: "DetailMenuViewController") as! DetailMenuViewController
             dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
@@ -139,8 +163,9 @@ extension MenuViewController : UITableViewDelegate, UITableViewDataSource{
             self.present(dest, animated: true, completion: nil)
             }
             }
-        }
+        }}
         //Bo chon cell
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
+
