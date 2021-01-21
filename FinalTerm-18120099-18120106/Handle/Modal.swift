@@ -28,3 +28,5 @@ var CurrentUsername = ""
 var isUserMode = false
 var ColorScheme = UIColor.systemGreen
 var ColorList = [String]()
+
+var LoginMethod:Int?
