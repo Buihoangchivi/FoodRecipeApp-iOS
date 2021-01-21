@@ -153,7 +153,7 @@ extension FoodPopUpViewController: DatePickerDalegate{
 
 extension FoodPopUpViewController: DeleteFoodDelegate {
     
-    func Reload() {
+    func UpdateUI() {
         
         delegate?.Reload()
         

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UOd-Cz-W2S">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UOd-Cz-W2S">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -1018,7 +1018,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="food-background" translatesAutoresizingMaskIntoConstraints="NO" id="PUg-KB-tJZ">
-                                        <rect key="frame" x="0.0" y="143.66666666666666" width="414" height="219.99999999999997"/>
+                                        <rect key="frame" x="0.0" y="143.66666666666666" width="414.00000000000045" height="219.99999999999997"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="220" id="RE0-pO-arf"/>
                                         </constraints>
@@ -3796,7 +3796,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="food-background" translatesAutoresizingMaskIntoConstraints="NO" id="9a7-Dz-de5">
-                                        <rect key="frame" x="0.0" y="143.66666666666666" width="414" height="219.99999999999997"/>
+                                        <rect key="frame" x="0.0" y="143.66666666666666" width="414.00000000000045" height="219.99999999999997"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="220" id="gCS-bU-e7e"/>
                                         </constraints>
@@ -4354,7 +4354,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="food-background" translatesAutoresizingMaskIntoConstraints="NO" id="Hz2-0m-vRt">
-                                                            <rect key="frame" x="-30" y="0.0" width="100" height="100"/>
+                                                            <rect key="frame" x="-30" y="0.0" width="100.00000000000045" height="100"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="100" id="Ahy-Xc-U2T"/>
                                                                 <constraint firstAttribute="width" constant="100" id="sWs-N4-Y73"/>
@@ -4370,23 +4370,34 @@
                                                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
                                                             </state>
-                                                            <connections>
-                                                                <action selector="btnLove:" destination="JTg-gF-WLd" eventType="touchUpInside" id="F91-Ou-UG0"/>
-                                                            </connections>
+                                                        </button>
+                                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yxu-hd-em4">
+                                                            <rect key="frame" x="277" y="83" width="35" height="35"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="35" id="2En-ae-0f3"/>
+                                                                <constraint firstAttribute="width" constant="35" id="bSB-GD-thN"/>
+                                                            </constraints>
+                                                            <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <state key="normal" image="xmark" catalog="system">
+                                                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
+                                                            </state>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.80580047217919704" green="0.97680455450000003" blue="0.88221829838846166" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="T7Y-3r-keN" secondAttribute="trailing" constant="20" id="4pT-TY-WBI"/>
                                                         <constraint firstAttribute="bottom" secondItem="bW8-Xb-IW3" secondAttribute="bottom" constant="10" id="8E3-kC-Pi0"/>
                                                         <constraint firstAttribute="height" constant="100" id="8cI-rx-P6t"/>
+                                                        <constraint firstAttribute="bottom" secondItem="yxu-hd-em4" secondAttribute="bottom" constant="-18" id="Be9-Ck-sUT"/>
                                                         <constraint firstAttribute="bottom" secondItem="T7Y-3r-keN" secondAttribute="bottom" constant="-18" id="Dlp-eh-SRC"/>
                                                         <constraint firstItem="bW8-Xb-IW3" firstAttribute="top" secondItem="PPl-Bu-Jg5" secondAttribute="top" constant="10" id="FL5-g8-I9N"/>
                                                         <constraint firstItem="bW8-Xb-IW3" firstAttribute="centerY" secondItem="PPl-Bu-Jg5" secondAttribute="centerY" id="KwZ-I0-5JA"/>
+                                                        <constraint firstItem="T7Y-3r-keN" firstAttribute="leading" secondItem="yxu-hd-em4" secondAttribute="trailing" id="Nmo-px-iFZ"/>
                                                         <constraint firstItem="Hz2-0m-vRt" firstAttribute="centerY" secondItem="PPl-Bu-Jg5" secondAttribute="centerY" id="Q9Y-rD-S6V"/>
                                                         <constraint firstAttribute="trailing" secondItem="bW8-Xb-IW3" secondAttribute="trailing" constant="20" id="Z5A-o8-PWC"/>
                                                         <constraint firstItem="Hz2-0m-vRt" firstAttribute="leading" secondItem="PPl-Bu-Jg5" secondAttribute="leading" constant="-30" id="cmo-Zg-ye7"/>
                                                         <constraint firstItem="bW8-Xb-IW3" firstAttribute="leading" secondItem="Hz2-0m-vRt" secondAttribute="trailing" constant="20" id="coJ-Mt-Hqu"/>
-                                                        <constraint firstAttribute="trailing" secondItem="T7Y-3r-keN" secondAttribute="trailing" constant="20" id="ohf-jB-eUP"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -4397,9 +4408,10 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="DeleteFoodButton" destination="yxu-hd-em4" id="iDM-yc-fb6"/>
                                             <outlet property="FoodImageView" destination="Hz2-0m-vRt" id="tOr-Vr-O1q"/>
                                             <outlet property="FoodNameLb" destination="bW8-Xb-IW3" id="YbE-vD-JLi"/>
-                                            <outlet property="btnLove" destination="T7Y-3r-keN" id="wVc-Iw-TrZ"/>
+                                            <outlet property="btnLove" destination="T7Y-3r-keN" id="yPR-E2-4cH"/>
                                             <outlet property="cellView" destination="PPl-Bu-Jg5" id="Bhf-7l-qXf"/>
                                         </connections>
                                     </tableViewCell>

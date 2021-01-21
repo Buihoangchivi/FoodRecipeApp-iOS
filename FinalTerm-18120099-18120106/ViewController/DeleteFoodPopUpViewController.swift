@@ -20,6 +20,7 @@ class DeleteFoodPopUpViewController: UIViewController {
     
     var FoodName = ""
     var FoodID = -1
+    var Ref = foodInfoRef
     
     var delegate: DeleteFoodDelegate?
     
@@ -81,11 +82,11 @@ class DeleteFoodPopUpViewController: UIViewController {
     @IBAction func act_DeleteFood(_ sender: Any) {
         
         //Xoá dữ liệu món ăn trên Firebase
-        foodInfoRef.child("\(FoodID)").removeValue()
+        Ref.child("\(FoodID)").removeValue()
         
         //Đóng giao diện Popup
         self.dismiss(animated: true, completion: nil)
-        delegate?.Reload()
+        delegate?.UpdateUI()
         
     }
     
