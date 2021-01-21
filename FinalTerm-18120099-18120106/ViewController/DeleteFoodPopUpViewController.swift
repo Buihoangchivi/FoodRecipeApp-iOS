@@ -86,7 +86,7 @@ class DeleteFoodPopUpViewController: UIViewController {
         
         //Đóng giao diện Popup
         self.dismiss(animated: true, completion: nil)
-        delegate?.UpdateUI()
+        delegate?.ReloadAfterDeleteFood()
         
     }
     

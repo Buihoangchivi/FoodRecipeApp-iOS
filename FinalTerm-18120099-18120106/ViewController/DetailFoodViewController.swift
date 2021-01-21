@@ -72,7 +72,7 @@ class DetailFoodViewController: UIViewController{
         ContentTableView.allowsSelection = false
         
         //Bo tron nut yeu thich
-        FavoriteButtonBackground.layer.cornerRadius = 23
+        FavoriteButtonBackground.layer.cornerRadius = FavoriteButtonBackground.frame.height / 2
         
         //Xu ly 2 nut tang giam khau phan an
         if (NumberOfPeople == 1) {
@@ -135,27 +135,25 @@ class DetailFoodViewController: UIViewController{
                       
                   }
                   
-              }
+            }
               
-              
-              
-              //Chi hien thi nut "Chon mon" va yeu thich o che do User
-              if (isUserMode == false) {
-                  
-                  self.btnAddtoMenu.isEnabled = false
-                  self.btnAddtoMenu.alpha = 0.5
-                  
-                  self.FavoriteButton.isEnabled = false
-                  
-              }
-              else {
-                  
-                  //Hien thi nut yeu thich
-                  self.FavoriteButton.isHidden = false
-                  self.FavoriteButtonBackground.isHidden = false
-                  
-              }
-                  
+            //Hien thi nut "Xoa mon" va an nut yeu thich o che do Admin
+            if (isUserMode == false) {
+                
+                self.btnAddtoMenu.setTitle("Xoá món", for: .normal)
+                
+                //An nut yeu thich
+                self.FavoriteButton.isEnabled = false
+                self.FavoriteButton.isHidden = true
+                self.FavoriteButtonBackground.isHidden = true
+                
+            }
+            else { //Hiển thị nút chọn món ở chế độ User
+                
+                self.btnAddtoMenu.setTitle("Chọn món", for: .normal)
+                
+            }
+            
               //Xoa cache
               //SDImageCache.shared.clearMemory()
               //SDImageCache.shared.clearDisk()
@@ -197,16 +195,34 @@ class DetailFoodViewController: UIViewController{
       
     }
     
-    
     @IBAction func act_AddFoodToShoppingList(_ sender: Any) {
-        let dest = self.storyboard?.instantiateViewController(identifier: "DatePickerPopUpViewController") as! DatePickerPopUpViewController
-        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        dest.delegate = self
-        self.present(dest, animated: true, completion: nil)
+        
+        //Nut Chon mon o che do User
+        if (isUserMode == true) {
+            
+            let dest = self.storyboard?.instantiateViewController(identifier: "DatePickerPopUpViewController") as! DatePickerPopUpViewController
+            dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            dest.delegate = self
+            self.present(dest, animated: true, completion: nil)
+            
+        }
+        else { //Nut Xoa mon o che do Admin
+            
+            let dest = self.storyboard?.instantiateViewController(identifier: "DeleteFoodPopUpViewController") as! DeleteFoodPopUpViewController
+            dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            dest.delegate = self
+            dest.FoodName = FoodNameLabel.text!
+            dest.FoodID = FoodID
+            self.present(dest, animated: true, completion: nil)
+            
+        }
+        
     }
     
     @IBAction func act_EditIngredient(_ sender: Any) {
+        
         let dest = self.storyboard?.instantiateViewController(identifier: "EditFoodViewController") as! EditFoodViewController
         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
@@ -214,27 +230,11 @@ class DetailFoodViewController: UIViewController{
         dest.editFoodRef = Ref.child("\(FoodID)")
         dest.editImageRef = imageRef.child("\(self.folderName)/\(foodImageName)")
         self.present(dest, animated: true, completion: nil)
-        /*if (isIngredientView == true) {
-            let dest = self.storyboard?.instantiateViewController(identifier: "IngredientListViewController") as! IngredientListViewController
-            dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-            dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-            dest.delegate = self
-            dest.SelectedIngredient = self.SelectedIngredientList
-            TempSelectedIngredient = SelectedIngredientList
-            self.present(dest, animated: true, completion: nil)
-        }
-        else {
-            let dest = self.storyboard?.instantiateViewController(identifier: "DirectionListViewController") as! DirectionListViewController
-            dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-            dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-            dest.delegate = self
-            dest.DirectionList = self.DirectionList
-            self.present(dest, animated: true, completion: nil)
-        }*/
         
     }
         
     @IBAction func act_ShowDirection(_ sender: Any) {
+        
         if (isIngredientView == true) {
             isIngredientView = false
             //Thay doi trang thai cua nut duoc chon
@@ -451,4 +451,18 @@ extension DetailFoodViewController: EditFoodDelegate {
         
     }
     
+}
+
+//Delegate cua xoa mon an
+extension DetailFoodViewController: DeleteFoodDelegate {
+    
+    func ReloadAfterDeleteFood() {
+        
+        let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
+        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        self.present(dest, animated: true, completion: nil)
+        
+    }
+
 }

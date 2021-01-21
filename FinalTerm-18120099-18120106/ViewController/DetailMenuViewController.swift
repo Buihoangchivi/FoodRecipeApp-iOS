@@ -316,16 +316,20 @@ extension DetailMenuViewController:UITableViewDelegate, UITableViewDataSource{
     
 }
 
+//Delegate cua cap nhat du lieu mon an sau khi tro ve tu man hinh chi tiet mon an
 extension DetailMenuViewController: DetailFoodDelegate {
     func Reload() {
+        
         FoodListTBV.isHidden = true
         Init()
+        
     }
 }
 
+//Delegate khi Admin xoa du lieu mon an
 extension DetailMenuViewController: DeleteFoodDelegate {
     
-    func UpdateUI() {
+    func ReloadAfterDeleteFood() {
         
         FoodListTBV.isHidden = true
         Init()

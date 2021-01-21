@@ -47,5 +47,9 @@ protocol EditFoodDelegate: class {
 }
 
 protocol DeleteFoodDelegate: class {
-    func UpdateUI()
+    func ReloadAfterDeleteFood()
+}
+
+protocol AdminDeleteFoodDelegate: class {
+    func BackToHome()
 }
