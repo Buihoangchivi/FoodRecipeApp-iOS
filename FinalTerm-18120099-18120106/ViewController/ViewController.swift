@@ -604,9 +604,8 @@ class ViewController: UIViewController {
                 if (self.FoodIDList.count <= (self.CurrentPage - 1) * 6 + i || self.CurrentPage == 0) {
                     continue
                 }
+                
                 //Doc du lieu 6 mon an tuong ung voi so trang hien tai
-                //foodInfoRef.child("\(self.FoodIDList[(self.CurrentPage - 1) * 6 + i])").observeSingleEvent(of: .value, with: { (snapshot) in
-                    
                 let food = foodList[self.FoodIDList[(self.CurrentPage - 1) * 6 + i]]
                 
                 //Hien thi hinh anh mon an
@@ -615,7 +614,7 @@ class ViewController: UIViewController {
                 self.FoodNameOutletList[i].attributedText = AttributedStringWithColor("\(food["Name"]!)", self.searchFoodName, color: UIColor.link)
                 
                 //Hien thi trang thai yeu thich cua mon an
-                FirebaseRef.child("UserList/\(CurrentUsername)/Favorite/\(snapshot.key)").observeSingleEvent(of: .value) { (snapshot) in
+                FirebaseRef.child("UserList/\(CurrentUsername)/Favorite/\(self.FoodIDList[(self.CurrentPage - 1) * 6 + i])").observeSingleEvent(of: .value) { (snapshot) in
                     
                     if (snapshot.exists() == true) { //Yeu thich
                         

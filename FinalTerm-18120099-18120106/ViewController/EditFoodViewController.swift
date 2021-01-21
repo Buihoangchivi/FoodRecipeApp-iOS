@@ -40,7 +40,7 @@ class EditFoodViewController: UIViewController {
     var delegate: EditFoodDelegate?
     var isAddFoodImage = false
     var fav = 1
-    var Ref = foodInfoRef
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         SDImageCache.shared.clearMemory()
@@ -93,7 +93,7 @@ class EditFoodViewController: UIViewController {
                 //Hien thi ten mon an
                 self.FoodNameTextField.text = food["Name"] as? String
                 
-                if (self.Ref.parent?.key == nil) { //Hiển thị trạng thái yêu thích trong chi tiết món ăn chung
+                if (self.editFoodRef.parent?.key == nil) { //Hiển thị trạng thái yêu thích trong chi tiết món ăn chung
                     
                     FirebaseRef.child("UserList/\(CurrentUsername)/Favorite/\(snapshot.key)").observeSingleEvent(of: .value) { (snapshot) in
                         
