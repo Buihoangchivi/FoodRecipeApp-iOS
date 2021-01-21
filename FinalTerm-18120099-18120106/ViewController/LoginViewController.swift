@@ -150,7 +150,7 @@ class LoginViewController: UIViewController {
                 
                 //Luu thong tin ten dang nhap
                 CurrentUsername = result!.user.uid
-                
+                LoginMethod = 0
                 //Chuyển màn hình thích hợp
                 self.ChangeScreen()
                 
@@ -183,8 +183,6 @@ class LoginViewController: UIViewController {
     @IBAction func act_LoginWithFacebook(_ sender: Any) {
         
         let fbLoginManager = LoginManager()
-        fbLoginManager.logOut()
-        try! Auth.auth().signOut()
         
         fbLoginManager.logIn(permissions: ["public_profile", "email"], from: self) { (result, error) in
             if let error = error {
@@ -217,7 +215,7 @@ class LoginViewController: UIViewController {
                 FirebaseRef.child("UserList/\(authResult!.user.uid)/Email").setValue(authResult!.user.email)
                 //Luu thong tin dang nhap
                 CurrentUsername = authResult!.user.uid
-                
+                LoginMethod = 2
                 //Chuyển màn hình thích hợp
                 self.ChangeScreen()
                    
@@ -308,7 +306,7 @@ extension LoginViewController: GIDSignInDelegate {
             FirebaseRef.child("UserList/\(authResult!.user.uid)/Email").setValue(authResult!.user.email)
             //Luu thong tin dang nhap
             CurrentUsername = authResult!.user.uid
-            
+            LoginMethod = 1
             //Chuyển màn hình thích hợp
             self.ChangeScreen()
             
