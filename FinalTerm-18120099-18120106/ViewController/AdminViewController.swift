@@ -141,6 +141,7 @@ class AdminViewController: UIViewController {
                         let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
                         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
                         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                        ColorScheme = UIColor.systemGreen
                         self.present(dest, animated: true, completion: nil)
                         
                     }

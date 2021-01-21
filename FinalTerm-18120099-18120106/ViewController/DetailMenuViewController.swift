@@ -46,9 +46,11 @@ class DetailMenuViewController: UIViewController {
         FoodList = [(ID: Int, Name: String, ImageName: String, Favorite: Bool)]()
         //Hien thi danh sach cac mon an rieng do nguoi dung tu them
         if (isUserFood == true) {
+            
             Ref = FirebaseRef.child("UserList/\(CurrentUsername)/FoodList")
             folderName = "/UserImages//\(CurrentUsername)"
             CategoryNameLb.text = "Công thức nhà mình"
+            
         }
         else { //Hien thi danh sach mon an chung
             Ref = foodInfoRef
@@ -135,7 +137,7 @@ class DetailMenuViewController: UIViewController {
     @IBAction func btnLove(_ sender: Any) {
         let button = sender as! UIButton
         //Them vao danh sach yeu thich
-        let foodID = (sender as! UIButton).tag
+        let foodID = button.tag
         if (button.tintColor == UIColor.black) {
             FoodList[foodID].Favorite = true
             button.tintColor = UIColor.red
@@ -228,6 +230,22 @@ class DetailMenuViewController: UIViewController {
         ReloadData()
     }
     
+    @IBAction func act_DeleteFood(_ sender: Any) {
+        
+        let dest = self.storyboard?.instantiateViewController(identifier: "DeleteFoodPopUpViewController") as! DeleteFoodPopUpViewController
+        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        dest.delegate = self
+        
+        //Lay ID cua mon an can xoa
+        let foodID = (sender as! UIButton).tag
+        dest.FoodName = FoodList[foodID].Name
+        dest.FoodID = FoodList[foodID].ID
+        dest.Ref = Ref
+        self.present(dest, animated: true, completion: nil)
+        
+    }
+    
     func ReloadData() {
         //Reset mang chi so
         FoodsIndexList = [Int]()
@@ -254,9 +272,11 @@ extension DetailMenuViewController:UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DetailMenuCell") as! DetailMenuTableViewCell
         let index = FoodsIndexList[indexPath.row]
-        //Gán chỉ số hàng tương ứng vào nút yêu thích của từng món ăn
+        //Gán chỉ số hàng tương ứng vào nút yêu thích và xoá của từng món ăn
         cell.btnLove.tag = indexPath.row
         cell.btnLove.addTarget(self, action: #selector(btnLove(_:)), for: .touchUpInside)
+        cell.DeleteFoodButton.tag = indexPath.row
+        cell.DeleteFoodButton.addTarget(self, action: #selector(act_DeleteFood(_:)), for: .touchUpInside)
         //Hiển thị ảnh món ăn
         cell.FoodImageView.sd_setImage(with: imageRef.child("\(folderName)/\(FoodList[index].ImageName)"), maxImageSize: 1 << 30, placeholderImage: UIImage(named: "food-background"), options: .retryFailed, completion: nil)
         //Hiển thị tên món ăn
@@ -269,6 +289,14 @@ extension DetailMenuViewController:UITableViewDelegate, UITableViewDataSource{
         else { //Khong yeu thich
             cell.btnLove.tintColor = UIColor.black
             cell.btnLove.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+        
+        //Chỉ nút xoá món ăn riêng ở chế độ User
+        if (isUserFood == true) {
+            
+            cell.DeleteFoodButton.isEnabled = true
+            cell.DeleteFoodButton.isHidden = false
+            
         }
         return cell
     }
@@ -288,9 +316,24 @@ extension DetailMenuViewController:UITableViewDelegate, UITableViewDataSource{
     
 }
 
+//Delegate cua cap nhat du lieu mon an sau khi tro ve tu man hinh chi tiet mon an
 extension DetailMenuViewController: DetailFoodDelegate {
     func Reload() {
+        
         FoodListTBV.isHidden = true
         Init()
+        
     }
+}
+
+//Delegate khi Admin xoa du lieu mon an
+extension DetailMenuViewController: DeleteFoodDelegate {
+    
+    func ReloadAfterDeleteFood() {
+        
+        FoodListTBV.isHidden = true
+        Init()
+        
+    }
+    
 }

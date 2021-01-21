@@ -73,8 +73,13 @@ class FoodPopUpViewController: UIViewController {
             self.FoodNameLabel.text = "\(food["Name"]!)"
             }})
         
-        //Hiển thị nút "Xoá món" ở chế độ Admin
-        if (isUserMode == false) {
+        //Hiển thị nút "Chọn món" ở chế độ User
+        if (isUserMode == true) {
+            
+            ChooseFoodButton.setTitle("Chọn món", for: .normal)
+            
+        }
+        else { //Hiển thị nút "Xoá món" ở chế độ Admin
             
             ChooseFoodButton.setTitle("Xoá món", for: .normal)
             
@@ -151,14 +156,15 @@ extension FoodPopUpViewController: DatePickerDalegate{
     }
 }
 
+
+//Delegate cua man hinh PopUp xoa mon an sau khi xoa thanh cong
 extension FoodPopUpViewController: DeleteFoodDelegate {
     
-    func Reload() {
+    func ReloadAfterDeleteFood() {
         
         delegate?.Reload()
-        
         self.dismiss(animated: true, completion: nil)
         
     }
-
+    
 }

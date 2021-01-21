@@ -148,6 +148,25 @@ class LoginViewController: UIViewController {
             }
             else {
                 
+                //Kiem tra xem co phai la tai khoan Admin hay khong
+                FirebaseRef.child("AdminList/\(result!.user.uid)").observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                    //Tai khoan vua dang nhap la tai khoan User
+                    if (snapshot.exists() == false) {
+                        
+                        //Chuyển màn hình thích hợp
+                        self.ChangeScreen()
+                        
+                    }
+                    else { //Tai khoan vua dang nhap khong phai la tai khoan User
+                        
+                        ChangTextFieldState(self.EmailTextField, UIColor.red, self.EmailNotificationLabel, "Đây không phải là tài khoản của người  .")
+                        NormalizeTextFieldState(self.PasswordTextField, self.PasswordNotificationLabel)
+                        
+                    }
+                    
+                })
+                
                 //Luu thong tin ten dang nhap
                 CurrentUsername = result!.user.uid
                 LoginMethod = 0

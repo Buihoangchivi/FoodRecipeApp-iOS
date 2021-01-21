@@ -47,5 +47,5 @@ protocol EditFoodDelegate: class {
 }
 
 protocol DeleteFoodDelegate: class {
-    func Reload()
+    func ReloadAfterDeleteFood()
 }

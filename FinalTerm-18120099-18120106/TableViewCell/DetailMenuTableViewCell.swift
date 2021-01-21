@@ -15,6 +15,7 @@ class DetailMenuTableViewCell: UITableViewCell {
     @IBOutlet weak var cellView: UIView!
     @IBOutlet weak var FoodNameLb: UILabel!
     @IBOutlet weak var FoodImageView: UIImageView!
+    @IBOutlet weak var DeleteFoodButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
