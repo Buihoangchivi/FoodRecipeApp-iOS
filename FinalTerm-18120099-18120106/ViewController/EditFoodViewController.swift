@@ -39,7 +39,7 @@ class EditFoodViewController: UIViewController {
     var imagePicker = UIImagePickerController()
     var delegate: EditFoodDelegate?
     var isAddFoodImage = false
-
+    var fav = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         SDImageCache.shared.clearMemory()
@@ -91,6 +91,9 @@ class EditFoodViewController: UIViewController {
                 
                 //Hien thi ten mon an
                 self.FoodNameTextField.text = food["Name"] as? String
+                
+                //
+                self.fav = food["Favorite"] as! Int
                 
                 //Cap nhat danh sach loai mon an
                 if let arr = food["Category"] as? NSArray {
@@ -166,7 +169,7 @@ class EditFoodViewController: UIViewController {
         
         //Hien thi hinh anh mon an
         FoodImageView.sd_setImage(with: editImageRef, maxImageSize: 1 << 30, placeholderImage: UIImage(named: "food-background"), options: .retryFailed, completion: nil)
-        
+        //
     }
     
     @IBAction func act_EditFoodImage(_ sender: Any) {
@@ -247,7 +250,7 @@ class EditFoodViewController: UIViewController {
             }
             
             //Cap nhat tat ca thong tin cua mon an len Firebase
-            self.editFoodRef.setValue(["Category": tempCategoryArr, "Direction": self.SelectedDirection, "Favorite": 0, "Image": imageName, "Ingredient": tempIngredientArr, "Meal": tempMealArr, "Name": self.FoodNameTextField.text!])
+            self.editFoodRef.setValue(["Category": tempCategoryArr, "Direction": self.SelectedDirection, "Favorite": self.fav, "Image": imageName, "Ingredient": tempIngredientArr, "Meal": tempMealArr, "Name": self.FoodNameTextField.text!])
             
             //Upload anh mon an va ten anh len Firebase
             if (self.isAddFoodImage == true) {
@@ -266,20 +269,19 @@ class EditFoodViewController: UIViewController {
                     if (percentComplete == 100.0) {
                         
                         //Cap nhat lai giao dien cua man hinh Chi tiet mon an
-                        self.delegate?.UpdateUI()
-                        self.delegate?.UpdateUI()
-                        self.dismiss(animated: true, completion: nil)
+                        
+                            self.delegate?.UpdateUI()
+                            self.dismiss(animated: true, completion: nil)
                             
                     }
-                
                 }
             
             }
             else {
                 
                 //Cap nhat lai giao dien cua man hinh Chi tiet mon an
-                self.delegate?.UpdateUI()
-                self.dismiss(animated: true, completion: nil)
+                    self.delegate?.UpdateUI()
+                    self.dismiss(animated: true, completion: nil)
                 
             }
             
