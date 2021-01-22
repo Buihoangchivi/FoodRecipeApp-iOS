@@ -118,8 +118,13 @@ class DetailFoodViewController: UIViewController{
                       }
                       
                   }
-                self.btnAddIngre.isEnabled = false
-                self.btnAddIngre.alpha = 0.5
+                
+                if (isUserMode == true) {
+                    
+                    self.btnAddIngre.isEnabled = false
+                    self.btnAddIngre.alpha = 0.5
+                    
+                }
                   
               }
               else { //Hiển thị trạng thái yêu thích trong chi tiết món ăn riêng của User
