@@ -20,6 +20,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var CategoryCollectionView: UICollectionView!
     @IBOutlet weak var MealCollectionView: UICollectionView!
     
+    @IBOutlet weak var LogOutAdminBtn: UIButton!
+    
     @IBOutlet weak var ShadowView: UIView!
     @IBOutlet weak var FoodView: UIView!
     @IBOutlet weak var HomeView: UIView!
@@ -196,7 +198,9 @@ class ViewController: UIViewController {
                 self.MealCollectionView.reloadData()
                 
             })
-            
+            //Ẩn button đăng xuất của Admin
+            LogOutAdminBtn.isHidden = true
+            LogOutAdminBtn.isEnabled = false
         }
             
         
@@ -418,6 +422,21 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func act_AdminLogout(_ sender: Any) {
+        let dest = self.storyboard?.instantiateViewController(identifier: "StartUpViewController") as! StartUpViewController
+        do {
+            try Auth.auth().signOut()
+            
+            // Update screen after user successfully signed out
+            //updateScreen()
+        } catch let error as NSError {
+            print ("Error signing out from Firebase: %@", error)
+        }
+        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        self.present(dest, animated: true, completion: nil)
+    }
+    
     //Cap nhat danh sach mon an theo phan loai
     func UpdateFoodList() {
         FoodIDList = [Int]()
@@ -467,11 +486,11 @@ class ViewController: UIViewController {
                         }
                     }
                     
-                    if let name = food["Name"] as? NSString {
+                    /*if let name = food["Name"] as? NSString {
                         if (CheckIfStringContainSubstring(name as String, self.searchFoodName) == false) {
                             continue
                         }
-                    }
+                    }*/
                     
                     //Neu thoa ca loai mon an va loai bua an thi dua mon an do vao List
                     if (check == 2) {

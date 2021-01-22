@@ -39,7 +39,8 @@ class EditFoodViewController: UIViewController {
     var imagePicker = UIImagePickerController()
     var delegate: EditFoodDelegate?
     var isAddFoodImage = false
-    var fav = 0
+    var fav = 1
+    var Ref = foodInfoRef
     override func viewDidLoad() {
         super.viewDidLoad()
         SDImageCache.shared.clearMemory()
@@ -92,8 +93,36 @@ class EditFoodViewController: UIViewController {
                 //Hien thi ten mon an
                 self.FoodNameTextField.text = food["Name"] as? String
                 
-                //
-                self.fav = food["Favorite"] as! Int
+                if (self.Ref.parent?.key == nil) { //Hiển thị trạng thái yêu thích trong chi tiết món ăn chung
+                    
+                    FirebaseRef.child("UserList/\(CurrentUsername)/Favorite/\(snapshot.key)").observeSingleEvent(of: .value) { (snapshot) in
+                        
+                        if (snapshot.exists() == true) { //Yeu thich
+                            DispatchQueue.main.async {
+                                self.fav = 1
+                            }
+                        }
+                        else { //Khong yeu thich
+                            DispatchQueue.main.async {
+                                self.fav = 0
+                            }
+                        }
+                    }
+                }
+                else { //Hiển thị trạng thái yêu thích trong chi tiết món ăn riêng của User
+                    
+                    if (food["Favorite"] as! Int == 1) { //Yeu thich
+                        DispatchQueue.main.async {
+                            self.fav = 1
+                        }
+                    }
+                    else { //Khong yeu thich
+                        DispatchQueue.main.async {
+                            self.fav = 0
+                        }
+                    }
+                    
+                }
                 
                 //Cap nhat danh sach loai mon an
                 if let arr = food["Category"] as? NSArray {
