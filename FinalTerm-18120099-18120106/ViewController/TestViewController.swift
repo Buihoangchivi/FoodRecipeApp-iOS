@@ -263,7 +263,7 @@ class TestViewController: UIViewController {
                 //Email
                 FirebaseRef.child("UserList/\(authResult!.user.uid)/Email").setValue(authResult!.user.email)
                 //Color
-                FirebaseRef.child("UserList/\(authResult!.user.uid)/Color").setValue("12")
+                FirebaseRef.child("UserList/\(authResult!.user.uid)/Color").setValue("\(Int.random(in: 0..<25))")
                 ColorScheme = UIColor(named: "12")!
                 //Splash
                 FirebaseRef.child("UserList/\(authResult!.user.uid)/SplashScreen").setValue(1)
@@ -313,7 +313,7 @@ extension TestViewController: GIDSignInDelegate {
             //Email
             FirebaseRef.child("UserList/\(authResult!.user.uid)/Email").setValue(authResult!.user.email)
             //Color
-            FirebaseRef.child("UserList/\(authResult!.user.uid)/Color").setValue("12")
+            FirebaseRef.child("UserList/\(authResult!.user.uid)/Color").setValue("\(Int.random(in: 0..<25))")
             ColorScheme = UIColor(named: "12")!
             //Splash
             FirebaseRef.child("UserList/\(authResult!.user.uid)/SplashScreen").setValue(1)

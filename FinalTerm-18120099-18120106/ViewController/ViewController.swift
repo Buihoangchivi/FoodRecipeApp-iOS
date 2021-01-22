@@ -483,11 +483,11 @@ class ViewController: UIViewController {
                         }
                     }
                     
-                    /*if let name = food["Name"] as? NSString {
+                    if let name = food["Name"] as? NSString {
                         if (CheckIfStringContainSubstring(name as String, self.searchFoodName) == false) {
                             continue
                         }
-                    }*/
+                    }
                     
                     //Neu thoa ca loai mon an va loai bua an thi dua mon an do vao List
                     if (check == 2) {
