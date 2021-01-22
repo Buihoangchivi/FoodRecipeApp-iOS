@@ -139,9 +139,12 @@ class DetailFoodViewController: UIViewController{
               
             //Hien thi nut "Xoa mon" va an nut yeu thich o che do Admin
             if (isUserMode == false) {
-                
-                self.btnAddtoMenu.setTitle("Xoá món", for: .normal)
-                
+                if(self.btnAddIngre.titleLabel?.text == "Chỉnh sửa"){
+                    self.btnAddtoMenu.setTitle("Xoá món", for: .normal)
+                }
+                else{
+                    self.btnAddtoMenu.setTitle("Delete food", for: .normal)
+                }
                 //An nut yeu thich
                 self.FavoriteButton.isEnabled = false
                 self.FavoriteButton.isHidden = true
@@ -149,9 +152,12 @@ class DetailFoodViewController: UIViewController{
                 
             }
             else { //Hiển thị nút chọn món ở chế độ User
-                
-                self.btnAddtoMenu.setTitle("Chọn món", for: .normal)
-                
+                if(self.btnAddIngre.titleLabel?.text == "Chỉnh sửa"){
+                    self.btnAddtoMenu.setTitle("Chọn món", for: .normal)
+                }
+                else{
+                    self.btnAddtoMenu.setTitle("Choose food", for: .normal)
+                }
             }
             
               //Xoa cache

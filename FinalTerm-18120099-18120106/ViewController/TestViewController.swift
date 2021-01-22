@@ -26,6 +26,7 @@ class TestViewController: UIViewController {
     @IBOutlet weak var EmailNotificationLabel: UILabel!
     @IBOutlet weak var PasswordNotificationLabel: UILabel!
     
+    @IBOutlet weak var TitleLb: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         Init();
@@ -46,9 +47,17 @@ class TestViewController: UIViewController {
             self.RegisterButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
             }})
         //Doi mau chu goi y trong cac o nhap ten nguoi dung, email, mat khau
-        UsernameTextField.attributedPlaceholder = NSAttributedString(string: "Tên đăng nhập", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        EmailTextField.attributedPlaceholder = NSAttributedString(string: "Địa chỉ email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Mật khẩu", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        if(TitleLb.text == "Người dùng đăng ký"){
+            UsernameTextField.attributedPlaceholder = NSAttributedString(string: "Tên đăng nhập", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+            EmailTextField.attributedPlaceholder = NSAttributedString(string: "Địa chỉ email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+            PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Mật khẩu", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        }
+        else{
+            UsernameTextField.attributedPlaceholder = NSAttributedString(string: "Username", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+            EmailTextField.attributedPlaceholder = NSAttributedString(string: "Email Address", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+            PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        }
+        
         
         //Canh le cho cac o
         UsernameTextField.setLeftPaddingPoints(8)
@@ -69,8 +78,16 @@ class TestViewController: UIViewController {
         PasswordTextField.layer.masksToBounds = true
         
         //Thay doi mau dong chu 'Đăng nhập nào' de lam noi bat
-        let FirstTitle = NSAttributedString(string: "Bạn đã có tài khoản rồi? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        let LastTitle = NSAttributedString(string: "Đăng nhập nào.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
+        var FirstTitle = NSAttributedString()
+        var LastTitle = NSAttributedString()
+        if(TitleLb.text == "Người dùng đăng ký"){
+            FirstTitle = NSAttributedString(string: "Bạn đã có tài khoản rồi? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+            LastTitle = NSAttributedString(string: "Đăng nhập nào.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
+        }
+        else{
+            FirstTitle = NSAttributedString(string: "Do you have an account? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+            LastTitle = NSAttributedString(string: "Let's login.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
+        }
         let Title = NSMutableAttributedString()
         Title.append(FirstTitle)
         Title.append(LastTitle)
