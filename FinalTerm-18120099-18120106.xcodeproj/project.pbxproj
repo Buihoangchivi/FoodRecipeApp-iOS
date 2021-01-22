@@ -38,6 +38,7 @@
 		36A2DE2E256FF1EB00C64FB8 /* MealCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A2DE2D256FF1EB00C64FB8 /* MealCollectionViewCell.swift */; };
 		36BE95BF25B2F5C9007B4695 /* EditFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BE95BE25B2F5C9007B4695 /* EditFoodViewController.swift */; };
 		36D8B3BC25B894C00062BC65 /* DeleteFoodPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D8B3BB25B894C00062BC65 /* DeleteFoodPopUpViewController.swift */; };
+		36D8B3C025BA81050062BC65 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36D8B3C225BA81050062BC65 /* Localizable.strings */; };
 		36DAB9A3257521C1005CA319 /* AddNewFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DAB9A2257521C1005CA319 /* AddNewFoodViewController.swift */; };
 		36E6E6992585D0F0007EEA32 /* ChangeCurrentPagePopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E6E6982585D0F0007EEA32 /* ChangeCurrentPagePopUpVC.swift */; };
 		81B71440F3D7338D7D04EF46 /* Pods_FinalTerm_18120099_18120106.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABDB6492BAB0F53D5553D11 /* Pods_FinalTerm_18120099_18120106.framework */; };
@@ -105,6 +106,8 @@
 		36A2DE2D256FF1EB00C64FB8 /* MealCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCollectionViewCell.swift; sourceTree = "<group>"; };
 		36BE95BE25B2F5C9007B4695 /* EditFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFoodViewController.swift; sourceTree = "<group>"; };
 		36D8B3BB25B894C00062BC65 /* DeleteFoodPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteFoodPopUpViewController.swift; sourceTree = "<group>"; };
+		36D8B3C125BA81050062BC65 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		36D8B3C325BA81090062BC65 /* vi-VN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "vi-VN"; path = "vi-VN.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		36DAB9A2257521C1005CA319 /* AddNewFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewFoodViewController.swift; sourceTree = "<group>"; };
 		36E6E6982585D0F0007EEA32 /* ChangeCurrentPagePopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCurrentPagePopUpVC.swift; sourceTree = "<group>"; };
 		4ABDB6492BAB0F53D5553D11 /* Pods_FinalTerm_18120099_18120106.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FinalTerm_18120099_18120106.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,8 +119,6 @@
 		8746F5902578EB4D00D388AE /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		874C217B257761F20033F8F8 /* DetailFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFoodViewController.swift; sourceTree = "<group>"; };
 		874C217D257762370033F8F8 /* DetailIngredientFoodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailIngredientFoodTableViewCell.swift; sourceTree = "<group>"; };
-		877C7AC725BA733100DE73B7 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		877C7AC825BA733200DE73B7 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Main.strings"; sourceTree = "<group>"; };
 		8788DD21259AF3AB007B8D8C /* DetailMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMenuViewController.swift; sourceTree = "<group>"; };
 		8788DD23259AF3C6007B8D8C /* DetailMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMenuTableViewCell.swift; sourceTree = "<group>"; };
 		87997F5F257DFFAD00C9AF5F /* TipListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipListTableViewCell.swift; sourceTree = "<group>"; };
@@ -263,6 +264,7 @@
 		366D6A78256F831B00693FD7 /* FinalTerm-18120099-18120106 */ = {
 			isa = PBXGroup;
 			children = (
+				36D8B3BD25BA77FA0062BC65 /* Strings */,
 				366D47B3259CEDA400926D8C /* Handle */,
 				363BA1CB257251A300A43B4A /* GoogleService-Info.plist */,
 				366D6A87256F831C00693FD7 /* Info.plist */,
@@ -283,6 +285,14 @@
 				366D6A92256F831C00693FD7 /* Info.plist */,
 			);
 			path = "FinalTerm-18120099-18120106Tests";
+			sourceTree = "<group>";
+		};
+		36D8B3BD25BA77FA0062BC65 /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				36D8B3C225BA81050062BC65 /* Localizable.strings */,
+			);
+			path = Strings;
 			sourceTree = "<group>";
 		};
 		608B03113053AF5D0B0FC296 /* Pods */ = {
@@ -374,7 +384,6 @@
 				en,
 				Base,
 				"vi-VN",
-				"en-GB",
 			);
 			mainGroup = 366D6A6D256F831B00693FD7;
 			productRefGroup = 366D6A77256F831B00693FD7 /* Products */;
@@ -392,6 +401,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36D8B3C025BA81050062BC65 /* Localizable.strings in Resources */,
 				366D6A86256F831C00693FD7 /* LaunchScreen.storyboard in Resources */,
 				363BA1CC257251A300A43B4A /* GoogleService-Info.plist in Resources */,
 				366D6A83256F831C00693FD7 /* Assets.xcassets in Resources */,
@@ -565,7 +575,6 @@
 				366D6A80256F831B00693FD7 /* Base */,
 				879CD43D25B714C2000BE33F /* vi-VN */,
 				879CD43F25B714EE000BE33F /* en */,
-				877C7AC825BA733200DE73B7 /* en-GB */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -575,9 +584,17 @@
 			children = (
 				366D6A85256F831C00693FD7 /* Base */,
 				879CD43C25B714C2000BE33F /* vi-VN */,
-				877C7AC725BA733100DE73B7 /* en-GB */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		36D8B3C225BA81050062BC65 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				36D8B3C125BA81050062BC65 /* en */,
+				36D8B3C325BA81090062BC65 /* vi-VN */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

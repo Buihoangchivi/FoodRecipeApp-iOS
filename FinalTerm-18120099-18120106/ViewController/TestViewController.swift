@@ -47,16 +47,9 @@ class TestViewController: UIViewController {
             self.RegisterButton.backgroundColor = UIColor(named: "\(food["Color"]!)")
             }})
         //Doi mau chu goi y trong cac o nhap ten nguoi dung, email, mat khau
-        if(TitleLb.text == "Người dùng đăng ký"){
-            UsernameTextField.attributedPlaceholder = NSAttributedString(string: "Tên đăng nhập", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-            EmailTextField.attributedPlaceholder = NSAttributedString(string: "Địa chỉ email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-            PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Mật khẩu", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        }
-        else{
-            UsernameTextField.attributedPlaceholder = NSAttributedString(string: "Username", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-            EmailTextField.attributedPlaceholder = NSAttributedString(string: "Email Address", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-            PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        }
+        UsernameTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Username", comment: "Tên đăng nhập"), attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        EmailTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Email address", comment: "Địa chỉ email"), attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        PasswordTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Password", comment: "Mật khẩu"), attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         
         
         //Canh le cho cac o
@@ -80,14 +73,10 @@ class TestViewController: UIViewController {
         //Thay doi mau dong chu 'Đăng nhập nào' de lam noi bat
         var FirstTitle = NSAttributedString()
         var LastTitle = NSAttributedString()
-        if(TitleLb.text == "Người dùng đăng ký"){
-            FirstTitle = NSAttributedString(string: "Bạn đã có tài khoản rồi? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-            LastTitle = NSAttributedString(string: "Đăng nhập nào.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
-        }
-        else{
-            FirstTitle = NSAttributedString(string: "Do you have an account? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-            LastTitle = NSAttributedString(string: "Let's login.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
-        }
+        
+        FirstTitle = NSAttributedString(string: NSLocalizedString("You don't have account", comment: "You don't have account?"), attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        LastTitle = NSAttributedString(string: NSLocalizedString("Sign in now", comment: "Sign in"), attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
+        
         let Title = NSMutableAttributedString()
         Title.append(FirstTitle)
         Title.append(LastTitle)
@@ -116,20 +105,20 @@ class TestViewController: UIViewController {
         
         //Ten dang nhap phai it nhat chua 2 ky tu
         if (UsernameTextField.text!.count < 2) {
-            ChangTextFieldState(UsernameTextField, UIColor.red, UsernameNotificationLabel, "Tên đăng nhập quá ngắn (tối thiểu là 2 ký tự).")
+            ChangTextFieldState(UsernameTextField, UIColor.red, UsernameNotificationLabel, NSLocalizedString("Short username", comment: "Tên đăng nhập quá ngắn (tối thiểu là 2 ký tự)."))
             ShowLoginButton()
         }
         else if (UsernameTextField.text!.isAlphanumeric == false) { //Cac ki tu chi chua cac chu cai tieng Anh va so
-            ChangTextFieldState(UsernameTextField, UIColor.red, UsernameNotificationLabel, "Vui lòng tạo tên đăng nhập chỉ với số và các ký tự ASCII.")
+            ChangTextFieldState(UsernameTextField, UIColor.red, UsernameNotificationLabel, NSLocalizedString("ASCII username", comment: "Vui lòng tạo tên đăng nhập chỉ với số và các ký tự ASCII."))
             ShowLoginButton()
         }
         else {
             CheckIfUsernameIsExist(UsernameTextField.text!) { (isTaken) in
                 if (isTaken == true) { //Kiem tra xem username da ton tai hay chua
-                    ChangTextFieldState(self.UsernameTextField, UIColor.red, self.UsernameNotificationLabel, "Tên đăng nhập đã tồn tại.")
+                    ChangTextFieldState(self.UsernameTextField, UIColor.red, self.UsernameNotificationLabel, NSLocalizedString("Exist username", comment: "Tên đăng nhập đã tồn tại."))
                 }
                 else { //Ten nguoi dung hop le
-                    ChangTextFieldState(self.UsernameTextField, UIColor.systemGreen, self.UsernameNotificationLabel, "Tên đăng nhập hợp lệ.")
+                    ChangTextFieldState(self.UsernameTextField, UIColor.systemGreen, self.UsernameNotificationLabel, NSLocalizedString("Valid username", comment: "Tên đăng nhập hợp lệ."))
                 }
                 self.ShowLoginButton()
             }
@@ -141,16 +130,16 @@ class TestViewController: UIViewController {
         
         //Email co dinh dang hop le hay khong
         if (CheckIfEmailIsValid(EmailTextField.text!) == false) {
-            ChangTextFieldState(EmailTextField, UIColor.red, EmailNotificationLabel, "Email có định dạng không hợp lệ.")
+            ChangTextFieldState(EmailTextField, UIColor.red, EmailNotificationLabel, NSLocalizedString("Email's format is wrong", comment: "Địa chỉ email không đúng định dạng."))
             ShowLoginButton()
         }
         else {
             CheckIfEmailIsExist(EmailTextField.text!) { (isTaken) in
                 if (isTaken == true) { //Kiem tra xem email da ton tai hay chua
-                    ChangTextFieldState(self.EmailTextField, UIColor.red, self.EmailNotificationLabel, "Email đã tồn tại.")
+                    ChangTextFieldState(self.EmailTextField, UIColor.red, self.EmailNotificationLabel, NSLocalizedString("Exist email", comment: "Email đã tồn tại."))
                 }
                 else { //Email hop le
-                    ChangTextFieldState(self.EmailTextField, UIColor.systemGreen, self.EmailNotificationLabel, "Email hợp lệ.")
+                    ChangTextFieldState(self.EmailTextField, UIColor.systemGreen, self.EmailNotificationLabel, NSLocalizedString("Valid email", comment: "Email hợp lệ."))
                 }
                 self.ShowLoginButton()
             }
@@ -161,14 +150,14 @@ class TestViewController: UIViewController {
     @IBAction func act_CheckValidPassword(_ sender: Any) {
         //Mat khau phai chua it nhat chua 8 ky tu
         if (PasswordTextField.text!.count < 8) {
-            ChangTextFieldState(PasswordTextField, UIColor.red, PasswordNotificationLabel, "Mật khẩu quá ngắn (tối thiểu là 8 ký tự).")
+            ChangTextFieldState(PasswordTextField, UIColor.red, PasswordNotificationLabel, NSLocalizedString("Short password", comment: "Mật khẩu quá ngắn (tối thiểu là 8 ký tự)."))
         }
         else if (CheckIfPasswordIsValid(PasswordTextField.text!) == false) {
             //Mat khau phai chua it nhat 1 ky tu thuong, 1 ky tu in hoa va 1 so
-            ChangTextFieldState(PasswordTextField, UIColor.red, PasswordNotificationLabel, "Mật khẩu phải chứa ít nhất 1 chữ thường, 1 chữ in và 1 số.")
+            ChangTextFieldState(PasswordTextField, UIColor.red, PasswordNotificationLabel, NSLocalizedString("Contain password", comment: "Mật khẩu phải chứa ít nhất 1 chữ thường, 1 chữ in và 1 số."))
         }
         else { //Mat khau hop le
-            ChangTextFieldState(PasswordTextField, UIColor.systemGreen, PasswordNotificationLabel, "Mật khẩu hợp lệ.")
+            ChangTextFieldState(PasswordTextField, UIColor.systemGreen, PasswordNotificationLabel, NSLocalizedString("Valid password", comment: "Mật khẩu hợp lệ."))
         }
         ShowLoginButton()
     }
@@ -273,6 +262,11 @@ class TestViewController: UIViewController {
                 FirebaseRef.child("UserList/\(authResult!.user.uid)/DisplayName").setValue(authResult!.user.displayName)
                 //Email
                 FirebaseRef.child("UserList/\(authResult!.user.uid)/Email").setValue(authResult!.user.email)
+                //Color
+                FirebaseRef.child("UserList/\(authResult!.user.uid)/Color").setValue("12")
+                ColorScheme = UIColor(named: "12")!
+                //Splash
+                FirebaseRef.child("UserList/\(authResult!.user.uid)/SplashScreen").setValue(1)
                 //Luu thong tin dang nhap
                 CurrentUsername = authResult!.user.uid
                 
@@ -289,11 +283,9 @@ class TestViewController: UIViewController {
     }
     
     @IBAction func act_Login(_ sender: Any) {
-        /*let dest = self.storyboard?.instantiateViewController(identifier: "LoginViewController") as! LoginViewController
-        dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        self.present(dest, animated: true, completion: nil)*/
+        
         self.dismiss(animated: true, completion: nil)
+        
     }
 }
 
@@ -308,7 +300,6 @@ extension TestViewController: GIDSignInDelegate {
 
         guard let authentication = user.authentication else { return }
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
-        //print(credential)
         
         //Authenticate with Firebase using the credential
         Auth.auth().signIn(with: credential) { (authResult, error) in
@@ -321,11 +312,17 @@ extension TestViewController: GIDSignInDelegate {
             FirebaseRef.child("UserList/\(authResult!.user.uid)/DisplayName").setValue(authResult!.user.displayName)
             //Email
             FirebaseRef.child("UserList/\(authResult!.user.uid)/Email").setValue(authResult!.user.email)
+            //Color
+            FirebaseRef.child("UserList/\(authResult!.user.uid)/Color").setValue("12")
+            ColorScheme = UIColor(named: "12")!
+            //Splash
+            FirebaseRef.child("UserList/\(authResult!.user.uid)/SplashScreen").setValue(1)
             //Luu thong tin dang nhap
             CurrentUsername = authResult!.user.uid
             
+            
             //Hien thi man hinh trang chu cua ung dung
-            let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
+            let dest = self.storyboard?.instantiateViewController(identifier: "SplashViewController") as! SplashViewController
             dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
             self.present(dest, animated: true, completion: nil)

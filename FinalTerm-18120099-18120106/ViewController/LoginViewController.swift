@@ -43,14 +43,8 @@ class LoginViewController: UIViewController {
         self.view.insertSubview(backgroundImage, at: 0)
         
         //Doi mau chu goi y trong cac o nhap ten nguoi dung va mat khau
-         if(TitleLb.text == "Người dùng đăng nhập"){
-               EmailTextField.attributedPlaceholder = NSAttributedString(string: "Địa chỉ email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-               PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Mật khẩu", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-               }
-               else{
-                   EmailTextField.attributedPlaceholder = NSAttributedString(string: "Email address", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-                   PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-               }
+           EmailTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Email address", comment: "Địa chỉ email"), attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+           PasswordTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Password", comment: "Mật khẩu"), attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         
         //Canh le cho 2 o Username va Password
         EmailTextField.setLeftPaddingPoints(8)
@@ -70,14 +64,9 @@ class LoginViewController: UIViewController {
         //Thay doi mau dong chu 'Đăng ký ngay' de lam noi bat
         var FirstTitle = NSAttributedString()
         var LastTitle = NSAttributedString()
-        if(TitleLb.text == "Người dùng đăng nhập"){
-            FirstTitle = NSAttributedString(string: "Bạn chưa có tài khoản? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-            LastTitle = NSAttributedString(string: "Đăng ký ngay.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
-        }
-        else{
-            FirstTitle = NSAttributedString(string: "Do not have an account? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-            LastTitle = NSAttributedString(string: "Let's register.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
-        }
+        
+        FirstTitle = NSAttributedString(string: NSLocalizedString("You don't have account", comment: "You don't have account?"), attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        LastTitle = NSAttributedString(string: NSLocalizedString("Register now", comment: "Register"), attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
         
         let Title = NSMutableAttributedString()
         Title.append(FirstTitle)
@@ -138,19 +127,19 @@ class LoginViewController: UIViewController {
                 if let errCode = AuthErrorCode(rawValue: error!._code) {
                     switch errCode {
                         case .invalidEmail:
-                            ChangTextFieldState(self.EmailTextField, UIColor.red, self.EmailNotificationLabel, "Địa chỉ email không đúng định dạng.")
+                            ChangTextFieldState(self.EmailTextField, UIColor.red, self.EmailNotificationLabel, NSLocalizedString("Email's format is wrong", comment: "Địa chỉ email không đúng định dạng."))
                             NormalizeTextFieldState(self.PasswordTextField, self.PasswordNotificationLabel)
                         case .wrongPassword:
                             ChangTextFieldState(self.EmailTextField, UIColor.systemGreen, self.EmailNotificationLabel, "")
-                            ChangTextFieldState(self.PasswordTextField, UIColor.red, self.PasswordNotificationLabel, "Mật khẩu không chính xác.")
+                            ChangTextFieldState(self.PasswordTextField, UIColor.red, self.PasswordNotificationLabel, NSLocalizedString("Wrong password", comment: "Mật khẩu không chính xác."))
                         case .tooManyRequests:
                             ChangTextFieldState(self.EmailTextField, UIColor.systemGreen, self.EmailNotificationLabel, "")
-                            ChangTextFieldState(self.PasswordTextField, UIColor.red, self.PasswordNotificationLabel, "Tạm thời khoá tài khoản này do truy cập lỗi quá nhiều lần.")
+                            ChangTextFieldState(self.PasswordTextField, UIColor.red, self.PasswordNotificationLabel, NSLocalizedString("Lock account", comment: "Tạm thời khoá tài khoản này do truy cập lỗi quá nhiều lần."))
                         case .userDisabled:
-                            ChangTextFieldState(self.EmailTextField, UIColor.red, self.EmailNotificationLabel, "Tài khoản này đã bị vô hiệu hoá.")
+                            ChangTextFieldState(self.EmailTextField, UIColor.red, self.EmailNotificationLabel, NSLocalizedString("Disable account", comment: "Tài khoản này đã bị vô hiệu hoá."))
                         NormalizeTextFieldState(self.PasswordTextField, self.PasswordNotificationLabel)
                         default:
-                            ChangTextFieldState(self.EmailTextField, UIColor.red, self.EmailNotificationLabel, "Địa chỉ email không hợp lệ.")
+                            ChangTextFieldState(self.EmailTextField, UIColor.red, self.EmailNotificationLabel, NSLocalizedString("Invalid email", comment: "Địa chỉ email không hợp lệ."))
                             NormalizeTextFieldState(self.PasswordTextField, self.PasswordNotificationLabel)
                     }
                 }
@@ -169,7 +158,7 @@ class LoginViewController: UIViewController {
                     }
                     else { //Tai khoan vua dang nhap khong phai la tai khoan User
                         
-                        ChangTextFieldState(self.EmailTextField, UIColor.red, self.EmailNotificationLabel, "Đây không phải là tài khoản của người  .")
+                        ChangTextFieldState(self.EmailTextField, UIColor.red, self.EmailNotificationLabel, NSLocalizedString("Not user account", comment: "Đây không phải là tài khoản của người dùng."))
                         NormalizeTextFieldState(self.PasswordTextField, self.PasswordNotificationLabel)
                         
                     }
@@ -251,18 +240,6 @@ class LoginViewController: UIViewController {
         
             }
         
-        /*// Sign out from Google
-        GIDSignIn.sharedInstance().signOut()
-        
-        // Sign out from Firebase
-        do {
-            try Auth.auth().signOut()
-            
-            // Update screen after user successfully signed out
-            //updateScreen()
-        } catch let error as NSError {
-            print ("Error signing out from Firebase: %@", error)
-        }*/
     }
     
     func ChangeScreen() {

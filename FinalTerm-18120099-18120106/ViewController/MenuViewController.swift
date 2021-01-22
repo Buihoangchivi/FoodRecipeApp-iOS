@@ -12,7 +12,7 @@ import FirebaseAuth
 import GoogleSignIn
 import FBSDKLoginKit
 class MenuViewController: UIViewController {
-    var MenuList = ["Món ăn yêu thích","Công thức nhà mình","Mẹo hay","Món ăn ngày lễ","Món ăn chay","Món ăn giảm cân","Món bánh ngon","Món nhậu cơ bản", "Liên hệ","Cài đặt", "Đăng xuất"]
+    
     @IBOutlet weak var MenuTBV: UITableView!
     
     @IBOutlet weak var MenuLb: UILabel!

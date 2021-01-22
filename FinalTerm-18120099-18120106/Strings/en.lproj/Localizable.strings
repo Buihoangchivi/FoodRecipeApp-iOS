@@ -1,0 +1,105 @@
+/* 
+  Localizable.strings
+  FinalTerm-18120099-18120106
+
+  Created by Bui Van Vi on 1/22/21.
+  Copyright © 2021 Bui Van Vi. All rights reserved.
+*/
+
+"You don't have account" = "Do not have an account? ";
+
+"Register now" = "Register now.";
+
+"Sign in now" = "Sign in now.";
+
+"Email's format is wrong" = "The email address is not in the correct format.";
+
+"Wrong password" = "Password is incorrect";
+
+"Lock account" = "Temporarily lock this account due to access errors too many times.";
+
+"Disable account" = "This account has been deactivated.";
+
+"Invalid email" = "This email address is invalid.";
+
+"Not user account" = "This is not the user's account.";
+
+"Email address" = "Email address";
+
+"Password" = "Password";
+
+"Username" = "Username";
+
+"Short username" = "Username is too short (minimum 2 characters).";
+
+"ASCII username" = "Please create your username with only ASCII numbers and characters.";
+
+"Exist username" = "This username is exist.";
+
+"Valid username" = "This username is valid.";
+
+"Exist email" = "This email is exist.";
+
+"Valid email" = "This email is valid.";
+
+"Short password" = "Password is too short (minimum of 8 characters).";
+
+"Contain password" = "Password must contain at least 1 lowercase, 1 uppercase letter and 1 number.";
+
+"Valid password" = "This password is valid.";
+
+"Heo" = "Pork";
+
+"Bo" = "Beef";
+
+"Ga" = "Chicken";
+
+"Vit" = "Duck";
+
+"Hai san" = "Seafood";
+
+"Ca" = "Fish";
+
+"Banh" = "Cake";
+
+"Trai cay" = "Fruit";
+
+"An chay" = "Vegetarian";
+
+"Giam can" = "Weight Loss";
+
+"Chien xao" = "Fried";
+
+"Mon canh" = "Soup";
+
+"Mon nuong" = "Grill";
+
+"Mon kho" = "Stew";
+
+"Mon nhau" = "Drinking";
+
+"Tiet kiem" = "Saving";
+
+"Le" = "Holiday";
+
+"Khac" = "Other";
+
+"Sang" = "Breakfast";
+
+"Trua" = "Lunch";
+
+"Toi" = "Dinner";
+
+"Phu" = "Snack";
+
+"Favorite" = "Favorite Food";
+
+"UserFood" = "My Food";
+
+"Tip" = "Tips";
+
+"Contact" = "Contact";
+
+"Setting" = "Setting";
+
+"Logout" = "Logout";
