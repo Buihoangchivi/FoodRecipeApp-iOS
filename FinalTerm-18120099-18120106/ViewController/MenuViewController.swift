@@ -7,7 +7,10 @@
 //
 
 import UIKit
-
+import Firebase
+import FirebaseAuth
+import GoogleSignIn
+import FBSDKLoginKit
 class MenuViewController: UIViewController {
     var MenuList = ["Món ăn yêu thích","Công thức nhà mình","Mẹo hay","Món ăn ngày lễ","Món ăn chay","Món ăn giảm cân","Món bánh ngon","Món nhậu cơ bản", "Liên hệ","Cài đặt", "Đăng xuất"]
     @IBOutlet weak var MenuTBV: UITableView!
@@ -132,13 +135,34 @@ extension MenuViewController : UITableViewDelegate, UITableViewDataSource{
                 }
                 else{
                     if(indexPath.row == 10)
-                {
+                    {
                         let dest = self.storyboard?.instantiateViewController(identifier: "StartUpViewController") as! StartUpViewController
+                        //Log out
+                        if(LoginMethod == 0)
+                        {
+                            do {
+                                try Auth.auth().signOut()
+                                
+                                // Update screen after user successfully signed out
+                                //updateScreen()
+                            } catch let error as NSError {
+                                print ("Error signing out from Firebase: %@", error)
+                            }
+                        }
+                        if(LoginMethod == 1)
+                        {
+                            GIDSignIn.sharedInstance().signOut()
+                        }
+                        if(LoginMethod == 2)
+                        {
+                            let fbLoginManager = LoginManager()
+                            fbLoginManager.logOut()
+                        }
                         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
                         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
                         self.present(dest, animated: true, completion: nil)
                     }
-                  else{
+                    else{
             let dest = self.storyboard?.instantiateViewController(identifier: "DetailMenuViewController") as! DetailMenuViewController
             dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
