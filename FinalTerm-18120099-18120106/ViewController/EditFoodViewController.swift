@@ -39,7 +39,6 @@ class EditFoodViewController: UIViewController {
     var imagePicker = UIImagePickerController()
     var delegate: EditFoodDelegate?
     var isAddFoodImage = false
-    var fav = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,37 +91,6 @@ class EditFoodViewController: UIViewController {
                 
                 //Hien thi ten mon an
                 self.FoodNameTextField.text = food["Name"] as? String
-                
-                if (self.editFoodRef.parent?.key == nil) { //Hiển thị trạng thái yêu thích trong chi tiết món ăn chung
-                    
-                    FirebaseRef.child("UserList/\(CurrentUsername)/Favorite/\(snapshot.key)").observeSingleEvent(of: .value) { (snapshot) in
-                        
-                        if (snapshot.exists() == true) { //Yeu thich
-                            DispatchQueue.main.async {
-                                self.fav = 1
-                            }
-                        }
-                        else { //Khong yeu thich
-                            DispatchQueue.main.async {
-                                self.fav = 0
-                            }
-                        }
-                    }
-                }
-                else { //Hiển thị trạng thái yêu thích trong chi tiết món ăn riêng của User
-                    
-                    if (food["Favorite"] as! Int == 1) { //Yeu thich
-                        DispatchQueue.main.async {
-                            self.fav = 1
-                        }
-                    }
-                    else { //Khong yeu thich
-                        DispatchQueue.main.async {
-                            self.fav = 0
-                        }
-                    }
-                    
-                }
                 
                 //Cap nhat danh sach loai mon an
                 if let arr = food["Category"] as? NSArray {
@@ -279,7 +247,13 @@ class EditFoodViewController: UIViewController {
             }
             
             //Cap nhat tat ca thong tin cua mon an len Firebase
-            self.editFoodRef.setValue(["Category": tempCategoryArr, "Direction": self.SelectedDirection, "Favorite": self.fav, "Image": imageName, "Ingredient": tempIngredientArr, "Meal": tempMealArr, "Name": self.FoodNameTextField.text!])
+           
+            self.editFoodRef.updateChildValues(["Category": tempCategoryArr])
+            self.editFoodRef.updateChildValues(["Direction": self.SelectedDirection])
+            self.editFoodRef.updateChildValues(["Image": imageName])
+            self.editFoodRef.updateChildValues(["Ingredient": tempIngredientArr])
+            self.editFoodRef.updateChildValues(["Meal": tempMealArr])
+            self.editFoodRef.updateChildValues(["Name": self.FoodNameTextField.text!])
             
             //Upload anh mon an va ten anh len Firebase
             if (self.isAddFoodImage == true) {
