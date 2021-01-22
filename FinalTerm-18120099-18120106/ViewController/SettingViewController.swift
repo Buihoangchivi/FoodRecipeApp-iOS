@@ -38,13 +38,11 @@ class SettingViewController: UIViewController {
                     if (isCheck == 1) { //Hiển thị SplashScreen
                         
                         self.ShowSplashScreenButton.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
-                        //FirebaseRef.child("UserList/\(CurrentUsername)").updateChildValues(["SplashScreen": 0])
                         
                     }
                     else { //Không hiển thị SplashScreen
                         
                         self.ShowSplashScreenButton.setImage(UIImage(systemName: "square"), for: .normal)
-                        //FirebaseRef.child("UserList/\(CurrentUsername)").updateChildValues(["SplashScreen": 1])
                         
                     }
                     self.check = isCheck

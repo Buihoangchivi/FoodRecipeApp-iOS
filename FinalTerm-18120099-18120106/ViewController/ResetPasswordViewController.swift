@@ -32,7 +32,7 @@ class ResetPasswordViewController: UIViewController {
         self.view.insertSubview(backgroundImage, at: 0)
         
         //Doi mau chu goi y trong cac o email
-        EmailTextField.attributedPlaceholder = NSAttributedString(string: "Địa chỉ email sẽ nhận thư đặt lại mật khẩu", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        EmailTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Get Reset Email", comment: "Địa chỉ email sẽ nhận thư đặt lại mật khẩu"), attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         
         //Canh le o nhap email
         EmailTextField.setLeftPaddingPoints(8)
@@ -45,8 +45,8 @@ class ResetPasswordViewController: UIViewController {
         ResetPasswordButton.layer.masksToBounds = true
         
         //Thay doi mau dong chu 'Đăng nhập nào' de lam noi bat
-        let FirstTitle = NSAttributedString(string: "Bạn đã có tài khoản rồi? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        let LastTitle = NSAttributedString(string: "Đăng nhập nào.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
+        let FirstTitle = NSAttributedString(string: NSLocalizedString("Have an account", comment: "Bạn đã có tài khoản rồi? "), attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        let LastTitle = NSAttributedString(string: NSLocalizedString("Sign in now", comment: "Đăng nhập nào."), attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
         let Title = NSMutableAttributedString()
         Title.append(FirstTitle)
         Title.append(LastTitle)
@@ -57,16 +57,18 @@ class ResetPasswordViewController: UIViewController {
         
         //Email co dinh dang hop le hay khong
         if (CheckIfEmailIsValid(EmailTextField.text!) == false) {
-            ChangTextFieldState(EmailTextField, UIColor.red, EmailNotificationLabel, "Email có định dạng không hợp lệ.")
+            ChangTextFieldState(EmailTextField, UIColor.red, EmailNotificationLabel, NSLocalizedString("Email's format is wrong", comment: "Email có định dạng không hợp lệ."))
             ShowLoginButton()
         }
         else {
             CheckIfEmailIsExist(EmailTextField.text!) { (isTaken) in
                 if (isTaken == true) { //Email hop le
-                    ChangTextFieldState(self.EmailTextField, UIColor.systemGreen, self.EmailNotificationLabel, "Email hợp lệ.")
+                   
+                    ChangTextFieldState(self.EmailTextField, UIColor.systemGreen, self.EmailNotificationLabel, NSLocalizedString("Valid email", comment: "Email hợp lệ."))
+                    
                 }
                 else { //Email khong ung voi tai khoan nao
-                    ChangTextFieldState(self.EmailTextField, UIColor.red, self.EmailNotificationLabel, "Không tìm thấy tài khoản nào tương ứng với email này.")
+                    ChangTextFieldState(self.EmailTextField, UIColor.red, self.EmailNotificationLabel, NSLocalizedString("Email not exist", comment: "Không tìm thấy tài khoản nào tương ứng với email này."))
                 }
                 self.ShowLoginButton()
             }
@@ -92,7 +94,7 @@ class ResetPasswordViewController: UIViewController {
                     //Hien thi thong bao cho nguoi dung
                     self.NotificationLabel.isHidden = false
                     //Hien thi nut quay tro ve man hinh dang nhap
-                    self.ResetPasswordButton.setTitle("Trở về đăng nhập", for: .normal)
+                    self.ResetPasswordButton.setTitle(NSLocalizedString("Back to login", comment: "Trở về đăng nhập"), for: .normal)
                 }
             }
         }

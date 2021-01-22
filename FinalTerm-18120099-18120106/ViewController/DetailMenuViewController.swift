@@ -49,14 +49,14 @@ class DetailMenuViewController: UIViewController {
             
             Ref = FirebaseRef.child("UserList/\(CurrentUsername)/FoodList")
             folderName = "/UserImages//\(CurrentUsername)"
-            CategoryNameLb.text = "Công thức nhà mình"
+            CategoryNameLb.text = NSLocalizedString("UserFood", comment: "Công thức nhà mình")
             
         }
         else { //Hien thi danh sach mon an chung
             Ref = foodInfoRef
             folderName = "/FoodImages"
             if (isFavorite == true) { //Hiển thị món ăn yêu thích
-                CategoryNameLb.text = "Món ăn yêu thích"
+                CategoryNameLb.text = NSLocalizedString("Favorite", comment: "Món ăn yêu thích")
             }
             else { //Hiển thị danh sách món ăn thuộc các loại khác
                 CategoryNameLb.text = CategoryList[CategoryID]

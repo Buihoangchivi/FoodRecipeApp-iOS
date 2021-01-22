@@ -6,7 +6,9 @@
   Copyright © 2021 Bui Van Vi. All rights reserved.
 */
 
-"You don't have account" = "Bạn chưa có tài khoản? ";
+"You don't have an account" = "Bạn chưa có tài khoản? ";
+
+"Have an account" = "Bạn chưa có tài khoản? ";
 
 "Register now" = "Đăng ký ngay.";
 
@@ -23,6 +25,8 @@
 "Invalid email" = "Địa chỉ email không hợp lệ.";
 
 "Not user account" = "Đây không phải là tài khoản của người dùng.";
+
+"Not admin account" = "Đây không phải là tài khoản của quản trị viên.";
 
 "Email address" = "Địa chỉ email";
 
@@ -103,3 +107,35 @@
 "Setting" = "Cài đặt";
 
 "Logout" = "Đăng xuất";
+
+"Delete Food" = "Xoá món";
+
+"Choose Food" = "Chọn món";
+
+"Total Step" = "Tổng số bước:";
+
+"Ration" = "Khẩu phần ăn:";
+
+"Step" = "Bước ";
+
+"Add" = "Thêm";
+
+"Get Reset Email" = "Địa chỉ email sẽ nhận thư đặt lại mật khẩu";
+
+"Email not exist" = "Không tìm thấy tài khoản nào tương ứng với email này.";
+
+"Back to login" = "Trở về đăng nhập";
+
+"Menu today" = "Bạn chưa chọn món cho thực đơn hôm nay!";
+
+"Menu yesterday" = "Bạn chưa chọn món cho thực đơn hôm qua!";
+
+"Menu tomorrow" = "Bạn chưa chọn món cho thực đơn ngày mai!";
+
+"Menu date" = "Bạn chưa chọn món cho thực đơn ngày";
+
+"Yesterday" = "Hôm qua";
+
+"Tomorrow" = "Ngày mai";
+
+"Today" = "Hôm nay";

@@ -52,7 +52,7 @@ class DirectionPopUpViewController: UIViewController {
         SaveDirectionButton.layer.cornerRadius = 22
         
         //Hien thi buoc thu may
-        StepNumberLabel.text = "Bước \(DỉrectionID + 1)"
+        StepNumberLabel.text = NSLocalizedString("Step", comment: "Bước") + "\(DỉrectionID + 1)"
         DirectionDetailTextView.layer.borderWidth = 0.8
         DirectionDetailTextView.layer.borderColor = UIColor.systemGray.cgColor
         
@@ -62,7 +62,7 @@ class DirectionPopUpViewController: UIViewController {
             DirectionDetailTextView.text = DirectionContent
         }
         else { //Che do them buoc moi
-            SaveDirectionButton.setTitle("Thêm", for: .normal)
+            SaveDirectionButton.setTitle(NSLocalizedString("Add", comment: "Thêm"), for: .normal)
         }
         
     }

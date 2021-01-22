@@ -74,7 +74,7 @@ class TestViewController: UIViewController {
         var FirstTitle = NSAttributedString()
         var LastTitle = NSAttributedString()
         
-        FirstTitle = NSAttributedString(string: NSLocalizedString("You don't have account", comment: "You don't have account?"), attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        FirstTitle = NSAttributedString(string: NSLocalizedString("Have an account", comment: "Bạn đã có tài khoản rồi? "), attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         LastTitle = NSAttributedString(string: NSLocalizedString("Sign in now", comment: "Sign in"), attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
         
         let Title = NSMutableAttributedString()

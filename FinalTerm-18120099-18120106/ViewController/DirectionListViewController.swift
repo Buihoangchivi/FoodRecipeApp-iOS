@@ -119,7 +119,8 @@ extension DirectionListViewController : UITableViewDataSource, UITableViewDelega
         cell.EditButton.addTarget(self, action: #selector(act_EditDirection(_:)), for: .touchUpInside)
         
         //Hien thi buoc thu may
-        cell.StepNumberLabel.text = "Bước \(indexPath.row + 1)"
+        cell.StepNumberLabel.text = NSLocalizedString("Step", comment: "Bước ") + "\(indexPath.row + 1)"
+        
         //Hien thi noi dung cua buoc
         cell.StepDetailLabel.text = DirectionList[indexPath.row]
         //Neu dang o che do chinh sua thi hien nut chinh sua cac buoc len

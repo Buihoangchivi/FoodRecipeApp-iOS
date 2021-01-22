@@ -145,13 +145,8 @@ class DetailFoodViewController: UIViewController{
             }
               
             //Hien thi nut "Xoa mon" va an nut yeu thich o che do Admin
-            if (isUserMode == false) {
-                if(self.btnAddIngre.titleLabel?.text == "Chỉnh sửa"){
-                    self.btnAddtoMenu.setTitle("Xoá món", for: .normal)
-                }
-                else{
-                    self.btnAddtoMenu.setTitle("Delete food", for: .normal)
-                }
+            if (isUserMode == false) { self.btnAddtoMenu.setTitle(NSLocalizedString("Delete Food", comment: "Xoá món"), for: .normal)
+                
                 //An nut yeu thich
                 self.FavoriteButton.isEnabled = false
                 self.FavoriteButton.isHidden = true
@@ -159,12 +154,9 @@ class DetailFoodViewController: UIViewController{
                 
             }
             else { //Hiển thị nút chọn món ở chế độ User
-                if(self.btnAddIngre.titleLabel?.text == "Chỉnh sửa"){
-                    self.btnAddtoMenu.setTitle("Chọn món", for: .normal)
-                }
-                else{
-                    self.btnAddtoMenu.setTitle("Choose food", for: .normal)
-                }
+                
+                self.btnAddtoMenu.setTitle(NSLocalizedString("Choose Food", comment: "Chọn món"), for: .normal)
+                
             }
             
               //Xoa cache
@@ -258,7 +250,7 @@ class DetailFoodViewController: UIViewController{
             IngredientDash.isHidden = true
             DirectionDash.isHidden = false
             //Thay doi thong tin khau phan an thanh thong tin tong so buoc
-            TextLabel.text = "Tổng số bước:"
+            TextLabel.text = NSLocalizedString("Total Step", comment: "Tổng số bước:")
             NumberPersonLabel.text = "\(DirectionList.count)"
             //An 2 nut dieu chinh khau phan an
             DownNumberButton.isHidden = true
@@ -284,7 +276,7 @@ class DetailFoodViewController: UIViewController{
             IngredientDash.isHidden = false
             DirectionDash.isHidden = true
             //Thay doi thong tin tong so buoc thanh thong tin khau phan an
-            TextLabel.text = "Khẩu phần ăn:"
+            TextLabel.text = NSLocalizedString("Ration", comment: "Khẩu phần ăn:")
             NumberPersonLabel.text = "\(NumberOfPeople)"
             //An 2 nut dieu chinh khau phan an
             DownNumberButton.isHidden = false

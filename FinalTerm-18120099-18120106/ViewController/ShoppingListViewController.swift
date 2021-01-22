@@ -100,17 +100,17 @@ class ShoppingListViewController: UIViewController {
                 self.EstablishMenuButton.isHidden = false
                 self.EstablishMenuButton.isEnabled = true
                 self.NotificationLabel.isHidden = false
-                if (self.DateLabel.text == "Hôm nay") {
-                    self.NotificationLabel.text = "Bạn chưa chọn món cho thực đơn hôm nay!"
+                if (self.DateLabel.text == NSLocalizedString("Today", comment: "Hôm nay")) {
+                    self.NotificationLabel.text = NSLocalizedString("Menu today", comment: "Bạn chưa chọn món cho thực đơn hôm nay!")
                 }
-                else if (self.DateLabel.text == "Hôm qua") {
-                    self.NotificationLabel.text = "Bạn chưa chọn món cho thực đơn hôm qua!"
+                else if (self.DateLabel.text == NSLocalizedString("Yesterday", comment: "Hôm qua")) {
+                    self.NotificationLabel.text = NSLocalizedString("Menu yesterday", comment: "Bạn chưa chọn món cho thực đơn hôm qua!")
                 }
-                else if (self.DateLabel.text == "Ngày mai") {
-                    self.NotificationLabel.text = "Bạn chưa chọn món cho thực đơn ngày mai!"
+                else if (self.DateLabel.text == NSLocalizedString("Tomorrow", comment: "Ngày mai")) {
+                    self.NotificationLabel.text = NSLocalizedString("Menu tomorrow", comment: "Bạn chưa chọn món cho thực đơn ngày mai!")
                 }
                 else {
-                    self.NotificationLabel.text = "Bạn chưa chọn món cho thực đơn ngày \(self.DateLabel.text!)!"
+                    self.NotificationLabel.text = NSLocalizedString("Menu date", comment: "Bạn chưa chọn món cho thực đơn ngày") + " \(self.DateLabel.text!)!"
                 }
             }
             else {
@@ -263,17 +263,17 @@ class ShoppingListViewController: UIViewController {
             EstablishMenuButton.isHidden = false
             EstablishMenuButton.isEnabled = true
             NotificationLabel.isHidden = false
-            if (DateLabel.text == "Hôm nay") {
-                NotificationLabel.text = "Bạn chưa chọn món cho thực đơn hôm nay!"
+            if (self.DateLabel.text == NSLocalizedString("Today", comment: "Hôm nay")) {
+                self.NotificationLabel.text = NSLocalizedString("Menu today", comment: "Bạn chưa chọn món cho thực đơn hôm nay!")
             }
-            else if (DateLabel.text == "Hôm qua") {
-                NotificationLabel.text = "Bạn chưa chọn món cho thực đơn hôm qua!"
+            else if (self.DateLabel.text == NSLocalizedString("Yesterday", comment: "Hôm qua")) {
+                self.NotificationLabel.text = NSLocalizedString("Menu yesterday", comment: "Bạn chưa chọn món cho thực đơn hôm qua!")
             }
-            else if (DateLabel.text == "Ngày mai") {
-                NotificationLabel.text = "Bạn chưa chọn món cho thực đơn ngày mai!"
+            else if (self.DateLabel.text == NSLocalizedString("Tomorrow", comment: "Ngày mai")) {
+                self.NotificationLabel.text = NSLocalizedString("Menu tomorrow", comment: "Bạn chưa chọn món cho thực đơn ngày mai!")
             }
             else {
-                NotificationLabel.text = "Bạn chưa chọn món cho thực đơn ngày \(DateLabel.text!)!"
+                self.NotificationLabel.text = NSLocalizedString("Menu date", comment: "Bạn chưa chọn món cho thực đơn ngày") + " \(self.DateLabel.text!)!"
             }
         }
         else { //Cap nhat lai giao dien
@@ -310,13 +310,13 @@ extension ShoppingListViewController: DatePickerDalegate {
         let calendar = Calendar.current
         dateData = date
         if (calendar.isDateInToday(date) == true) {
-            DateLabel.text = "Hôm nay"
+            DateLabel.text = NSLocalizedString("Today", comment: "Hôm nay")
         }
         else if (calendar.isDateInYesterday(date) == true) {
-            DateLabel.text = "Hôm qua"
+            DateLabel.text = NSLocalizedString("Yesterday", comment: "Hôm qua")
         }
         else if (calendar.isDateInTomorrow(date) == true) {
-            DateLabel.text = "Ngày mai"
+            DateLabel.text = NSLocalizedString("Tomorrow", comment: "Ngày mai")
         }
         else {
             DateLabel.text = DateToString(date, "dd/MM/yyyy")

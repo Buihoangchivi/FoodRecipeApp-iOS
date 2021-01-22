@@ -8,6 +8,8 @@
 
 "You don't have account" = "Do not have an account? ";
 
+"Have an account" = "Do you have an account? ";
+
 "Register now" = "Register now.";
 
 "Sign in now" = "Sign in now.";
@@ -23,6 +25,8 @@
 "Invalid email" = "This email address is invalid.";
 
 "Not user account" = "This is not the user's account.";
+
+"Not admin account" = "This is not the admin's account.";
 
 "Email address" = "Email address";
 
@@ -103,3 +107,35 @@
 "Setting" = "Setting";
 
 "Logout" = "Logout";
+
+"Delete Food" = "Delete Food";
+
+"Choose Food" = "Choose Food";
+
+"Total Step" = "Total Step:";
+
+"Ration" = "Ration:";
+
+"Step" = "Step";
+
+"Add" = "Add";
+
+"Get Reset Email" = "The email address will be received the password reset message";
+
+"Email not exist" = "Can't find any corresponding account for this email.";
+
+"Back to login" = "Return to login";
+
+"Menu today" = "You have not chosen the menu for today!";
+
+"Menu yesterday" = "You have not chosen the menu for yesterday!";
+
+"Menu tomorrow" = "You have not chosen the menu for tomorrow!";
+
+"Menu date" = "You have not chosen the menu for date";
+
+"Yesterday" = "Yesterday";
+
+"Tomorrow" = "Tomorrow";
+
+"Today" = "Today";

@@ -37,15 +37,9 @@ class AdminViewController: UIViewController {
         self.view.insertSubview(backgroundImage, at: 0)
         
         //Doi mau chu goi y trong cac o nhap ten nguoi dung va mat khau
-        if(TitleLb.text == "Quản trị viên đăng nhập"){
-        EmailTextField.attributedPlaceholder = NSAttributedString(string: "Địa chỉ email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Mật khẩu", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        }
-        else{
-            EmailTextField.attributedPlaceholder = NSAttributedString(string: "Email address", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-            PasswordTextField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        }
         
+        EmailTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Email address", comment: "Địa chỉ email"), attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        PasswordTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Password", comment: "Mật khẩu"), attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         
         //Canh le cho 2 o Username va Password
         EmailTextField.setLeftPaddingPoints(8)
@@ -112,19 +106,19 @@ class AdminViewController: UIViewController {
                 if let errCode = AuthErrorCode(rawValue: error!._code) {
                     switch errCode {
                         case .invalidEmail:
-                            ChangTextFieldState(self.EmailTextField, UIColor.red, self.EmailNotificationLabel, "Địa chỉ email không đúng định dạng.")
+                            ChangTextFieldState(self.EmailTextField, UIColor.red, self.EmailNotificationLabel, NSLocalizedString("Email's format is wrong", comment: "Địa chỉ email không đúng định dạng."))
                             NormalizeTextFieldState(self.PasswordTextField, self.PasswordNotificationLabel)
                         case .wrongPassword:
                             ChangTextFieldState(self.EmailTextField, UIColor.systemGreen, self.EmailNotificationLabel, "")
-                            ChangTextFieldState(self.PasswordTextField, UIColor.red, self.PasswordNotificationLabel, "Mật khẩu không chính xác.")
+                            ChangTextFieldState(self.PasswordTextField, UIColor.red, self.PasswordNotificationLabel, NSLocalizedString("Wrong password", comment: "Mật khẩu không chính xác."))
                         case .tooManyRequests:
                             ChangTextFieldState(self.EmailTextField, UIColor.systemGreen, self.EmailNotificationLabel, "")
-                            ChangTextFieldState(self.PasswordTextField, UIColor.red, self.PasswordNotificationLabel, "Tạm thời khoá tài khoản này do truy cập lỗi quá nhiều lần.")
+                            ChangTextFieldState(self.PasswordTextField, UIColor.red, self.PasswordNotificationLabel, NSLocalizedString("Lock account", comment: "Tạm thời khoá tài khoản này do truy cập lỗi quá nhiều lần."))
                         case .userDisabled:
-                            ChangTextFieldState(self.EmailTextField, UIColor.red, self.EmailNotificationLabel, "Tài khoản này đã bị vô hiệu hoá.")
+                            ChangTextFieldState(self.EmailTextField, UIColor.red, self.EmailNotificationLabel, NSLocalizedString("Disable account", comment: "Tài khoản này đã bị vô hiệu hoá."))
                         NormalizeTextFieldState(self.PasswordTextField, self.PasswordNotificationLabel)
                         default:
-                            ChangTextFieldState(self.EmailTextField, UIColor.red, self.EmailNotificationLabel, "Địa chỉ email không hợp lệ.")
+                            ChangTextFieldState(self.EmailTextField, UIColor.red, self.EmailNotificationLabel, NSLocalizedString("Invalid email", comment: "Địa chỉ email không hợp lệ."))
                             NormalizeTextFieldState(self.PasswordTextField, self.PasswordNotificationLabel)
                     }
                 }
@@ -147,7 +141,7 @@ class AdminViewController: UIViewController {
                     }
                     else { //Tai khoan vua dang nhap khong phai la tai khoan Admin
                         
-                        ChangTextFieldState(self.EmailTextField, UIColor.red, self.EmailNotificationLabel, "Đây không phải là tài khoản của quản trị viên.")
+                        ChangTextFieldState(self.EmailTextField, UIColor.red, self.EmailNotificationLabel, NSLocalizedString("Not admin account", comment: "Đây không phải là tài khoản của quản trị viên."))
                         NormalizeTextFieldState(self.PasswordTextField, self.PasswordNotificationLabel)
                         
                     }
