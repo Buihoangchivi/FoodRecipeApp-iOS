@@ -48,7 +48,6 @@ class ChangeCurrentPagePopUpVC: UIViewController {
         
         //Bo tron goc cho 2 nut Huy va Luu/Sua
         CancelButton.layer.cornerRadius = 22
-        CancelButton.layer.borderColor = UIColor.systemGreen.cgColor
         CancelButton.layer.borderWidth = 1
         ChooseButton.layer.cornerRadius = 22
         
