@@ -235,7 +235,7 @@ class ViewController: UIViewController {
     @IBAction func act_ClickFoodButton(_ sender: Any) {
         let button = sender as! UIButton
         let index = button.restorationIdentifier!.last!.hexDigitValue!
-        let myPopUp = self.storyboard?.instantiateViewController(identifier: "FoodPopUpViewController") as! FoodPopUpViewController
+        let myPopUp = self.storyboard?.instantiateViewController(identifier: Storyboard.FoodPopUp_StoryboardID) as! FoodPopUpViewController
         myPopUp.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         myPopUp.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         myPopUp.FoodID = FoodIDList[(CurrentPage - 1) * 6 + index]
@@ -295,7 +295,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func act_ShowAddFoodScreen(_ sender: Any) {
-        let dest = self.storyboard?.instantiateViewController(identifier: "AddNewFoodViewController") as! AddNewFoodViewController
+        let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.AddNewFood_StoryboardID) as! AddNewFoodViewController
         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         dest.delegate = self
@@ -305,7 +305,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func act_ShowShoppingListScreen(_ sender: Any) {
-        let dest = self.storyboard?.instantiateViewController(identifier: "ShoppingListViewController") as! ShoppingListViewController
+        let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.ShoppingList_StoryboardID) as! ShoppingListViewController
         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         dest.delegate = self
@@ -315,7 +315,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func act_ShowMenu(_ sender: Any) {
-        let myPopUp = self.storyboard?.instantiateViewController(identifier: "MenuViewController") as! MenuViewController
+        let myPopUp = self.storyboard?.instantiateViewController(identifier: Storyboard.Menu_StoryboardID) as! MenuViewController
         myPopUp.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         myPopUp.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         myPopUp.delegate = self
@@ -420,7 +420,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func act_AdminLogout(_ sender: Any) {
-        let dest = self.storyboard?.instantiateViewController(identifier: "StartUpViewController") as! StartUpViewController
+        let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.StartUp_StoryboardID) as! StartUpViewController
         do {
             try Auth.auth().signOut()
             
@@ -733,14 +733,14 @@ extension ViewController: AddNewFoodDelegate {
                 }})
         }
         else if (index == 1) { //Hien thi man hinh them mon an moi
-            let dest = self.storyboard?.instantiateViewController(identifier: "AddNewFoodViewController") as! AddNewFoodViewController
+            let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.AddNewFood_StoryboardID) as! AddNewFoodViewController
             dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
             dest.delegate = self
             self.present(dest, animated: true, completion: nil)
         }
         else { //Hien thi man hinh thuc don mua sam
-            let dest = self.storyboard?.instantiateViewController(identifier: "ShoppingListViewController") as! ShoppingListViewController
+            let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.ShoppingList_StoryboardID) as! ShoppingListViewController
             dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
             dest.delegate = self

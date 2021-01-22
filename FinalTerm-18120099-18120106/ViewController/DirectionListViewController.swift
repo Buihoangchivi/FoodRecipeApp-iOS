@@ -54,7 +54,7 @@ class DirectionListViewController: UIViewController {
     
     @IBAction func act_EditDirection(_ sender: Any) {
         let index = (sender as! UIButton).tag
-        let dest = self.storyboard?.instantiateViewController(identifier: "DirectionPopUpViewController") as! DirectionPopUpViewController
+        let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.DirectionPopUp_StoryboardID) as! DirectionPopUpViewController
         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         dest.delegate = self
@@ -77,7 +77,7 @@ class DirectionListViewController: UIViewController {
     }
     
     @IBAction func act_AddNewStep(_ sender: Any) {
-        let dest = self.storyboard?.instantiateViewController(identifier: "DirectionPopUpViewController") as! DirectionPopUpViewController
+        let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.DirectionPopUp_StoryboardID) as! DirectionPopUpViewController
         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         dest.delegate = self
@@ -119,7 +119,7 @@ extension DirectionListViewController : UITableViewDataSource, UITableViewDelega
         cell.EditButton.addTarget(self, action: #selector(act_EditDirection(_:)), for: .touchUpInside)
         
         //Hien thi buoc thu may
-        cell.StepNumberLabel.text = NSLocalizedString("Step", comment: "Bước ") + "\(indexPath.row + 1)"
+        cell.StepNumberLabel.text = NSLocalizedString("Step", comment: "Bước ") + " \(indexPath.row + 1)"
         
         //Hien thi noi dung cua buoc
         cell.StepDetailLabel.text = DirectionList[indexPath.row]

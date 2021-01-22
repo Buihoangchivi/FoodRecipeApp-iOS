@@ -205,7 +205,7 @@ class DetailFoodViewController: UIViewController{
         //Nut Chon mon o che do User
         if (isUserMode == true) {
             
-            let dest = self.storyboard?.instantiateViewController(identifier: "DatePickerPopUpViewController") as! DatePickerPopUpViewController
+            let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.DatePickerPopUp_StoryboardID) as! DatePickerPopUpViewController
             dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
             dest.delegate = self
@@ -214,7 +214,7 @@ class DetailFoodViewController: UIViewController{
         }
         else { //Nut Xoa mon o che do Admin
             
-            let dest = self.storyboard?.instantiateViewController(identifier: "DeleteFoodPopUpViewController") as! DeleteFoodPopUpViewController
+            let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.DeleteFoodPopUp_StoryboardID) as! DeleteFoodPopUpViewController
             dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
             dest.delegate = self
@@ -228,7 +228,7 @@ class DetailFoodViewController: UIViewController{
     
     @IBAction func act_EditIngredient(_ sender: Any) {
         
-        let dest = self.storyboard?.instantiateViewController(identifier: "EditFoodViewController") as! EditFoodViewController
+        let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.EditFood_StoryboardID) as! EditFoodViewController
         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         dest.delegate = self
@@ -436,7 +436,7 @@ extension DetailFoodViewController:UITableViewDelegate,UITableViewDataSource{
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProcessingCell") as! ProcessingTableViewCell
             cell.CircleImage.tintColor = ColorScheme
-            cell.lbStep.text = "Bước \(indexPath.row + 1)"
+            cell.lbStep.text = NSLocalizedString("Step", comment: "Bước") + " \(indexPath.row + 1)"
             cell.lbDetail.text = "\(DirectionList[indexPath.row])"
             return cell
         }
@@ -463,7 +463,7 @@ extension DetailFoodViewController: DeleteFoodDelegate {
     
     func ReloadAfterDeleteFood() {
         
-        let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
+        let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.Home_StoryboardID) as! ViewController
         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         self.present(dest, animated: true, completion: nil)

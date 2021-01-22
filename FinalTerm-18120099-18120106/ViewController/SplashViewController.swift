@@ -78,7 +78,7 @@ class SplashViewController: UIViewController {
     @IBAction func act_ShowLoginScreen(_ sender: Any) {
         
         //Hiển thị màn hình trang chủ
-        let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
+        let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.Home_StoryboardID) as! ViewController
         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         self.present(dest, animated: true, completion: nil)

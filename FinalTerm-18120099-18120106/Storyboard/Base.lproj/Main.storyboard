@@ -2794,7 +2794,7 @@
         <!--Tip Detail View Controller-->
         <scene sceneID="3VC-qU-4rg">
             <objects>
-                <viewController storyboardIdentifier="TipDetail" id="JAR-sH-CHE" customClass="TipDetailViewController" customModule="FinalTerm_18120099_18120106" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TipDetailViewController" id="JAR-sH-CHE" customClass="TipDetailViewController" customModule="FinalTerm_18120099_18120106" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mNY-V3-LDG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

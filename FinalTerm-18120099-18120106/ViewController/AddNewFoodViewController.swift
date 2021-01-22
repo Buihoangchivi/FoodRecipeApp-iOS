@@ -97,7 +97,7 @@ class AddNewFoodViewController: UIViewController {
     
     //Hien thi man hinh chua danh sach nguyen lieu
     @IBAction func act_ShowIngredientList(_ sender: Any) {
-        let dest = self.storyboard?.instantiateViewController(identifier: "IngredientListViewController") as! IngredientListViewController
+        let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.IngredientList_StoryboardID) as! IngredientListViewController
         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         dest.delegate = self
@@ -108,7 +108,7 @@ class AddNewFoodViewController: UIViewController {
     
     //Hien thi man hinh chua danh sach cac buoc
     @IBAction func act_ShowStepsList(_ sender: Any) {
-        let dest = self.storyboard?.instantiateViewController(identifier: "DirectionListViewController") as! DirectionListViewController
+        let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.DirectionList_StoryboardID) as! DirectionListViewController
         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         dest.delegate = self

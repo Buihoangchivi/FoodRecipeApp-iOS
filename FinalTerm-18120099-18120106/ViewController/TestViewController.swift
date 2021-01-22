@@ -271,7 +271,7 @@ class TestViewController: UIViewController {
                 CurrentUsername = authResult!.user.uid
                 
                 //Hien thi man hinh trang chu cua ung dung
-                let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
+                let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.Home_StoryboardID) as! ViewController
                 dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
                 dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
                 self.present(dest, animated: true, completion: nil)
@@ -322,7 +322,7 @@ extension TestViewController: GIDSignInDelegate {
             
             
             //Hien thi man hinh trang chu cua ung dung
-            let dest = self.storyboard?.instantiateViewController(identifier: "SplashViewController") as! SplashViewController
+            let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.Splash_StoryboardID) as! SplashViewController
             dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
             self.present(dest, animated: true, completion: nil)

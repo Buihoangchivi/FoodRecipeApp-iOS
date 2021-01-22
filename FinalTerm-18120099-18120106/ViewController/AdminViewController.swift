@@ -132,7 +132,7 @@ class AdminViewController: UIViewController {
                     if (snapshot.exists() == true) {
                         
                         //Hien thi man hinh trang chu cua ung dung
-                        let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
+                        let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.Home_StoryboardID) as! ViewController
                         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
                         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
                         ColorScheme = UIColor.systemGreen

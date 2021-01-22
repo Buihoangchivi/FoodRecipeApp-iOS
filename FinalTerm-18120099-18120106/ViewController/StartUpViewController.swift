@@ -39,7 +39,7 @@ class StartUpViewController: UIViewController {
         isUserMode = true
         
         //Hien thi man hinh dang nhap danh cho nguoi dung
-        let dest = self.storyboard?.instantiateViewController(identifier: "LoginViewController") as! LoginViewController
+        let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.Login_StoryboardID) as! LoginViewController
         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         self.present(dest, animated: true, completion: nil)
@@ -52,7 +52,7 @@ class StartUpViewController: UIViewController {
         isUserMode = false
         
         //Hien thi man hinh dang nhap danh cho nguoi dung
-        let dest = self.storyboard?.instantiateViewController(identifier: "AdminViewController") as! AdminViewController
+        let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.Admin_StoryboardID) as! AdminViewController
         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         self.present(dest, animated: true, completion: nil)

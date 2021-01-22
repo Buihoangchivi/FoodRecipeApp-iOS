@@ -64,7 +64,7 @@ class ShoppingListViewController: UIViewController {
     
     @IBAction func act_ShowMenu(_ sender: Any) {
         
-        let myPopUp = self.storyboard?.instantiateViewController(identifier: "MenuViewController") as! MenuViewController
+        let myPopUp = self.storyboard?.instantiateViewController(identifier: Storyboard.Menu_StoryboardID) as! MenuViewController
         myPopUp.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         myPopUp.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         self.present(myPopUp, animated: true, completion: nil)
@@ -173,7 +173,7 @@ class ShoppingListViewController: UIViewController {
     
     @IBAction func act_ShowDatePicker(_ sender: Any) {
         
-        let myPopUp = self.storyboard?.instantiateViewController(identifier: "DatePickerPopUpViewController") as! DatePickerPopUpViewController
+        let myPopUp = self.storyboard?.instantiateViewController(identifier: Storyboard.DatePickerPopUp_StoryboardID) as! DatePickerPopUpViewController
         myPopUp.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         myPopUp.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         myPopUp.delegate = self

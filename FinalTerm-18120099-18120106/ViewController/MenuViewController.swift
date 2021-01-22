@@ -112,7 +112,7 @@ extension MenuViewController : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //Meo hay
         if (indexPath.row == 2) {
-            let dest = self.storyboard?.instantiateViewController(identifier: "TipListViewController") as! TipListViewController
+            let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.TipList_StoryboardID) as! TipListViewController
             dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
             self.present(dest, animated: true, completion: nil)
@@ -120,7 +120,7 @@ extension MenuViewController : UITableViewDelegate, UITableViewDataSource{
         else {
             if (indexPath.row == 9)
             {
-                let dest = self.storyboard?.instantiateViewController(identifier: "SettingViewController") as! SettingViewController
+                let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.Setting_StoryboardID) as! SettingViewController
                 dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
                 dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
                 self.present(dest, animated: true, completion: nil)
@@ -128,7 +128,7 @@ extension MenuViewController : UITableViewDelegate, UITableViewDataSource{
             else {
                 if(indexPath.row == 8)
                 {
-                    let dest = self.storyboard?.instantiateViewController(identifier: "ContactViewController") as! ContactViewController
+                    let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.Contact_StoryboardID) as! ContactViewController
                     dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
                     dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
                     self.present(dest, animated: true, completion: nil)
@@ -136,7 +136,7 @@ extension MenuViewController : UITableViewDelegate, UITableViewDataSource{
                 else{
                     if(indexPath.row == 10)
                     {
-                        let dest = self.storyboard?.instantiateViewController(identifier: "StartUpViewController") as! StartUpViewController
+                        let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.StartUp_StoryboardID) as! StartUpViewController
                         //Log out
                         if(LoginMethod == 0)
                         {
@@ -163,7 +163,7 @@ extension MenuViewController : UITableViewDelegate, UITableViewDataSource{
                         self.present(dest, animated: true, completion: nil)
                     }
                     else{
-            let dest = self.storyboard?.instantiateViewController(identifier: "DetailMenuViewController") as! DetailMenuViewController
+                        let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.DetailMenu_StoryboardID) as! DetailMenuViewController
             dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
             switch indexPath.row {

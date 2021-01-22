@@ -180,14 +180,14 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func act_ResetPassword(_ sender: Any) {
-        let dest = self.storyboard?.instantiateViewController(identifier: "ResetPasswordViewController") as! ResetPasswordViewController
+        let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.ResetPassword_StoryboardID) as! ResetPasswordViewController
         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         self.present(dest, animated: true, completion: nil)
     }
     
     @IBAction func act_Register(_ sender: Any) {
-        let dest = self.storyboard?.instantiateViewController(identifier: "RegisterViewController") as! TestViewController
+        let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.Register_StoryboardID) as! TestViewController
         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         self.present(dest, animated: true, completion: nil)
@@ -260,7 +260,7 @@ class LoginViewController: UIViewController {
                     
                     if (isCheck == 0) { //Không hiển thị SplashScreen
                         
-                        let dest = self.storyboard?.instantiateViewController(identifier: "ViewController") as! ViewController
+                        let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.Home_StoryboardID) as! ViewController
                         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
                         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
                         self.present(dest, animated: true, completion: nil)
@@ -268,7 +268,7 @@ class LoginViewController: UIViewController {
                     }
                     else { //Hiển thị SplashScreen
                         
-                        let dest = self.storyboard?.instantiateViewController(identifier: "SplashViewController") as! SplashViewController
+                        let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.Splash_StoryboardID) as! SplashViewController
                         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
                         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
                         self.present(dest, animated: true, completion: nil)

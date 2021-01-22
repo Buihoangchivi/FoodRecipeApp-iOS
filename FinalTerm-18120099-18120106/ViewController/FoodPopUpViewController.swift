@@ -95,7 +95,7 @@ class FoodPopUpViewController: UIViewController {
     
     @IBAction func act_ShowDetailFood(_ sender: Any) {
         isClickDetailFood = true
-        let dest = self.storyboard?.instantiateViewController(identifier: "DetailFoodViewController") as! DetailFoodViewController
+        let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.DetailFood_StoryboardID) as! DetailFoodViewController
         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         dest.FoodID = FoodID
@@ -107,7 +107,7 @@ class FoodPopUpViewController: UIViewController {
         //Chọn món ở chế độ User
         if (isUserMode == true) {
          
-            let dest = self.storyboard?.instantiateViewController(identifier: "DatePickerPopUpViewController") as! DatePickerPopUpViewController
+            let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.DatePickerPopUp_StoryboardID) as! DatePickerPopUpViewController
             dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
             dest.delegate = self
@@ -116,7 +116,7 @@ class FoodPopUpViewController: UIViewController {
         }
         else { //Xoá món ở chế độ Admin
             
-            let dest = self.storyboard?.instantiateViewController(identifier: "DeleteFoodPopUpViewController") as! DeleteFoodPopUpViewController
+            let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.DeleteFoodPopUp_StoryboardID) as! DeleteFoodPopUpViewController
             dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
             dest.delegate = self

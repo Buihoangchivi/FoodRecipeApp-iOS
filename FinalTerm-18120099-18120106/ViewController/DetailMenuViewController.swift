@@ -232,7 +232,7 @@ class DetailMenuViewController: UIViewController {
     
     @IBAction func act_DeleteFood(_ sender: Any) {
         
-        let dest = self.storyboard?.instantiateViewController(identifier: "DeleteFoodPopUpViewController") as! DeleteFoodPopUpViewController
+        let dest = self.storyboard?.instantiateViewController(identifier: Storyboard.DeleteFoodPopUp_StoryboardID) as! DeleteFoodPopUpViewController
         dest.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         dest.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         dest.delegate = self
@@ -302,7 +302,7 @@ extension DetailMenuViewController:UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let dest = storyboard?.instantiateViewController(withIdentifier: "DetailFoodViewController") as! DetailFoodViewController
+        let dest = storyboard?.instantiateViewController(withIdentifier: Storyboard.DetailFood_StoryboardID) as! DetailFoodViewController
         let index = FoodsIndexList[indexPath.row]
         dest.FoodID = FoodList[index].ID
         dest.Ref = Ref
