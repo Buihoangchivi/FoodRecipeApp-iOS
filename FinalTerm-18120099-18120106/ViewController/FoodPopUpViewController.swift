@@ -75,14 +75,20 @@ class FoodPopUpViewController: UIViewController {
         
         //Hiển thị nút "Chọn món" ở chế độ User
         if (isUserMode == true) {
-            
-            ChooseFoodButton.setTitle("Chọn món", for: .normal)
-            
+            if(DetailFoodButton.titleLabel?.text == "Chi tiết"){
+                ChooseFoodButton.setTitle("Chọn món", for: .normal)
+            }
+            else{
+                ChooseFoodButton.setTitle("Choose food", for: .normal)
+            }
         }
         else { //Hiển thị nút "Xoá món" ở chế độ Admin
-            
-            ChooseFoodButton.setTitle("Xoá món", for: .normal)
-            
+            if(DetailFoodButton.titleLabel?.text == "Chi tiết"){
+                ChooseFoodButton.setTitle("Xoá món", for: .normal)
+            }
+            else{
+                ChooseFoodButton.setTitle("Delete food", for: .normal)
+            }
         }
     }
     

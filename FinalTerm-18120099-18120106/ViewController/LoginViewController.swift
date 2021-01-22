@@ -68,8 +68,17 @@ class LoginViewController: UIViewController {
         PasswordTextField.layer.masksToBounds = true
         
         //Thay doi mau dong chu 'Đăng ký ngay' de lam noi bat
-        let FirstTitle = NSAttributedString(string: "Bạn chưa có tài khoản? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        let LastTitle = NSAttributedString(string: "Đăng ký ngay.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
+        var FirstTitle = NSAttributedString()
+        var LastTitle = NSAttributedString()
+        if(TitleLb.text == "Người dùng đăng nhập"){
+            FirstTitle = NSAttributedString(string: "Bạn chưa có tài khoản? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+            LastTitle = NSAttributedString(string: "Đăng ký ngay.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
+        }
+        else{
+            FirstTitle = NSAttributedString(string: "Do not have an account? ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+            LastTitle = NSAttributedString(string: "Let's register.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
+        }
+        
         let Title = NSMutableAttributedString()
         Title.append(FirstTitle)
         Title.append(LastTitle)
