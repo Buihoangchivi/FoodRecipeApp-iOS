@@ -390,7 +390,7 @@ extension DetailFoodViewController: DirectionDelegate {
 extension DetailFoodViewController: DatePickerDalegate{
     func TransmitDate(Date date: Date) {
         let path = DateToString(date, "yyyy/MM/dd")
-        FirebaseRef.child("ShoppingList/\(path)").observeSingleEvent(of: .value) { (snapshot) in
+        FirebaseRef.child("UserList/\(CurrentUsername)/ShoppingList/\(path)").observeSingleEvent(of: .value) { (snapshot) in
             var index = 0
             var isExist = false
             if (snapshot.exists() == true) {
@@ -407,7 +407,7 @@ extension DetailFoodViewController: DatePickerDalegate{
             }
             
             if (isExist == false) {
-            FirebaseRef.child("ShoppingList/\(path)/\(index)").setValue(["FoodID": self.FoodID])
+            FirebaseRef.child("UserList/\(CurrentUsername)/ShoppingList/\(path)/\(index)").setValue(["FoodID": self.FoodID])
             }
             }
     }

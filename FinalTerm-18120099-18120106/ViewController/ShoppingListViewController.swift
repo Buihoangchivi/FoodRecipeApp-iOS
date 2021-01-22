@@ -63,6 +63,7 @@ class ShoppingListViewController: UIViewController {
     }
     
     @IBAction func act_ShowMenu(_ sender: Any) {
+        
         let myPopUp = self.storyboard?.instantiateViewController(identifier: "MenuViewController") as! MenuViewController
         myPopUp.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         myPopUp.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
@@ -70,22 +71,29 @@ class ShoppingListViewController: UIViewController {
         
     }
     @IBAction func act_ShowHomeScreen(_ sender: Any) {
+        
         self.dismiss(animated: true, completion: nil)
         delegate?.DismissWithCondition(0)
+        
     }
     
     @IBAction func act_ShowAddNewFoodScreen(_ sender: Any) {
+        
         self.dismiss(animated: true, completion: nil)
         delegate?.DismissWithCondition(1)
+        
     }
     
     func LoadDataFromFirebase(_ date: Date) {
+        
         //Khoi tao danh sach cac mon an trong menu
         ShoppingList = [(FoodName: String, IngredientName: String, Value: String, Check: Bool)]()
         let path = DateToString(date, "yyyy/MM/dd")
-        FirebaseRef.child("ShoppingList/\(path)").observeSingleEvent(of: .value) { (snapshot) in
+        FirebaseRef.child("UserList/\(CurrentUsername)/ShoppingList/\(path)").observeSingleEvent(of: .value) { (snapshot) in
+            
             //Kiem tra co ton tai menu trong ngay duoc chon hay khong
             if (snapshot.exists() == false) {
+                
                 //An View chua TableView
                 self.ShoppingListView.isHidden = true
                 //Hien thi thong bao khong co menu
@@ -164,12 +172,14 @@ class ShoppingListViewController: UIViewController {
     }
     
     @IBAction func act_ShowDatePicker(_ sender: Any) {
+        
         let myPopUp = self.storyboard?.instantiateViewController(identifier: "DatePickerPopUpViewController") as! DatePickerPopUpViewController
         myPopUp.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         myPopUp.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         myPopUp.delegate = self
         myPopUp.DefaultDate = dateData
         self.present(myPopUp, animated: true, completion: nil)
+        
     }
     
     @IBAction func ChangeCheckState(_ sender: Any) {
@@ -203,7 +213,7 @@ class ShoppingListViewController: UIViewController {
         
         //Cap nhat lai du lieu tren Firebase
         let path = DateToString(dateData, "yyyy/MM/dd")
-        FirebaseRef.child("ShoppingList/\(path)/\(index)/CheckList").setValue(stateArr)
+        FirebaseRef.child("UserList/\(CurrentUsername)/ShoppingList/\(path)/\(index)/CheckList").setValue(stateArr)
         
         //Cap nhat lai giao dien
         ShoppingListTableView.reloadData()
@@ -224,7 +234,7 @@ class ShoppingListViewController: UIViewController {
         let path = DateToString(dateData, "yyyy/MM/dd")
         
         //Xoa du lieu mon an trong mang
-        FirebaseRef.child("ShoppingList/\(path)").observeSingleEvent(of: .value) { (snapshot) in
+        FirebaseRef.child("UserList/\(CurrentUsername)/ShoppingList/\(path)").observeSingleEvent(of: .value) { (snapshot) in
         if (snapshot.exists() == true) {
             var menuArr = [[String:AnyObject]]()
             for snapshotChild in snapshot.children {
@@ -237,7 +247,7 @@ class ShoppingListViewController: UIViewController {
             menuArr.remove(at: index)
             
             //Cap nhat lai du lieu tren Firebase
-            FirebaseRef.child("ShoppingList/\(path)").setValue(menuArr)
+            FirebaseRef.child("UserList/\(CurrentUsername)/ShoppingList/\(path)").setValue(menuArr)
             }
         }
         

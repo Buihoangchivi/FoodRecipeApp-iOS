@@ -139,9 +139,12 @@ class FoodPopUpViewController: UIViewController {
 extension FoodPopUpViewController: DatePickerDalegate{
     func TransmitDate(Date date: Date) {
         let path = DateToString(date, "yyyy/MM/dd")
-        FirebaseRef.child("ShoppingList/\(path)").observeSingleEvent(of: .value) { (snapshot) in
+        
+        FirebaseRef.child("UserList/\(CurrentUsername)/ShoppingList/\(path)").observeSingleEvent(of: .value) { (snapshot) in
             var index = 0
             var isExist = false
+            
+            //Kiem tra xem mon nay da duoc them vao thuc don trong thoi gian nay hay chua
             if (snapshot.exists() == true) {
                 for snapshotChild in snapshot.children {
                     let temp = snapshotChild as! DataSnapshot
@@ -156,7 +159,9 @@ extension FoodPopUpViewController: DatePickerDalegate{
             }
             
             if (isExist == false) {
-            FirebaseRef.child("ShoppingList/\(path)/\(index)").setValue(["FoodID": self.FoodID])
+                
+                FirebaseRef.child("UserList/\(CurrentUsername)/ShoppingList/\(path)/\(index)").setValue(["FoodID": self.FoodID])
+                
             }
             }
     }
