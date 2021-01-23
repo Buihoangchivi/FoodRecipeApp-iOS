@@ -21,6 +21,7 @@
 		3651797E2576508F00574610 /* IngredientListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3651797D2576508F00574610 /* IngredientListViewController.swift */; };
 		36517980257659DA00574610 /* IngredientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3651797F257659DA00574610 /* IngredientTableViewCell.swift */; };
 		365CC02025BB458B002B4030 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365CC01F25BB458B002B4030 /* Constants.swift */; };
+		365CC03425BC5146002B4030 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 366D6A84256F831C00693FD7 /* LaunchScreen.storyboard */; };
 		366D47B2259CEBF800926D8C /* Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366D47B1259CEBF800926D8C /* Delegate.swift */; };
 		366D47B5259CEE1F00926D8C /* Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366D47B4259CEE1F00926D8C /* Modal.swift */; };
 		366D47B7259CEF7E00926D8C /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366D47B6259CEF7E00926D8C /* Method.swift */; };
@@ -126,9 +127,6 @@
 		87997F5F257DFFAD00C9AF5F /* TipListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipListTableViewCell.swift; sourceTree = "<group>"; };
 		87997F61257DFFBD00C9AF5F /* TipListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipListViewController.swift; sourceTree = "<group>"; };
 		87997F63257DFFCB00C9AF5F /* TipDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipDetailViewController.swift; sourceTree = "<group>"; };
-		879CD43C25B714C2000BE33F /* vi-VN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "vi-VN"; path = "vi-VN.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		879CD43D25B714C2000BE33F /* vi-VN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "vi-VN"; path = "vi-VN.lproj/Main.strings"; sourceTree = "<group>"; };
-		879CD43F25B714EE000BE33F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		879CD44225B738BE000BE33F /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		879CD44425B7398A000BE33F /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		87BD52B02577986C0099C569 /* ProcessingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingTableViewCell.swift; sourceTree = "<group>"; };
@@ -417,6 +415,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				877C7AC625BA71B000DE73B7 /* Main.storyboard in Resources */,
+				365CC03425BC5146002B4030 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,8 +576,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				366D6A80256F831B00693FD7 /* Base */,
-				879CD43D25B714C2000BE33F /* vi-VN */,
-				879CD43F25B714EE000BE33F /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -587,7 +584,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				366D6A85256F831C00693FD7 /* Base */,
-				879CD43C25B714C2000BE33F /* vi-VN */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
