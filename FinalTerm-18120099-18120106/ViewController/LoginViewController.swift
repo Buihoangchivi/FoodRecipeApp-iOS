@@ -65,7 +65,7 @@ class LoginViewController: UIViewController {
         var FirstTitle = NSAttributedString()
         var LastTitle = NSAttributedString()
         
-        FirstTitle = NSAttributedString(string: NSLocalizedString("You don't have account", comment: "You don't have account?"), attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        FirstTitle = NSAttributedString(string: NSLocalizedString("You don't have an account", comment: "You don't have account?"), attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         LastTitle = NSAttributedString(string: NSLocalizedString("Register now", comment: "Register"), attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGreen])
         
         let Title = NSMutableAttributedString()

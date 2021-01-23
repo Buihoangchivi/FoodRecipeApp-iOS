@@ -6,7 +6,7 @@
   Copyright © 2021 Bui Van Vi. All rights reserved.
 */
 
-"You don't have account" = "Do not have an account? ";
+"You don't have an account" = "Do not have an account? ";
 
 "Have an account" = "Do you have an account? ";
 
@@ -120,7 +120,7 @@
 
 "Add" = "Add";
 
-"Get Reset Email" = "The email address will be received the password reset message";
+"Get Reset Email" = "The email address received the password reset";
 
 "Email not exist" = "Can't find any corresponding account for this email.";
 
